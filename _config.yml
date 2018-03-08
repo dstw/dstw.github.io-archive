@@ -9,6 +9,7 @@ category_dir: category
 permalink: /blog/:year/:month/:day/:title/
 highlighter: pygments
 allowsearch: true
+timezone: Asia/Jakarta
 
 disqus_shortname: didiksetiawan
 google_analytics: UA-78151571-1
