@@ -206,8 +206,8 @@ contribute from other place. Let’s check this out.</p>
 
 <p>On debian system, use apt-get.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ sudo apt-get install git
-$ sudo apt-get install nodejs</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo </span>apt-get <span class="nb">install </span>git
+<span class="nv">$ </span><span class="nb">sudo </span>apt-get <span class="nb">install </span>nodejs</code></pre></figure>
 
 <ul>
   <li>Install Ruby</li>
@@ -218,10 +218,10 @@ prefer to install ruby from source. Download from
 <a href="https://www.ruby-lang.org/en/downloads/">Ruby official site</a>. The installation
 process is quite common.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ tar zxf ruby-2.3.1.tar.gz 
-$ <span class="nb">cd</span> ruby-2.3.1/
-$ ./configure
-$ sudo make <span class="o">&amp;&amp;</span> make install </code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">tar </span>zxf ruby-2.3.1.tar.gz 
+<span class="nv">$ </span><span class="nb">cd </span>ruby-2.3.1/
+<span class="nv">$ </span>./configure
+<span class="nv">$ </span><span class="nb">sudo </span>make <span class="o">&amp;&amp;</span> make <span class="nb">install</span> </code></pre></figure>
 
 <ul>
   <li>Install ExecJS</li>
@@ -229,7 +229,7 @@ $ sudo make <span class="o">&amp;&amp;</span> make install </code></pre></figure
 
 <p>To run JavaScript code from Ruby.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ sudo gem install execjs</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo </span>gem <span class="nb">install </span>execjs</code></pre></figure>
 
 <ul>
   <li>Configure bundle</li>
@@ -237,20 +237,20 @@ $ sudo make <span class="o">&amp;&amp;</span> make install </code></pre></figure
 
 <p>Another octopress dependency.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ sudo gem install bundler</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo </span>gem <span class="nb">install </span>bundler</code></pre></figure>
 
 <p>After all needed requirements fulfilled, then grab the octopress source code.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ git clone git://github.com/imathis/octopress.git octopress
-$ <span class="nb">cd</span> octopress</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git clone git://github.com/imathis/octopress.git octopress
+<span class="nv">$ </span><span class="nb">cd </span>octopress</code></pre></figure>
 
 <p>One more dependency:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ bundle install</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>bundle <span class="nb">install</span></code></pre></figure>
 
 <p>Then install octopress default theme.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ rake install</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>rake <span class="nb">install</span></code></pre></figure>
 
 <p>Setup process is finished. We can now start to blog using rake newpost[“title”], 
 customize _config.yml, add some pages, customize 404 not found page, using
@@ -269,7 +269,7 @@ http://username.github.io. As a result, we will to work on the source for
 our blog in the source branch and commit the generated content to the master 
 branch. Octopress has a configuration task that helps us set all this up.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ rake setup_github_pages</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>rake setup_github_pages</code></pre></figure>
 
 <p>The rake task will ask for a URL of the Github repo. Copy the SSH or HTTPS URL 
 from our newly created repository
@@ -289,17 +289,17 @@ and paste it in as a response.</p>
 
 <p>Next run:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ rake generate
-$ rake deploy</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>rake generate
+<span class="nv">$ </span>rake deploy</code></pre></figure>
 
 <p>This will generate our blog, copy the generated files into _deploy/, add them 
 to git, commit and push them up to the master branch.</p>
 
 <p>Don’t forget to commit the source of our blog.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ git add .
-$ git commit -m <span class="s1">&#39;our message&#39;</span>
-$ git push origin <span class="nb">source</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git add <span class="nb">.</span>
+<span class="nv">$ </span>git commit <span class="nt">-m</span> <span class="s1">'our message'</span>
+<span class="nv">$ </span>git push origin <span class="nb">source</span></code></pre></figure>
 
 <p>With new repositories, Github sets the default branch based on the branch we 
 push first, and it looks there for the generated site content. If we’re having 
@@ -312,37 +312,37 @@ repository and make sure that the master branch is the default branch.</p>
 in. To do that, we will use the benefit of git.<br />
 First, we need to get our site copy:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ git clone git@github.com:username/username.github.io.git
-$ <span class="nb">cd</span> username.github.io</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git clone git@github.com:username/username.github.io.git
+<span class="nv">$ </span><span class="nb">cd </span>username.github.io</code></pre></figure>
 
 <p>Switch to source branch</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ git checkout <span class="nb">source</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git checkout <span class="nb">source</span></code></pre></figure>
 
 <p>Then do all change on our source, after that run “rake generate” or “rake
 preview” to compile our source onto public directory. Everything seems to be
 okay until we need to upload to github.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ rake deploy
-<span class="c1">## Deploying branch to Github Pages </span>
-<span class="c1">## Pulling any updates from Github Pages </span>
-<span class="nb">cd</span> _deploy
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>rake deploy
+<span class="c">## Deploying branch to Github Pages </span>
+<span class="c">## Pulling any updates from Github Pages </span>
+<span class="nb">cd </span>_deploy
 rake aborted!
 Errno::ENOENT: No such file or directory @ dir_chdir - _deploy
-/home/didik/octopress/Rakefile:255:in <span class="sb">`</span>block in &lt;top <span class="o">(</span>required<span class="o">)</span>&gt;<span class="s1">&#39;</span>
-<span class="s1">/home/didik/octopress/Rakefile:227:in `block in &lt;top (required)&gt;&#39;</span>
-Tasks: <span class="nv">TOP</span> <span class="o">=</span>&gt; deploy
-<span class="o">(</span>See full trace by running task with --trace<span class="o">)</span></code></pre></figure>
+/home/didik/octopress/Rakefile:255:in <span class="sb">`</span>block <span class="k">in</span> &lt;top <span class="o">(</span>required<span class="o">)&gt;</span><span class="s1">'
+/home/didik/octopress/Rakefile:227:in `block in &lt;top (required)&gt;'</span>
+Tasks: TOP <span class="o">=&gt;</span> deploy
+<span class="o">(</span>See full trace by running task with <span class="nt">--trace</span><span class="o">)</span></code></pre></figure>
 
 <p>Oops, it’s look like we miss something. We have to make a new _deploy directory 
 and add git initialization to it.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ mkdir _deploy
-$ <span class="nb">cd</span> _deploy
-$ git init
-$ git remote add origin git@github.com:username/username.github.io.git
-$ git pull origin master
-$ <span class="nb">cd</span> ..</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">mkdir </span>_deploy
+<span class="nv">$ </span><span class="nb">cd </span>_deploy
+<span class="nv">$ </span>git init
+<span class="nv">$ </span>git remote add origin git@github.com:username/username.github.io.git
+<span class="nv">$ </span>git pull origin master
+<span class="nv">$ </span><span class="nb">cd</span> ..</code></pre></figure>
 
 <p>That’s all. Now, we can upload using rake deploy as usual.<br />
 Until next time.</p>

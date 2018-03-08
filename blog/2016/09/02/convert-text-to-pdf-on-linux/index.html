@@ -204,13 +204,13 @@ when using text files. Text files look ugly when I open using my reader
 
 <p>Install needed packages.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ sudo apt-get install enscript ps2pdf</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo </span>apt-get <span class="nb">install </span>enscript ps2pdf</code></pre></figure>
 
 <p>Do this simple tricks.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ <span class="nb">cd</span> Documentation/
-$ <span class="k">for</span> i in <span class="sb">`</span>ls -p <span class="p">|</span> grep -v /<span class="sb">`</span> <span class="p">;</span> <span class="k">do</span> <span class="p">;</span> enscript -p<span class="nv">$i</span>.ps <span class="nv">$i</span> <span class="p">;</span> <span class="k">done</span>
-$ <span class="k">for</span> i in <span class="sb">`</span>ls *.ps<span class="sb">`</span> <span class="p">;</span> <span class="k">do</span> <span class="p">;</span> ps2pdf <span class="nv">$i</span> <span class="p">;</span> <span class="k">done</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">cd </span>Documentation/
+<span class="nv">$ </span><span class="k">for </span>i <span class="k">in</span> <span class="sb">`</span><span class="nb">ls</span> <span class="nt">-p</span> | <span class="nb">grep</span> <span class="nt">-v</span> /<span class="sb">`</span> <span class="p">;</span> <span class="k">do</span> <span class="p">;</span> enscript <span class="nt">-p</span><span class="nv">$i</span>.ps <span class="nv">$i</span> <span class="p">;</span> <span class="k">done</span>
+<span class="nv">$ </span><span class="k">for </span>i <span class="k">in</span> <span class="sb">`</span><span class="nb">ls</span> <span class="k">*</span>.ps<span class="sb">`</span> <span class="p">;</span> <span class="k">do</span> <span class="p">;</span> ps2pdf <span class="nv">$i</span> <span class="p">;</span> <span class="k">done</span></code></pre></figure>
 
 <p>Now I have pdf files of all the text files.<br />
 It still have a problem, it just convert files on the same directory. So other

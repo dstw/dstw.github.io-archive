@@ -195,20 +195,20 @@
 <article class="content">
     <div class="post"><p>Generate key on the client side:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ ssh-keygen</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>ssh-keygen</code></pre></figure>
 
 <p>That command will generate key with rsa encryption. To choose dsa encryption,
 add parameter “-t dsa”.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ ssh-keygen -t dsa</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>ssh-keygen <span class="nt">-t</span> dsa</code></pre></figure>
 
 <p>Then, just click “Enter” if you are asked for passphrase. It is like you use an
 empty passphrase.</p>
 
 <p>Copy that generated public key to host side, computer which will be used for remote.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ scp user@10.10.10.10:/home/didik/.ssh/id_dsa.pub .
-$ cat id_dsa.pub &gt;&gt; .ssh/authorized_keys</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>scp user@10.10.10.10:/home/didik/.ssh/id_dsa.pub <span class="nb">.</span>
+<span class="nv">$ </span><span class="nb">cat </span>id_dsa.pub <span class="o">&gt;&gt;</span> .ssh/authorized_keys</code></pre></figure>
 
 <p>That’s all. Now you can login to client computer without worrying to be asked 
 for a password. It is useful for deploying automatic scripts or programs.</p>

@@ -201,97 +201,97 @@
 
 <p>First, check harddrive partition which will be used for Squid cache partition.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ df -h
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">df</span> <span class="nt">-h</span>
 
 Filesystem      Size  Used Avail Use% Mounted on
-udev            <span class="m">1</span>.9G     <span class="m">0</span>  <span class="m">1</span>.9G   <span class="m">0</span>% /dev
-tmpfs           387M  <span class="m">6</span>.2M  381M   <span class="m">2</span>% /run
-/dev/sda2        30G   19G  <span class="m">9</span>.4G  <span class="m">67</span>% /
-tmpfs           <span class="m">1</span>.9G   11M  <span class="m">1</span>.9G   <span class="m">1</span>% /dev/shm
-tmpfs           <span class="m">5</span>.0M  <span class="m">4</span>.0K  <span class="m">5</span>.0M   <span class="m">1</span>% /run/lock
-tmpfs           <span class="m">1</span>.9G     <span class="m">0</span>  <span class="m">1</span>.9G   <span class="m">0</span>% /sys/fs/cgroup
-/dev/sda2        30G   19G  <span class="m">9</span>.4G  <span class="m">67</span>% /home
-tmpfs           387M   52K  387M   <span class="m">1</span>% /run/user/1000
-/dev/sdb1        38G   57M   38G   <span class="m">1</span>% /squid</code></pre></figure>
+udev            1.9G     0  1.9G   0% /dev
+tmpfs           387M  6.2M  381M   2% /run
+/dev/sda2        30G   19G  9.4G  67% /
+tmpfs           1.9G   11M  1.9G   1% /dev/shm
+tmpfs           5.0M  4.0K  5.0M   1% /run/lock
+tmpfs           1.9G     0  1.9G   0% /sys/fs/cgroup
+/dev/sda2        30G   19G  9.4G  67% /home
+tmpfs           387M   52K  387M   1% /run/user/1000
+/dev/sdb1        38G   57M   38G   1% /squid</code></pre></figure>
 
 <p>Create some partition on that harddrive. For assumption, you will use harddrive
 which have been mounted on /dev/sdb. That harddrive then divided to 4 section.
 You need to format those partitions. Before do that, you must ensure those
 partitions not in active state.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ sudo umount /dev/sdb1
-$ sudo umount /dev/sdb2
-$ sudo umount /dev/sdb3
-$ sudo umount /dev/sdb4</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo </span>umount /dev/sdb1
+<span class="nv">$ </span><span class="nb">sudo </span>umount /dev/sdb2
+<span class="nv">$ </span><span class="nb">sudo </span>umount /dev/sdb3
+<span class="nv">$ </span><span class="nb">sudo </span>umount /dev/sdb4</code></pre></figure>
 
 <p>Then, format those partitions with partition tool on Linux, such as fdisk and
 cfdisk. In this example, I will use cfdisk.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ sudo cfdisk /dev/sdb</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo </span>cfdisk /dev/sdb</code></pre></figure>
 
 <p>Change its partition filesystem to ReiserFS filesystem.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ sudo mkreiserfs /dev/sdb1</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo </span>mkreiserfs /dev/sdb1</code></pre></figure>
 
 <p>Repeat that step for three other partition.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ sudo mkreisfers /dev/sdb2
-$ sudo mkreiserfs /dev/sdb3
-$ sudo mkreiserfs /dev/sdb4</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo </span>mkreisfers /dev/sdb2
+<span class="nv">$ </span><span class="nb">sudo </span>mkreiserfs /dev/sdb3
+<span class="nv">$ </span><span class="nb">sudo </span>mkreiserfs /dev/sdb4</code></pre></figure>
 
 <p>Make 4 directory in root called cache1, cache2, cache3 and cache4 respectively
 which will be used for cache engine directory.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ sudo mkdir /cache1
-$ sudo mkdir /cache2
-$ sudo mkdir /cache3
-$ sudo mkdir /cache4</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo mkdir</span> /cache1
+<span class="nv">$ </span><span class="nb">sudo mkdir</span> /cache2
+<span class="nv">$ </span><span class="nb">sudo mkdir</span> /cache3
+<span class="nv">$ </span><span class="nb">sudo mkdir</span> /cache4</code></pre></figure>
 
 <p>Edit filesystem table in /etc/fstab. This have purpose to save change which have
 been done for cache partition so they can be used when computer boot. Add the
 following lines:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>/dev/sdb1       /cache1 reiserfs notail,noatime <span class="m">1</span> <span class="m">2</span>
-/dev/sdb2       /cache2 reiserfs notail,noatime <span class="m">1</span> <span class="m">2</span>
-/dev/sdb3       /cache3 reiserfs notail,noatime <span class="m">1</span> <span class="m">2</span>
-/dev/sdb4       /cache4 reiserfs notail,noatime <span class="m">1</span> <span class="m">2</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">/dev/sdb1       /cache1 reiserfs notail,noatime 1 2
+/dev/sdb2       /cache2 reiserfs notail,noatime 1 2
+/dev/sdb3       /cache3 reiserfs notail,noatime 1 2
+/dev/sdb4       /cache4 reiserfs notail,noatime 1 2</code></pre></figure>
 
 <p>Mount all of those partition.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ sudo mount /dev/sdb1
-$ sudo mount /dev/sdb2
-$ sudo mount /dev/sdb3
-$ sudo mount /dev/sdb4</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo </span>mount /dev/sdb1
+<span class="nv">$ </span><span class="nb">sudo </span>mount /dev/sdb2
+<span class="nv">$ </span><span class="nb">sudo </span>mount /dev/sdb3
+<span class="nv">$ </span><span class="nb">sudo </span>mount /dev/sdb4</code></pre></figure>
 
 <p>then all of those partition will be mounted on /cache1, /cache2, /cache3 and
 /cache4 directory.</p>
 
 <p>Create new user and group which will be used by Squid daemon.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ sudo groupadd squid
-$ sudo useradd squid -g squid -s /no/login</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo </span>groupadd squid
+<span class="nv">$ </span><span class="nb">sudo </span>useradd squid <span class="nt">-g</span> squid <span class="nt">-s</span> /no/login</code></pre></figure>
 
 <p>This Squid user will be used for setting up permission on cache directories you
 have been created before.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ sudo  chown -R squid.squid /cache*</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo  chown</span> <span class="nt">-R</span> squid.squid /cache<span class="k">*</span></code></pre></figure>
 
 <p>Change settings for file descriptor on Linux Slackware. Variable which will need
 to be changed is on FD_SETSIZE in file /usr/include/linux/posix_types.h
 (Slackware 12.2). Edit this file and search for following lines:</p>
 
-<figure class="highlight"><pre><code class="language-c" data-lang="c"><span></span><span class="cm">/* Number of descriptors that can fit in an `fd_set’. */</span>
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="cm">/* Number of descriptors that can fit in an `fd_set’. */</span>
 <span class="cp">#define __FD_SETSIZE 1024[/sourcecode]</span></code></pre></figure>
 
 <p>change to:</p>
 
-<figure class="highlight"><pre><code class="language-c" data-lang="c"><span></span><span class="cm">/* Number of descriptors that can fit in an `fd_set’. */</span>
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="cm">/* Number of descriptors that can fit in an `fd_set’. */</span>
 <span class="cp">#define __FD_SETSIZE 16384</span></code></pre></figure>
 
 <p>Then use following commands:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ sudo  chown -R squid.squid /cache1
-$ sudo <span class="nb">ulimit</span> -HSn <span class="m">16384</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo  chown</span> <span class="nt">-R</span> squid.squid /cache1
+<span class="nv">$ </span><span class="nb">sudo ulimit</span> <span class="nt">-HSn</span> 16384</code></pre></figure>
 
 <p>After all prerequisites have been fullfiled, then it is time to download Squid
 source code. You will compile and install from its source code.
@@ -299,95 +299,95 @@ It source code can be obtained from its official website in
 http://www.squid-cache.org.
 For assumption, I use version squid-2.7STABLE7.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ sudo  chown -R squid.squid /cache1
-$ wget http://www.squid-cache.org/Versions/v2/2.7/squid-2.7.STABLE9.tar.gz
-$ tar zxf squid-2.7STABLE9.tar.gz
-$ <span class="nb">cd</span> squid-2.7STABLE9.tar.gz</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo  chown</span> <span class="nt">-R</span> squid.squid /cache1
+<span class="nv">$ </span>wget http://www.squid-cache.org/Versions/v2/2.7/squid-2.7.STABLE9.tar.gz
+<span class="nv">$ </span><span class="nb">tar </span>zxf squid-2.7STABLE9.tar.gz
+<span class="nv">$ </span><span class="nb">cd </span>squid-2.7STABLE9.tar.gz</code></pre></figure>
 
 <p>Before compile its source code, you need to find a variable (I called it xyz
 variable) which will be used to compile it. These variable is obtained from
 processor specification. You can check it with commands:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ sudo  chown -R squid.squid /cache1
-$ sudo cat /proc/cpuinfo
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo  chown</span> <span class="nt">-R</span> squid.squid /cache1
+<span class="nv">$ </span><span class="nb">sudo cat</span> /proc/cpuinfo
 
-processor	: <span class="m">0</span>
+processor	: 0
 vendor_id	: GenuineIntel
-cpu family	: <span class="m">6</span>
-model		: <span class="m">42</span>
-model name	: Intel<span class="o">(</span>R<span class="o">)</span> Core<span class="o">(</span>TM<span class="o">)</span> i5-2410M CPU @ <span class="m">2</span>.30GHz
-stepping	: <span class="m">7</span>
+cpu family	: 6
+model		: 42
+model name	: Intel<span class="o">(</span>R<span class="o">)</span> Core<span class="o">(</span>TM<span class="o">)</span> i5-2410M CPU @ 2.30GHz
+stepping	: 7
 microcode	: 0x29
-cpu MHz		: <span class="m">2699</span>.804
-cache size	: <span class="m">3072</span> KB
-physical id	: <span class="m">0</span>
-siblings	: <span class="m">4</span>
-core id		: <span class="m">0</span>
-cpu cores	: <span class="m">2</span>
-apicid		: <span class="m">0</span>
-initial apicid	: <span class="m">0</span>
-fpu		: yes
-fpu_exception	: yes
-cpuid level	: <span class="m">13</span>
-wp		: yes
-flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx rdtscp lm constant_tsc arch_perfmon pebs bts nopl xtopology nonstop_tsc aperfmperf eagerfpu pni pclmulqdq dtes64 ds_cpl vmx est tm2 ssse3 cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer aes xsave avx lahf_lm epb tpr_shadow vnmi flexpriority ept vpid xsaveopt dtherm ida arat pln pts
+cpu MHz		: 2699.804
+cache size	: 3072 KB
+physical <span class="nb">id</span>	: 0
+siblings	: 4
+core <span class="nb">id</span>		: 0
+cpu cores	: 2
+apicid		: 0
+initial apicid	: 0
+fpu		: <span class="nb">yes
+</span>fpu_exception	: <span class="nb">yes
+</span>cpuid level	: 13
+wp		: <span class="nb">yes
+</span>flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx rdtscp lm constant_tsc arch_perfmon pebs bts nopl xtopology nonstop_tsc aperfmperf eagerfpu pni pclmulqdq dtes64 ds_cpl vmx est tm2 ssse3 cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer aes xsave avx lahf_lm epb tpr_shadow vnmi flexpriority ept vpid xsaveopt dtherm ida arat pln pts
 bugs		:
-bogomips	: <span class="m">4589</span>.51
-clflush size	: <span class="m">64</span>
-cache_alignment	: <span class="m">64</span>
-address sizes	: <span class="m">36</span> bits physical, <span class="m">48</span> bits virtual
+bogomips	: 4589.51
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 36 bits physical, 48 bits virtual
 power management:
 
---ommited--</code></pre></figure>
+<span class="nt">--ommited--</span></code></pre></figure>
 
 <p>From that output, the number you need to use is on the cpu MHz section. In that
 example, the number is 2699 and I will be rounded to 2700.
 The formula I use:</p>
 
-<figure class="highlight"><pre><code class="language-text" data-lang="text"><span></span>xyz = ([cpu MHz] / 500) x 30</code></pre></figure>
+<figure class="highlight"><pre><code class="language-text" data-lang="text">xyz = ([cpu MHz] / 500) x 30</code></pre></figure>
 
 <p>Then from the previous number, variable xyz you can get:</p>
 
-<figure class="highlight"><pre><code class="language-text" data-lang="text"><span></span>xyz = (2700/500) x 30 = 5.4 x 30 = 162. </code></pre></figure>
+<figure class="highlight"><pre><code class="language-text" data-lang="text">xyz = (2700/500) x 30 = 5.4 x 30 = 162. </code></pre></figure>
 
 <p>Compile the Squid source code which following prefix and don’t forget to change
 variable xyz with previous number:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>./configure<span class="se">\</span>
---prefix<span class="o">=</span>/usr<span class="se">\</span>
---exec-prefix<span class="o">=</span>/usr<span class="se">\</span>
---libexecdir<span class="o">=</span>/usr/lib/squid<span class="se">\</span>
---localstatedir<span class="o">=</span>/var<span class="se">\</span>
---sysconfdir<span class="o">=</span>/etc/squid<span class="se">\</span>
---enable-delay-pools<span class="se">\</span>
---enable-http-violations<span class="se">\</span>
---enable-poll<span class="se">\</span>
---disable-ident-lookups<span class="se">\</span>
---enable-truncate<span class="se">\</span>
---enable-removal-policies<span class="o">=</span>lru,heap<span class="se">\</span>
---enable-cachemgr-hostname<span class="o">=</span>www<span class="se">\</span>
---enable-linux-netfilter<span class="se">\</span>
---enable-stacktraces<span class="se">\</span>
---enable-unlinkd<span class="se">\</span>
---enable-storeio<span class="o">=</span>diskd,ufs,aufs,coss,null<span class="se">\</span>
---enable-snmp<span class="se">\</span>
---bindir<span class="o">=</span>/usr/sbin<span class="se">\</span>
---enable-arp-acl<span class="se">\</span>
---enable-async-io<span class="o">=</span>xyz<span class="se">\</span>
---disable-icmp<span class="se">\</span>
---enable-gnuregex<span class="se">\</span>
---enable-large-cache-files<span class="se">\</span>
---with-aufs-threads<span class="o">=</span>xyz<span class="se">\</span>
---with-maxfd<span class="o">=</span><span class="m">16384</span><span class="se">\</span>
---enable-htcp<span class="se">\</span>
---enable-coss-aio-ops<span class="se">\</span>
---with-pthreads<span class="se">\</span>
---with-large-files<span class="se">\</span>
---CFLAGS<span class="o">=</span>-O6 -s -DNUMTHREADS<span class="o">=</span>xyz<span class="se">\</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">./configure<span class="se">\</span>
+<span class="nt">--prefix</span><span class="o">=</span>/usr<span class="se">\</span>
+<span class="nt">--exec-prefix</span><span class="o">=</span>/usr<span class="se">\</span>
+<span class="nt">--libexecdir</span><span class="o">=</span>/usr/lib/squid<span class="se">\</span>
+<span class="nt">--localstatedir</span><span class="o">=</span>/var<span class="se">\</span>
+<span class="nt">--sysconfdir</span><span class="o">=</span>/etc/squid<span class="se">\</span>
+<span class="nt">--enable-delay-pools</span><span class="se">\</span>
+<span class="nt">--enable-http-violations</span><span class="se">\</span>
+<span class="nt">--enable-poll</span><span class="se">\</span>
+<span class="nt">--disable-ident-lookups</span><span class="se">\</span>
+<span class="nt">--enable-truncate</span><span class="se">\</span>
+<span class="nt">--enable-removal-policies</span><span class="o">=</span>lru,heap<span class="se">\</span>
+<span class="nt">--enable-cachemgr-hostname</span><span class="o">=</span>www<span class="se">\</span>
+<span class="nt">--enable-linux-netfilter</span><span class="se">\</span>
+<span class="nt">--enable-stacktraces</span><span class="se">\</span>
+<span class="nt">--enable-unlinkd</span><span class="se">\</span>
+<span class="nt">--enable-storeio</span><span class="o">=</span>diskd,ufs,aufs,coss,null<span class="se">\</span>
+<span class="nt">--enable-snmp</span><span class="se">\</span>
+<span class="nt">--bindir</span><span class="o">=</span>/usr/sbin<span class="se">\</span>
+<span class="nt">--enable-arp-acl</span><span class="se">\</span>
+<span class="nt">--enable-async-io</span><span class="o">=</span>xyz<span class="se">\</span>
+<span class="nt">--disable-icmp</span><span class="se">\</span>
+<span class="nt">--enable-gnuregex</span><span class="se">\</span>
+<span class="nt">--enable-large-cache-files</span><span class="se">\</span>
+<span class="nt">--with-aufs-threads</span><span class="o">=</span>xyz<span class="se">\</span>
+<span class="nt">--with-maxfd</span><span class="o">=</span>16384<span class="se">\</span>
+<span class="nt">--enable-htcp</span><span class="se">\</span>
+<span class="nt">--enable-coss-aio-ops</span><span class="se">\</span>
+<span class="nt">--with-pthreads</span><span class="se">\</span>
+<span class="nt">--with-large-files</span><span class="se">\</span>
+<span class="nt">--CFLAGS</span><span class="o">=</span><span class="nt">-O6</span> <span class="nt">-s</span> <span class="nt">-DNUMTHREADS</span><span class="o">=</span>xyz<span class="se">\</span></code></pre></figure>
 
 <p>After compiling process success, then install with:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ sudo make <span class="o">&amp;&amp;</span> make install</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo </span>make <span class="o">&amp;&amp;</span> make <span class="nb">install</span></code></pre></figure>
 
 <p>If there are not appear an error message, then Squid have been successfully
 installed on your system.</p>
@@ -395,64 +395,64 @@ installed on your system.</p>
 <p>Do some tune up on Squid configuration. Edit file /etc/squid/squid.conf. Make
 some adaptation for network in access list options (acl).</p>
 
-<figure class="highlight"><pre><code class="language-text" data-lang="text"><span></span>cache_mem ==&gt; cache memori formula = (amount of ram / 4)
+<figure class="highlight"><pre><code class="language-text" data-lang="text">cache_mem ==&gt; cache memori formula = (amount of ram / 4)
 cache_dir ==&gt; 80% from size of cache partition (for example: 16000 64 256)</code></pre></figure>
 
 <p>For transparent proxy mode, you need to add the following line:</p>
 
-<figure class="highlight"><pre><code class="language-text" data-lang="text"><span></span>http_port 3128 transparent</code></pre></figure>
+<figure class="highlight"><pre><code class="language-text" data-lang="text">http_port 3128 transparent</code></pre></figure>
 
 <p>Make Squid log file and set this permission:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ sudo mkdir -p /var/log/squid
-$ sudo touch /var/log/squid/access.log
-$ sudo touch /var/log/squid/cache.log
-$ sudo chown -R squid.squid /var/log/squid</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo mkdir</span> <span class="nt">-p</span> /var/log/squid
+<span class="nv">$ </span><span class="nb">sudo touch</span> /var/log/squid/access.log
+<span class="nv">$ </span><span class="nb">sudo touch</span> /var/log/squid/cache.log
+<span class="nv">$ </span><span class="nb">sudo chown</span> <span class="nt">-R</span> squid.squid /var/log/squid</code></pre></figure>
 
 <p>Afterall, run Squid commands:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ sudo squid -z
-$ sudo squid -s</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo </span>squid <span class="nt">-z</span>
+<span class="nv">$ </span><span class="nb">sudo </span>squid <span class="nt">-s</span></code></pre></figure>
 
 <p>Check whether Squid have been running with nmap command.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ nmap localhost
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>nmap localhost
 
-Starting Nmap <span class="m">7</span>.01 <span class="o">(</span> https://nmap.org <span class="o">)</span> at <span class="m">2016</span>-11-28 <span class="m">01</span>:27 WIB
-Nmap scan report <span class="k">for</span> localhost <span class="o">(</span><span class="m">127</span>.0.0.1<span class="o">)</span>
-Host is up <span class="o">(</span><span class="m">0</span>.000062s latency<span class="o">)</span>.
-Not shown: <span class="m">998</span> closed ports
+Starting Nmap 7.01 <span class="o">(</span> https://nmap.org <span class="o">)</span> at 2016-11-28 01:27 WIB
+Nmap scan report <span class="k">for </span>localhost <span class="o">(</span>127.0.0.1<span class="o">)</span>
+Host is up <span class="o">(</span>0.000062s latency<span class="o">)</span><span class="nb">.</span>
+Not shown: 998 closed ports
 PORT     STATE SERVICE
-<span class="m">22</span>/tcp   open  ssh
-<span class="m">53</span>/tcp   open  domain
-<span class="m">80</span>/tcp   open  http
-<span class="m">3128</span>/tcp open  squid-http
+22/tcp   open  ssh
+53/tcp   open  domain
+80/tcp   open  http
+3128/tcp open  squid-http
 
-Nmap <span class="k">done</span>: <span class="m">1</span> IP address <span class="o">(</span><span class="m">1</span> host up<span class="o">)</span> scanned in <span class="m">0</span>.10 seconds</code></pre></figure>
+Nmap <span class="k">done</span>: 1 IP address <span class="o">(</span>1 host up<span class="o">)</span> scanned <span class="k">in </span>0.10 seconds</code></pre></figure>
 
 <p>Or you can look on the cache.log file you have been created before.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ sudo tail -f /var/log/squid/cache.log
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo tail</span> <span class="nt">-f</span> /var/log/squid/cache.log
 
-<span class="m">2010</span>/12/02 <span class="m">23</span>:06:13<span class="p">|</span> <span class="m">0</span> Objects expired.
-<span class="m">2010</span>/12/02 <span class="m">23</span>:06:13<span class="p">|</span> <span class="m">0</span> Objects cancelled.
-<span class="m">2010</span>/12/02 <span class="m">23</span>:06:13<span class="p">|</span> <span class="m">0</span> Duplicate URLs purged.
-<span class="m">2010</span>/12/02 <span class="m">23</span>:06:13<span class="p">|</span> <span class="m">0</span> Swapfile clashes avoided.
-<span class="m">2010</span>/12/02 <span class="m">23</span>:06:13<span class="p">|</span> Took <span class="m">0</span>.4 seconds <span class="o">(</span><span class="m">75149</span>.7 objects/sec<span class="o">)</span>.
-<span class="m">2010</span>/12/02 <span class="m">23</span>:06:13<span class="p">|</span> Beginning Validation Procedure
-<span class="m">2010</span>/12/02 <span class="m">23</span>:06:13<span class="p">|</span> Completed Validation Procedure
-<span class="m">2010</span>/12/02 <span class="m">23</span>:06:13<span class="p">|</span> Validated <span class="m">26825</span> Entries
-<span class="m">2010</span>/12/02 <span class="m">23</span>:06:13<span class="p">|</span> <span class="nv">store_swap_size</span> <span class="o">=</span> 1327892k
-<span class="m">2010</span>/12/02 <span class="m">23</span>:06:14<span class="p">|</span> storeLateRelease: released <span class="m">0</span> objects<span class="o">[</span>/sourcecode<span class="o">]</span></code></pre></figure>
+2010/12/02 23:06:13| 0 Objects expired.
+2010/12/02 23:06:13| 0 Objects cancelled.
+2010/12/02 23:06:13| 0 Duplicate URLs purged.
+2010/12/02 23:06:13| 0 Swapfile clashes avoided.
+2010/12/02 23:06:13| Took 0.4 seconds <span class="o">(</span>75149.7 objects/sec<span class="o">)</span><span class="nb">.</span>
+2010/12/02 23:06:13| Beginning Validation Procedure
+2010/12/02 23:06:13| Completed Validation Procedure
+2010/12/02 23:06:13| Validated 26825 Entries
+2010/12/02 23:06:13| store_swap_size <span class="o">=</span> 1327892k
+2010/12/02 23:06:14| storeLateRelease: released 0 objects[/sourcecode]</code></pre></figure>
 
 <p>If the results is same as the following example, the Squid Proxy ready to serve.</p>
 
 <p>Add the following commands in order to run Squid whenever the Linux machine
 reboot. Edit file /etc/rc.d/rc.local.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="c1"># run squid cache daemon</span>
-<span class="nb">ulimit</span> -HSn <span class="m">16384</span>
-squid <span class="p">&amp;</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># run squid cache daemon</span>
+<span class="nb">ulimit</span> <span class="nt">-HSn</span> 16384
+squid &amp;</code></pre></figure>
 
 </div>
     <hr />

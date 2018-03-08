@@ -5,8 +5,8 @@
     <description>Didik Setiawan's Blog</description>
     <link>https://www.didiksetiawan.com/</link>
     <atom:link href="https://www.didiksetiawan.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 08 Mar 2018 21:28:25 +0700</pubDate>
-    <lastBuildDate>Thu, 08 Mar 2018 21:28:25 +0700</lastBuildDate>
+    <pubDate>Fri, 09 Mar 2018 03:00:35 +0700</pubDate>
+    <lastBuildDate>Fri, 09 Mar 2018 03:00:35 +0700</lastBuildDate>
     <generator>Jekyll v3.7.3</generator>
     
       <item>
@@ -39,7 +39,7 @@ The contributor of the project is so friendly. They give me some clues about
 what should I do. I should do some &lt;em&gt;microproject&lt;/em&gt; work to show effort from me to
 understand their workflow and also their codebase. That means, I have to send a
 patch (there was Github pull request at this time) to the project.  I choose to
-work on adding new unit test to function &lt;code&gt;wget_robots_parse()&lt;/code&gt; [0].  Just like
+work on adding new unit test to function &lt;code class=&quot;highlighter-rouge&quot;&gt;wget_robots_parse()&lt;/code&gt; [0].  Just like
 most of open source contribution, it took some process of revision of patch so
 it can be merged to upstream. I respect the reviewing process, it help me learn
 a lot. Also from now I learn a lot to use &lt;em&gt;GDB (GNU Debugger)&lt;/em&gt; to debug
@@ -51,12 +51,12 @@ Test Suite Using Libmicrohttpd” as my project. I send my proposal to project�
 mailing list [1]. After some reviewing and revision process, I officially sent
 my proposal to GSoC homepage and my proposal was accepted.&lt;br /&gt;
 The project aim to use Libmicrohttpd as test suite for Wget2. I planned to
-complete this by change on function &lt;code&gt;wget_test_start_server()&lt;/code&gt; also
-&lt;code&gt;wget_test_stop_server()&lt;/code&gt; from src/libtest.c of Wget2. With this
+complete this by change on function &lt;code class=&quot;highlighter-rouge&quot;&gt;wget_test_start_server()&lt;/code&gt; also
+&lt;code class=&quot;highlighter-rouge&quot;&gt;wget_test_stop_server()&lt;/code&gt; from src/libtest.c of Wget2. With this
 approach, I don’t need to change existing test suite which call the internal
 server code through functions mentioned above.&lt;br /&gt;
 I’ve count there are 36 test file which use
-&lt;code&gt;wget_test_start_server()&lt;/code&gt;. I must ensure all the test passed.  And
+&lt;code class=&quot;highlighter-rouge&quot;&gt;wget_test_start_server()&lt;/code&gt;. I must ensure all the test passed.  And
 for installation prerequisite, I must ensure that Libmicrohttpd are included
 when building Wget2 binary. Then I need to modify configure.ac. I will give
 proper warning about this requirement. There is a section in README.md where I
@@ -105,15 +105,17 @@ respective repository, except MingW64 (the representation of Windows build).
 Especially for MingW64 build, because I haven’t found the correct package for
 Libmicrohttpd, I include Libmicrohttpd by download the source and compile
 manually. What I’ve done is add the following lines on .gitlab-ci.yml:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;before_script:
-- dnf -y install wget
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;before_script:
+- dnf &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;wget
 - wget http://ftp.gnu.org/gnu/libmicrohttpd/libmicrohttpd-0.9.55.tar.gz
-- tar zxf libmicrohttpd-0.9.55.tar.gz &amp;amp;&amp;amp; cd libmicrohttpd-0.9.55/
-- mingw64-configure --prefix=/usr/x86_64-w64-mingw32/sys-root/mingw/
-- mingw64-make -j$(nproc)
-- mingw64-make -j$(nproc) LOG_COMPILER=wine install
-- cd -
-&lt;/code&gt;&lt;/pre&gt;
+- &lt;span class=&quot;nb&quot;&gt;tar &lt;/span&gt;zxf libmicrohttpd-0.9.55.tar.gz &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;libmicrohttpd-0.9.55/
+- mingw64-configure &lt;span class=&quot;nt&quot;&gt;--prefix&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/usr/x86_64-w64-mingw32/sys-root/mingw/
+- mingw64-make &lt;span class=&quot;nt&quot;&gt;-j&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;nproc&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;
+- mingw64-make &lt;span class=&quot;nt&quot;&gt;-j&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;nproc&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;LOG_COMPILER&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;wine &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt;
+- &lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; -
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
 &lt;p&gt;I asking if my step was right. Tim give me advice on that MingW64 issue, that I
 should provide a script (e.g. in contrib/ folder) that will
 downloads/builds/installs Libmicrohttpd. That script then added to the CI runner
@@ -129,16 +131,16 @@ the test code first.&lt;/p&gt;
 &lt;h3 id=&quot;2nd-week&quot;&gt;2nd Week&lt;/h3&gt;
 
 &lt;p&gt;Things get more interesting. Because in this period, I will starting to work on
-Wget2 main testing function. I started on &lt;code&gt;wget_test_start_server()&lt;/code&gt;.
+Wget2 main testing function. I started on &lt;code class=&quot;highlighter-rouge&quot;&gt;wget_test_start_server()&lt;/code&gt;.
 I must change that function in order to call Libmicrohttpd as service for
-&lt;code&gt;wget_test()&lt;/code&gt;. Workflow to resolve this:&lt;/p&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;wget_test()&lt;/code&gt;. Workflow to resolve this:&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Disable initial process for HTTP server socket.&lt;/li&gt;
-  &lt;li&gt;Disable &lt;code&gt;_http_server_thread&lt;/code&gt;, instead call new function which call
+  &lt;li&gt;Disable &lt;code class=&quot;highlighter-rouge&quot;&gt;_http_server_thread&lt;/code&gt;, instead call new function which call
 Libmicrohttpd.&lt;/li&gt;
-  &lt;li&gt;Create &lt;code&gt;_http_server()&lt;/code&gt; function, wrapper for Libmicrohttpd. There
-is also function &lt;code&gt;ahc_eco()&lt;/code&gt; which use to create proper HTTP
+  &lt;li&gt;Create &lt;code class=&quot;highlighter-rouge&quot;&gt;_http_server()&lt;/code&gt; function, wrapper for Libmicrohttpd. There
+is also function &lt;code class=&quot;highlighter-rouge&quot;&gt;ahc_eco()&lt;/code&gt; which use to create proper HTTP
 response.&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -146,19 +148,19 @@ response.&lt;/li&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Decide what the best threading model for Libmicrohttpd. I currently using
-&lt;code&gt;MHD_USE_INTERNALLY_POLLING_THREAD&lt;/code&gt; which use external select. I still check
-the comparison with legacy code that use Wget2 API &lt;code&gt;wget_thread_start&lt;/code&gt;.
+&lt;code class=&quot;highlighter-rouge&quot;&gt;MHD_USE_INTERNALLY_POLLING_THREAD&lt;/code&gt; which use external select. I still check
+the comparison with legacy code that use Wget2 API &lt;code class=&quot;highlighter-rouge&quot;&gt;wget_thread_start&lt;/code&gt;.
 Darshit Shah give me a clue, that I should choose any mechanism that uses
-&lt;code&gt;select()&lt;/code&gt;. Then we can change the threading model at a later stage if it
-turns out to be a bottleneck. &lt;code&gt;epoll&lt;/code&gt; is Linux-only and even &lt;code&gt;poll&lt;/code&gt; isn’t
-always available, so as long as I choose a &lt;code&gt;select&lt;/code&gt; based implementation, it
-should be fine. Evgeny said that I can use &lt;code&gt;MHD_is_feature_supported()&lt;/code&gt; with
-&lt;code&gt;MHD_FEATURE_POLL&lt;/code&gt; and &lt;code&gt;MHD_FEATURE_EPOLL&lt;/code&gt; to check for supported polling
+&lt;code class=&quot;highlighter-rouge&quot;&gt;select()&lt;/code&gt;. Then we can change the threading model at a later stage if it
+turns out to be a bottleneck. &lt;code class=&quot;highlighter-rouge&quot;&gt;epoll&lt;/code&gt; is Linux-only and even &lt;code class=&quot;highlighter-rouge&quot;&gt;poll&lt;/code&gt; isn’t
+always available, so as long as I choose a &lt;code class=&quot;highlighter-rouge&quot;&gt;select&lt;/code&gt; based implementation, it
+should be fine. Evgeny said that I can use &lt;code class=&quot;highlighter-rouge&quot;&gt;MHD_is_feature_supported()&lt;/code&gt; with
+&lt;code class=&quot;highlighter-rouge&quot;&gt;MHD_FEATURE_POLL&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;MHD_FEATURE_EPOLL&lt;/code&gt; to check for supported polling
 functions.  Alternatively, with latest versions of Libmicrohttpd I can use
-&lt;code&gt;MHD_USE_AUTO&lt;/code&gt; and Libmicrohttpd will choose &lt;code&gt;select()&lt;/code&gt;, &lt;code&gt;poll()&lt;/code&gt; or
+&lt;code class=&quot;highlighter-rouge&quot;&gt;MHD_USE_AUTO&lt;/code&gt; and Libmicrohttpd will choose &lt;code class=&quot;highlighter-rouge&quot;&gt;select()&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;poll()&lt;/code&gt; or
 epoll-based polling automatically.&lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;I make the &lt;code&gt;http_server_port&lt;/code&gt; still hardcoded. Darshit tell me that this
+    &lt;p&gt;I make the &lt;code class=&quot;highlighter-rouge&quot;&gt;http_server_port&lt;/code&gt; still hardcoded. Darshit tell me that this
 becomes important note. The port should be a random number. Usually, passing 0
 in the port number makes the kernel choose an open one for it. Having a
 randomised port is important to ensure that multiple runs don’t step on each
@@ -166,72 +168,72 @@ other.&lt;br /&gt;
 I think still don’t know how to accomplish this. Maybe, it just my understanding
 that when I pass 0 in MHD port number, the result is still 0.  Another
 approach, when I look into the old code, it generate port number by calling
-&lt;code&gt;wget_tcp_get_local_port()&lt;/code&gt;. But, I need to call &lt;code&gt;wget_tcp_init()&lt;/code&gt; and
-&lt;code&gt;wget_tcp_listen()&lt;/code&gt; respectively in order to get proper result.  Conclusion, do
-I need to use existing &lt;code&gt;wget_tcp_get_local_port()&lt;/code&gt; to get the port, or maybe
+&lt;code class=&quot;highlighter-rouge&quot;&gt;wget_tcp_get_local_port()&lt;/code&gt;. But, I need to call &lt;code class=&quot;highlighter-rouge&quot;&gt;wget_tcp_init()&lt;/code&gt; and
+&lt;code class=&quot;highlighter-rouge&quot;&gt;wget_tcp_listen()&lt;/code&gt; respectively in order to get proper result.  Conclusion, do
+I need to use existing &lt;code class=&quot;highlighter-rouge&quot;&gt;wget_tcp_get_local_port()&lt;/code&gt; to get the port, or maybe
 there is a function in Libmicrohttpd to do that.&lt;br /&gt;
 Tim added that all I need is the socket descriptor. How to call
-&lt;code&gt;getsockname()&lt;/code&gt; + &lt;code&gt;getnameinfo()&lt;/code&gt; to retrieve the port number I see in
-&lt;code&gt;libwget/net.c&lt;/code&gt;/ &lt;code&gt;wget_tcp_get_local_port()&lt;/code&gt;. If Libmicrohttpd doesn’t have
+&lt;code class=&quot;highlighter-rouge&quot;&gt;getsockname()&lt;/code&gt; + &lt;code class=&quot;highlighter-rouge&quot;&gt;getnameinfo()&lt;/code&gt; to retrieve the port number I see in
+&lt;code class=&quot;highlighter-rouge&quot;&gt;libwget/net.c&lt;/code&gt;/ &lt;code class=&quot;highlighter-rouge&quot;&gt;wget_tcp_get_local_port()&lt;/code&gt;. If Libmicrohttpd doesn’t have
 such a function, either try to get the socket descriptor or extend
 Libmicrohttpd with a small function (similar code as in
-&lt;code&gt;wget_tcp_get_local_port&lt;/code&gt;).&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;wget_tcp_get_local_port&lt;/code&gt;).&lt;br /&gt;
 Evgeny give more detailed explanations. There are several ways to resolve it:&lt;/p&gt;
 
     &lt;ol&gt;
-      &lt;li&gt;Initialise socket externally and start &lt;code&gt;listen()&lt;/code&gt; on it. I can use any bind
-and port detection function. Pass socket &lt;code&gt;FD&lt;/code&gt; to &lt;code&gt;MHD_start_daemon()&lt;/code&gt; by
-&lt;code&gt;MHD_OPTION_LISTEN_SOCKET&lt;/code&gt;.&lt;/li&gt;
-      &lt;li&gt;Use &lt;code&gt;MHD_start_daemon()&lt;/code&gt; with “0” as port number then use
-&lt;code&gt;MHD_get_daemon_info()&lt;/code&gt; with &lt;code&gt;MHD_DAEMON_INFO_LISTEN_FD&lt;/code&gt; to get listen
+      &lt;li&gt;Initialise socket externally and start &lt;code class=&quot;highlighter-rouge&quot;&gt;listen()&lt;/code&gt; on it. I can use any bind
+and port detection function. Pass socket &lt;code class=&quot;highlighter-rouge&quot;&gt;FD&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;MHD_start_daemon()&lt;/code&gt; by
+&lt;code class=&quot;highlighter-rouge&quot;&gt;MHD_OPTION_LISTEN_SOCKET&lt;/code&gt;.&lt;/li&gt;
+      &lt;li&gt;Use &lt;code class=&quot;highlighter-rouge&quot;&gt;MHD_start_daemon()&lt;/code&gt; with “0” as port number then use
+&lt;code class=&quot;highlighter-rouge&quot;&gt;MHD_get_daemon_info()&lt;/code&gt; with &lt;code class=&quot;highlighter-rouge&quot;&gt;MHD_DAEMON_INFO_LISTEN_FD&lt;/code&gt; to get listen
 socket FD. Use any port detection.&lt;/li&gt;
-      &lt;li&gt;Use &lt;code&gt;MHD_start_daemon()&lt;/code&gt; with “0” as port number then use
-&lt;code&gt;MHD_get_daemon_info()&lt;/code&gt; with &lt;code&gt;MHD_DAEMON_INFO_BIND_PORT&lt;/code&gt; to get port
-number.  Works with &lt;code&gt;MHD_VERSION &amp;gt;= 0x00095501&lt;/code&gt; and on platforms that
-support &lt;code&gt;getsockname()&lt;/code&gt;.&lt;br /&gt;
+      &lt;li&gt;Use &lt;code class=&quot;highlighter-rouge&quot;&gt;MHD_start_daemon()&lt;/code&gt; with “0” as port number then use
+&lt;code class=&quot;highlighter-rouge&quot;&gt;MHD_get_daemon_info()&lt;/code&gt; with &lt;code class=&quot;highlighter-rouge&quot;&gt;MHD_DAEMON_INFO_BIND_PORT&lt;/code&gt; to get port
+number.  Works with &lt;code class=&quot;highlighter-rouge&quot;&gt;MHD_VERSION &amp;gt;= 0x00095501&lt;/code&gt; and on platforms that
+support &lt;code class=&quot;highlighter-rouge&quot;&gt;getsockname()&lt;/code&gt;.&lt;br /&gt;
 I can combine second and third methods.&lt;/li&gt;
     &lt;/ol&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;pre&gt;&lt;code&gt;  int port_num;
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;port_num&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 
-  if(0) {}
-#if MHD_VERSION &amp;gt;= 0x00095501
-  else if (MHD_NO !=
-     MHD_is_feature_supported (MHD_FEATURE_AUTODETECT_BIND_PORT))
-  {
-    const union MHD_DaemonInfo *dinfo;
-    dinfo = MHD_get_daemon_info (d, MHD_DAEMON_INFO_BIND_PORT);
-    if (NULL == dinfo || 0 == dinfo-&amp;gt;port)
-    {
-      /* Insert code to handle error. */
-      return -1;
-    }
-    port_num = (int)dinfo-&amp;gt;port;
-  }
-#endif /* MHD_VERSION &amp;gt;= 0x00095501 */
-  else
-  {
-    const union MHD_DaemonInfo *dinfo;
-    MHD_socket sock_fd;
-    dinfo = MHD_get_daemon_info (d, MHD_OPTION_LISTEN_FD);
-    if (NULL == dinfo)
-    {
-      /* Insert code to handle error. */
-      return -1;
-    }
-    sock_fd = dinfo-&amp;gt;listen_fd;
-    /* Insert code to use port detection on provided socket. */
-  }
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;#if MHD_VERSION &amp;gt;= 0x00095501
+&lt;/span&gt;  &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MHD_NO&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt;
+     &lt;span class=&quot;n&quot;&gt;MHD_is_feature_supported&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MHD_FEATURE_AUTODETECT_BIND_PORT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;union&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MHD_DaemonInfo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dinfo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;dinfo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MHD_get_daemon_info&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MHD_DAEMON_INFO_BIND_PORT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;NULL&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dinfo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dinfo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;port&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;cm&quot;&gt;/* Insert code to handle error. */&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;port_num&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dinfo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;port&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;#endif &lt;/span&gt;&lt;span class=&quot;cm&quot;&gt;/* MHD_VERSION &amp;gt;= 0x00095501 */&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
+&lt;/span&gt;  &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;union&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MHD_DaemonInfo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dinfo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;MHD_socket&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sock_fd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;dinfo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MHD_get_daemon_info&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MHD_OPTION_LISTEN_FD&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;NULL&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dinfo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;cm&quot;&gt;/* Insert code to handle error. */&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;sock_fd&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dinfo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;listen_fd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;cm&quot;&gt;/* Insert code to use port detection on provided socket. */&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;He add note that socket type used by MHD functions is &lt;code&gt;MHD_socket&lt;/code&gt;.
-&lt;code&gt;MHD_socket&lt;/code&gt; is &lt;code&gt;int&lt;/code&gt; on POSIX platforms (Linux, *BSD, Unix, Darwin) and
-&lt;code&gt;SOCKET&lt;/code&gt; on Windows platform (excluding Cygwin, where &lt;code&gt;MHD_socket&lt;/code&gt; is &lt;code&gt;int&lt;/code&gt;).&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;He add note that socket type used by MHD functions is &lt;code class=&quot;highlighter-rouge&quot;&gt;MHD_socket&lt;/code&gt;.
+&lt;code class=&quot;highlighter-rouge&quot;&gt;MHD_socket&lt;/code&gt; is &lt;code class=&quot;highlighter-rouge&quot;&gt;int&lt;/code&gt; on POSIX platforms (Linux, *BSD, Unix, Darwin) and
+&lt;code class=&quot;highlighter-rouge&quot;&gt;SOCKET&lt;/code&gt; on Windows platform (excluding Cygwin, where &lt;code class=&quot;highlighter-rouge&quot;&gt;MHD_socket&lt;/code&gt; is &lt;code class=&quot;highlighter-rouge&quot;&gt;int&lt;/code&gt;).&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;In &lt;code&gt;ahc_eco()&lt;/code&gt; of Libmicrohttpd, urls data still using static checking for
+  &lt;li&gt;In &lt;code class=&quot;highlighter-rouge&quot;&gt;ahc_eco()&lt;/code&gt; of Libmicrohttpd, urls data still using static checking for
 matching with requested urls. In other word, it’s hardcoded. It needs to be
 changed to dynamic method to accomodate variadic data.&lt;/li&gt;
   &lt;li&gt;I still not touched HTTPS yet.&lt;/li&gt;
@@ -242,14 +244,14 @@ now. Then we should look into different libraries that provide a FTP server in
 C and try to integrate that into your test suite as well. But for this period,
 it is out of scope.&lt;/li&gt;
   &lt;li&gt;The test was failed when I try to resolve URL with question mark. For example:
-&lt;code&gt;/subdir1/subpage1.html?query&amp;amp;param&lt;/code&gt;, when I debug, it return just
-&lt;code&gt;/subdir1/subpage1.html&lt;/code&gt; so the result is 404 not found. I also check using
+&lt;code class=&quot;highlighter-rouge&quot;&gt;/subdir1/subpage1.html?query&amp;amp;param&lt;/code&gt;, when I debug, it return just
+&lt;code class=&quot;highlighter-rouge&quot;&gt;/subdir1/subpage1.html&lt;/code&gt; so the result is 404 not found. I also check using
 logging example source code provided in Libmicrohttpd tutorial. When I access
 using http client such as Wget2 and Firefox, the result is still the same. The
 URL result omit the query part. I confirm to Libmicrohttpd side about
 this, whether it is intended behaviour or not. Christian said it that’s
 intended, for URL parameters/arguments I need to use
-&lt;code&gt;MHD_get_connection_values()&lt;/code&gt; with &lt;code&gt;kind=MHD_GET_ARGUMENT_KIND&lt;/code&gt; to inspect
+&lt;code class=&quot;highlighter-rouge&quot;&gt;MHD_get_connection_values()&lt;/code&gt; with &lt;code class=&quot;highlighter-rouge&quot;&gt;kind=MHD_GET_ARGUMENT_KIND&lt;/code&gt; to inspect
 them.&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -259,18 +261,18 @@ them.&lt;/li&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Remove initial process for HTTP server socket.&lt;/li&gt;
-  &lt;li&gt;Create &lt;code&gt;_http_server_start()&lt;/code&gt; function, wrapper for Libmicrohttpd. There is
-also function &lt;code&gt;answer_to_connection()&lt;/code&gt; which use to create proper HTTP
+  &lt;li&gt;Create &lt;code class=&quot;highlighter-rouge&quot;&gt;_http_server_start()&lt;/code&gt; function, wrapper for Libmicrohttpd. There is
+also function &lt;code class=&quot;highlighter-rouge&quot;&gt;answer_to_connection()&lt;/code&gt; which use to create proper HTTP
 response.&lt;/li&gt;
-  &lt;li&gt;Use select method &lt;code&gt;(MHD_USE_SELECT_INTERNALLY)&lt;/code&gt; for threading model in
+  &lt;li&gt;Use select method &lt;code class=&quot;highlighter-rouge&quot;&gt;(MHD_USE_SELECT_INTERNALLY)&lt;/code&gt; for threading model in
 Libmicrohttpd to get better compatibility.&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;http_server_port&lt;/code&gt; seized automatically using Libmicrohttpd function by
-passing &lt;code&gt;MHD_DAEMON_INFO_BIND_PORT&lt;/code&gt; or &lt;code&gt;MHD_DAEMON_INFO_LISTEN_FD&lt;/code&gt; parameter
-to &lt;code&gt;MHD_get_daemon_info()&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;Using iteration to parse urls data in &lt;code&gt;answer_to_connection()&lt;/code&gt;. This
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;http_server_port&lt;/code&gt; seized automatically using Libmicrohttpd function by
+passing &lt;code class=&quot;highlighter-rouge&quot;&gt;MHD_DAEMON_INFO_BIND_PORT&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;MHD_DAEMON_INFO_LISTEN_FD&lt;/code&gt; parameter
+to &lt;code class=&quot;highlighter-rouge&quot;&gt;MHD_get_daemon_info()&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Using iteration to parse urls data in &lt;code class=&quot;highlighter-rouge&quot;&gt;answer_to_connection()&lt;/code&gt;. This
 guarantee we can pass any variadic data to Libmicrohttpd and prevent
 segmentation fault.&lt;/li&gt;
-  &lt;li&gt;Fix &lt;code&gt;answer_to_connection()&lt;/code&gt; function to create proper HTTP response (to deal
+  &lt;li&gt;Fix &lt;code class=&quot;highlighter-rouge&quot;&gt;answer_to_connection()&lt;/code&gt; function to create proper HTTP response (to deal
 with parameters and arguments on url, to add proper HTTP headers).&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -284,28 +286,28 @@ done in this week.&lt;/p&gt;
   &lt;li&gt;I have ensured that all make check passed on several testing machine
 including: Debian/GCC, Fedora/Clang, MingW64 and OSX.&lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;Started working on &lt;code&gt;wget_test_start_server()&lt;/code&gt;. Workflow to resolve this:&lt;/p&gt;
+    &lt;p&gt;Started working on &lt;code class=&quot;highlighter-rouge&quot;&gt;wget_test_start_server()&lt;/code&gt;. Workflow to resolve this:&lt;/p&gt;
 
     &lt;ul&gt;
       &lt;li&gt;Remove initial process for HTTP server socket.&lt;/li&gt;
-      &lt;li&gt;Create &lt;code&gt;_http_server_start()&lt;/code&gt; function, wrapper for Libmicrohttpd. There is
-also function &lt;code&gt;answer_to_connection()&lt;/code&gt; which use to create proper HTTP
+      &lt;li&gt;Create &lt;code class=&quot;highlighter-rouge&quot;&gt;_http_server_start()&lt;/code&gt; function, wrapper for Libmicrohttpd. There is
+also function &lt;code class=&quot;highlighter-rouge&quot;&gt;answer_to_connection()&lt;/code&gt; which use to create proper HTTP
 response.&lt;/li&gt;
-      &lt;li&gt;Use select method (&lt;code&gt;MHD_USE_SELECT_INTERNALLY&lt;/code&gt;) for threading model in
+      &lt;li&gt;Use select method (&lt;code class=&quot;highlighter-rouge&quot;&gt;MHD_USE_SELECT_INTERNALLY&lt;/code&gt;) for threading model in
 Libmicrohttpd to get better compatibility.&lt;/li&gt;
       &lt;li&gt;http_server_port seized automatically using Libmicrohttpd function by
-passing &lt;code&gt;MHD_DAEMON_INFO_BIND_PORT&lt;/code&gt; or &lt;code&gt;MHD_DAEMON_INFO_LISTEN_FD&lt;/code&gt; parameter
-to &lt;code&gt;MHD_get_daemon_info()&lt;/code&gt;.&lt;/li&gt;
-      &lt;li&gt;Using iteration to parse urls data in &lt;code&gt;answer_to_connection()&lt;/code&gt;. This
+passing &lt;code class=&quot;highlighter-rouge&quot;&gt;MHD_DAEMON_INFO_BIND_PORT&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;MHD_DAEMON_INFO_LISTEN_FD&lt;/code&gt; parameter
+to &lt;code class=&quot;highlighter-rouge&quot;&gt;MHD_get_daemon_info()&lt;/code&gt;.&lt;/li&gt;
+      &lt;li&gt;Using iteration to parse urls data in &lt;code class=&quot;highlighter-rouge&quot;&gt;answer_to_connection()&lt;/code&gt;. This
 guarantee we can pass any variadic data to Libmicrohttpd and prevent
 segmentation fault.&lt;/li&gt;
-      &lt;li&gt;Fix &lt;code&gt;answer_to_connection()&lt;/code&gt; function to create proper HTTP response (to deal
+      &lt;li&gt;Fix &lt;code class=&quot;highlighter-rouge&quot;&gt;answer_to_connection()&lt;/code&gt; function to create proper HTTP response (to deal
 with parameters and arguments on url, to add proper HTTP headers).&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
   &lt;li&gt;I must ensure that all test suite running correctly. To give better
 visualization, I’ve created spreadsheet about summary of test file which use
-&lt;code&gt;wget_test_start_server()&lt;/code&gt;. Currently, as far as I know, it reaches 87.5% (28
+&lt;code class=&quot;highlighter-rouge&quot;&gt;wget_test_start_server()&lt;/code&gt;. Currently, as far as I know, it reaches 87.5% (28
 of 32). I need to complete all test suite reach 100%.&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -323,7 +325,7 @@ hard to read. Also, he asks to maintain the standard style of commit messages.
 At Wget, the commit messages are converted into a ChangeLog, hence my message
 should be written in that format.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;git commit
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git commit
 
 Commit Message title (60 chars)
 [Blank Line]
@@ -331,7 +333,7 @@ Commit Message title (60 chars)
 * file_changed(function_name): Description of change
 
 Any other details I want to write
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;The commit messages I have written are actually fine, but when it exceeds 60 chars in
 the first line, I should convert my message to the longer format he just
@@ -344,26 +346,26 @@ should force push to my own current branch. That will allow me to maintain that
 branch later.&lt;br /&gt;
 The CI system states failures. He asks whether this is an expected failures. I
 said that it not intended to be failure. On my machine which use Ubuntu/GCC, I
-can run &lt;code&gt;make check&lt;/code&gt;, and some test could pass. Same like on Gitlab CI that use
-Debian/GCC. Based on CI artifacts, most of them failed on &lt;code&gt;make check-valgrind&lt;/code&gt;
+can run &lt;code class=&quot;highlighter-rouge&quot;&gt;make check&lt;/code&gt;, and some test could pass. Same like on Gitlab CI that use
+Debian/GCC. Based on CI artifacts, most of them failed on &lt;code class=&quot;highlighter-rouge&quot;&gt;make check-valgrind&lt;/code&gt;
 that I miss to check before. I still find out how to deal with this memory leak
 error. Actually, I still stuck in this. Then I ask, how to debug using Valgrind.
 I read the error logs and it still it pointed me out of nowhere. He said that I
 really should discuss these issues with them more. That is exactly why they are
 here to mentor me. Valgrind’s memcheck tool which is what is being used in the
-&lt;code&gt;make check-valgrind&lt;/code&gt; is a memory leak checker. He will look a little into it
+&lt;code class=&quot;highlighter-rouge&quot;&gt;make check-valgrind&lt;/code&gt; is a memory leak checker. He will look a little into it
 once he can get the basic tests running on his machine. I asked to be focus on
 that first. He said we will look into the memory leaks in a while. Most probably
 the leaks happen because either I lost the pointer to some allocated memory or
-are using the libmicrohttpd API wrong and forgot to &lt;code&gt;free()&lt;/code&gt; some data structure
+are using the libmicrohttpd API wrong and forgot to &lt;code class=&quot;highlighter-rouge&quot;&gt;free()&lt;/code&gt; some data structure
 returned by it.&lt;br /&gt;
 He also sees that ./configure always tries to link Libmicrohttpd. But Wget2
 should not depend on that. It should try to add the linker flags &lt;em&gt;only&lt;/em&gt; when
 trying to compile the test suite. The Wget2 binary should not use that flag. I
 realize that was there are flaws in my code. I will figure out after some work
 against other test files.&lt;br /&gt;
-On his local system, not a single test passes. &lt;code&gt;make check -j$(nproc)&lt;/code&gt; causes a
-segmentation fault and a simple &lt;code&gt;make check&lt;/code&gt; gets stuck on test-wget-1 and never
+On his local system, not a single test passes. &lt;code class=&quot;highlighter-rouge&quot;&gt;make check -j$(nproc)&lt;/code&gt; causes a
+segmentation fault and a simple &lt;code class=&quot;highlighter-rouge&quot;&gt;make check&lt;/code&gt; gets stuck on test-wget-1 and never
 progresses ahead. He asks me to fix the branch and/or provide them with
 information on how to make the tests work. I look at CI system with Fedora/Clang
 and indeed the result is all segmentation faults. I still have no clue about
@@ -371,7 +373,7 @@ that. With this case, I cannot claim that I have almost 85% tests passing
 already. From his perspective, it is still 0%.&lt;br /&gt;
 In fact, all the tests that my spread sheet marks are passes, end up causing a
 segfault on his system. This seems to stem from the fact that the
-&lt;code&gt;http_server_tid&lt;/code&gt; is stored as “0” and I try to call &lt;code&gt;pthread_cancel&lt;/code&gt; on that
+&lt;code class=&quot;highlighter-rouge&quot;&gt;http_server_tid&lt;/code&gt; is stored as “0” and I try to call &lt;code class=&quot;highlighter-rouge&quot;&gt;pthread_cancel&lt;/code&gt; on that
 value. I asks for more detail information about this. I have use some advice
 from Evgeny Grin how to deal with dynamic port. Even when I use hard coded port,
 the result is still the same. He explains that he don’t think this is connected
@@ -380,14 +382,14 @@ serious change. This issue is happening because I have never stored the tid of
 the server in the variable, but I still try to cancel that thread id. After I
 take a look on my code again, I realize something wrong. Darshit was right. That
 segmentation fault error happened because I forgot to remove
-&lt;code&gt;wget_thread_cancel&lt;/code&gt;(&lt;code&gt;http_server_tid&lt;/code&gt;) which is used by the old code at server
+&lt;code class=&quot;highlighter-rouge&quot;&gt;wget_thread_cancel&lt;/code&gt;(&lt;code class=&quot;highlighter-rouge&quot;&gt;http_server_tid&lt;/code&gt;) which is used by the old code at server
 termination time. After I remove that line, the CI runner of Fedora/Clang
 passes some tests, not all test were resulted segmentation fault (14 of 32
 pass, while 4 skipped). The other fail because likely Valgrind check error.&lt;br /&gt;
 Darshit asks me to make sure that my code works as I have mentioned at least one day
 before the deadline for the evaluations. On my Week 3 report I planned to get
 100% of passing all of the test suite. But, until Week 4, my job still not yet
-all done (even excluding other error generated outside &lt;code&gt;make check&lt;/code&gt; on
+all done (even excluding other error generated outside &lt;code class=&quot;highlighter-rouge&quot;&gt;make check&lt;/code&gt; on
 Debian/GCC system). I realized I have missed my (personal) target. Hence, he
 asks me where do I think I missed out which caused me to fall behind. In
 hindsight, he asks what according to me could have been done better. So, I and
@@ -400,7 +402,7 @@ Darshit sends a message to both Libmicrohttpd maintainers, Christian and Evgeny:
 that the issues in Valgrind seem to come from within Libmicrohttpd. One of the
 blocks reported by Valgrind is:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;=26290== 72 bytes in 3 blocks are still reachable in loss record 6 of 6
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;=26290== 72 bytes in 3 blocks are still reachable in loss record 6 of 6
 ==26290==    at 0x4C2BEEF: malloc (in
 /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
 ==26290==    by 0x7E06608: ??? (in /usr/lib/libgcrypt.so.20.1.7)
@@ -414,10 +416,10 @@ blocks reported by Valgrind is:&lt;/p&gt;
 ==26290==    by 0x400F445: _dl_init (in /usr/lib/[2]ld-2.25.so)
 ==26290==    by 0x4000D39: ??? (in /usr/lib/[3]ld-2.25.so)
 ==26290==    by 0x9: ???
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;So, he guess is that this is some memory that is being allocated by Libmicrohttpd.
-The test code does indeed seem to call &lt;code&gt;MHD_stop_daemon()&lt;/code&gt; which should
+The test code does indeed seem to call &lt;code class=&quot;highlighter-rouge&quot;&gt;MHD_stop_daemon()&lt;/code&gt; which should
 ideally ensure a clean exit. He asks, where did the implementation go wrong.&lt;br /&gt;
 Christian said this is a bit hard to evaluate without the debug symbols. Most
 likely it would be a false-positive from a globally allocated buffer of
@@ -427,16 +429,16 @@ Libmicrohttpd fault, as except for responses there are no Libmicrohttpd buffers
 my code would have to free.&lt;br /&gt;
 Evgeny gives a review about my works, direct pointed to the code.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;static char *_scan_directory(const char* data)
-{
-      char *path = strchr(data, '/');
-      if (path != 0) {
-              return path;
-      }
-      else
-              return NULL;
-}
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;_scan_directory&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;strchr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;sc&quot;&gt;'/'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+              &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
+              &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;He asks why do I use underscore as prefix for functions. Usually it is used by
 libraries to avoid name conflict. First, I think that I need to remove the
@@ -445,52 +447,52 @@ where there is more than one C file. They use it to make clear that a
 function/variable is static (not consequently everywhere, though). So, I
 still keep the underscore.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;static char *_parse_hostname(const char* data)
-{
-      if (!wget_strncasecmp_ascii(data, &quot;http://&quot;, 7)) {
-              char *path = strchr(data += 7, '/');
-              return path;
-      } else
-              return NULL;
-}
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;_parse_hostname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;wget_strncasecmp_ascii&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;http://&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+              &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;strchr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;sc&quot;&gt;'/'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+              &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
+              &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-static char *_replace_space_with_plus(char *data)
-{
-      if (strchr(data, ' ') != 0) {
-              char *result = data;
-              char *wk, *s;
+&lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;_replace_space_with_plus&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strchr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;sc&quot;&gt;' '&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+              &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+              &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;wk&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 
-              wk = s = strdup(data);
+              &lt;span class=&quot;n&quot;&gt;wk&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;strdup&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 
-              while (*s != 0) {
-                      if (*s == ' '){
-                              *data++ = '+';
-                              ++s;
-                      } else
-                              *data++ = *s++;
-              }
-              *data = '\0';
-              free(wk);
-              return result;
-      } else
-              return data;
-}
-&lt;/code&gt;&lt;/pre&gt;
+              &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                      &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;sc&quot;&gt;' '&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+                              &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;sc&quot;&gt;'+'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+                              &lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+                      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
+                              &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+              &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+              &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;sc&quot;&gt;'\0'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+              &lt;span class=&quot;n&quot;&gt;free&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;wk&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+              &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
+              &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;He asks me about the reason for using &lt;code&gt;strdup()&lt;/code&gt;/&lt;code&gt;free()&lt;/code&gt;. I checked string
-twice (by &lt;code&gt;strchr()&lt;/code&gt; and by my custom iterations). It just waste of CPU time.
+&lt;p&gt;He asks me about the reason for using &lt;code class=&quot;highlighter-rouge&quot;&gt;strdup()&lt;/code&gt;/&lt;code class=&quot;highlighter-rouge&quot;&gt;free()&lt;/code&gt;. I checked string
+twice (by &lt;code class=&quot;highlighter-rouge&quot;&gt;strchr()&lt;/code&gt; and by my custom iterations). It just waste of CPU time.
 He gives simpler implementation:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;{
-  while(0 != *data)
-  {
-    if (' ' == *data)
-      *data = '+';
-    data++;
-  }
-  return data;
-}
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sc&quot;&gt;' '&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+      &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;sc&quot;&gt;'+'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;I applied the changes to my code.&lt;br /&gt;
 Evgeny also give note that according to current HTTP specification ‘+’ must NOT be
@@ -503,114 +505,114 @@ the ‘+’ rule, but what consortium is not accepted as normative by everyone,
 while IETF is. He is unsure about what ‘spec’ to follow. So, I keep my changes
 of ‘+’.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;static int print_out_key(void *cls, enum MHD_ValueKind kind, const char *key,
-                                              const char *value)
-{
-      if (key &amp;amp;&amp;amp; url_it == 0 &amp;amp;&amp;amp; url_it2 == 0) {
-              wget_buffer_strcpy(url_arg, &quot;?&quot;);
-              _replace_space_with_plus((char *) key);
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_out_key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cls&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;enum&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MHD_ValueKind&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kind&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                                              &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;url_it&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;url_it2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+              &lt;span class=&quot;n&quot;&gt;wget_buffer_strcpy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url_arg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;?&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+              &lt;span class=&quot;n&quot;&gt;_replace_space_with_plus&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Evgeny said that we are not allowed to modify any content pointed by pointer to
 const. By dropping ‘const’ qualifiers are violating API. In other words: I was
 modifying internal structures that are not expected to be modified and the
 result is unpredictable. I fixed them then.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;              wget_buffer_strcat(url_arg, key);
-              if (value) {
-                      wget_buffer_strcat(url_arg, &quot;=&quot;);
-                      _replace_space_with_plus((char *) value);
-                      wget_buffer_strcat(url_arg, value);
-              }
-      }
-      if (key &amp;amp;&amp;amp; url_it != 0 &amp;amp;&amp;amp; url_it2 == 0) {
-              wget_buffer_strcat(url_arg, &quot;&amp;amp;&quot;);
-              _replace_space_with_plus((char *) key);
-              wget_buffer_strcat(url_arg, key);
-              if (value) {
-                      wget_buffer_strcat(url_arg, &quot;=&quot;);
-                      _replace_space_with_plus((char *) value);
-                      wget_buffer_strcat(url_arg, value);
-              }
-      }
-      url_it++;
-    return MHD_YES;
-}
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;              &lt;span class=&quot;n&quot;&gt;wget_buffer_strcat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url_arg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+              &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                      &lt;span class=&quot;n&quot;&gt;wget_buffer_strcat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url_arg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;=&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+                      &lt;span class=&quot;n&quot;&gt;_replace_space_with_plus&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+                      &lt;span class=&quot;n&quot;&gt;wget_buffer_strcat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url_arg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+              &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;url_it&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;url_it2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+              &lt;span class=&quot;n&quot;&gt;wget_buffer_strcat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url_arg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&amp;amp;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+              &lt;span class=&quot;n&quot;&gt;_replace_space_with_plus&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+              &lt;span class=&quot;n&quot;&gt;wget_buffer_strcat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url_arg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+              &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                      &lt;span class=&quot;n&quot;&gt;wget_buffer_strcat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url_arg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;=&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+                      &lt;span class=&quot;n&quot;&gt;_replace_space_with_plus&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+                      &lt;span class=&quot;n&quot;&gt;wget_buffer_strcat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url_arg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+              &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;url_it&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MHD_YES&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;He also gives me some questions:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;Is &lt;code&gt;url_arg&lt;/code&gt; a global variable?&lt;/li&gt;
+  &lt;li&gt;Is &lt;code class=&quot;highlighter-rouge&quot;&gt;url_arg&lt;/code&gt; a global variable?&lt;/li&gt;
   &lt;li&gt;Do I use single thread only?&lt;/li&gt;
-  &lt;li&gt;Why not to pass pointer to &lt;code&gt;url_arg&lt;/code&gt; as &lt;code&gt;cls&lt;/code&gt;?&lt;/li&gt;
-  &lt;li&gt;What about &lt;code&gt;url_it&lt;/code&gt; and &lt;code&gt;url_it2&lt;/code&gt;? It is hard to guess meaning from name.&lt;/li&gt;
+  &lt;li&gt;Why not to pass pointer to &lt;code class=&quot;highlighter-rouge&quot;&gt;url_arg&lt;/code&gt; as &lt;code class=&quot;highlighter-rouge&quot;&gt;cls&lt;/code&gt;?&lt;/li&gt;
+  &lt;li&gt;What about &lt;code class=&quot;highlighter-rouge&quot;&gt;url_it&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;url_it2&lt;/code&gt;? It is hard to guess meaning from name.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;If I need to pass all of them, I was advised to define some structure with three
 pointers and pass pointer to structure.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;static int answer_to_connection (void *cls,
-                                      struct MHD_Connection *connection,
-                                      const char *url,
-                                      const char *method,
-                                      const char *version,
-                                      const char *upload_data, size_t *upload_data_size, void **con_cls)
-{
-      struct MHD_Response *response;
-      int ret;
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;answer_to_connection&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cls&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                                      &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MHD_Connection&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;connection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                                      &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                                      &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                                      &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                                      &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;upload_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;size_t&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;upload_data_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;**&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;con_cls&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MHD_Response&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ret&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 
-      url_arg = wget_buffer_alloc(1024);
-      MHD_get_connection_values (connection, MHD_GET_ARGUMENT_KIND, print_out_key, NULL);
+      &lt;span class=&quot;n&quot;&gt;url_arg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wget_buffer_alloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1024&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;MHD_get_connection_values&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;connection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MHD_GET_ARGUMENT_KIND&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;print_out_key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 
-      url_it2 = url_it;
-      wget_buffer_t *url_full = wget_buffer_alloc(1024);
-      wget_buffer_strcpy(url_full, url);
-      if (url_arg)
-              wget_buffer_strcat(url_full, url_arg-&amp;gt;data);
-      if (!strcmp(url_full-&amp;gt;data, &quot;/&quot;))
-              wget_buffer_strcat(url_full, &quot;index.html&quot;);
-      url_it = url_it2 = 0;
-      unsigned int itt, found = 0;
-      for (itt = 0; itt &amp;lt; nurls; itt++) {
-              char *dir = _scan_directory(url_full-&amp;gt;data + 1);
-              if (dir != 0 &amp;amp;&amp;amp; !strcmp(dir, &quot;/&quot;))
-                      wget_buffer_strcat(url_full, &quot;index.html&quot;);
+      &lt;span class=&quot;n&quot;&gt;url_it2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;url_it&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;wget_buffer_t&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url_full&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wget_buffer_alloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1024&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;wget_buffer_strcpy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url_full&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url_arg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+              &lt;span class=&quot;n&quot;&gt;wget_buffer_strcat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url_full&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;url_arg&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strcmp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url_full&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+              &lt;span class=&quot;n&quot;&gt;wget_buffer_strcat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url_full&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;index.html&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;url_it&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;url_it2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;kt&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;itt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;found&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;itt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;itt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nurls&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;itt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+              &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dir&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_scan_directory&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url_full&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+              &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dir&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strcmp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dir&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+                      &lt;span class=&quot;n&quot;&gt;wget_buffer_strcat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url_full&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;index.html&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 
-              char *host = _parse_hostname(url_full-&amp;gt;data);
-              if (host != 0 &amp;amp;&amp;amp; !strcmp(host, &quot;/&quot;))
-                      wget_buffer_strcat(url_full, &quot;index.html&quot;);
+              &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;host&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_parse_hostname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url_full&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+              &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;host&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strcmp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;host&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+                      &lt;span class=&quot;n&quot;&gt;wget_buffer_strcat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url_full&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;index.html&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 
-              wget_buffer_t *iri_url = wget_buffer_alloc(1024);
-              wget_buffer_strcpy(iri_url, urls[itt].name);
-              MHD_http_unescape(iri_url-&amp;gt;data);
+              &lt;span class=&quot;n&quot;&gt;wget_buffer_t&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iri_url&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wget_buffer_alloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1024&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+              &lt;span class=&quot;n&quot;&gt;wget_buffer_strcpy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iri_url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;urls&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;itt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+              &lt;span class=&quot;n&quot;&gt;MHD_http_unescape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iri_url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 
-              if (urls[itt].code != NULL &amp;amp;&amp;amp;
-                      !strcmp(urls[itt].code, &quot;302 Redirect&quot;) &amp;amp;&amp;amp;
-                      !strcmp(url_full-&amp;gt;data, iri_url-&amp;gt;data))
-              {
-                      response = MHD_create_response_from_buffer(strlen(&quot;302 Redirect&quot;),
-                                      (void *) &quot;302 Redirect&quot;, MHD_RESPMEM_PERSISTENT);
-                      for (int itt2 = 0; urls[itt].headers[itt2] != NULL; itt2++) {
-                              const char *header = urls[itt].headers[itt2];
-                              if (header) {
-                                      char *header_value = strchr(header, ':');
-                                      char *header_key = wget_strmemdup(header, header_value - header);
-                                      MHD_add_response_header(response, header_key, header_value + 2);
-                                      ret = MHD_queue_response(connection, MHD_HTTP_FOUND, response);
-                                      wget_xfree(header_key);
-                                      itt = nurls;
-                                      found = 1;
-                              } else
-                                      itt = nurls;
-                      }
-              } else if (!strcmp(url_full-&amp;gt;data, iri_url-&amp;gt;data)) {
-                      response = MHD_create_response_from_buffer(strlen(urls[itt].body),
-                                      (void *) urls[itt].body, MHD_RESPMEM_PERSISTENT);
-&lt;/code&gt;&lt;/pre&gt;
+              &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;urls&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;itt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;code&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;NULL&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt;
+                      &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strcmp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;urls&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;itt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;302 Redirect&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt;
+                      &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strcmp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url_full&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;iri_url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+              &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                      &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MHD_create_response_from_buffer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strlen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;302 Redirect&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+                                      &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;302 Redirect&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MHD_RESPMEM_PERSISTENT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+                      &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;itt2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;urls&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;itt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;headers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;itt2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;itt2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                              &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;header&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;urls&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;itt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;headers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;itt2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+                              &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;header&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                                      &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;header_value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;strchr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;header&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;sc&quot;&gt;':'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+                                      &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;header_key&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wget_strmemdup&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;header&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;header_value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;header&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+                                      &lt;span class=&quot;n&quot;&gt;MHD_add_response_header&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;header_key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;header_value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+                                      &lt;span class=&quot;n&quot;&gt;ret&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MHD_queue_response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;connection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MHD_HTTP_FOUND&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+                                      &lt;span class=&quot;n&quot;&gt;wget_xfree&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;header_key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+                                      &lt;span class=&quot;n&quot;&gt;itt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nurls&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+                                      &lt;span class=&quot;n&quot;&gt;found&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+                              &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
+                                      &lt;span class=&quot;n&quot;&gt;itt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nurls&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+                      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+              &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strcmp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url_full&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;iri_url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                      &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MHD_create_response_from_buffer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strlen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;urls&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;itt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+                                      &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;urls&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;itt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MHD_RESPMEM_PERSISTENT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;He asks me again to ensure that content of &lt;code&gt;urls[itt].body&lt;/code&gt; will be valid until
-end of this connection. Otherwise you must use &lt;code&gt;MHD_RESPMEM_MUST_COPY&lt;/code&gt; as last
+&lt;p&gt;He asks me again to ensure that content of &lt;code class=&quot;highlighter-rouge&quot;&gt;urls[itt].body&lt;/code&gt; will be valid until
+end of this connection. Otherwise you must use &lt;code class=&quot;highlighter-rouge&quot;&gt;MHD_RESPMEM_MUST_COPY&lt;/code&gt; as last
 parameter. I followed his advice and fix my code.&lt;/p&gt;
 
 &lt;p&gt;Two generic advises he gave to me:&lt;/p&gt;
@@ -618,7 +620,7 @@ parameter. I followed his advice and fix my code.&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;Avoid using global variables.&lt;/li&gt;
   &lt;li&gt;Use better names for variables. It it hard to understand what mean
-&lt;code&gt;iri_url&lt;/code&gt;, &lt;code&gt;itt&lt;/code&gt; and &lt;code&gt;itt2&lt;/code&gt;.&lt;/li&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;iri_url&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;itt&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;itt2&lt;/code&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;first-period-evaluations&quot;&gt;First Period Evaluations&lt;/h3&gt;
@@ -685,9 +687,9 @@ follow:&lt;/p&gt;
 
 &lt;p&gt;Fork project so you can modify yourself via Gitlab interface.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;git clone https://gitlab.com/dstw/wget2
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git clone https://gitlab.com/dstw/wget2
 git remote add upstream https://dstw@gitlab.com/gnuwget/wget2.git
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Create an own branch for each ‘task’ you are working on and make your commits
 within it. When done, sync with upstream, rebase/merge and create your patches
@@ -699,17 +701,17 @@ changes from the ‘original/upstream’ master branch on Savannah.&lt;/p&gt;
 
 &lt;p&gt;Sync your Gitlab repo with upstream:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;git checkout master
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git checkout master
 git fetch upstream
 git merge upstream/master
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Sync your ‘new-feature’ branch before generating patches:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;git checkout new-feature
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git checkout new-feature
 git rebase master
 git push -f  # pushing updated tree to your Gitlab new-feature branch)
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Assume ‘new-feature’ is a private branch where you can do all the dirty things
 that you shouldn’t on public/shared branches. As soon as your patch has been
@@ -751,15 +753,15 @@ experienced peers!&lt;/p&gt;
 there is option to overwrite my existing commits or create new merge commits to
 keep history.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;git push origin new-feature
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git push origin new-feature
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;If there is a conflict, Git will ask me to resolve the problem this. Then, try
 to push and merge commits. This won’t remove any existing commits. And if I
 don’t want to keep any commits history, I usually force to push:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;git push -f origin new-feature
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git push -f origin new-feature
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;del&gt;This is considered a little bit harmful. Before I do this, I will make sure
 that I know what I do. Also, forcing commits is should only do if it believed to
@@ -914,13 +916,13 @@ when using text files. Text files look ugly when I open using my reader
 
 &lt;p&gt;Install needed packages.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt-get install enscript ps2pdf&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;enscript ps2pdf&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Do this simple tricks.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; Documentation/
-$ &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; i in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;ls -p &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; grep -v /&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; enscript -p&lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt;.ps &lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;
-$ &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; i in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;ls *.ps&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; ps2pdf &lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;Documentation/
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;i &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt; /&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; enscript &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt;.ps &lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;i &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;.ps&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; ps2pdf &lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Now I have pdf files of all the text files.&lt;br /&gt;
 It still have a problem, it just convert files on the same directory. So other
@@ -950,143 +952,143 @@ Feel free to use and customize.&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;Use vim settings instead of vi&lt;/em&gt;&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;nocompatible&lt;/span&gt; &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; nocompatible &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;em&gt;No backup or swap&lt;/em&gt;&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;nobackup&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;nowritebackup&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;noswapfile&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;autoread&lt;/span&gt;          &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; nobackup nowritebackup &lt;span class=&quot;k&quot;&gt;noswapfile&lt;/span&gt; autoread          &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;em&gt;Enable per-directory .vimrc files&lt;/em&gt;&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;exrc&lt;/span&gt;                                                &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; exrc                                                &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;em&gt;Don’t unload buffer when switching away&lt;/em&gt;&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;hidden&lt;/span&gt;                                              &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; hidden                                              &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;em&gt;Allow per-file settings via modeline&lt;/em&gt;&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;modeline&lt;/span&gt;                                            &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; modeline                                            &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;em&gt;Disable unsafe commands in local .vimrc files&lt;/em&gt;&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;secure&lt;/span&gt;                                              &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; secure                                              &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;em&gt;Saving and encoding&lt;/em&gt;&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;encoding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;utf&lt;span class=&quot;m&quot;&gt;-8&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;fileencoding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;utf&lt;span class=&quot;m&quot;&gt;-8&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;termencoding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;utf&lt;span class=&quot;m&quot;&gt;-8&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; encoding&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;utf&lt;span class=&quot;m&quot;&gt;-8&lt;/span&gt; fileencoding&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;utf&lt;span class=&quot;m&quot;&gt;-8&lt;/span&gt; termencoding&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;utf&lt;span class=&quot;m&quot;&gt;-8&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;em&gt;Command completion&lt;/em&gt;&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;wildmenu&lt;/span&gt;                                            &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; wildmenu                                            &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;em&gt;Allow backspacing over everything in insert mode&lt;/em&gt;&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;backspace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;indent&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;eol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;start&lt;/span&gt;                          &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; backspace&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;indent&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;eol&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;start&lt;/span&gt;                          &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;em&gt;Display status line which contains current mode, file name, file status,
 ruler, etc.&lt;/em&gt;&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;laststatus&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;                                        &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; laststatus&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;                                        &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;em&gt;Always set autoindenting on&lt;/em&gt;&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;autoindent&lt;/span&gt;                                          &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; autoindent                                          &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;em&gt;Display incomplete commands&lt;/em&gt;&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;showcmd&lt;/span&gt;                                             &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; showcmd                                             &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;em&gt;Keep upto 50 lines of command line history&lt;/em&gt;&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;history&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;50&lt;/span&gt;                                          &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;history&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;50&lt;/span&gt;                                          &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;em&gt;Show a vertical line at the 79th character&lt;/em&gt;&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;textwidth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;80&lt;/span&gt;                                        &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; textwidth&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;80&lt;/span&gt;                                        &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;em&gt;Highlight column after ‘textwidth’&lt;/em&gt;&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;colorcolumn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=+&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;                                      &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; colorcolumn&lt;span class=&quot;p&quot;&gt;=+&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;                                      &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;em&gt;Switch syntax highlighting on&lt;/em&gt;&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;syntax&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;on&lt;/span&gt;                                               &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;syntax &lt;span class=&quot;k&quot;&gt;on&lt;/span&gt;                                               &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;em&gt;Switch highlighting on the last used search pattern&lt;/em&gt;&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;hlsearch&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;incsearch&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;ignorecase&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;smartcase&lt;/span&gt;             &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; hlsearch incsearch ignorecase smartcase             &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;em&gt;Don’t hide the mouse cursor while typing&lt;/em&gt;&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;nomousehide&lt;/span&gt;                                         &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; nomousehide                                         &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;em&gt;Right-click pops up contect menu&lt;/em&gt;&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;mousemodel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;popup&lt;/span&gt;                                    &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; mousemodel&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;popup&lt;/span&gt;                                    &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;em&gt;Show cursor position in status bar&lt;/em&gt;&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;ruler&lt;/span&gt;                                               &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; ruler                                               &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;em&gt;Show line numbers on left&lt;/em&gt;&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;number&lt;/span&gt;                                              &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;number&lt;/span&gt;                                              &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;em&gt;Disable code folding&lt;/em&gt;&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;nofoldenable&lt;/span&gt;                                        &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; nofoldenable                                        &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;em&gt;Scroll the window so we can always see 10 lines around the cursor&lt;/em&gt;&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;scrolloff&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;                                        &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; scrolloff&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;                                        &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;em&gt;Kernel coding style&lt;/em&gt;&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;tabstop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;8&lt;/span&gt;                                           
-&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;softtabstop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;8&lt;/span&gt;                                       
-&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;shiftwidth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;8&lt;/span&gt;                                        
-&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;noexpandtab&lt;/span&gt;                                         &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; tabstop&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;8&lt;/span&gt;                                           
+&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; softtabstop&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;8&lt;/span&gt;                                       
+&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; shiftwidth&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;8&lt;/span&gt;                                        
+&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; noexpandtab                                         &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;em&gt;Enable file type detection&lt;/em&gt;&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;filetype&lt;/span&gt; plugin indent &lt;span class=&quot;k&quot;&gt;on&lt;/span&gt;                               &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span class=&quot;k&quot;&gt;filetype&lt;/span&gt; plugin indent &lt;span class=&quot;k&quot;&gt;on&lt;/span&gt;                               &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;em&gt;Shortcut to search visually selected text&lt;/em&gt;&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;vnoremap&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;y&lt;/span&gt;/&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;C&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;R&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt;&amp;quot;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;CR&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;vnoremap &lt;span class=&quot;sr&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;y&lt;/span&gt;/&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;C&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;R&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt;&quot;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;CR&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;em&gt;Check if running on gvim&lt;/em&gt;&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; has&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;gui_running&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;                                   &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; has&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;gui_running&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;                                   &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;em&gt;Set terminal color to 256&lt;/em&gt;&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;t_Co&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;256&lt;/span&gt;                                          &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; t_Co&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;256&lt;/span&gt;                                          &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;em&gt;Check if using Windows&lt;/em&gt;&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; has&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;win32&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;||&lt;/span&gt; has&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;win16&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;                       &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; has&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;win32&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;||&lt;/span&gt; has&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;win16&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;                       &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;em&gt;Set Ubuntu Mono font with size 11&lt;/em&gt;&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;guifont&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;Ubuntu\ Mono:h11                        &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; guifont&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;Ubuntu\ Mono&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;h11                        &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;em&gt;Use solarized colorscheme&lt;/em&gt;&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;colorscheme&lt;/span&gt; solarized                                 &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span class=&quot;k&quot;&gt;colorscheme&lt;/span&gt; solarized                                 &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;em&gt;Set the background to dark color&lt;/em&gt;&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;background&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;dark&lt;/span&gt;                                   &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; background&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;dark&lt;/span&gt;                                   &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;em&gt;Highlight the current line&lt;/em&gt;&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cursorline&lt;/span&gt;                                        &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; cursorline                                        &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;em&gt;Use letter as the print output format&lt;/em&gt;&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;printoptions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;paper:letter                         &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; printoptions&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;paper&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;letter                         &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;I use Ubuntu font which can be download from
 &lt;a href=&quot;http://font.ubuntu.com/&quot;&gt;font.ubuntu.com&lt;/a&gt;.
@@ -1221,8 +1223,8 @@ Navigate between search results &lt;code&gt;n&lt;/code&gt; to move forward and
 
 &lt;p&gt;Find text using visually selected text, firstly add this line to vimrc file&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;vnoremap // y/&amp;lt;C-R&amp;gt;&quot;&amp;lt;CR&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;vnoremap // y/&amp;lt;C-R&amp;gt;&quot;&amp;lt;CR&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;then select text in visual mode and press &lt;code&gt;//&lt;/code&gt;&lt;/p&gt;
 
@@ -1283,8 +1285,8 @@ contribute from other place. Let’s check this out.&lt;/p&gt;
 
 &lt;p&gt;On debian system, use apt-get.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt-get install git
-$ sudo apt-get install nodejs&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;git
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;nodejs&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Install Ruby&lt;/li&gt;
@@ -1295,10 +1297,10 @@ prefer to install ruby from source. Download from
 &lt;a href=&quot;https://www.ruby-lang.org/en/downloads/&quot;&gt;Ruby official site&lt;/a&gt;. The installation
 process is quite common.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span&gt;&lt;/span&gt;$ tar zxf ruby-2.3.1.tar.gz 
-$ &lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ruby-2.3.1/
-$ ./configure
-$ sudo make &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; make install &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;tar &lt;/span&gt;zxf ruby-2.3.1.tar.gz 
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;ruby-2.3.1/
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;./configure
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;make &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; make &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Install ExecJS&lt;/li&gt;
@@ -1306,7 +1308,7 @@ $ sudo make &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; make
 
 &lt;p&gt;To run JavaScript code from Ruby.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span&gt;&lt;/span&gt;$ sudo gem install execjs&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;gem &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;execjs&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Configure bundle&lt;/li&gt;
@@ -1314,20 +1316,20 @@ $ sudo make &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; make
 
 &lt;p&gt;Another octopress dependency.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span&gt;&lt;/span&gt;$ sudo gem install bundler&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;gem &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;bundler&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;After all needed requirements fulfilled, then grab the octopress source code.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span&gt;&lt;/span&gt;$ git clone git://github.com/imathis/octopress.git octopress
-$ &lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; octopress&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git clone git://github.com/imathis/octopress.git octopress
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;octopress&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;One more dependency:&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span&gt;&lt;/span&gt;$ bundle install&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Then install octopress default theme.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span&gt;&lt;/span&gt;$ rake install&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rake &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Setup process is finished. We can now start to blog using rake newpost[“title”], 
 customize _config.yml, add some pages, customize 404 not found page, using
@@ -1346,7 +1348,7 @@ http://username.github.io. As a result, we will to work on the source for
 our blog in the source branch and commit the generated content to the master 
 branch. Octopress has a configuration task that helps us set all this up.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span&gt;&lt;/span&gt;$ rake setup_github_pages&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rake setup_github_pages&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;The rake task will ask for a URL of the Github repo. Copy the SSH or HTTPS URL 
 from our newly created repository
@@ -1366,17 +1368,17 @@ and paste it in as a response.&lt;/p&gt;
 
 &lt;p&gt;Next run:&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span&gt;&lt;/span&gt;$ rake generate
-$ rake deploy&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rake generate
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rake deploy&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;This will generate our blog, copy the generated files into _deploy/, add them 
 to git, commit and push them up to the master branch.&lt;/p&gt;
 
 &lt;p&gt;Don’t forget to commit the source of our blog.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span&gt;&lt;/span&gt;$ git add .
-$ git commit -m &lt;span class=&quot;s1&quot;&gt;&amp;#39;our message&amp;#39;&lt;/span&gt;
-$ git push origin &lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git add &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git commit &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'our message'&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git push origin &lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;With new repositories, Github sets the default branch based on the branch we 
 push first, and it looks there for the generated site content. If we’re having 
@@ -1389,37 +1391,37 @@ repository and make sure that the master branch is the default branch.&lt;/p&gt;
 in. To do that, we will use the benefit of git.&lt;br /&gt;
 First, we need to get our site copy:&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span&gt;&lt;/span&gt;$ git clone git@github.com:username/username.github.io.git
-$ &lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; username.github.io&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git clone git@github.com:username/username.github.io.git
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;username.github.io&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Switch to source branch&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span&gt;&lt;/span&gt;$ git checkout &lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git checkout &lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Then do all change on our source, after that run “rake generate” or “rake
 preview” to compile our source onto public directory. Everything seems to be
 okay until we need to upload to github.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span&gt;&lt;/span&gt;$ rake deploy
-&lt;span class=&quot;c1&quot;&gt;## Deploying branch to Github Pages &lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;## Pulling any updates from Github Pages &lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; _deploy
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rake deploy
+&lt;span class=&quot;c&quot;&gt;## Deploying branch to Github Pages &lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;## Pulling any updates from Github Pages &lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;_deploy
 rake aborted!
 Errno::ENOENT: No such file or directory @ dir_chdir - _deploy
-/home/didik/octopress/Rakefile:255:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;block in &amp;lt;top &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;required&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&amp;gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;&lt;/span&gt;
-&lt;span class=&quot;s1&quot;&gt;/home/didik/octopress/Rakefile:227:in `block in &amp;lt;top (required)&amp;gt;&amp;#39;&lt;/span&gt;
-Tasks: &lt;span class=&quot;nv&quot;&gt;TOP&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&amp;gt; deploy
-&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;See full trace by running task with --trace&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+/home/didik/octopress/Rakefile:255:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;block &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &amp;lt;top &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;required&lt;span class=&quot;o&quot;&gt;)&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'
+/home/didik/octopress/Rakefile:227:in `block in &amp;lt;top (required)&amp;gt;'&lt;/span&gt;
+Tasks: TOP &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; deploy
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;See full trace by running task with &lt;span class=&quot;nt&quot;&gt;--trace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Oops, it’s look like we miss something. We have to make a new _deploy directory 
 and add git initialization to it.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span&gt;&lt;/span&gt;$ mkdir _deploy
-$ &lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; _deploy
-$ git init
-$ git remote add origin git@github.com:username/username.github.io.git
-$ git pull origin master
-$ &lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ..&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;mkdir &lt;/span&gt;_deploy
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;_deploy
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git init
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git remote add origin git@github.com:username/username.github.io.git
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git pull origin master
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ..&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;That’s all. Now, we can upload using rake deploy as usual.&lt;br /&gt;
 Until next time.&lt;/p&gt;
@@ -1518,38 +1520,38 @@ Even with free service, I can use my own domain name.&lt;/p&gt;
 can not be detected by my operating system. I check on dmesg, there are entry
 about my usb flashdrive on the log:&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span&gt;&lt;/span&gt;didik@thinkpad:~$ dmesg
---- output omitted ---
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;  &lt;span class=&quot;m&quot;&gt;123&lt;/span&gt;.616624&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; usb &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;-1.2: new high-speed USB device number &lt;span class=&quot;m&quot;&gt;3&lt;/span&gt; using ehci-pci
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;  &lt;span class=&quot;m&quot;&gt;123&lt;/span&gt;.710606&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; usb &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;-1.2: New USB device found, &lt;span class=&quot;nv&quot;&gt;idVendor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0951&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;idProduct&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1666&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;  &lt;span class=&quot;m&quot;&gt;123&lt;/span&gt;.710617&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; usb &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;-1.2: New USB device strings: &lt;span class=&quot;nv&quot;&gt;Mfr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;Product&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;SerialNumber&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;  &lt;span class=&quot;m&quot;&gt;123&lt;/span&gt;.710631&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; usb &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;-1.2: Product: DataTraveler &lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;.0
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;  &lt;span class=&quot;m&quot;&gt;123&lt;/span&gt;.710634&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; usb &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;-1.2: Manufacturer: Kingston
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;  &lt;span class=&quot;m&quot;&gt;123&lt;/span&gt;.710637&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; usb &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;-1.2: SerialNumber: 60A44C3FACDBBDB1796E36C9
---- output omitted ---&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;didik@thinkpad:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;dmesg
+&lt;span class=&quot;nt&quot;&gt;---&lt;/span&gt; output omitted &lt;span class=&quot;nt&quot;&gt;---&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;  123.616624] usb 1-1.2: new high-speed USB device number 3 using ehci-pci
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;  123.710606] usb 1-1.2: New USB device found, &lt;span class=&quot;nv&quot;&gt;idVendor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;0951, &lt;span class=&quot;nv&quot;&gt;idProduct&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1666
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;  123.710617] usb 1-1.2: New USB device strings: &lt;span class=&quot;nv&quot;&gt;Mfr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1, &lt;span class=&quot;nv&quot;&gt;Product&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;2, &lt;span class=&quot;nv&quot;&gt;SerialNumber&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;3
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;  123.710631] usb 1-1.2: Product: DataTraveler 3.0
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;  123.710634] usb 1-1.2: Manufacturer: Kingston
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;  123.710637] usb 1-1.2: SerialNumber: 60A44C3FACDBBDB1796E36C9
+&lt;span class=&quot;nt&quot;&gt;---&lt;/span&gt; output omitted &lt;span class=&quot;nt&quot;&gt;---&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;But, after a moment I wait, there is no notification about new flashdrive
 inserted. I check using blkid, still there is no sign of the thing.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span&gt;&lt;/span&gt;didik@thinkpad:~$ sudo blkid
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;sudo&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; password &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; didik: 
-/dev/sda1: &lt;span class=&quot;nv&quot;&gt;LABEL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;SYSTEM&amp;quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;UUID&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;70E80099E8005FA8&amp;quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;TYPE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;ntfs&amp;quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;PARTUUID&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;ba6ded71-01&amp;quot;&lt;/span&gt;
-/dev/sda2: &lt;span class=&quot;nv&quot;&gt;UUID&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;92521783-0211-4b1d-8f66-b9a62c16fc89&amp;quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;UUID_SUB&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;fdb1cb3e-1a44-4e53-864e-b29f6fdfb153&amp;quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;TYPE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;btrfs&amp;quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;PARTUUID&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;ba6ded71-02&amp;quot;&lt;/span&gt;
-/dev/sda3: &lt;span class=&quot;nv&quot;&gt;UUID&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;4723c4f7-9624-4b8d-9b41-3079442641b4&amp;quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;TYPE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;swap&amp;quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;PARTUUID&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;ba6ded71-03&amp;quot;&lt;/span&gt;
-/dev/sda5: &lt;span class=&quot;nv&quot;&gt;LABEL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;DATA&amp;quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;UUID&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;01CD0094E26EBB80&amp;quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;TYPE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;ntfs&amp;quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;PARTUUID&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;ba6ded71-05&amp;quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;didik@thinkpad:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;blkid
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; password &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;didik: 
+/dev/sda1: &lt;span class=&quot;nv&quot;&gt;LABEL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;SYSTEM&quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;UUID&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;70E80099E8005FA8&quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;TYPE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;ntfs&quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;PARTUUID&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;ba6ded71-01&quot;&lt;/span&gt;
+/dev/sda2: &lt;span class=&quot;nv&quot;&gt;UUID&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;92521783-0211-4b1d-8f66-b9a62c16fc89&quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;UUID_SUB&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;fdb1cb3e-1a44-4e53-864e-b29f6fdfb153&quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;TYPE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;btrfs&quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;PARTUUID&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;ba6ded71-02&quot;&lt;/span&gt;
+/dev/sda3: &lt;span class=&quot;nv&quot;&gt;UUID&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;4723c4f7-9624-4b8d-9b41-3079442641b4&quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;TYPE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;swap&quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;PARTUUID&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;ba6ded71-03&quot;&lt;/span&gt;
+/dev/sda5: &lt;span class=&quot;nv&quot;&gt;LABEL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;DATA&quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;UUID&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;01CD0094E26EBB80&quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;TYPE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;ntfs&quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;PARTUUID&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;ba6ded71-05&quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Apparently, I forget to insert usb-storage module in my kernel, after I
 recompile it. So, I try to modprobe the needed module.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span&gt;&lt;/span&gt;didik@thinkpad:~$ modprobe usb-storage
-modprobe: FATAL: Module usb-storage not found in directory /lib/modules/4.6.2&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;didik@thinkpad:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;modprobe usb-storage
+modprobe: FATAL: Module usb-storage not found &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;directory /lib/modules/4.6.2&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Okay, it seems that the file I need is not available from the kernel tree. So, I
 need to insert the module manually.&lt;br /&gt;
 Time to go to kernel tree.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span&gt;&lt;/span&gt;didik@thinkpad:~$ &lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; linux-4.6.2/
-didik@thinkpad:~/linux-4.6.2$ make menuconfig&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;didik@thinkpad:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;linux-4.6.2/
+didik@thinkpad:~/linux-4.6.2&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;make menuconfig&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;From this menu, I will include the module that I need for usb-storage. Press /
 to search module name. It is called USB_STORAGE.&lt;/p&gt;
@@ -1564,56 +1566,56 @@ tri-state mode.&lt;/p&gt;
 &lt;p&gt;I exit and save this configuration.&lt;br /&gt;
 Then I make it.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span&gt;&lt;/span&gt;didik@thinkpad:~/linux-4.6.2$ make -j4&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;didik@thinkpad:~/linux-4.6.2&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;make &lt;span class=&quot;nt&quot;&gt;-j4&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Note that the “4” value is changeable depends on processor specs.&lt;br /&gt;
 I use “4” because my processor 
 Install old and new compiled module, as root of course.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span&gt;&lt;/span&gt;didik@thinkpad:~/linux-4.6.2$ sudo make modules_install&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;didik@thinkpad:~/linux-4.6.2&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;make modules_install&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;My new module finally installed. Now I can plug the usb drive on my computer.&lt;br /&gt;
 Just in case you are curious about system message of the inserted device, you 
 can use dmesg.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span&gt;&lt;/span&gt;didik@thinkpad:~$ dmesg
---- output omitted ---
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3231&lt;/span&gt;.314581&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; usb &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;-1.2: USB disconnect, device number &lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3233&lt;/span&gt;.198257&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; usb &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;-1.2: new high-speed USB device number &lt;span class=&quot;m&quot;&gt;4&lt;/span&gt; using ehci-pci
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3233&lt;/span&gt;.292379&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; usb &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;-1.2: New USB device found, &lt;span class=&quot;nv&quot;&gt;idVendor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0951&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;idProduct&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1666&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3233&lt;/span&gt;.292390&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; usb &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;-1.2: New USB device strings: &lt;span class=&quot;nv&quot;&gt;Mfr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;Product&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;SerialNumber&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3233&lt;/span&gt;.292395&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; usb &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;-1.2: Product: DataTraveler &lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;.0
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3233&lt;/span&gt;.292399&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; usb &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;-1.2: Manufacturer: Kingston
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3233&lt;/span&gt;.292403&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; usb &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;-1.2: SerialNumber: 60A44C3FACDBBDB1796E36C9
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3233&lt;/span&gt;.990697&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; usb-storage &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;-1.2:1.0: USB Mass Storage device detected
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3233&lt;/span&gt;.990994&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; scsi host6: usb-storage &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;-1.2:1.0
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3233&lt;/span&gt;.991196&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; usbcore: registered new interface driver usb-storage
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3234&lt;/span&gt;.995392&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; scsi &lt;span class=&quot;m&quot;&gt;6&lt;/span&gt;:0:0:0: Direct-Access     Kingston DataTraveler &lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;.0 PMAP PQ: &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; ANSI: &lt;span class=&quot;m&quot;&gt;6&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3234&lt;/span&gt;.996242&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; sd &lt;span class=&quot;m&quot;&gt;6&lt;/span&gt;:0:0:0: Attached scsi generic sg2 &lt;span class=&quot;nb&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3234&lt;/span&gt;.996655&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; sd &lt;span class=&quot;m&quot;&gt;6&lt;/span&gt;:0:0:0: &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;sdb&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;31293440&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;512&lt;/span&gt;-byte logical blocks: &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;16&lt;/span&gt;.0 GB/14.9 GiB&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3234&lt;/span&gt;.998693&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; sd &lt;span class=&quot;m&quot;&gt;6&lt;/span&gt;:0:0:0: &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;sdb&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; Write Protect is off
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3234&lt;/span&gt;.998705&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; sd &lt;span class=&quot;m&quot;&gt;6&lt;/span&gt;:0:0:0: &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;sdb&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; Mode Sense: 2b &lt;span class=&quot;m&quot;&gt;80&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;00&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;08&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3235&lt;/span&gt;.000537&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; sd &lt;span class=&quot;m&quot;&gt;6&lt;/span&gt;:0:0:0: &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;sdb&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; Write cache: disabled, &lt;span class=&quot;nb&quot;&gt;read&lt;/span&gt; cache: enabled, doesn&lt;span class=&quot;err&quot;&gt;&amp;#39;&lt;/span&gt;t support DPO or FUA
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3236&lt;/span&gt;.101997&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;  sdb: sdb1
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3236&lt;/span&gt;.108153&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; sd &lt;span class=&quot;m&quot;&gt;6&lt;/span&gt;:0:0:0: &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;sdb&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; Attached SCSI removable disk
---- output omitted ---&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;didik@thinkpad:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;dmesg
+&lt;span class=&quot;nt&quot;&gt;---&lt;/span&gt; output omitted &lt;span class=&quot;nt&quot;&gt;---&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; 3231.314581] usb 1-1.2: USB disconnect, device number 3
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; 3233.198257] usb 1-1.2: new high-speed USB device number 4 using ehci-pci
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; 3233.292379] usb 1-1.2: New USB device found, &lt;span class=&quot;nv&quot;&gt;idVendor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;0951, &lt;span class=&quot;nv&quot;&gt;idProduct&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1666
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; 3233.292390] usb 1-1.2: New USB device strings: &lt;span class=&quot;nv&quot;&gt;Mfr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1, &lt;span class=&quot;nv&quot;&gt;Product&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;2, &lt;span class=&quot;nv&quot;&gt;SerialNumber&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;3
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; 3233.292395] usb 1-1.2: Product: DataTraveler 3.0
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; 3233.292399] usb 1-1.2: Manufacturer: Kingston
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; 3233.292403] usb 1-1.2: SerialNumber: 60A44C3FACDBBDB1796E36C9
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; 3233.990697] usb-storage 1-1.2:1.0: USB Mass Storage device detected
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; 3233.990994] scsi host6: usb-storage 1-1.2:1.0
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; 3233.991196] usbcore: registered new interface driver usb-storage
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; 3234.995392] scsi 6:0:0:0: Direct-Access     Kingston DataTraveler 3.0 PMAP PQ: 0 ANSI: 6
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; 3234.996242] sd 6:0:0:0: Attached scsi generic sg2 &lt;span class=&quot;nb&quot;&gt;type &lt;/span&gt;0
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; 3234.996655] sd 6:0:0:0: &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;sdb] 31293440 512-byte logical blocks: &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;16.0 GB/14.9 GiB&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; 3234.998693] sd 6:0:0:0: &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;sdb] Write Protect is off
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; 3234.998705] sd 6:0:0:0: &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;sdb] Mode Sense: 2b 80 00 08
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; 3235.000537] sd 6:0:0:0: &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;sdb] Write cache: disabled, &lt;span class=&quot;nb&quot;&gt;read &lt;/span&gt;cache: enabled, doesn&lt;span class=&quot;s1&quot;&gt;'t support DPO or FUA
+[ 3236.101997]  sdb: sdb1
+[ 3236.108153] sd 6:0:0:0: [sdb] Attached SCSI removable disk
+--- output omitted ---&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;And modinfo to view module details.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span&gt;&lt;/span&gt;didik@thinkpad:~$ modinfo usb-storage
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;didik@thinkpad:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;modinfo usb-storage
 filename:       /lib/modules/4.6.2/kernel/drivers/usb/storage/usb-storage.ko
 license:        GPL
-description:    USB Mass Storage driver &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; Linux
+description:    USB Mass Storage driver &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;Linux
 author:         Matthew Dharm &amp;lt;mdharm-usb@one-eyed-alien.net&amp;gt;
 srcversion:     D0235102D9160CC35A9A1C4
-alias:          usb:v*p*d*dc*dsc*dp*ic08isc06ip50in*
-alias:          usb:v*p*d*dc*dsc*dp*ic08isc05ip50in*
---- output omitted ---
-alias:          usb:v03EEp6906d0003dc*dsc*dp*ic*isc*ip*in*
-alias:          usb:v03EBp2002d0100dc*dsc*dp*ic*isc*ip*in*
+&lt;span class=&quot;nb&quot;&gt;alias&lt;/span&gt;:          usb:v&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;p&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;d&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;dc&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;dsc&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;dp&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;ic08isc06ip50in&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;alias&lt;/span&gt;:          usb:v&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;p&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;d&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;dc&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;dsc&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;dp&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;ic08isc05ip50in&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;---&lt;/span&gt; output omitted &lt;span class=&quot;nt&quot;&gt;---&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;alias&lt;/span&gt;:          usb:v03EEp6906d0003dc&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;dsc&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;dp&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;ic&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;isc&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;ip&lt;span class=&quot;k&quot;&gt;*in*&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;alias&lt;/span&gt;:          usb:v03EBp2002d0100dc&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;dsc&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;dp&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;ic&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;isc&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;ip&lt;span class=&quot;k&quot;&gt;*in*&lt;/span&gt;
 depends:        
 intree:         Y
-vermagic:       &lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;.6.2 SMP mod_unload modversions 
+vermagic:       4.6.2 SMP mod_unload modversions 
 parm:           option_zero_cd:ZeroCD mode &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Force Modem &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;default&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Allow CD-Rom &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;uint&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
 parm:           swi_tru_install:TRU-Install mode &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Full Logic &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;def&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Force CD-Rom, &lt;span class=&quot;nv&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Force Modem&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;uint&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
 parm:           delay_use:seconds to delay before using a new device &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;uint&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
@@ -1639,15 +1641,15 @@ parm:           quirks:supplemental list of device IDs and their quirks &lt;span
 &lt;p&gt;To build this custom Linux Kernel, I use Ubuntu 14.04 64 bit operating system.
 At first, ensure all the required utilities installed correctly.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt-get install gcc make git libssl-dev libncurses5-dev&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;gcc make git libssl-dev libncurses5-dev&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Download source from Linux Kernel Archives, for example, I use version 4.4.&lt;br /&gt;
 &lt;a href=&quot;https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.4.tar.xz&quot;&gt;https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.4.tar.xz&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;Extract the tarball file.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span&gt;&lt;/span&gt;$ tar xJf linux-4.4.tar.xz
-$ &lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; linux-4.4&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;tar &lt;/span&gt;xJf linux-4.4.tar.xz
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;linux-4.4&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;We need to change configuration parameters to determine which settings and modules we need to build.
 Use make *config command as follow. 
@@ -1657,70 +1659,70 @@ I usually use number 2.&lt;/p&gt;
 &lt;h4 id=&quot;1-use-default-kernel-configuration&quot;&gt;1. Use default kernel configuration.&lt;/h4&gt;
 &lt;p&gt;This settings comes from the kernel maintainer.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span&gt;&lt;/span&gt;$ make defconfig &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;make defconfig &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;h4 id=&quot;2-use-our-existing-configuration&quot;&gt;2. Use our existing configuration.&lt;/h4&gt;
 &lt;p&gt;Just press “Enter” when asked for configuration options.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span&gt;&lt;/span&gt;$ make localmodconfig&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;make localmodconfig&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;h4 id=&quot;3-manual-selection-with-graphical-menu&quot;&gt;3. Manual selection with graphical menu.&lt;/h4&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span&gt;&lt;/span&gt;$ make menuconfig&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;make menuconfig&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;h4 id=&quot;4--duplicate-our-current-config&quot;&gt;4.  Duplicate our current config.&lt;/h4&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span&gt;&lt;/span&gt;$ sudo cp /boot/config-&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;uname -r&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;* .config&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo cp&lt;/span&gt; /boot/config-&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;uname&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; .config&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Then, compile source, this process can take a while.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span&gt;&lt;/span&gt;$ make -j4 &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;make &lt;span class=&quot;nt&quot;&gt;-j4&lt;/span&gt; &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;The parameter “4” is based on processor specification.
 Set this at your own favor.&lt;br /&gt;
 Install modules.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span&gt;&lt;/span&gt;$ sudo make modules_install &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;make modules_install &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Bootloader setup.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span&gt;&lt;/span&gt;$ sudo make install &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;make &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Double check bootloader setup.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span&gt;&lt;/span&gt;$ sudo update-grub2 &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;update-grub2 &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Reboot the system.
 We can check our new installed kernel with this command.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span&gt;&lt;/span&gt;$ uname -a&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;uname&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;h2 id=&quot;uninstall-custom-linux-kernel&quot;&gt;Uninstall Custom Linux Kernel&lt;/h2&gt;
 
 &lt;p&gt;Find out the version of custom kernel.&lt;br /&gt;
 Update filesystem search index.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span&gt;&lt;/span&gt;$ sudo updatedb&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;updatedb&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;In this example, I want to remove kernel version 3.16.0-30-generic.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span class=&quot;nv&quot;&gt;CUSTOM_KERNEL_VERSION&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;3.16.0-30-generic&amp;quot;&lt;/span&gt;
-$ locate &lt;span class=&quot;nv&quot;&gt;$CUSTOM_KERNEL_VERSION&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ CUSTOM_KERNEL_VERSION&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;3.16.0-30-generic&quot;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;locate &lt;span class=&quot;nv&quot;&gt;$CUSTOM_KERNEL_VERSION&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Ensure our system has other kernel installed beside $CUSTOM_KERNEL_VERSION.&lt;br /&gt;
 Then, delete all files &amp;amp; folders which contain $CUSTOM_KERNEL_VERSION name.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span&gt;&lt;/span&gt;$ sudo rm /boot/vmlinuz-&lt;span class=&quot;nv&quot;&gt;$CUSTOM_KERNEL_VERSION&lt;/span&gt;
-$ sudo rm /boot/initrd.img-&lt;span class=&quot;nv&quot;&gt;$CUSTOM_KERNEL_VERSION&lt;/span&gt;
-$ sudo rm /boot/System.map-&lt;span class=&quot;nv&quot;&gt;$CUSTOM_KERNEL_VERSION&lt;/span&gt;
-$ sudo rm /boot/config-&lt;span class=&quot;nv&quot;&gt;$CUSTOM_KERNEL_VERSION&lt;/span&gt;
-$ sudo rm -rf /lib/modules/&lt;span class=&quot;nv&quot;&gt;$CUSTOM_KERNEL_VERSION&lt;/span&gt;/
-$ sudo rm /var/lib/initramfs-tools/&lt;span class=&quot;nv&quot;&gt;$CUSTOM_KERNEL_VERSION&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo rm&lt;/span&gt; /boot/vmlinuz-&lt;span class=&quot;nv&quot;&gt;$CUSTOM_KERNEL_VERSION&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo rm&lt;/span&gt; /boot/initrd.img-&lt;span class=&quot;nv&quot;&gt;$CUSTOM_KERNEL_VERSION&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo rm&lt;/span&gt; /boot/System.map-&lt;span class=&quot;nv&quot;&gt;$CUSTOM_KERNEL_VERSION&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo rm&lt;/span&gt; /boot/config-&lt;span class=&quot;nv&quot;&gt;$CUSTOM_KERNEL_VERSION&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo rm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-rf&lt;/span&gt; /lib/modules/&lt;span class=&quot;nv&quot;&gt;$CUSTOM_KERNEL_VERSION&lt;/span&gt;/
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo rm&lt;/span&gt; /var/lib/initramfs-tools/&lt;span class=&quot;nv&quot;&gt;$CUSTOM_KERNEL_VERSION&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Do some cleaning.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span&gt;&lt;/span&gt;$ sudo update-initramfs -k all -u
-$ sudo update-grub2&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;update-initramfs &lt;span class=&quot;nt&quot;&gt;-k&lt;/span&gt; all &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;update-grub2&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Finish. Our custom kernel has been uninstalled from our system.&lt;/p&gt;
 </description>

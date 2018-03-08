@@ -242,7 +242,7 @@ In the following example, I created script on C:\rshutdown.bat.</p>
 
 <p>Then make a new file with notepad, give it name rshutdown.bat, save on disk C. The contents:</p>
 
-<figure class="highlight"><pre><code class="language-batch" data-lang="batch"><span></span>C<span class="p">:</span><span class="nl">\Windows\System32\shutdown.exe</span><span class="c1"> /s /t 20</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-batch" data-lang="batch">C:\Windows\System32\shutdown.exe /s /t 20</code></pre></figure>
 
 <p>That command is being used to shutdown the computer.</p>
 
@@ -262,7 +262,7 @@ In the following example, I use file on “C:\User\edp11\Desktop\putty\shutdown.
 
 <p>The script contents is same as previous script we write:</p>
 
-<figure class="highlight"><pre><code class="language-batch" data-lang="batch"><span></span>C<span class="p">:</span><span class="nl">\Windows\System32\shutdown.exe</span><span class="c1"> /s /t 20</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-batch" data-lang="batch">C:\Windows\System32\shutdown.exe /s /t 20</code></pre></figure>
 
 <p>Testing</p>
 
@@ -286,7 +286,7 @@ The detail is explained below.</p>
 Save following file in anywhere, in this example in C:\psshutdown.exe.
 Then add the following file as file shutdown.bat:</p>
 
-<figure class="highlight"><pre><code class="language-batch" data-lang="batch"><span></span>C<span class="p">:</span><span class="nl">\psshutdown.exe</span><span class="c1"> -u foo -p bar \172.16.10.245</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-batch" data-lang="batch">C:\psshutdown.exe -u foo -p bar \172.16.10.245</code></pre></figure>
 
 <p>In that example I use username foo and password bar and with IP 172.16.10.245. Set this with our need.
 It is recommended to test the script with manually typing on the command prompt, to avoid notification from psshutdown application stop the shutdown process.
@@ -315,12 +315,12 @@ If the following notification appear, then click Yes, just ignore it, because we
 <p>For the next step, we need add public key that we have been created into host which want we access without password.
 Login in to that host with putty and user root. Then type this commands.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="nb">echo</span> <span class="s2">&quot;ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDOPrv4jtzSdRbaRY16miDNOnAYDnha0A+V92+ul88xCjLmLOYL78KyGKc1u47ZtCSpV590sLdSmXULvaSC6Fs8mVg+DdgumoBRZg1unwYGwUp9DKVjI+6DxAJIjwsarCS78TxtuGb+55ujnaJh4rSwLHnuqvDB3q6JtR/yET28Fq6RJ4Czjpv06X0EohfLVqwXdMKsZXbde/9vyFB9G1CrsnA6KXg1bsYDKW7xp4ayS4Q2yA1P7itX4zBNyRVQjdR5K/PTuNBzItbYiM7cyL6P6kfB3pnpZJQtK+IV0RhSPOQaaAJch+DwFcElamuENsDeE77PcYTLrqIxaIOYVPhh root@server&quot;</span> &gt;&gt; .ssh/authorized_keys</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">echo</span> <span class="s2">"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDOPrv4jtzSdRbaRY16miDNOnAYDnha0A+V92+ul88xCjLmLOYL78KyGKc1u47ZtCSpV590sLdSmXULvaSC6Fs8mVg+DdgumoBRZg1unwYGwUp9DKVjI+6DxAJIjwsarCS78TxtuGb+55ujnaJh4rSwLHnuqvDB3q6JtR/yET28Fq6RJ4Czjpv06X0EohfLVqwXdMKsZXbde/9vyFB9G1CrsnA6KXg1bsYDKW7xp4ayS4Q2yA1P7itX4zBNyRVQjdR5K/PTuNBzItbYiM7cyL6P6kfB3pnpZJQtK+IV0RhSPOQaaAJch+DwFcElamuENsDeE77PcYTLrqIxaIOYVPhh root@server"</span> <span class="o">&gt;&gt;</span> .ssh/authorized_keys</code></pre></figure>
 
 <p>Change the parameter in the quotation mark (“ “) above using contents from key-server.pub public key file that exist.
 Then add this script in to file shutdown.bat.</p>
 
-<figure class="highlight"><pre><code class="language-batch" data-lang="batch"><span></span>C<span class="p">:</span><span class="nl">\plink.exe</span><span class="c1"> -i C:\key-server.ppk root@172.16.10.250 /sbin/poweroff</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-batch" data-lang="batch">C:\plink.exe -i C:\key-server.ppk root@172.16.10.250 /sbin/poweroff</code></pre></figure>
 
 <p>Extract plink.exe file from putty package we have been downloaded and save in C:, as well as the key-server.ppk private key.
 Edit the IP Server above to your needs.</p>

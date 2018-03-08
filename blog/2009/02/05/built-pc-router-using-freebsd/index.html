@@ -219,15 +219,15 @@ time and decrease memory.</p>
 <p>Copy file GENERIC on a file with new name (for example: ROUTER) and edit
 using text editor.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="c1"># cd /usr/src/sys/i386/conf</span>
-<span class="c1"># cp GENERIC ROUTER</span>
-<span class="c1"># ee ROUTER</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># cd /usr/src/sys/i386/conf</span>
+<span class="c"># cp GENERIC ROUTER</span>
+<span class="c"># ee ROUTER</span></code></pre></figure>
 
 <p>When edit file ROUTER, change “indent” row with the new kernel name (set
 to the file name). Remove options that not needed, but be careful if you
 still doubt about options that you remove. Then add option:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>options ALTQ
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">options ALTQ
 options ALTQ_CBQ
 options ALTQ_RED
 options ALTQ_RIO
@@ -243,59 +243,59 @@ device pfsync</code></pre></figure>
 
 <p>Do the compile process of new kernel.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="c1"># config ROUTER</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># config ROUTER</span></code></pre></figure>
 
 <p>It will show directory to process of compilation. If there is a syntax
 error, we could repair on the ROUTER file.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="c1"># cd ../compile/ROUTER</span>
-<span class="c1"># make depend &amp;&amp; make &amp;&amp; make install</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># cd ../compile/ROUTER</span>
+<span class="c"># make depend &amp;&amp; make &amp;&amp; make install</span></code></pre></figure>
 
 <p>If the compilation fail, before we check ROUTER file, we should run command:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="c1"># make cleandepend</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># make cleandepend</span></code></pre></figure>
 
 <p>if the compilation process success, we could use the new kernel after
 rebooting computer, after the configuration process finished.</p>
 
 <p>Configure IP Forwarding. Edit file sysctl.conf</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="c1"># ee /etc/sysctl.conf</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># ee /etc/sysctl.conf</span></code></pre></figure>
 
 <p>add row:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>net.inet.ip.forwarding<span class="o">=</span><span class="m">1</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">net.inet.ip.forwarding<span class="o">=</span>1</code></pre></figure>
 
 <p>save the configuration.</p>
 
 <p>For networking configuration, NAT and pf options to system, edit file
 /etc/rc.conf.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="c1"># ee /etc/rc.conf</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># ee /etc/rc.conf</span></code></pre></figure>
 
 <p>edit and add row:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="nv">router_enable</span><span class="o">=</span>”YES”
-<span class="nv">pf_enable</span><span class="o">=</span>”YES” <span class="c1"># Enable PF (load module if required)</span>
-<span class="nv">pf_rules</span><span class="o">=</span>”/etc/pf.conf” <span class="c1"># rules definition file for pf</span>
-<span class="nv">pf_flags</span><span class="o">=</span>”-q” <span class="c1"># additional flags for pfctl startup</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">router_enable</span><span class="o">=</span>”YES”
+<span class="nv">pf_enable</span><span class="o">=</span>”YES” <span class="c"># Enable PF (load module if required)</span>
+<span class="nv">pf_rules</span><span class="o">=</span>”/etc/pf.conf” <span class="c"># rules definition file for pf</span>
+<span class="nv">pf_flags</span><span class="o">=</span>”-q” <span class="c"># additional flags for pfctl startup</span></code></pre></figure>
 
 <p>NAT configuration and pf, on file /etc/pf.conf.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="c1"># ee /etc/pf.conf</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># ee /etc/pf.conf</span></code></pre></figure>
 
 <p>enable interface and NAT:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="nv">ext_if</span><span class="o">=</span><span class="s2">&quot;rl0&quot;</span> <span class="c1"># public network</span>
-<span class="nv">int_if</span><span class="o">=</span><span class="s2">&quot;rl1&quot;</span> <span class="c1"># local network</span>
-<span class="nv">internal_net</span><span class="o">=</span><span class="s2">&quot;192.168.12.64/26&quot;</span>
-<span class="nv">external_addr</span><span class="o">=</span><span class="s2">&quot;210.100.12.130&quot;</span>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">ext_if</span><span class="o">=</span><span class="s2">"rl0"</span> <span class="c"># public network</span>
+<span class="nv">int_if</span><span class="o">=</span><span class="s2">"rl1"</span> <span class="c"># local network</span>
+<span class="nv">internal_net</span><span class="o">=</span><span class="s2">"192.168.12.64/26"</span>
+<span class="nv">external_addr</span><span class="o">=</span><span class="s2">"210.100.12.130"</span>
 nat on <span class="nv">$ext_if</span> from <span class="nv">$internal_net</span> to any -&gt; <span class="nv">$external_addr</span>
 pass on <span class="nv">$int_if</span> from any to any</code></pre></figure>
 
 <p>after finish, save the configuration. Run command:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="c1"># /etc/netstart</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># /etc/netstart</span></code></pre></figure>
 
 <p>Configuration for FreeBSD PC Router has finished, in order the computer can
 recognized new configuration, reboot it first. Then to check the connection to
@@ -321,49 +321,49 @@ not connected to internet, we can solve with copy dhcp file to directory
 /usr/ports/distfiles/.<br />
 Commands to install:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="c1"># cd /usr/ports/net/isc-dhcp3-server/</span>
-<span class="c1"># make install clean</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># cd /usr/ports/net/isc-dhcp3-server/</span>
+<span class="c"># make install clean</span></code></pre></figure>
 
 <p>After installation finished, configure it.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="c1"># ee /usr/local/etc/dhcpd.conf</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># ee /usr/local/etc/dhcpd.conf</span></code></pre></figure>
 
 <p>Below is example of dhcp.conf contents:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>ddns-update-style none<span class="p">;</span>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">ddns-update-style none<span class="p">;</span>
 log-facility local7<span class="p">;</span>
 
-subnet <span class="m">192</span>.168.12.64 netmask <span class="m">255</span>.255.255.192 <span class="o">{</span> 
-range <span class="m">192</span>.168.12.66 <span class="m">192</span>.168.12.76<span class="p">;</span>
-option routers <span class="m">192</span>.168.12.65<span class="p">;</span>
-option subnet-mask <span class="m">255</span>.255.255.192<span class="p">;</span> 
-option domain-name-servers <span class="m">210</span>.100.12.129<span class="p">;</span>
+subnet 192.168.12.64 netmask 255.255.255.192 <span class="o">{</span> 
+range 192.168.12.66 192.168.12.76<span class="p">;</span>
+option routers 192.168.12.65<span class="p">;</span>
+option subnet-mask 255.255.255.192<span class="p">;</span> 
+option domain-name-servers 210.100.12.129<span class="p">;</span>
 option domain-name example.com<span class="p">;</span>
-default-lease-time <span class="m">3600</span><span class="p">;</span>
-max-lease-time <span class="m">86400</span><span class="p">;</span>
+default-lease-time 3600<span class="p">;</span>
+max-lease-time 86400<span class="p">;</span>
 <span class="o">}</span></code></pre></figure>
 
 <p>Don’t forget to save file.<br />
 Configure rc.conf to determine DHCP Server running process and which interface
 to listening on this DHCP Server.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="c1"># ee /etc/rc.conf</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># ee /etc/rc.conf</span></code></pre></figure>
 
 <p>Add following lines:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="nv">dhcpd_enable</span><span class="o">=</span><span class="s2">&quot;YES&quot;</span>
-<span class="nv">dhcpd_flags</span><span class="o">=</span><span class="s2">&quot;-q&quot;</span>
-<span class="nv">dhcpd_conf</span><span class="o">=</span><span class="s2">&quot;/usr/local/etc/dhcpd.conf&quot;</span>
-<span class="nv">dhcpd_withumask</span><span class="o">=</span><span class="s2">&quot;022&quot;</span>
-<span class="nv">dhcpd_withuser</span><span class="o">=</span><span class="s2">&quot;dhcpd&quot;</span>
-<span class="nv">dhcpd_withgroup</span><span class="o">=</span><span class="s2">&quot;dhcpd&quot;</span>
-<span class="nv">dhcpd_iface</span><span class="o">=</span><span class="s2">&quot;rl1&quot;</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">dhcpd_enable</span><span class="o">=</span><span class="s2">"YES"</span>
+<span class="nv">dhcpd_flags</span><span class="o">=</span><span class="s2">"-q"</span>
+<span class="nv">dhcpd_conf</span><span class="o">=</span><span class="s2">"/usr/local/etc/dhcpd.conf"</span>
+<span class="nv">dhcpd_withumask</span><span class="o">=</span><span class="s2">"022"</span>
+<span class="nv">dhcpd_withuser</span><span class="o">=</span><span class="s2">"dhcpd"</span>
+<span class="nv">dhcpd_withgroup</span><span class="o">=</span><span class="s2">"dhcpd"</span>
+<span class="nv">dhcpd_iface</span><span class="o">=</span><span class="s2">"rl1"</span></code></pre></figure>
 
 <p>then save changes.</p>
 
 <p>Run the DHCP Server.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="c1"># /usr/local/etc/rc.d/isc-dhcpd.sh start</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># /usr/local/etc/rc.d/isc-dhcpd.sh start</span></code></pre></figure>
 
 <p>Starting dhcpd.</p>
 
@@ -374,15 +374,15 @@ Server. To use other features, you could try on your own.</p>
 obtain IP address automatically on Windows, Linux and FreeBSD PC.<br />
 Watch the DHCP Server leasing activity with:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="c1"># tail -f /var/db/dhcpd.leases</span>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># tail -f /var/db/dhcpd.leases</span>
 
-lease <span class="m">192</span>.168.12.66 <span class="o">{</span>
-starts <span class="m">2</span> <span class="m">2007</span>/01/30 <span class="m">23</span>:25:05<span class="p">;</span>
-ends <span class="m">3</span> <span class="m">2007</span>/01/31 <span class="m">00</span>:25:05<span class="p">;</span>
-tstp <span class="m">3</span> <span class="m">2007</span>/01/31 <span class="m">00</span>:25:05<span class="p">;</span>
+lease 192.168.12.66 <span class="o">{</span>
+starts 2 2007/01/30 23:25:05<span class="p">;</span>
+ends 3 2007/01/31 00:25:05<span class="p">;</span>
+tstp 3 2007/01/31 00:25:05<span class="p">;</span>
 binding state active<span class="p">;</span>
 next binding state free<span class="p">;</span>
-hardware ethernet <span class="m">00</span>:01:6c:b0:d0:44<span class="p">;</span>
+hardware ethernet 00:01:6c:b0:d0:44<span class="p">;</span>
 uid 010001l260320D<span class="p">;</span>
 client-hostname underiez<span class="p">;</span>
 <span class="o">}</span></code></pre></figure>
@@ -394,41 +394,41 @@ Choose the right FreeBSD version that is for AMD or Intel, then upload it from
 other PC using FTP or other methods. Because I use file isc-dhcp3-server
 3.0.5_2.tbz and FreeBSD release 7.0, so the command I use.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="c1"># pkg_add isc-dhcp3-server 3.0.5_2.tbz</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># pkg_add isc-dhcp3-server 3.0.5_2.tbz</span></code></pre></figure>
 
 <p>Then add the following lines in /etc/rc.conf.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="c1"># ee /etc/rc.conf</span>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># ee /etc/rc.conf</span>
 
-<span class="nv">dhcpd_enable</span><span class="o">=</span><span class="s2">&quot;YES&quot;</span>
-<span class="nv">dhcpd_flags</span><span class="o">=</span><span class="s2">&quot;-q&quot;</span>
-<span class="nv">dhcpd_conf</span><span class="o">=</span><span class="s2">&quot;/usr/local/etc/dhcpd.conf&quot;</span>
-<span class="nv">dhcpd_withumask</span><span class="o">=</span><span class="s2">&quot;022&quot;</span>
-<span class="nv">dhcpd_withuser</span><span class="o">=</span><span class="s2">&quot;dhcpd&quot;</span>
-<span class="nv">dhcpd_withgroup</span><span class="o">=</span><span class="s2">&quot;dhcpd&quot;</span>
-<span class="nv">dhcpd_iface</span><span class="o">=</span><span class="s2">&quot;rl1&quot;</span></code></pre></figure>
+<span class="nv">dhcpd_enable</span><span class="o">=</span><span class="s2">"YES"</span>
+<span class="nv">dhcpd_flags</span><span class="o">=</span><span class="s2">"-q"</span>
+<span class="nv">dhcpd_conf</span><span class="o">=</span><span class="s2">"/usr/local/etc/dhcpd.conf"</span>
+<span class="nv">dhcpd_withumask</span><span class="o">=</span><span class="s2">"022"</span>
+<span class="nv">dhcpd_withuser</span><span class="o">=</span><span class="s2">"dhcpd"</span>
+<span class="nv">dhcpd_withgroup</span><span class="o">=</span><span class="s2">"dhcpd"</span>
+<span class="nv">dhcpd_iface</span><span class="o">=</span><span class="s2">"rl1"</span></code></pre></figure>
 
 <p>then change configuration in /usr/local/etc/dhcpd.conf</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="c1"># cp /usr/local/etc/dhcpd.conf.sample /usr/local/etc/dhcpd.conf</span>
-<span class="c1"># ee /usr/local/etc/dhcpd.conf</span>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># cp /usr/local/etc/dhcpd.conf.sample /usr/local/etc/dhcpd.conf</span>
+<span class="c"># ee /usr/local/etc/dhcpd.conf</span>
 
 ddns-update-style none<span class="p">;</span>
 log-facility local7<span class="p">;</span>
 
-subnet <span class="m">192</span>.168.12.64 netmask <span class="m">255</span>.255.255.192 <span class="o">{</span>
-range <span class="m">192</span>.168.12.66 <span class="m">192</span>.168.12.76<span class="p">;</span>
-option routers <span class="m">192</span>.168.12.65<span class="p">;</span>
-option subnet-mask <span class="m">255</span>.255.255.192<span class="p">;</span>
-option domain-name-servers <span class="m">210</span>.100.12.129<span class="p">;</span>
+subnet 192.168.12.64 netmask 255.255.255.192 <span class="o">{</span>
+range 192.168.12.66 192.168.12.76<span class="p">;</span>
+option routers 192.168.12.65<span class="p">;</span>
+option subnet-mask 255.255.255.192<span class="p">;</span>
+option domain-name-servers 210.100.12.129<span class="p">;</span>
 option domain-name example.com<span class="p">;</span>
-default-lease-time <span class="m">3600</span><span class="p">;</span>
-max-lease-time <span class="m">86400</span><span class="p">;</span>
+default-lease-time 3600<span class="p">;</span>
+max-lease-time 86400<span class="p">;</span>
 <span class="o">}</span></code></pre></figure>
 
 <p>save the file. Then run commands.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="c1"># /usr/local/etc/rc.d/isc-dhcpd start</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># /usr/local/etc/rc.d/isc-dhcpd start</span></code></pre></figure>
 
 <p>So those are my explanations about DHCP Server on FreeBSD.</p>
 </div>

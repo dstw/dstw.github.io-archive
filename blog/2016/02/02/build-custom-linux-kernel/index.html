@@ -198,15 +198,15 @@
 <p>To build this custom Linux Kernel, I use Ubuntu 14.04 64 bit operating system.
 At first, ensure all the required utilities installed correctly.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ sudo apt-get install gcc make git libssl-dev libncurses5-dev</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo </span>apt-get <span class="nb">install </span>gcc make git libssl-dev libncurses5-dev</code></pre></figure>
 
 <p>Download source from Linux Kernel Archives, for example, I use version 4.4.<br />
 <a href="https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.4.tar.xz">https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.4.tar.xz</a></p>
 
 <p>Extract the tarball file.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ tar xJf linux-4.4.tar.xz
-$ <span class="nb">cd</span> linux-4.4</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">tar </span>xJf linux-4.4.tar.xz
+<span class="nv">$ </span><span class="nb">cd </span>linux-4.4</code></pre></figure>
 
 <p>We need to change configuration parameters to determine which settings and modules we need to build.
 Use make *config command as follow. 
@@ -216,70 +216,70 @@ I usually use number 2.</p>
 <h4 id="1-use-default-kernel-configuration">1. Use default kernel configuration.</h4>
 <p>This settings comes from the kernel maintainer.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ make defconfig </code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>make defconfig </code></pre></figure>
 
 <h4 id="2-use-our-existing-configuration">2. Use our existing configuration.</h4>
 <p>Just press “Enter” when asked for configuration options.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ make localmodconfig</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>make localmodconfig</code></pre></figure>
 
 <h4 id="3-manual-selection-with-graphical-menu">3. Manual selection with graphical menu.</h4>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ make menuconfig</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>make menuconfig</code></pre></figure>
 
 <h4 id="4--duplicate-our-current-config">4.  Duplicate our current config.</h4>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ sudo cp /boot/config-<span class="sb">`</span>uname -r<span class="sb">`</span>* .config</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo cp</span> /boot/config-<span class="sb">`</span><span class="nb">uname</span> <span class="nt">-r</span><span class="sb">`</span><span class="k">*</span> .config</code></pre></figure>
 
 <p>Then, compile source, this process can take a while.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ make -j4 </code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>make <span class="nt">-j4</span> </code></pre></figure>
 
 <p>The parameter “4” is based on processor specification.
 Set this at your own favor.<br />
 Install modules.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ sudo make modules_install </code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo </span>make modules_install </code></pre></figure>
 
 <p>Bootloader setup.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ sudo make install </code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo </span>make <span class="nb">install</span> </code></pre></figure>
 
 <p>Double check bootloader setup.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ sudo update-grub2 </code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo </span>update-grub2 </code></pre></figure>
 
 <p>Reboot the system.
 We can check our new installed kernel with this command.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ uname -a</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">uname</span> <span class="nt">-a</span></code></pre></figure>
 
 <h2 id="uninstall-custom-linux-kernel">Uninstall Custom Linux Kernel</h2>
 
 <p>Find out the version of custom kernel.<br />
 Update filesystem search index.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ sudo updatedb</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo </span>updatedb</code></pre></figure>
 
 <p>In this example, I want to remove kernel version 3.16.0-30-generic.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ <span class="nv">CUSTOM_KERNEL_VERSION</span><span class="o">=</span><span class="s2">&quot;3.16.0-30-generic&quot;</span>
-$ locate <span class="nv">$CUSTOM_KERNEL_VERSION</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ CUSTOM_KERNEL_VERSION</span><span class="o">=</span><span class="s2">"3.16.0-30-generic"</span>
+<span class="nv">$ </span>locate <span class="nv">$CUSTOM_KERNEL_VERSION</span></code></pre></figure>
 
 <p>Ensure our system has other kernel installed beside $CUSTOM_KERNEL_VERSION.<br />
 Then, delete all files &amp; folders which contain $CUSTOM_KERNEL_VERSION name.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ sudo rm /boot/vmlinuz-<span class="nv">$CUSTOM_KERNEL_VERSION</span>
-$ sudo rm /boot/initrd.img-<span class="nv">$CUSTOM_KERNEL_VERSION</span>
-$ sudo rm /boot/System.map-<span class="nv">$CUSTOM_KERNEL_VERSION</span>
-$ sudo rm /boot/config-<span class="nv">$CUSTOM_KERNEL_VERSION</span>
-$ sudo rm -rf /lib/modules/<span class="nv">$CUSTOM_KERNEL_VERSION</span>/
-$ sudo rm /var/lib/initramfs-tools/<span class="nv">$CUSTOM_KERNEL_VERSION</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo rm</span> /boot/vmlinuz-<span class="nv">$CUSTOM_KERNEL_VERSION</span>
+<span class="nv">$ </span><span class="nb">sudo rm</span> /boot/initrd.img-<span class="nv">$CUSTOM_KERNEL_VERSION</span>
+<span class="nv">$ </span><span class="nb">sudo rm</span> /boot/System.map-<span class="nv">$CUSTOM_KERNEL_VERSION</span>
+<span class="nv">$ </span><span class="nb">sudo rm</span> /boot/config-<span class="nv">$CUSTOM_KERNEL_VERSION</span>
+<span class="nv">$ </span><span class="nb">sudo rm</span> <span class="nt">-rf</span> /lib/modules/<span class="nv">$CUSTOM_KERNEL_VERSION</span>/
+<span class="nv">$ </span><span class="nb">sudo rm</span> /var/lib/initramfs-tools/<span class="nv">$CUSTOM_KERNEL_VERSION</span></code></pre></figure>
 
 <p>Do some cleaning.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ sudo update-initramfs -k all -u
-$ sudo update-grub2</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo </span>update-initramfs <span class="nt">-k</span> all <span class="nt">-u</span>
+<span class="nv">$ </span><span class="nb">sudo </span>update-grub2</code></pre></figure>
 
 <p>Finish. Our custom kernel has been uninstalled from our system.</p>
 </div>

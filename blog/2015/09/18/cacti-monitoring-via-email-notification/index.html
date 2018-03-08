@@ -202,23 +202,23 @@
 
 <p>The installation procedure itself is easy enough. Before this plugin thold installation, we need to install settings plugin <a href="http://docs.cacti.net/plugin:settings">http://docs.cacti.net/plugin:settings</a>. We can install those plugins concurently. Download files that are needed:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ <span class="nb">cd</span> /tmp
-$ wget http://docs.cacti.net/_media/plugin:settings-v0.71-1.tgz
-$ wget http://docs.cacti.net/_media/plugin:thold-v0.5.0.tgz</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">cd</span> /tmp
+<span class="nv">$ </span>wget http://docs.cacti.net/_media/plugin:settings-v0.71-1.tgz
+<span class="nv">$ </span>wget http://docs.cacti.net/_media/plugin:thold-v0.5.0.tgz</code></pre></figure>
 
 <p>Rename download files in order to avoid error at extract time.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ mv plugin:settings-v0.71-1.tgz settings-v0.71-1.tgz
-$ mv plugin:thold-v0.5.0.tgz thold-v0.5.0.tgz</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">mv </span>plugin:settings-v0.71-1.tgz settings-v0.71-1.tgz
+<span class="nv">$ </span><span class="nb">mv </span>plugin:thold-v0.5.0.tgz thold-v0.5.0.tgz</code></pre></figure>
 
 <p>Extract tarball files.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ tar zxf settings-v0.71-1.tgz
-$ tar zxf thold-v0.5.0.tgz</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">tar </span>zxf settings-v0.71-1.tgz
+<span class="nv">$ </span><span class="nb">tar </span>zxf thold-v0.5.0.tgz</code></pre></figure>
 
 <p>Move extrated files to folder cacti/plugins.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ sudo mv settings thold /var/www/html/cacti/plugins/</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo mv </span>settings thold /var/www/html/cacti/plugins/</code></pre></figure>
 
 <p>Then we configure cacti via web interface.</p>
 

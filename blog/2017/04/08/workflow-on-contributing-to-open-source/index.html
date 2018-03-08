@@ -217,9 +217,9 @@ follow:</p>
 
 <p>Fork project so you can modify yourself via Gitlab interface.</p>
 
-<pre><code>git clone https://gitlab.com/dstw/wget2
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://gitlab.com/dstw/wget2
 git remote add upstream https://dstw@gitlab.com/gnuwget/wget2.git
-</code></pre>
+</code></pre></div></div>
 
 <p>Create an own branch for each ‘task’ you are working on and make your commits
 within it. When done, sync with upstream, rebase/merge and create your patches
@@ -231,17 +231,17 @@ changes from the ‘original/upstream’ master branch on Savannah.</p>
 
 <p>Sync your Gitlab repo with upstream:</p>
 
-<pre><code>git checkout master
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout master
 git fetch upstream
 git merge upstream/master
-</code></pre>
+</code></pre></div></div>
 
 <p>Sync your ‘new-feature’ branch before generating patches:</p>
 
-<pre><code>git checkout new-feature
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout new-feature
 git rebase master
 git push -f  # pushing updated tree to your Gitlab new-feature branch)
-</code></pre>
+</code></pre></div></div>
 
 <p>Assume ‘new-feature’ is a private branch where you can do all the dirty things
 that you shouldn’t on public/shared branches. As soon as your patch has been
@@ -283,15 +283,15 @@ experienced peers!</p>
 there is option to overwrite my existing commits or create new merge commits to
 keep history.</p>
 
-<pre><code>git push origin new-feature
-</code></pre>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push origin new-feature
+</code></pre></div></div>
 
 <p>If there is a conflict, Git will ask me to resolve the problem this. Then, try
 to push and merge commits. This won’t remove any existing commits. And if I
 don’t want to keep any commits history, I usually force to push:</p>
 
-<pre><code>git push -f origin new-feature
-</code></pre>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push -f origin new-feature
+</code></pre></div></div>
 
 <p><del>This is considered a little bit harmful. Before I do this, I will make sure
 that I know what I do. Also, forcing commits is should only do if it believed to

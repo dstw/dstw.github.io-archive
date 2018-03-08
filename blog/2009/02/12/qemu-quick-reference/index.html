@@ -201,7 +201,7 @@ can obtain Qemu from its official site.</p>
 
 <p>To run Qemu, we must run command line from console:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ qemu -cdrom /dev/hdc</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>qemu <span class="nt">-cdrom</span> /dev/hdc</code></pre></figure>
 
 <p>Explanations from those command line is the -cdrom option for boot from cdrom 
 drive and the “/dev/hdc” parameter is path for image we use (“/dev/hdc” is path 
@@ -218,15 +218,15 @@ umount /dev/shm</p>
 <p>Those message indicates that the amount of virtual memory which will be used 
 Qemu is less than generic size (default). To solve this problem, use this command:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ sudo umount /dev/shm
-$ sudo mount -t tmpfs -o <span class="nv">size</span><span class="o">=</span>144m none /dev/shm</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo </span>umount /dev/shm
+<span class="nv">$ </span><span class="nb">sudo </span>mount <span class="nt">-t</span> tmpfs <span class="nt">-o</span> <span class="nv">size</span><span class="o">=</span>144m none /dev/shm</code></pre></figure>
 
 <p>After repaired, run Qemu once again. Then there is an xwindow with title Qemu and 
 the operating system we run. If you need a full screen output, you can press key 
 Ctrl + Alt + F or with adding fullscreen option, so the command we need to type 
 become:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ qemu -full-screen -cdrom /dev/hdc</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>qemu <span class="nt">-full-screen</span> <span class="nt">-cdrom</span> /dev/hdc</code></pre></figure>
 
 <p>To get cursor exit from the virtual machine screen, we can press Ctrl + Alt key 
 combination. You can find details about another options on manual page. With 
@@ -241,7 +241,7 @@ will make is being used for save virtual files that needed for new operating
 system. The capacity is about 4 GB (or more value is better) based on computer 
 specs we use. The commands:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ qemu-img create debian.img 4G</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>qemu-img create debian.img 4G</code></pre></figure>
 
 <p>The purpose of that commands is to create an image file named debian.img with 4 
 GB capacity which will used by qemu. This image file act as virtual harddisk so 
@@ -253,13 +253,13 @@ Debian operating system. As requirement, we need the installation CD of Debian.
 Insert the Debian CD to CD bay, then run qemu with additional options in order 
 to boot from CD drive.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ qemu -hda debian.img -cdrom /dev/cdrom -boot d</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>qemu <span class="nt">-hda</span> debian.img <span class="nt">-cdrom</span> /dev/cdrom <span class="nt">-boot</span> d</code></pre></figure>
 
 <p>The purpose of that commands is to use debian.img file as virtual harddisk for 
 the guest operating system. Then options “-cdrom /dev/cdrom/ -boot d” added in 
 order qemu can boot from CD drive first.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ qemu -hda image.img /path/to/image.iso</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>qemu <span class="nt">-hda</span> image.img /path/to/image.iso</code></pre></figure>
 
 <p>The image.img is the name of virtual file and /path/to/image.iso is path to the 
 guest operating system iso file. Then we can continue the installation process 

@@ -197,12 +197,12 @@
 message to another user. The message will appear on user terminal. To do this,
 all we need is root access and simple one liner.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ <span class="nb">echo</span> <span class="s2">&quot;Hello buddy!&quot;</span> <span class="p">|</span> sudo wall -n</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">echo</span> <span class="s2">"Hello buddy!"</span> | <span class="nb">sudo </span>wall <span class="nt">-n</span></code></pre></figure>
 
 <p>And if we want to use a file text as message source, we just need to omit the
 redirection pipe and point commands to file directly.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ sudo wall -n message.txt</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo </span>wall <span class="nt">-n</span> message.txt</code></pre></figure>
 
 </div>
     <hr />

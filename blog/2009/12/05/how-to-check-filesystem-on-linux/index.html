@@ -195,64 +195,64 @@ our running linux system.</p>
 
 <p>The fastest way is via reading filesystem table in /etc/fstab:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ cat /etc/fstab
-/dev/hda1        swap             swap        defaults         <span class="m">0</span>   <span class="m">0</span>
-/dev/hda3        /                ext3        defaults         <span class="m">1</span>   <span class="m">1</span>
-/dev/hda2        /home            ext3        defaults         <span class="m">1</span>   <span class="m">2</span>
-/dev/hda4        /usr             ext3        defaults         <span class="m">1</span>   <span class="m">2</span>
-<span class="c1">#/dev/cdrom      /mnt/cdrom       auto        noauto,owner,ro  0   0</span>
-/dev/fd0         /mnt/floppy      auto        noauto,owner     <span class="m">0</span>   <span class="m">0</span>
-devpts           /dev/pts         devpts      <span class="nv">gid</span><span class="o">=</span><span class="m">5</span>,mode<span class="o">=</span><span class="m">620</span>   <span class="m">0</span>   <span class="m">0</span>
-proc             /proc            proc        defaults         <span class="m">0</span>   <span class="m">0</span>
-tmpfs            /dev/shm         tmpfs       defaults         <span class="m">0</span>   <span class="m">0</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">cat</span> /etc/fstab
+/dev/hda1        swap             swap        defaults         0   0
+/dev/hda3        /                ext3        defaults         1   1
+/dev/hda2        /home            ext3        defaults         1   2
+/dev/hda4        /usr             ext3        defaults         1   2
+<span class="c">#/dev/cdrom      /mnt/cdrom       auto        noauto,owner,ro  0   0</span>
+/dev/fd0         /mnt/floppy      auto        noauto,owner     0   0
+devpts           /dev/pts         devpts      <span class="nv">gid</span><span class="o">=</span>5,mode<span class="o">=</span>620   0   0
+proc             /proc            proc        defaults         0   0
+tmpfs            /dev/shm         tmpfs       defaults         0   0</code></pre></figure>
 
 <p>Or using mount command:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ mount
-/dev/root on / <span class="nb">type</span> ext3 <span class="o">(</span>rw,errors<span class="o">=</span><span class="k">continue</span>,data<span class="o">=</span>ordered<span class="o">)</span>
-proc on /proc <span class="nb">type</span> proc <span class="o">(</span>rw<span class="o">)</span>
-sysfs on /sys <span class="nb">type</span> sysfs <span class="o">(</span>rw<span class="o">)</span>
-usbfs on /proc/bus/usb <span class="nb">type</span> usbfs <span class="o">(</span>rw<span class="o">)</span>
-/dev/hda2 on /home <span class="nb">type</span> ext3 <span class="o">(</span>rw<span class="o">)</span>
-/dev/hda4 on /usr <span class="nb">type</span> ext3 <span class="o">(</span>rw<span class="o">)</span>
-tmpfs on /dev/shm <span class="nb">type</span> tmpfs <span class="o">(</span>rw<span class="o">)</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>mount
+/dev/root on / <span class="nb">type </span>ext3 <span class="o">(</span>rw,errors<span class="o">=</span><span class="k">continue</span>,data<span class="o">=</span>ordered<span class="o">)</span>
+proc on /proc <span class="nb">type </span>proc <span class="o">(</span>rw<span class="o">)</span>
+sysfs on /sys <span class="nb">type </span>sysfs <span class="o">(</span>rw<span class="o">)</span>
+usbfs on /proc/bus/usb <span class="nb">type </span>usbfs <span class="o">(</span>rw<span class="o">)</span>
+/dev/hda2 on /home <span class="nb">type </span>ext3 <span class="o">(</span>rw<span class="o">)</span>
+/dev/hda4 on /usr <span class="nb">type </span>ext3 <span class="o">(</span>rw<span class="o">)</span>
+tmpfs on /dev/shm <span class="nb">type </span>tmpfs <span class="o">(</span>rw<span class="o">)</span></code></pre></figure>
 
 <p>Or with looking system directory in file /proc/mounts:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ less /proc/mounts</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>less /proc/mounts</code></pre></figure>
 
 <p>That will show the following output:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>rootfs / rootfs rw <span class="m">0</span> <span class="m">0</span>
-/dev/root / ext3 rw,errors<span class="o">=</span><span class="k">continue</span>,data<span class="o">=</span>ordered <span class="m">0</span> <span class="m">0</span>
-proc /proc proc rw <span class="m">0</span> <span class="m">0</span>
-sysfs /sys sysfs rw <span class="m">0</span> <span class="m">0</span>
-tmpfs /dev tmpfs rw,mode<span class="o">=</span><span class="m">755</span> <span class="m">0</span> <span class="m">0</span>
-devpts /dev/pts devpts rw,gid<span class="o">=</span><span class="m">5</span>,mode<span class="o">=</span><span class="m">620</span> <span class="m">0</span> <span class="m">0</span>
-usbfs /proc/bus/usb usbfs rw <span class="m">0</span> <span class="m">0</span>
-/dev/hda2 /home ext3 rw,errors<span class="o">=</span><span class="k">continue</span>,data<span class="o">=</span>ordered <span class="m">0</span> <span class="m">0</span>
-/dev/hda4 /usr ext3 rw,errors<span class="o">=</span><span class="k">continue</span>,data<span class="o">=</span>ordered <span class="m">0</span> <span class="m">0</span>
-tmpfs /dev/shm tmpfs rw <span class="m">0</span> <span class="m">0</span>
-/proc/mounts lines <span class="m">1</span>-10/10 <span class="o">(</span>END<span class="o">)</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">rootfs / rootfs rw 0 0
+/dev/root / ext3 rw,errors<span class="o">=</span><span class="k">continue</span>,data<span class="o">=</span>ordered 0 0
+proc /proc proc rw 0 0
+sysfs /sys sysfs rw 0 0
+tmpfs /dev tmpfs rw,mode<span class="o">=</span>755 0 0
+devpts /dev/pts devpts rw,gid<span class="o">=</span>5,mode<span class="o">=</span>620 0 0
+usbfs /proc/bus/usb usbfs rw 0 0
+/dev/hda2 /home ext3 rw,errors<span class="o">=</span><span class="k">continue</span>,data<span class="o">=</span>ordered 0 0
+/dev/hda4 /usr ext3 rw,errors<span class="o">=</span><span class="k">continue</span>,data<span class="o">=</span>ordered 0 0
+tmpfs /dev/shm tmpfs rw 0 0
+/proc/mounts lines 1-10/10 <span class="o">(</span>END<span class="o">)</span></code></pre></figure>
 
 <p>To make tidier, check with “df” command:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ df -T
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">df</span> <span class="nt">-T</span>
 Filesystem    Type   1K-blocks      Used Available Use% Mounted on
-/dev/root     ext3     <span class="m">4806936</span>    <span class="m">696400</span>   <span class="m">3866348</span>  <span class="m">16</span>% /
-/dev/hda2     ext3     <span class="m">3850320</span>    <span class="m">226940</span>   <span class="m">3427792</span>   <span class="m">7</span>% /home
-/dev/hda4     ext3     <span class="m">9621880</span>   <span class="m">3866924</span>   <span class="m">5266180</span>  <span class="m">43</span>% /usr
-tmpfs        tmpfs      <span class="m">254680</span>         <span class="m">0</span>    <span class="m">254680</span>   <span class="m">0</span>% /dev/shm</code></pre></figure>
+/dev/root     ext3     4806936    696400   3866348  16% /
+/dev/hda2     ext3     3850320    226940   3427792   7% /home
+/dev/hda4     ext3     9621880   3866924   5266180  43% /usr
+tmpfs        tmpfs      254680         0    254680   0% /dev/shm</code></pre></figure>
 
 <p>The “-T” option will show the filesystem type. In order to read the disk
 capacity easier, you can use “-h” option.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ df -Th
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">df</span> <span class="nt">-Th</span>
 Filesystem    Type    Size  Used Avail Use% Mounted on
-/dev/root     ext3    <span class="m">4</span>.6G  681M  <span class="m">3</span>.7G  <span class="m">16</span>% /
-/dev/hda2     ext3    <span class="m">3</span>.7G  222M  <span class="m">3</span>.3G   <span class="m">7</span>% /home
-/dev/hda4     ext3    <span class="m">9</span>.2G  <span class="m">3</span>.7G  <span class="m">5</span>.1G  <span class="m">43</span>% /usr
-tmpfs        tmpfs    249M     <span class="m">0</span>  249M   <span class="m">0</span>% /dev/shm</code></pre></figure>
+/dev/root     ext3    4.6G  681M  3.7G  16% /
+/dev/hda2     ext3    3.7G  222M  3.3G   7% /home
+/dev/hda4     ext3    9.2G  3.7G  5.1G  43% /usr
+tmpfs        tmpfs    249M     0  249M   0% /dev/shm</code></pre></figure>
 
 </div>
     <hr />

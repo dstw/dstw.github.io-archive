@@ -197,38 +197,38 @@
 can not be detected by my operating system. I check on dmesg, there are entry
 about my usb flashdrive on the log:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>didik@thinkpad:~$ dmesg
---- output omitted ---
-<span class="o">[</span>  <span class="m">123</span>.616624<span class="o">]</span> usb <span class="m">1</span>-1.2: new high-speed USB device number <span class="m">3</span> using ehci-pci
-<span class="o">[</span>  <span class="m">123</span>.710606<span class="o">]</span> usb <span class="m">1</span>-1.2: New USB device found, <span class="nv">idVendor</span><span class="o">=</span><span class="m">0951</span>, <span class="nv">idProduct</span><span class="o">=</span><span class="m">1666</span>
-<span class="o">[</span>  <span class="m">123</span>.710617<span class="o">]</span> usb <span class="m">1</span>-1.2: New USB device strings: <span class="nv">Mfr</span><span class="o">=</span><span class="m">1</span>, <span class="nv">Product</span><span class="o">=</span><span class="m">2</span>, <span class="nv">SerialNumber</span><span class="o">=</span><span class="m">3</span>
-<span class="o">[</span>  <span class="m">123</span>.710631<span class="o">]</span> usb <span class="m">1</span>-1.2: Product: DataTraveler <span class="m">3</span>.0
-<span class="o">[</span>  <span class="m">123</span>.710634<span class="o">]</span> usb <span class="m">1</span>-1.2: Manufacturer: Kingston
-<span class="o">[</span>  <span class="m">123</span>.710637<span class="o">]</span> usb <span class="m">1</span>-1.2: SerialNumber: 60A44C3FACDBBDB1796E36C9
---- output omitted ---</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">didik@thinkpad:~<span class="nv">$ </span>dmesg
+<span class="nt">---</span> output omitted <span class="nt">---</span>
+<span class="o">[</span>  123.616624] usb 1-1.2: new high-speed USB device number 3 using ehci-pci
+<span class="o">[</span>  123.710606] usb 1-1.2: New USB device found, <span class="nv">idVendor</span><span class="o">=</span>0951, <span class="nv">idProduct</span><span class="o">=</span>1666
+<span class="o">[</span>  123.710617] usb 1-1.2: New USB device strings: <span class="nv">Mfr</span><span class="o">=</span>1, <span class="nv">Product</span><span class="o">=</span>2, <span class="nv">SerialNumber</span><span class="o">=</span>3
+<span class="o">[</span>  123.710631] usb 1-1.2: Product: DataTraveler 3.0
+<span class="o">[</span>  123.710634] usb 1-1.2: Manufacturer: Kingston
+<span class="o">[</span>  123.710637] usb 1-1.2: SerialNumber: 60A44C3FACDBBDB1796E36C9
+<span class="nt">---</span> output omitted <span class="nt">---</span></code></pre></figure>
 
 <p>But, after a moment I wait, there is no notification about new flashdrive
 inserted. I check using blkid, still there is no sign of the thing.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>didik@thinkpad:~$ sudo blkid
-<span class="o">[</span>sudo<span class="o">]</span> password <span class="k">for</span> didik: 
-/dev/sda1: <span class="nv">LABEL</span><span class="o">=</span><span class="s2">&quot;SYSTEM&quot;</span> <span class="nv">UUID</span><span class="o">=</span><span class="s2">&quot;70E80099E8005FA8&quot;</span> <span class="nv">TYPE</span><span class="o">=</span><span class="s2">&quot;ntfs&quot;</span> <span class="nv">PARTUUID</span><span class="o">=</span><span class="s2">&quot;ba6ded71-01&quot;</span>
-/dev/sda2: <span class="nv">UUID</span><span class="o">=</span><span class="s2">&quot;92521783-0211-4b1d-8f66-b9a62c16fc89&quot;</span> <span class="nv">UUID_SUB</span><span class="o">=</span><span class="s2">&quot;fdb1cb3e-1a44-4e53-864e-b29f6fdfb153&quot;</span> <span class="nv">TYPE</span><span class="o">=</span><span class="s2">&quot;btrfs&quot;</span> <span class="nv">PARTUUID</span><span class="o">=</span><span class="s2">&quot;ba6ded71-02&quot;</span>
-/dev/sda3: <span class="nv">UUID</span><span class="o">=</span><span class="s2">&quot;4723c4f7-9624-4b8d-9b41-3079442641b4&quot;</span> <span class="nv">TYPE</span><span class="o">=</span><span class="s2">&quot;swap&quot;</span> <span class="nv">PARTUUID</span><span class="o">=</span><span class="s2">&quot;ba6ded71-03&quot;</span>
-/dev/sda5: <span class="nv">LABEL</span><span class="o">=</span><span class="s2">&quot;DATA&quot;</span> <span class="nv">UUID</span><span class="o">=</span><span class="s2">&quot;01CD0094E26EBB80&quot;</span> <span class="nv">TYPE</span><span class="o">=</span><span class="s2">&quot;ntfs&quot;</span> <span class="nv">PARTUUID</span><span class="o">=</span><span class="s2">&quot;ba6ded71-05&quot;</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">didik@thinkpad:~<span class="nv">$ </span><span class="nb">sudo </span>blkid
+<span class="o">[</span><span class="nb">sudo</span><span class="o">]</span> password <span class="k">for </span>didik: 
+/dev/sda1: <span class="nv">LABEL</span><span class="o">=</span><span class="s2">"SYSTEM"</span> <span class="nv">UUID</span><span class="o">=</span><span class="s2">"70E80099E8005FA8"</span> <span class="nv">TYPE</span><span class="o">=</span><span class="s2">"ntfs"</span> <span class="nv">PARTUUID</span><span class="o">=</span><span class="s2">"ba6ded71-01"</span>
+/dev/sda2: <span class="nv">UUID</span><span class="o">=</span><span class="s2">"92521783-0211-4b1d-8f66-b9a62c16fc89"</span> <span class="nv">UUID_SUB</span><span class="o">=</span><span class="s2">"fdb1cb3e-1a44-4e53-864e-b29f6fdfb153"</span> <span class="nv">TYPE</span><span class="o">=</span><span class="s2">"btrfs"</span> <span class="nv">PARTUUID</span><span class="o">=</span><span class="s2">"ba6ded71-02"</span>
+/dev/sda3: <span class="nv">UUID</span><span class="o">=</span><span class="s2">"4723c4f7-9624-4b8d-9b41-3079442641b4"</span> <span class="nv">TYPE</span><span class="o">=</span><span class="s2">"swap"</span> <span class="nv">PARTUUID</span><span class="o">=</span><span class="s2">"ba6ded71-03"</span>
+/dev/sda5: <span class="nv">LABEL</span><span class="o">=</span><span class="s2">"DATA"</span> <span class="nv">UUID</span><span class="o">=</span><span class="s2">"01CD0094E26EBB80"</span> <span class="nv">TYPE</span><span class="o">=</span><span class="s2">"ntfs"</span> <span class="nv">PARTUUID</span><span class="o">=</span><span class="s2">"ba6ded71-05"</span></code></pre></figure>
 
 <p>Apparently, I forget to insert usb-storage module in my kernel, after I
 recompile it. So, I try to modprobe the needed module.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>didik@thinkpad:~$ modprobe usb-storage
-modprobe: FATAL: Module usb-storage not found in directory /lib/modules/4.6.2</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">didik@thinkpad:~<span class="nv">$ </span>modprobe usb-storage
+modprobe: FATAL: Module usb-storage not found <span class="k">in </span>directory /lib/modules/4.6.2</code></pre></figure>
 
 <p>Okay, it seems that the file I need is not available from the kernel tree. So, I
 need to insert the module manually.<br />
 Time to go to kernel tree.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>didik@thinkpad:~$ <span class="nb">cd</span> linux-4.6.2/
-didik@thinkpad:~/linux-4.6.2$ make menuconfig</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">didik@thinkpad:~<span class="nv">$ </span><span class="nb">cd </span>linux-4.6.2/
+didik@thinkpad:~/linux-4.6.2<span class="nv">$ </span>make menuconfig</code></pre></figure>
 
 <p>From this menu, I will include the module that I need for usb-storage. Press /
 to search module name. It is called USB_STORAGE.</p>
@@ -243,56 +243,56 @@ tri-state mode.</p>
 <p>I exit and save this configuration.<br />
 Then I make it.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>didik@thinkpad:~/linux-4.6.2$ make -j4</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">didik@thinkpad:~/linux-4.6.2<span class="nv">$ </span>make <span class="nt">-j4</span></code></pre></figure>
 
 <p>Note that the “4” value is changeable depends on processor specs.<br />
 I use “4” because my processor 
 Install old and new compiled module, as root of course.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>didik@thinkpad:~/linux-4.6.2$ sudo make modules_install</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">didik@thinkpad:~/linux-4.6.2<span class="nv">$ </span><span class="nb">sudo </span>make modules_install</code></pre></figure>
 
 <p>My new module finally installed. Now I can plug the usb drive on my computer.<br />
 Just in case you are curious about system message of the inserted device, you 
 can use dmesg.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>didik@thinkpad:~$ dmesg
---- output omitted ---
-<span class="o">[</span> <span class="m">3231</span>.314581<span class="o">]</span> usb <span class="m">1</span>-1.2: USB disconnect, device number <span class="m">3</span>
-<span class="o">[</span> <span class="m">3233</span>.198257<span class="o">]</span> usb <span class="m">1</span>-1.2: new high-speed USB device number <span class="m">4</span> using ehci-pci
-<span class="o">[</span> <span class="m">3233</span>.292379<span class="o">]</span> usb <span class="m">1</span>-1.2: New USB device found, <span class="nv">idVendor</span><span class="o">=</span><span class="m">0951</span>, <span class="nv">idProduct</span><span class="o">=</span><span class="m">1666</span>
-<span class="o">[</span> <span class="m">3233</span>.292390<span class="o">]</span> usb <span class="m">1</span>-1.2: New USB device strings: <span class="nv">Mfr</span><span class="o">=</span><span class="m">1</span>, <span class="nv">Product</span><span class="o">=</span><span class="m">2</span>, <span class="nv">SerialNumber</span><span class="o">=</span><span class="m">3</span>
-<span class="o">[</span> <span class="m">3233</span>.292395<span class="o">]</span> usb <span class="m">1</span>-1.2: Product: DataTraveler <span class="m">3</span>.0
-<span class="o">[</span> <span class="m">3233</span>.292399<span class="o">]</span> usb <span class="m">1</span>-1.2: Manufacturer: Kingston
-<span class="o">[</span> <span class="m">3233</span>.292403<span class="o">]</span> usb <span class="m">1</span>-1.2: SerialNumber: 60A44C3FACDBBDB1796E36C9
-<span class="o">[</span> <span class="m">3233</span>.990697<span class="o">]</span> usb-storage <span class="m">1</span>-1.2:1.0: USB Mass Storage device detected
-<span class="o">[</span> <span class="m">3233</span>.990994<span class="o">]</span> scsi host6: usb-storage <span class="m">1</span>-1.2:1.0
-<span class="o">[</span> <span class="m">3233</span>.991196<span class="o">]</span> usbcore: registered new interface driver usb-storage
-<span class="o">[</span> <span class="m">3234</span>.995392<span class="o">]</span> scsi <span class="m">6</span>:0:0:0: Direct-Access     Kingston DataTraveler <span class="m">3</span>.0 PMAP PQ: <span class="m">0</span> ANSI: <span class="m">6</span>
-<span class="o">[</span> <span class="m">3234</span>.996242<span class="o">]</span> sd <span class="m">6</span>:0:0:0: Attached scsi generic sg2 <span class="nb">type</span> <span class="m">0</span>
-<span class="o">[</span> <span class="m">3234</span>.996655<span class="o">]</span> sd <span class="m">6</span>:0:0:0: <span class="o">[</span>sdb<span class="o">]</span> <span class="m">31293440</span> <span class="m">512</span>-byte logical blocks: <span class="o">(</span><span class="m">16</span>.0 GB/14.9 GiB<span class="o">)</span>
-<span class="o">[</span> <span class="m">3234</span>.998693<span class="o">]</span> sd <span class="m">6</span>:0:0:0: <span class="o">[</span>sdb<span class="o">]</span> Write Protect is off
-<span class="o">[</span> <span class="m">3234</span>.998705<span class="o">]</span> sd <span class="m">6</span>:0:0:0: <span class="o">[</span>sdb<span class="o">]</span> Mode Sense: 2b <span class="m">80</span> <span class="m">00</span> <span class="m">08</span>
-<span class="o">[</span> <span class="m">3235</span>.000537<span class="o">]</span> sd <span class="m">6</span>:0:0:0: <span class="o">[</span>sdb<span class="o">]</span> Write cache: disabled, <span class="nb">read</span> cache: enabled, doesn<span class="err">&#39;</span>t support DPO or FUA
-<span class="o">[</span> <span class="m">3236</span>.101997<span class="o">]</span>  sdb: sdb1
-<span class="o">[</span> <span class="m">3236</span>.108153<span class="o">]</span> sd <span class="m">6</span>:0:0:0: <span class="o">[</span>sdb<span class="o">]</span> Attached SCSI removable disk
---- output omitted ---</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">didik@thinkpad:~<span class="nv">$ </span>dmesg
+<span class="nt">---</span> output omitted <span class="nt">---</span>
+<span class="o">[</span> 3231.314581] usb 1-1.2: USB disconnect, device number 3
+<span class="o">[</span> 3233.198257] usb 1-1.2: new high-speed USB device number 4 using ehci-pci
+<span class="o">[</span> 3233.292379] usb 1-1.2: New USB device found, <span class="nv">idVendor</span><span class="o">=</span>0951, <span class="nv">idProduct</span><span class="o">=</span>1666
+<span class="o">[</span> 3233.292390] usb 1-1.2: New USB device strings: <span class="nv">Mfr</span><span class="o">=</span>1, <span class="nv">Product</span><span class="o">=</span>2, <span class="nv">SerialNumber</span><span class="o">=</span>3
+<span class="o">[</span> 3233.292395] usb 1-1.2: Product: DataTraveler 3.0
+<span class="o">[</span> 3233.292399] usb 1-1.2: Manufacturer: Kingston
+<span class="o">[</span> 3233.292403] usb 1-1.2: SerialNumber: 60A44C3FACDBBDB1796E36C9
+<span class="o">[</span> 3233.990697] usb-storage 1-1.2:1.0: USB Mass Storage device detected
+<span class="o">[</span> 3233.990994] scsi host6: usb-storage 1-1.2:1.0
+<span class="o">[</span> 3233.991196] usbcore: registered new interface driver usb-storage
+<span class="o">[</span> 3234.995392] scsi 6:0:0:0: Direct-Access     Kingston DataTraveler 3.0 PMAP PQ: 0 ANSI: 6
+<span class="o">[</span> 3234.996242] sd 6:0:0:0: Attached scsi generic sg2 <span class="nb">type </span>0
+<span class="o">[</span> 3234.996655] sd 6:0:0:0: <span class="o">[</span>sdb] 31293440 512-byte logical blocks: <span class="o">(</span>16.0 GB/14.9 GiB<span class="o">)</span>
+<span class="o">[</span> 3234.998693] sd 6:0:0:0: <span class="o">[</span>sdb] Write Protect is off
+<span class="o">[</span> 3234.998705] sd 6:0:0:0: <span class="o">[</span>sdb] Mode Sense: 2b 80 00 08
+<span class="o">[</span> 3235.000537] sd 6:0:0:0: <span class="o">[</span>sdb] Write cache: disabled, <span class="nb">read </span>cache: enabled, doesn<span class="s1">'t support DPO or FUA
+[ 3236.101997]  sdb: sdb1
+[ 3236.108153] sd 6:0:0:0: [sdb] Attached SCSI removable disk
+--- output omitted ---</span></code></pre></figure>
 
 <p>And modinfo to view module details.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>didik@thinkpad:~$ modinfo usb-storage
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">didik@thinkpad:~<span class="nv">$ </span>modinfo usb-storage
 filename:       /lib/modules/4.6.2/kernel/drivers/usb/storage/usb-storage.ko
 license:        GPL
-description:    USB Mass Storage driver <span class="k">for</span> Linux
+description:    USB Mass Storage driver <span class="k">for </span>Linux
 author:         Matthew Dharm &lt;mdharm-usb@one-eyed-alien.net&gt;
 srcversion:     D0235102D9160CC35A9A1C4
-alias:          usb:v*p*d*dc*dsc*dp*ic08isc06ip50in*
-alias:          usb:v*p*d*dc*dsc*dp*ic08isc05ip50in*
---- output omitted ---
-alias:          usb:v03EEp6906d0003dc*dsc*dp*ic*isc*ip*in*
-alias:          usb:v03EBp2002d0100dc*dsc*dp*ic*isc*ip*in*
+<span class="nb">alias</span>:          usb:v<span class="k">*</span>p<span class="k">*</span>d<span class="k">*</span>dc<span class="k">*</span>dsc<span class="k">*</span>dp<span class="k">*</span>ic08isc06ip50in<span class="k">*</span>
+<span class="nb">alias</span>:          usb:v<span class="k">*</span>p<span class="k">*</span>d<span class="k">*</span>dc<span class="k">*</span>dsc<span class="k">*</span>dp<span class="k">*</span>ic08isc05ip50in<span class="k">*</span>
+<span class="nt">---</span> output omitted <span class="nt">---</span>
+<span class="nb">alias</span>:          usb:v03EEp6906d0003dc<span class="k">*</span>dsc<span class="k">*</span>dp<span class="k">*</span>ic<span class="k">*</span>isc<span class="k">*</span>ip<span class="k">*in*</span>
+<span class="nb">alias</span>:          usb:v03EBp2002d0100dc<span class="k">*</span>dsc<span class="k">*</span>dp<span class="k">*</span>ic<span class="k">*</span>isc<span class="k">*</span>ip<span class="k">*in*</span>
 depends:        
 intree:         Y
-vermagic:       <span class="m">4</span>.6.2 SMP mod_unload modversions 
+vermagic:       4.6.2 SMP mod_unload modversions 
 parm:           option_zero_cd:ZeroCD mode <span class="o">(</span><span class="nv">1</span><span class="o">=</span>Force Modem <span class="o">(</span>default<span class="o">)</span>, <span class="nv">2</span><span class="o">=</span>Allow CD-Rom <span class="o">(</span>uint<span class="o">)</span>
 parm:           swi_tru_install:TRU-Install mode <span class="o">(</span><span class="nv">1</span><span class="o">=</span>Full Logic <span class="o">(</span>def<span class="o">)</span>, <span class="nv">2</span><span class="o">=</span>Force CD-Rom, <span class="nv">3</span><span class="o">=</span>Force Modem<span class="o">)</span> <span class="o">(</span>uint<span class="o">)</span>
 parm:           delay_use:seconds to delay before using a new device <span class="o">(</span>uint<span class="o">)</span>
