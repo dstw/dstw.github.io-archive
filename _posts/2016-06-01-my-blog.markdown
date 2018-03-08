@@ -41,7 +41,7 @@ use. I can create post directly from Vim on my Linux console.
 It can be updated using git, so I can feel the sysadmin way to write a post. 
 It use a simplify html-like syntax, markdown. 
 I can host my blog together with my application repository in 
-[Github](www.github.com). You can check this
+[Github](https://www.github.com). You can check this
 [article](/blog/2016/06/02/octopress-setup-and-deployment/) 
 for more details. 
 With this Octopress take control my way to blog,

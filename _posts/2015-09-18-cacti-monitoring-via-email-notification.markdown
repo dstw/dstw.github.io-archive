@@ -39,23 +39,23 @@ $ sudo mv settings thold /var/www/html/cacti/plugins/
 
 Then we configure cacti via web interface.
 
-![cactiemail1](/images/cactiemail1.png)
+![cactiemail1](/static/img/cactiemail1.png)
 
 Install and activate plugin Setting and Thold. After success, we need to configure thos plugins. Set configuration for email. We will use gmail account for mail service configuration. Configure following parameters:
 
-![cactiemail2](/images/cactiemail2.png)
+![cactiemail2](/static/img/cactiemail2.png)
 
 We can test to send email to confirm email sending process running well.
 
-![cactiemail3](/images/cactiemail3.png)
+![cactiemail3](/static/img/cactiemail3.png)
 
 After test passed, we can save the configuration. In the notification lists menu, add our email address for thold plugin which need to be sent if some notification raised by system.
 
-![cactiemail4](/images/cactiemail4.png)
+![cactiemail4](/static/img/cactiemail4.png)
 
 Choose graph which need to monitor the threshold. In this example, I will monitor a Windows host, so I can use harddrive free space percentage to trigger the thold.
 
-![cactiemail5](/images/cactiemail5.png)
+![cactiemail5](/static/img/cactiemail5.png)
 
 Configure the following parameter:
 
@@ -66,13 +66,13 @@ Configure the following parameter:
 * Warning Notification List: List of email address notification for warning
 * Alert Notification List: List of email address notification for alert
 
-![cactiemail6](/images/cactiemail6.png)
+![cactiemail6](/static/img/cactiemail6.png)
 
 Thold has been done configured. We just need to monitor the result. Cacti will send notification contain email and graph concerned about monitored device. In the example above, cacti will check harddrive capacity of server within a day.
 If something has found that harddrive capacity meet the condition of below 25%, then cacti will send email notification warning. And if harddrive capacity below 10% then cacti will send email notification alert.  
 This is an example of email notification from cacti.
 
-![cactiemail7](/images/cactiemail7.png)
+![cactiemail7](/static/img/cactiemail7.png)
 
 Reference:  
 [http://docs.cacti.net/plugin:thold](http://docs.cacti.net/plugin:thold)

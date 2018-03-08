@@ -53,12 +53,12 @@ didik@thinkpad:~/linux-4.6.2$ make menuconfig
 From this menu, I will include the module that I need for usb-storage. Press /
 to search module name. It is called USB_STORAGE.
 
-![usb-module0.png](/images/usb-module0.png)
+![usb-module0.png](/static/img/usb-module0.png)
 
 After I found its location, I insert it with "M" become my choice between the
 tri-state mode. 
 
-![usb-module1.png](/images/usb-module1.png)
+![usb-module1.png](/static/img/usb-module1.png)
 
 I exit and save this configuration.  
 Then I make it.

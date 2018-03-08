@@ -18,17 +18,17 @@ Then we need import that xml templates from folder "template" using cacti web in
 
 Log in to cacti web interface and point to Import Templates
 
-![cactiwinhost1](/images/cactiwinhost1.png)
+![cactiwinhost1](/static/img/cactiwinhost1.png)
 
 Browse template folder that have been downloaded and search for cacti_host_template_windows_host_-_snmp_informant.xml file then click import. This template is ready to use.
 
 Next, I need to activate SNMP service in Windows host as well as others add-on for SNMP. Login to Control Panel > Programs and Features > Windows Features. Check in Simple Network Management Protocol (SNMP).
 
-![cactiwinhost2](/images/cactiwinhost2.png)
+![cactiwinhost2](/static/img/cactiwinhost2.png)
 
 After SNMP feature success, configure SNMP service. Log in to menu Service.
 
-![cactiwinhost3](/images/cactiwinhost3.png)
+![cactiwinhost3](/static/img/cactiwinhost3.png)
 
 Change configuration for service "SNMP Service". Add appropriate parameter community, and allow SNMP so it can be accessed from anywhere host.
 Additionally, we can add contact address in tab Agent (optional).
@@ -36,7 +36,7 @@ After SNMP installed and configured, install 3rd party software that is SNMP inf
 
 How to add device in cacti
 
-![cactiwinhost4](/images/cactiwinhost4.png)
+![cactiwinhost4](/static/img/cactiwinhost4.png)
 
 After the device creation success, next step is create graph for this device.
 It can be done automatically with click "*Create Graph for this Host".
@@ -45,7 +45,7 @@ Add to tree in order to it can be accessed from Tree View mode.
 Finish, we can access graph that we created in tab graphs.
 Happy cactying.
 
-![cactiwinhost5](/images/cactiwinhost5.png)
+![cactiwinhost5](/static/img/cactiwinhost5.png)
 
 Reference:
 

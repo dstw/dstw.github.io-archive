@@ -23,17 +23,17 @@ After installed, open control panel from that UPS software on browser with this 
 
 Login as admin, the default password for Prolink PRO 1200 SFCU is "administrator"
 
-![ups1](/images/ups1.png)
+![ups1](/static/img/ups1.png)
 
-![ups2](/images/ups2.png)
+![ups2](/static/img/ups2.png)
 
 Change this default password immediately on configuration menu ViewPower > Change Password
 
-![ups3](/images/ups3.png)
+![ups3](/static/img/ups3.png)
 
 Check in to UPS Settings > Local Shutdown
 
-![ups4](/images/ups4.png)
+![ups4](/static/img/ups4.png)
 
 Set the check box up on menu "When the UPS is running from the battery" and fill the section "Shut down the local system after" with value 6 (in minutes).  
 In the section "Time to wait before shutting down the local system" fill with value 5 (in minutes).  
@@ -41,7 +41,7 @@ In the section "Maximum file execution time", fill with value 1 (in minutes).
 In the section "File to execute when shutting down" fill with value of path to shutdown script.   
 In the following example, I created script on C:\rshutdown.bat.
 
-![ups5](/images/ups5.png)
+![ups5](/static/img/ups5.png)
 
 Then make a new file with notepad, give it name rshutdown.bat, save on disk C. The contents:
 
@@ -58,12 +58,12 @@ Install UPS Eaton AVR software that delivered with the CD. The installation proc
 After installation successful, set the UPS to run the shutdown process if a failure power source has occured.
 Click icon on Windows system tray, check in to menu Settings.
 
-![ups6](/images/ups6.png)
+![ups6](/static/img/ups6.png)
 
 Fill with command line parameter where we save the batch file for shutdown. 
 In the following example, I use file on "C:\User\edp11\Desktop\putty\shutdown.bat"
 
-![ups7](/images/ups7.png)
+![ups7](/static/img/ups7.png)
 
 The script contents is same as previous script we write:
 
@@ -109,17 +109,17 @@ In order to shutdown Linux based host, we use another application from putty tha
 
 Confirm that we can automatic login to Linux. To do this, we need to generate public and private key for Windows host where the autoshutdown trigger is run.
 
-![ups8](/images/ups8.png)
+![ups8](/static/img/ups8.png)
 
 Click button Generate. While wait the key making process, we could moving the mouse in order to accelerate the process.
 
-![ups9](/images/ups9.png)
+![ups9](/static/img/ups9.png)
 
 After generating process, save the public and private key.
 Save with easy name to find, for example for the public key we could named it key-server.pub and for the private key key-server.ppl.
 If the following notification appear, then click Yes, just ignore it, because weneed automatic login without passpharase which same as password.
 
-![ups10](/images/ups10.png)
+![ups10](/static/img/ups10.png)
 
 For the next step, we need add public key that we have been created into host which want we access without password.
 Login in to that host with putty and user root. Then type this commands.
