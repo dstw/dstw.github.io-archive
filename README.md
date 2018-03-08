@@ -4,7 +4,7 @@ This blog, [www.didiksetiawan.com](https://www.didiksetiawan.com), is my notes
 about programming, system administration and other computer stuff. I make this
 blog to share my views and my ideas to the world.
 
-HTML checker status [!Travis build status](https://travis-ci.org/dstw/dstw.github.io.svg?branch=source)
+HTML checker status [![Build Status](https://travis-ci.org/dstw/dstw.github.io.svg?branch=source)](https://travis-ci.org/dstw/dstw.github.io)
 
 ## Blog theme
 
