@@ -9,7 +9,7 @@ rvm:
 install:
   - bundle install
 
-script: bash ./scripts/cibuild.sh
+script: bash ./_scripts/cibuild.sh
 
 # Branch whitelist, only for GitHub Pages
 branches:
@@ -29,7 +29,7 @@ sudo: false # route your build to the container-based infrastructure for a faste
 
 deploy:
   provider: script
-  script: bash ./scripts/deploy.sh
+  script: bash ./_scripts/deploy.sh
   skip_cleanup: true
   on:
     branch: source
