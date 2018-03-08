@@ -1,0 +1,68 @@
+---
+layout: post
+title: "My Blog"
+date: 2016-06-01 15:06:57 +0700
+comments: true
+categories: web blog email 
+---
+As a person who use internet in daily basis, I think something
+personal like a domain name is essential to have. But, there is no good
+personal domain name available for free. Fortunately, the price to "borrow" a
+domain name from the registrar is fairly affordable. So, without even thinking
+more about price to pay, I decided that what I invested in this thing will
+someday get useful for everyone, in anyway.  
+After I "reserved" one domain name, I need to associate it with other service.
+The two things that important to be setting up immediately are blog and email.   
+Blog is like my "broadcasting center". I store my notes, my journals there.
+Everyone is welcome to visit there, and I hope it can help someone to answer
+their question someday. Email become my virtual identity. I use it to register
+to many service on the internet. Especially with my own custom domain name,
+I can make my blog and email look more personally.
+Here I explain how I build my blog step by step. 
+
+### Domain Name
+
+I register my domain from a web hosting provider. I just pay for the domain
+name, not the hosting service.  
+About what provider I currently use, it can be found using a domain tool easily.
+
+### Blog
+
+In order to build my infrastructure, I need to have a server, dedicated internet
+or static IP address to run the software up. But I don't have any of them, so I
+just use free service from external providers. There is a lot of providers who
+can give us some space to host our web and email.  
+In early time I touch with internet, I did use some blogging framework to run my
+blog. I ever use Blogger, Joomla, Drupal and Wordpress. I spend a long time with 
+Wordpress. But, due to personal favor, finally I switch to Octopress. 
+
+Why Octopress? Because that is simple. It has beautiful design, while easy to 
+use. I can create post directly from Vim on my Linux console. 
+It can be updated using git, so I can feel the sysadmin way to write a post. 
+It use a simplify html-like syntax, markdown. 
+I can host my blog together with my application repository in 
+[Github](www.github.com). You can check this
+[article](/blog/2016/06/02/octopress-setup-and-deployment/) 
+for more details. 
+With this Octopress take control my way to blog,
+I can focus on contents that I want to share rather than 
+have to be confused to setup and design my blog.
+
+### SSL
+
+For security purpose, I use free ssl service from 
+[CloudFlare](http://www.cloudflare.com). The setup process is fairly easy.
+The requirements for its service is just a domain name with top level domain.
+I just need to set my DNS configuration to point CloudFlare DNS. Additionally, 
+there is a feature so I can force my blog visitor to use https in order to see
+the ssl sign.
+
+### Email
+
+Rather than using well-known free email service, I need to host my own email
+because I want to use my own domain name. Fortunately, there is email provider 
+that provide free email service using custom domain, thanks to
+[Zoho Mail](http://www.zoho.com).
+Even with free service, I can use my own domain name.
+
+That's all about my blog. I hope it all will be useful. Thanks for reading.
