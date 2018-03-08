@@ -5,8 +5,8 @@
     <description>Didik Setiawan's Blog</description>
     <link>https://www.didiksetiawan.com/</link>
     <atom:link href="https://www.didiksetiawan.com/sitemap.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 08 Mar 2018 13:34:45 +0000</pubDate>
-    <lastBuildDate>Thu, 08 Mar 2018 13:34:45 +0000</lastBuildDate>
+    <pubDate>Thu, 08 Mar 2018 20:47:41 +0700</pubDate>
+    <lastBuildDate>Thu, 08 Mar 2018 20:47:41 +0700</lastBuildDate>
     <generator>Jekyll v3.7.3</generator>
     
       <item>
@@ -644,9 +644,9 @@ them.&lt;/p&gt;
 [1] &lt;a href=&quot;https://lists.gnu.org/archive/html/bug-wget/2017-03/msg00156.html&quot;&gt;https://lists.gnu.org/archive/html/bug-wget/2017-03/msg00156.html&lt;/a&gt;&lt;br /&gt;
 [2] &lt;a href=&quot;https://stackoverflow.com/questions/1005676/urls-and-plus-signs&quot;&gt;https://stackoverflow.com/questions/1005676/urls-and-plus-signs&lt;/a&gt;&lt;/p&gt;
 </description>
-        <pubDate>Wed, 07 Mar 2018 20:21:00 +0000</pubDate>
-        <link>https://www.didiksetiawan.com/blog/2018/03/07/gsoc-with-gnu-wget2-part-i/</link>
-        <guid isPermaLink="true">https://www.didiksetiawan.com/blog/2018/03/07/gsoc-with-gnu-wget2-part-i/</guid>
+        <pubDate>Thu, 08 Mar 2018 03:21:00 +0700</pubDate>
+        <link>https://www.didiksetiawan.com/blog/2018/03/08/gsoc-with-gnu-wget2-part-i/</link>
+        <guid isPermaLink="true">https://www.didiksetiawan.com/blog/2018/03/08/gsoc-with-gnu-wget2-part-i/</guid>
         
         
         <category>open_source</category>
@@ -775,7 +775,7 @@ And the best of it all, I could learn a lot from the process.&lt;/p&gt;
 &lt;p&gt;References:&lt;br /&gt;
 [0] (http://lists.gnu.org/archive/html/bug-wget/2017-04/msg00052.html)&lt;/p&gt;
 </description>
-        <pubDate>Sat, 08 Apr 2017 06:43:38 +0000</pubDate>
+        <pubDate>Sat, 08 Apr 2017 13:43:38 +0700</pubDate>
         <link>https://www.didiksetiawan.com/blog/2017/04/08/workflow-on-contributing-to-open-source/</link>
         <guid isPermaLink="true">https://www.didiksetiawan.com/blog/2017/04/08/workflow-on-contributing-to-open-source/</guid>
         
@@ -889,7 +889,7 @@ project code base.&lt;/p&gt;
 hope this article will help provide an overview of what preparations need to be
 done so you can participate in GSoC. Good luck!&lt;/p&gt;
 </description>
-        <pubDate>Wed, 05 Apr 2017 05:23:38 +0000</pubDate>
+        <pubDate>Wed, 05 Apr 2017 12:23:38 +0700</pubDate>
         <link>https://www.didiksetiawan.com/blog/2017/04/05/google-summer-of-code-preparation/</link>
         <guid isPermaLink="true">https://www.didiksetiawan.com/blog/2017/04/05/google-summer-of-code-preparation/</guid>
         
@@ -927,7 +927,7 @@ It still have a problem, it just convert files on the same directory. So other
 files under this directory must be processed separately, which mean I must move
 to each directory.&lt;/p&gt;
 </description>
-        <pubDate>Fri, 02 Sep 2016 13:23:38 +0000</pubDate>
+        <pubDate>Fri, 02 Sep 2016 20:23:38 +0700</pubDate>
         <link>https://www.didiksetiawan.com/blog/2016/09/02/convert-text-to-pdf-on-linux/</link>
         <guid isPermaLink="true">https://www.didiksetiawan.com/blog/2016/09/02/convert-text-to-pdf-on-linux/</guid>
         
@@ -1101,7 +1101,7 @@ linux kernel and other open source projects. For daily programming use, you can
 change the value of tabstop, softtabstop and shiftwidth.&lt;br /&gt;
 Happy Vimming!&lt;/p&gt;
 </description>
-        <pubDate>Fri, 03 Jun 2016 08:08:57 +0000</pubDate>
+        <pubDate>Fri, 03 Jun 2016 15:08:57 +0700</pubDate>
         <link>https://www.didiksetiawan.com/blog/2016/06/03/my-vim-configuration/</link>
         <guid isPermaLink="true">https://www.didiksetiawan.com/blog/2016/06/03/my-vim-configuration/</guid>
         
@@ -1257,7 +1257,7 @@ For my personal preference, I have modified my vimrc which you can find
 &lt;a href=&quot;/blog/2016/06/03/my-vim-configuration&quot;&gt;here&lt;/a&gt;.
 Thanks for reading.&lt;/p&gt;
 </description>
-        <pubDate>Thu, 02 Jun 2016 13:23:38 +0000</pubDate>
+        <pubDate>Thu, 02 Jun 2016 20:23:38 +0700</pubDate>
         <link>https://www.didiksetiawan.com/blog/2016/06/02/vim-quick-reference/</link>
         <guid isPermaLink="true">https://www.didiksetiawan.com/blog/2016/06/02/vim-quick-reference/</guid>
         
@@ -1424,7 +1424,7 @@ $ &lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ..&lt;/code&gt;&lt;/pre&gt;&l
 &lt;p&gt;That’s all. Now, we can upload using rake deploy as usual.&lt;br /&gt;
 Until next time.&lt;/p&gt;
 </description>
-        <pubDate>Thu, 02 Jun 2016 08:06:57 +0000</pubDate>
+        <pubDate>Thu, 02 Jun 2016 15:06:57 +0700</pubDate>
         <link>https://www.didiksetiawan.com/blog/2016/06/02/octopress-setup-and-deployment/</link>
         <guid isPermaLink="true">https://www.didiksetiawan.com/blog/2016/06/02/octopress-setup-and-deployment/</guid>
         
@@ -1499,7 +1499,7 @@ Even with free service, I can use my own domain name.&lt;/p&gt;
 
 &lt;p&gt;That’s all about my blog. I hope it all will be useful. Thanks for reading.&lt;/p&gt;
 </description>
-        <pubDate>Wed, 01 Jun 2016 08:06:57 +0000</pubDate>
+        <pubDate>Wed, 01 Jun 2016 15:06:57 +0700</pubDate>
         <link>https://www.didiksetiawan.com/blog/2016/06/01/my-blog/</link>
         <guid isPermaLink="true">https://www.didiksetiawan.com/blog/2016/06/01/my-blog/</guid>
         
@@ -1621,7 +1621,7 @@ parm:           quirks:supplemental list of device IDs and their quirks &lt;span
 
 &lt;p&gt;Until next time.&lt;/p&gt;
 </description>
-        <pubDate>Tue, 03 May 2016 14:13:21 +0000</pubDate>
+        <pubDate>Tue, 03 May 2016 21:13:21 +0700</pubDate>
         <link>https://www.didiksetiawan.com/blog/2016/05/03/insert-usb-module-linux-kernel/</link>
         <guid isPermaLink="true">https://www.didiksetiawan.com/blog/2016/05/03/insert-usb-module-linux-kernel/</guid>
         
@@ -1724,7 +1724,7 @@ $ sudo update-grub2&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Finish. Our custom kernel has been uninstalled from our system.&lt;/p&gt;
 </description>
-        <pubDate>Tue, 02 Feb 2016 03:35:18 +0000</pubDate>
+        <pubDate>Tue, 02 Feb 2016 10:35:18 +0700</pubDate>
         <link>https://www.didiksetiawan.com/blog/2016/02/02/build-custom-linux-kernel/</link>
         <guid isPermaLink="true">https://www.didiksetiawan.com/blog/2016/02/02/build-custom-linux-kernel/</guid>
         
@@ -1803,7 +1803,7 @@ This is an example of email notification from cacti.&lt;/p&gt;
 &lt;p&gt;Reference:&lt;br /&gt;
 &lt;a href=&quot;http://docs.cacti.net/plugin:thold&quot;&gt;http://docs.cacti.net/plugin:thold&lt;/a&gt;&lt;/p&gt;
 </description>
-        <pubDate>Fri, 18 Sep 2015 03:54:34 +0000</pubDate>
+        <pubDate>Fri, 18 Sep 2015 10:54:34 +0700</pubDate>
         <link>https://www.didiksetiawan.com/blog/2015/09/18/cacti-monitoring-via-email-notification/</link>
         <guid isPermaLink="true">https://www.didiksetiawan.com/blog/2015/09/18/cacti-monitoring-via-email-notification/</guid>
         
@@ -1863,7 +1863,7 @@ Happy cactying.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://everythingshouldbevirtual.com/cacti-monitoring-for-windows-servers&quot;&gt;http://everythingshouldbevirtual.com/cacti-monitoring-for-windows-servers&lt;/a&gt;&lt;/p&gt;
 </description>
-        <pubDate>Fri, 18 Sep 2015 03:54:34 +0000</pubDate>
+        <pubDate>Fri, 18 Sep 2015 10:54:34 +0700</pubDate>
         <link>https://www.didiksetiawan.com/blog/2015/09/18/cacti-for-monitoring-windows-host/</link>
         <guid isPermaLink="true">https://www.didiksetiawan.com/blog/2015/09/18/cacti-for-monitoring-windows-host/</guid>
         
@@ -2005,7 +2005,7 @@ Edit the IP Server above to your needs.&lt;/p&gt;
 
 &lt;p&gt;As well as the script to shutdown the Windows host, it is recommended to test the script with manually typing on the command prompt, to avoid notification from psshutdown application stop the shutdown process.&lt;/p&gt;
 </description>
-        <pubDate>Wed, 18 Mar 2015 14:04:31 +0000</pubDate>
+        <pubDate>Wed, 18 Mar 2015 21:04:31 +0700</pubDate>
         <link>https://www.didiksetiawan.com/blog/2015/03/18/setup-autoshutdown-ups-on-windows/</link>
         <guid isPermaLink="true">https://www.didiksetiawan.com/blog/2015/03/18/setup-autoshutdown-ups-on-windows/</guid>
         
@@ -2044,7 +2044,7 @@ $ cat id_dsa.pub &amp;gt;&amp;gt; .ssh/authorized_keys&lt;/code&gt;&lt;/pre&gt;&
 &lt;p&gt;That’s all. Now you can login to client computer without worrying to be asked 
 for a password. It is useful for deploying automatic scripts or programs.&lt;/p&gt;
 </description>
-        <pubDate>Thu, 26 Feb 2015 13:23:38 +0000</pubDate>
+        <pubDate>Thu, 26 Feb 2015 20:23:38 +0700</pubDate>
         <link>https://www.didiksetiawan.com/blog/2015/02/26/linux-passwordless-login/</link>
         <guid isPermaLink="true">https://www.didiksetiawan.com/blog/2015/02/26/linux-passwordless-login/</guid>
         
@@ -2266,7 +2266,7 @@ Device     Boot     Start       End   Sectors   Size Id Type
 Partition table entries are not in disk order.&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 </description>
-        <pubDate>Thu, 04 Dec 2014 08:30:42 +0000</pubDate>
+        <pubDate>Thu, 04 Dec 2014 15:30:42 +0700</pubDate>
         <link>https://www.didiksetiawan.com/blog/2014/12/04/check-hardware-specification-in-ubuntu/</link>
         <guid isPermaLink="true">https://www.didiksetiawan.com/blog/2014/12/04/check-hardware-specification-in-ubuntu/</guid>
         
@@ -2538,7 +2538,7 @@ reboot. Edit file /etc/rc.d/rc.local.&lt;/p&gt;
 squid &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 </description>
-        <pubDate>Thu, 01 Sep 2011 11:16:38 +0000</pubDate>
+        <pubDate>Thu, 01 Sep 2011 18:16:38 +0700</pubDate>
         <link>https://www.didiksetiawan.com/blog/2011/09/01/install-squid-web-proxy-on-slackware/</link>
         <guid isPermaLink="true">https://www.didiksetiawan.com/blog/2011/09/01/install-squid-web-proxy-on-slackware/</guid>
         
@@ -2669,7 +2669,7 @@ without open new connection to remote host.&lt;/p&gt;
 
 &lt;p&gt;Thanks for reading.&lt;/p&gt;
 </description>
-        <pubDate>Wed, 17 Nov 2010 03:33:38 +0000</pubDate>
+        <pubDate>Wed, 17 Nov 2010 10:33:38 +0700</pubDate>
         <link>https://www.didiksetiawan.com/blog/2010/11/17/linux-router-configuration-as-pppoe-client/</link>
         <guid isPermaLink="true">https://www.didiksetiawan.com/blog/2010/11/17/linux-router-configuration-as-pppoe-client/</guid>
         
@@ -2694,7 +2694,7 @@ redirection pipe and point commands to file directly.&lt;/p&gt;
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span&gt;&lt;/span&gt;$ sudo wall -n message.txt&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 </description>
-        <pubDate>Sat, 05 Dec 2009 13:23:38 +0000</pubDate>
+        <pubDate>Sat, 05 Dec 2009 20:23:38 +0700</pubDate>
         <link>https://www.didiksetiawan.com/blog/2009/12/05/linux-broadcast-message/</link>
         <guid isPermaLink="true">https://www.didiksetiawan.com/blog/2009/12/05/linux-broadcast-message/</guid>
         
@@ -2772,7 +2772,7 @@ Filesystem    Type    Size  Used Avail Use% Mounted on
 tmpfs        tmpfs    249M     &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;  249M   &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;% /dev/shm&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 </description>
-        <pubDate>Sat, 05 Dec 2009 11:23:38 +0000</pubDate>
+        <pubDate>Sat, 05 Dec 2009 18:23:38 +0700</pubDate>
         <link>https://www.didiksetiawan.com/blog/2009/12/05/how-to-check-filesystem-on-linux/</link>
         <guid isPermaLink="true">https://www.didiksetiawan.com/blog/2009/12/05/how-to-check-filesystem-on-linux/</guid>
         
@@ -2858,7 +2858,7 @@ order qemu can boot from CD drive first.&lt;/p&gt;
 guest operating system iso file. Then we can continue the installation process 
 like as we do installation on real computer.&lt;/p&gt;
 </description>
-        <pubDate>Thu, 12 Feb 2009 13:37:38 +0000</pubDate>
+        <pubDate>Thu, 12 Feb 2009 20:37:38 +0700</pubDate>
         <link>https://www.didiksetiawan.com/blog/2009/02/12/qemu-quick-reference/</link>
         <guid isPermaLink="true">https://www.didiksetiawan.com/blog/2009/02/12/qemu-quick-reference/</guid>
         
@@ -3108,7 +3108,7 @@ max-lease-time &lt;span class=&quot;m&quot;&gt;86400&lt;/span&gt;&lt;span class=
 
 &lt;p&gt;So those are my explanations about DHCP Server on FreeBSD.&lt;/p&gt;
 </description>
-        <pubDate>Thu, 05 Feb 2009 13:23:38 +0000</pubDate>
+        <pubDate>Thu, 05 Feb 2009 20:23:38 +0700</pubDate>
         <link>https://www.didiksetiawan.com/blog/2009/02/05/built-pc-router-using-freebsd/</link>
         <guid isPermaLink="true">https://www.didiksetiawan.com/blog/2009/02/05/built-pc-router-using-freebsd/</guid>
         
@@ -3124,7 +3124,7 @@ max-lease-time &lt;span class=&quot;m&quot;&gt;86400&lt;/span&gt;&lt;span class=
         <title>Cool project 1</title>
         <description>Cool project 1</description>
         <link>https://www.didiksetiawan.com#</link>
-        <pubDate>Wed, 01 Jan 2014 00:00:00 +0000</pubDate>
+        <pubDate>Wed, 01 Jan 2014 00:00:00 +0700</pubDate>
         
         <category>Angular JS</category>
         
@@ -3136,7 +3136,7 @@ max-lease-time &lt;span class=&quot;m&quot;&gt;86400&lt;/span&gt;&lt;span class=
         <title>Cool project 2</title>
         <description>Cool project 2</description>
         <link>https://www.didiksetiawan.com#</link>
-        <pubDate>Thu, 01 May 2014 00:00:00 +0000</pubDate>
+        <pubDate>Thu, 01 May 2014 00:00:00 +0700</pubDate>
         
         <category>Android</category>
         
@@ -3148,7 +3148,7 @@ max-lease-time &lt;span class=&quot;m&quot;&gt;86400&lt;/span&gt;&lt;span class=
         <title>Cool project 3</title>
         <description>Cool project 3</description>
         <link>https://www.didiksetiawan.com#</link>
-        <pubDate>Sun, 01 Jun 2014 00:00:00 +0000</pubDate>
+        <pubDate>Sun, 01 Jun 2014 00:00:00 +0700</pubDate>
         
         <category>HTML</category>
         
@@ -3162,7 +3162,7 @@ max-lease-time &lt;span class=&quot;m&quot;&gt;86400&lt;/span&gt;&lt;span class=
         <title>Cool project 4</title>
         <description>Cool project 4</description>
         <link>https://www.didiksetiawan.com</link>
-        <pubDate>Sat, 01 Oct 2016 00:00:00 +0000</pubDate>
+        <pubDate>Sat, 01 Oct 2016 00:00:00 +0700</pubDate>
         
         <category>Android</category>
         
