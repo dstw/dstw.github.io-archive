@@ -5,8 +5,8 @@
     <description>Didik Setiawan's Blog</description>
     <link>https://www.didiksetiawan.com/</link>
     <atom:link href="https://www.didiksetiawan.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 09 Mar 2018 03:00:35 +0700</pubDate>
-    <lastBuildDate>Fri, 09 Mar 2018 03:00:35 +0700</lastBuildDate>
+    <pubDate>Fri, 09 Mar 2018 03:35:13 +0700</pubDate>
+    <lastBuildDate>Fri, 09 Mar 2018 03:35:13 +0700</lastBuildDate>
     <generator>Jekyll v3.7.3</generator>
     
       <item>
@@ -1475,7 +1475,7 @@ use. I can create post directly from Vim on my Linux console.
 It can be updated using git, so I can feel the sysadmin way to write a post. 
 It use a simplify html-like syntax, markdown. 
 I can host my blog together with my application repository in 
-&lt;a href=&quot;www.github.com&quot;&gt;Github&lt;/a&gt;. You can check this
+&lt;a href=&quot;https://www.github.com&quot;&gt;Github&lt;/a&gt;. You can check this
 &lt;a href=&quot;/blog/2016/06/02/octopress-setup-and-deployment/&quot;&gt;article&lt;/a&gt; 
 for more details. 
 With this Octopress take control my way to blog,
@@ -1556,12 +1556,12 @@ didik@thinkpad:~/linux-4.6.2&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;make
 &lt;p&gt;From this menu, I will include the module that I need for usb-storage. Press /
 to search module name. It is called USB_STORAGE.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/usb-module0.png&quot; alt=&quot;usb-module0.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/static/img/usb-module0.png&quot; alt=&quot;usb-module0.png&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;After I found its location, I insert it with “M” become my choice between the
 tri-state mode.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/usb-module1.png&quot; alt=&quot;usb-module1.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/static/img/usb-module1.png&quot; alt=&quot;usb-module1.png&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;I exit and save this configuration.&lt;br /&gt;
 Then I make it.&lt;/p&gt;

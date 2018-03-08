@@ -5,8 +5,8 @@
     <description>Didik Setiawan's Blog</description>
     <link>https://www.didiksetiawan.com/</link>
     <atom:link href="https://www.didiksetiawan.com/sitemap.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 09 Mar 2018 03:00:35 +0700</pubDate>
-    <lastBuildDate>Fri, 09 Mar 2018 03:00:35 +0700</lastBuildDate>
+    <pubDate>Fri, 09 Mar 2018 03:35:13 +0700</pubDate>
+    <lastBuildDate>Fri, 09 Mar 2018 03:35:13 +0700</lastBuildDate>
     <generator>Jekyll v3.7.3</generator>
     
       <item>
@@ -1475,7 +1475,7 @@ use. I can create post directly from Vim on my Linux console.
 It can be updated using git, so I can feel the sysadmin way to write a post. 
 It use a simplify html-like syntax, markdown. 
 I can host my blog together with my application repository in 
-&lt;a href=&quot;www.github.com&quot;&gt;Github&lt;/a&gt;. You can check this
+&lt;a href=&quot;https://www.github.com&quot;&gt;Github&lt;/a&gt;. You can check this
 &lt;a href=&quot;/blog/2016/06/02/octopress-setup-and-deployment/&quot;&gt;article&lt;/a&gt; 
 for more details. 
 With this Octopress take control my way to blog,
@@ -1556,12 +1556,12 @@ didik@thinkpad:~/linux-4.6.2&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;make
 &lt;p&gt;From this menu, I will include the module that I need for usb-storage. Press /
 to search module name. It is called USB_STORAGE.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/usb-module0.png&quot; alt=&quot;usb-module0.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/static/img/usb-module0.png&quot; alt=&quot;usb-module0.png&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;After I found its location, I insert it with “M” become my choice between the
 tri-state mode.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/usb-module1.png&quot; alt=&quot;usb-module1.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/static/img/usb-module1.png&quot; alt=&quot;usb-module1.png&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;I exit and save this configuration.&lt;br /&gt;
 Then I make it.&lt;/p&gt;
@@ -1765,23 +1765,23 @@ Then, delete all files &amp;amp; folders which contain $CUSTOM_KERNEL_VERSION na
 
 &lt;p&gt;Then we configure cacti via web interface.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/cactiemail1.png&quot; alt=&quot;cactiemail1&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/static/img/cactiemail1.png&quot; alt=&quot;cactiemail1&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Install and activate plugin Setting and Thold. After success, we need to configure thos plugins. Set configuration for email. We will use gmail account for mail service configuration. Configure following parameters:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/cactiemail2.png&quot; alt=&quot;cactiemail2&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/static/img/cactiemail2.png&quot; alt=&quot;cactiemail2&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;We can test to send email to confirm email sending process running well.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/cactiemail3.png&quot; alt=&quot;cactiemail3&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/static/img/cactiemail3.png&quot; alt=&quot;cactiemail3&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;After test passed, we can save the configuration. In the notification lists menu, add our email address for thold plugin which need to be sent if some notification raised by system.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/cactiemail4.png&quot; alt=&quot;cactiemail4&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/static/img/cactiemail4.png&quot; alt=&quot;cactiemail4&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Choose graph which need to monitor the threshold. In this example, I will monitor a Windows host, so I can use harddrive free space percentage to trigger the thold.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/cactiemail5.png&quot; alt=&quot;cactiemail5&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/static/img/cactiemail5.png&quot; alt=&quot;cactiemail5&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Configure the following parameter:&lt;/p&gt;
 
@@ -1794,13 +1794,13 @@ Then, delete all files &amp;amp; folders which contain $CUSTOM_KERNEL_VERSION na
   &lt;li&gt;Alert Notification List: List of email address notification for alert&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/cactiemail6.png&quot; alt=&quot;cactiemail6&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/static/img/cactiemail6.png&quot; alt=&quot;cactiemail6&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Thold has been done configured. We just need to monitor the result. Cacti will send notification contain email and graph concerned about monitored device. In the example above, cacti will check harddrive capacity of server within a day.
 If something has found that harddrive capacity meet the condition of below 25%, then cacti will send email notification warning. And if harddrive capacity below 10% then cacti will send email notification alert.&lt;br /&gt;
 This is an example of email notification from cacti.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/cactiemail7.png&quot; alt=&quot;cactiemail7&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/static/img/cactiemail7.png&quot; alt=&quot;cactiemail7&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Reference:&lt;br /&gt;
 &lt;a href=&quot;http://docs.cacti.net/plugin:thold&quot;&gt;http://docs.cacti.net/plugin:thold&lt;/a&gt;&lt;/p&gt;
@@ -1832,17 +1832,17 @@ This is an example of email notification from cacti.&lt;/p&gt;
 
 &lt;p&gt;Log in to cacti web interface and point to Import Templates&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/cactiwinhost1.png&quot; alt=&quot;cactiwinhost1&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/static/img/cactiwinhost1.png&quot; alt=&quot;cactiwinhost1&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Browse template folder that have been downloaded and search for cacti_host_template_windows_host_-_snmp_informant.xml file then click import. This template is ready to use.&lt;/p&gt;
 
 &lt;p&gt;Next, I need to activate SNMP service in Windows host as well as others add-on for SNMP. Login to Control Panel &amp;gt; Programs and Features &amp;gt; Windows Features. Check in Simple Network Management Protocol (SNMP).&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/cactiwinhost2.png&quot; alt=&quot;cactiwinhost2&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/static/img/cactiwinhost2.png&quot; alt=&quot;cactiwinhost2&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;After SNMP feature success, configure SNMP service. Log in to menu Service.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/cactiwinhost3.png&quot; alt=&quot;cactiwinhost3&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/static/img/cactiwinhost3.png&quot; alt=&quot;cactiwinhost3&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Change configuration for service “SNMP Service”. Add appropriate parameter community, and allow SNMP so it can be accessed from anywhere host.
 Additionally, we can add contact address in tab Agent (optional).
@@ -1850,7 +1850,7 @@ After SNMP installed and configured, install 3rd party software that is SNMP inf
 
 &lt;p&gt;How to add device in cacti&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/cactiwinhost4.png&quot; alt=&quot;cactiwinhost4&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/static/img/cactiwinhost4.png&quot; alt=&quot;cactiwinhost4&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;After the device creation success, next step is create graph for this device.
 It can be done automatically with click “*Create Graph for this Host”.
@@ -1859,7 +1859,7 @@ Add to tree in order to it can be accessed from Tree View mode.
 Finish, we can access graph that we created in tab graphs.
 Happy cactying.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/cactiwinhost5.png&quot; alt=&quot;cactiwinhost5&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/static/img/cactiwinhost5.png&quot; alt=&quot;cactiwinhost5&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Reference:&lt;/p&gt;
 
@@ -1900,17 +1900,17 @@ After installed, open control panel from that UPS software on browser with this 
 
 &lt;p&gt;Login as admin, the default password for Prolink PRO 1200 SFCU is “administrator”&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/ups1.png&quot; alt=&quot;ups1&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/static/img/ups1.png&quot; alt=&quot;ups1&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/ups2.png&quot; alt=&quot;ups2&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/static/img/ups2.png&quot; alt=&quot;ups2&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Change this default password immediately on configuration menu ViewPower &amp;gt; Change Password&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/ups3.png&quot; alt=&quot;ups3&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/static/img/ups3.png&quot; alt=&quot;ups3&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Check in to UPS Settings &amp;gt; Local Shutdown&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/ups4.png&quot; alt=&quot;ups4&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/static/img/ups4.png&quot; alt=&quot;ups4&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Set the check box up on menu “When the UPS is running from the battery” and fill the section “Shut down the local system after” with value 6 (in minutes).&lt;br /&gt;
 In the section “Time to wait before shutting down the local system” fill with value 5 (in minutes).&lt;br /&gt;
@@ -1918,7 +1918,7 @@ In the section “Maximum file execution time”, fill with value 1 (in minutes)
 In the section “File to execute when shutting down” fill with value of path to shutdown script. &lt;br /&gt;
 In the following example, I created script on C:\rshutdown.bat.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/ups5.png&quot; alt=&quot;ups5&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/static/img/ups5.png&quot; alt=&quot;ups5&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Then make a new file with notepad, give it name rshutdown.bat, save on disk C. The contents:&lt;/p&gt;
 
@@ -1933,12 +1933,12 @@ Install UPS Eaton AVR software that delivered with the CD. The installation proc
 After installation successful, set the UPS to run the shutdown process if a failure power source has occured.
 Click icon on Windows system tray, check in to menu Settings.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/ups6.png&quot; alt=&quot;ups6&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/static/img/ups6.png&quot; alt=&quot;ups6&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Fill with command line parameter where we save the batch file for shutdown. 
 In the following example, I use file on “C:\User\edp11\Desktop\putty\shutdown.bat”&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/ups7.png&quot; alt=&quot;ups7&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/static/img/ups7.png&quot; alt=&quot;ups7&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;The script contents is same as previous script we write:&lt;/p&gt;
 
@@ -1980,17 +1980,17 @@ Because, on the first time, we will asked for confirmation about end user licens
 
 &lt;p&gt;Confirm that we can automatic login to Linux. To do this, we need to generate public and private key for Windows host where the autoshutdown trigger is run.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/ups8.png&quot; alt=&quot;ups8&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/static/img/ups8.png&quot; alt=&quot;ups8&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Click button Generate. While wait the key making process, we could moving the mouse in order to accelerate the process.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/ups9.png&quot; alt=&quot;ups9&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/static/img/ups9.png&quot; alt=&quot;ups9&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;After generating process, save the public and private key.
 Save with easy name to find, for example for the public key we could named it key-server.pub and for the private key key-server.ppl.
 If the following notification appear, then click Yes, just ignore it, because weneed automatic login without passpharase which same as password.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/ups10.png&quot; alt=&quot;ups10&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/static/img/ups10.png&quot; alt=&quot;ups10&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;For the next step, we need add public key that we have been created into host which want we access without password.
 Login in to that host with putty and user root. Then type this commands.&lt;/p&gt;
