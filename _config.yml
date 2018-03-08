@@ -1,4 +1,5 @@
 url: "https://www.didiksetiawan.com"
+baseurl: ""
 title: Didik Setiawan | Blog
 about: cat ~/.life_history | grep fun
 description: Didik Setiawan's Blog
@@ -7,9 +8,6 @@ logo: /static/img/avatar.png
 category_dir: category
 permalink: /blog/:year/:month/:day/:title/
 highlighter: pygments
-
-baseurl: ""
-
 allowsearch: true
 
 disqus_shortname: didiksetiawan
@@ -22,6 +20,7 @@ share:
 #enableTags: true
 #tagarray: []
 
+exclude: ["scripts/", "Gemfile", "Gemfile.lock"]
 paginate: 5
 per_page: 5
 paginate_path: "/page:num/"
