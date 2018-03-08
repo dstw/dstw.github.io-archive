@@ -98,7 +98,8 @@ respective repository, except MingW64 (the representation of Windows build).
 Especially for MingW64 build, because I haven't found the correct package for
 Libmicrohttpd, I include Libmicrohttpd by download the source and compile
 manually. What I've done is add the following lines on .gitlab-ci.yml:
-```
+
+``` shell
 before_script:
 - dnf -y install wget
 - wget http://ftp.gnu.org/gnu/libmicrohttpd/libmicrohttpd-0.9.55.tar.gz
@@ -108,6 +109,7 @@ before_script:
 - mingw64-make -j$(nproc) LOG_COMPILER=wine install
 - cd -
 ```
+
 I asking if my step was right. Tim give me advice on that MingW64 issue, that I
 should provide a script (e.g. in contrib/ folder) that will
 downloads/builds/installs Libmicrohttpd. That script then added to the CI runner
@@ -181,7 +183,7 @@ Some issues I found in this period:
      support `getsockname()`.  
      I can combine second and third methods.
 
-```
+``` c
   int port_num;
 
   if(0) {}
@@ -408,7 +410,7 @@ Libmicrohttpd fault, as except for responses there are no Libmicrohttpd buffers
 my code would have to free.  
 Evgeny gives a review about my works, direct pointed to the code.
 
-```
+``` c
 static char *_scan_directory(const char* data)
 {
       char *path = strchr(data, '/');
@@ -427,7 +429,7 @@ where there is more than one C file. They use it to make clear that a
 function/variable is static (not consequently everywhere, though). So, I
 still keep the underscore.
 
-```
+``` c
 static char *_parse_hostname(const char* data)
 {
       if (!wget_strncasecmp_ascii(data, "http://", 7)) {
@@ -464,7 +466,7 @@ He asks me about the reason for using `strdup()`/`free()`. I checked string
 twice (by `strchr()` and by my custom iterations). It just waste of CPU time.
 He gives simpler implementation:
 
-```
+``` c
 {
   while(0 != *data)
   {
@@ -487,7 +489,7 @@ the '+' rule, but what consortium is not accepted as normative by everyone,
 while IETF is. He is unsure about what 'spec' to follow. So, I keep my changes
 of '+'.
 
-```
+``` c
 static int print_out_key(void *cls, enum MHD_ValueKind kind, const char *key,
                                               const char *value)
 {
@@ -501,7 +503,7 @@ const. By dropping 'const' qualifiers are violating API. In other words: I was
 modifying internal structures that are not expected to be modified and the
 result is unpredictable. I fixed them then.
 
-```
+``` c
               wget_buffer_strcat(url_arg, key);
               if (value) {
                       wget_buffer_strcat(url_arg, "=");
@@ -534,7 +536,7 @@ He also gives me some questions:
 If I need to pass all of them, I was advised to define some structure with three
 pointers and pass pointer to structure.
 
-```
+``` c
 static int answer_to_connection (void *cls,
                                       struct MHD_Connection *connection,
                                       const char *url,
