@@ -10,7 +10,7 @@
         <title>Workflow on Contributing to Open Source Project - Didik Setiawan</title>
         <meta name="author" content="Didik Setiawan" />
         <meta name="description" content="Workflow on Contributing to Open Source Project" />
-        <meta name="keywords" content="Workflow on Contributing to Open Source Project, Didik Setiawan, open_source, programming" />
+        <meta name="keywords" content="Workflow on Contributing to Open Source Project, Didik Setiawan, open_source, collaboration, programming" />
 
         <meta content="0" property="fb:app_id">
         <meta content="Didik Setiawan" property="og:site_name">
@@ -136,6 +136,9 @@
                     <a href="/category/open_source">open_source</a>
                     , 
                   
+                    <a href="/category/collaboration">collaboration</a>
+                    , 
+                  
                     <a href="/category/programming">programming</a>
                     
                   
@@ -217,7 +220,7 @@ follow:</p>
 
 <p>Fork project so you can modify yourself via Gitlab interface.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://gitlab.com/dstw/wget2
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://gitlab.com/dstw/wget2
 git remote add upstream https://dstw@gitlab.com/gnuwget/wget2.git
 </code></pre></div></div>
 
@@ -231,16 +234,16 @@ changes from the ‘original/upstream’ master branch on Savannah.</p>
 
 <p>Sync your Gitlab repo with upstream:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout master
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout master
 git fetch upstream
 git merge upstream/master
 </code></pre></div></div>
 
 <p>Sync your ‘new-feature’ branch before generating patches:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout new-feature
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout new-feature
 git rebase master
-git push -f  # pushing updated tree to your Gitlab new-feature branch)
+git push <span class="nt">-f</span>  <span class="c"># pushing updated tree to your Gitlab new-feature branch)</span>
 </code></pre></div></div>
 
 <p>Assume ‘new-feature’ is a private branch where you can do all the dirty things
@@ -283,14 +286,14 @@ experienced peers!</p>
 there is option to overwrite my existing commits or create new merge commits to
 keep history.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push origin new-feature
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push origin new-feature
 </code></pre></div></div>
 
 <p>If there is a conflict, Git will ask me to resolve the problem this. Then, try
 to push and merge commits. This won’t remove any existing commits. And if I
 don’t want to keep any commits history, I usually force to push:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push -f origin new-feature
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push <span class="nt">-f</span> origin new-feature
 </code></pre></div></div>
 
 <p><del>This is considered a little bit harmful. Before I do this, I will make sure
@@ -353,10 +356,6 @@ And the best of it all, I could learn a lot from the process.</p>
         
             
         
-    
-        
-            
-        
             
         
     
@@ -365,7 +364,19 @@ And the best of it all, I could learn a lot from the process.</p>
         
             
         
+            
+        
     
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
         
             
         
@@ -380,7 +391,19 @@ And the best of it all, I could learn a lot from the process.</p>
         
             
         
+            
+        
     
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
         
             
         
@@ -405,28 +428,11 @@ And the best of it all, I could learn a lot from the process.</p>
         
             
         
-    
-        
-            
-        
             
         
     
         
             
-        
-            
-        
-    
-        
-            
-        
-            
-        
-    
-
-    
-    
         
             
         
@@ -438,7 +444,11 @@ And the best of it all, I could learn a lot from the process.</p>
         
             
         
+            
+        
     
+        
+            
         
             
         
@@ -453,22 +463,19 @@ And the best of it all, I could learn a lot from the process.</p>
         
             
         
+            
+        
     
         
             
         
             
         
-    
-
-    
-    
-        
-            
-        
             
         
     
+        
+            
         
             
         
@@ -483,28 +490,11 @@ And the best of it all, I could learn a lot from the process.</p>
         
             
         
-    
-        
-            
-        
-            
-        
-    
-
-    
-    
-        
-            
-        
             
         
     
         
             
-        
-            
-        
-    
         
             
         
@@ -519,22 +509,11 @@ And the best of it all, I could learn a lot from the process.</p>
         
             
         
-    
-        
-            
-        
             
         
     
-
-    
-    
         
             
-        
-            
-        
-    
         
             
         
@@ -549,13 +528,11 @@ And the best of it all, I could learn a lot from the process.</p>
         
             
         
-    
-        
-            
-        
             
         
     
+        
+            
         
             
         
@@ -570,10 +547,6 @@ And the best of it all, I could learn a lot from the process.</p>
         
             
         
-    
-        
-            
-        
             
         
     
@@ -582,40 +555,11 @@ And the best of it all, I could learn a lot from the process.</p>
         
             
         
-    
-        
-            
-        
-            
-        
-    
-
-    
-    
-        
-            
-        
             
         
     
         
             
-        
-            
-        
-    
-        
-            
-        
-            
-        
-    
-        
-            
-        
-            
-        
-    
         
             
         
@@ -630,22 +574,11 @@ And the best of it all, I could learn a lot from the process.</p>
         
             
         
-    
-        
-            
-        
             
         
     
-
-    
-    
         
             
-        
-            
-        
-    
         
             
         
@@ -660,28 +593,11 @@ And the best of it all, I could learn a lot from the process.</p>
         
             
         
-    
-        
-            
-        
             
         
     
         
             
-        
-            
-        
-    
-
-    
-    
-        
-            
-        
-            
-        
-    
         
             
         
@@ -696,25 +612,19 @@ And the best of it all, I could learn a lot from the process.</p>
         
             
         
+            
+        
     
         
             
         
             
         
-    
-
-    
-    
-        
-            
-        
             
         
     
-
-    
-    
+        
+            
         
             
         
@@ -729,7 +639,214 @@ And the best of it all, I could learn a lot from the process.</p>
         
             
         
+            
+        
     
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
         
             
         

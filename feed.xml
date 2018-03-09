@@ -5,8 +5,8 @@
     <description>Didik Setiawan's Blog</description>
     <link>https://www.didiksetiawan.com/</link>
     <atom:link href="https://www.didiksetiawan.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 09 Mar 2018 03:48:42 +0700</pubDate>
-    <lastBuildDate>Fri, 09 Mar 2018 03:48:42 +0700</lastBuildDate>
+    <pubDate>Fri, 09 Mar 2018 10:05:43 +0700</pubDate>
+    <lastBuildDate>Fri, 09 Mar 2018 10:05:43 +0700</lastBuildDate>
     <generator>Jekyll v3.7.3</generator>
     
       <item>
@@ -687,7 +687,7 @@ follow:&lt;/p&gt;
 
 &lt;p&gt;Fork project so you can modify yourself via Gitlab interface.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git clone https://gitlab.com/dstw/wget2
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git clone https://gitlab.com/dstw/wget2
 git remote add upstream https://dstw@gitlab.com/gnuwget/wget2.git
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -701,16 +701,16 @@ changes from the ‘original/upstream’ master branch on Savannah.&lt;/p&gt;
 
 &lt;p&gt;Sync your Gitlab repo with upstream:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git checkout master
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git checkout master
 git fetch upstream
 git merge upstream/master
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Sync your ‘new-feature’ branch before generating patches:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git checkout new-feature
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git checkout new-feature
 git rebase master
-git push -f  # pushing updated tree to your Gitlab new-feature branch)
+git push &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt;  &lt;span class=&quot;c&quot;&gt;# pushing updated tree to your Gitlab new-feature branch)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Assume ‘new-feature’ is a private branch where you can do all the dirty things
@@ -753,14 +753,14 @@ experienced peers!&lt;/p&gt;
 there is option to overwrite my existing commits or create new merge commits to
 keep history.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git push origin new-feature
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git push origin new-feature
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;If there is a conflict, Git will ask me to resolve the problem this. Then, try
 to push and merge commits. This won’t remove any existing commits. And if I
 don’t want to keep any commits history, I usually force to push:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git push -f origin new-feature
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git push &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; origin new-feature
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;del&gt;This is considered a little bit harmful. Before I do this, I will make sure
@@ -783,6 +783,8 @@ And the best of it all, I could learn a lot from the process.&lt;/p&gt;
         
         
         <category>open_source</category>
+        
+        <category>collaboration</category>
         
         <category>programming</category>
         
