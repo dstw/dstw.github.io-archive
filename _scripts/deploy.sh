@@ -8,6 +8,8 @@ if [[ $TRAVIS_BRANCH == 'source' ]] ; then
   git clone https://${GH_TOKEN}@github.com/dstw/dstw.github.io.git ../dstw.github.io.master
   cd ../dstw.github.io.master
   git checkout master
+  rm -rf *
+  rm .travis.yml
 
   # Copy generated HTML site from source branch in original repository.
   # Now the `master` branch will contain only the contents of the _site directory.
