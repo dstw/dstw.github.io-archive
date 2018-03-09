@@ -7,15 +7,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="shortcut icon" href="/static/img/favicon.ico" />
-        <title>Octopress Setup and Deployment - Didik Setiawan</title>
+        <title>My Blog - Didik Setiawan</title>
         <meta name="author" content="Didik Setiawan" />
-        <meta name="description" content="Octopress Setup and Deployment" />
-        <meta name="keywords" content="Octopress Setup and Deployment, Didik Setiawan, web, blog" />
+        <meta name="description" content="My Blog" />
+        <meta name="keywords" content="My Blog, Didik Setiawan, web, blog, email" />
 
         <meta content="0" property="fb:app_id">
         <meta content="Didik Setiawan" property="og:site_name">
         
-          <meta content="Octopress Setup and Deployment" property="og:title">
+          <meta content="My Blog" property="og:title">
         
         
           <meta content="article" property="og:type">
@@ -24,7 +24,7 @@
           <meta content="Didik Setiawan's Blog" property="og:description">
         
         
-          <meta content="https://www.didiksetiawan.com/blog/2016/06/02/octopress-setup-and-deployment/" property="og:url">
+          <meta content="https://www.didiksetiawan.com/blog/2016/06/02/my-blog/" property="og:url">
         
         
           <meta content="2016-06-02T15:06:57+07:00" property="article:published_time">
@@ -45,10 +45,10 @@
         <meta name="twitter:site" content="@didik_swn">
         <meta name="twitter:creator" content="@didik_swn">
         
-          <meta name="twitter:title" content="Octopress Setup and Deployment">
+          <meta name="twitter:title" content="My Blog">
         
         
-          <meta name="twitter:url" content="https://www.didiksetiawan.com/blog/2016/06/02/octopress-setup-and-deployment/">
+          <meta name="twitter:url" content="https://www.didiksetiawan.com/blog/2016/06/02/my-blog/">
         
         
           <meta name="twitter:description" content="Didik Setiawan's Blog">
@@ -117,7 +117,7 @@
           </div>
           <div class="col-md-9 col-sm-8 col-xs-12">
           <div class="row">
-            <h2 class="blog-title-pro col-md-6 col-sm-12 col-xs-12 ">Octopress Setup and Deployment</h2>
+            <h2 class="blog-title-pro col-md-6 col-sm-12 col-xs-12 ">My Blog</h2>
             
             <div class="col-md-6 col-sm-12 col-xs-12 searchcontrol" id="js-search">
               <input class="form-control" type="text" id="js-search__input" placeholder="Search">
@@ -137,6 +137,9 @@
                     , 
                   
                     <a href="/category/blog">blog</a>
+                    , 
+                  
+                    <a href="/category/email">email</a>
                     
                   
                 </span>
@@ -162,7 +165,7 @@
 	
     
 	
-	<li class="col-lg-12 col-md-12 col-sm-4 col-xs-12 current-menu-item octopress-setup-and-deployment"><a href="/" target="_self"><i class="fa fa-home"></i> Blog</a></li>
+	<li class="col-lg-12 col-md-12 col-sm-4 col-xs-12 current-menu-item my-blog"><a href="/" target="_self"><i class="fa fa-home"></i> Blog</a></li>
 
 	
 	
@@ -172,7 +175,7 @@
 	
     
 	
-	<li class="col-lg-12 col-md-12 col-sm-4 col-xs-12  octopress-setup-and-deployment"><a href="/about/" target="_self"><i class="fa fa-comments"></i> About</a></li>
+	<li class="col-lg-12 col-md-12 col-sm-4 col-xs-12  my-blog"><a href="/about/" target="_self"><i class="fa fa-comments"></i> About</a></li>
 
 	
 	
@@ -182,7 +185,7 @@
 	
     
 	
-	<li class="col-lg-12 col-md-12 col-sm-4 col-xs-12  octopress-setup-and-deployment"><a href="mailto:ds@didiksetiawan.com" target="_self"><i class="fa fa-envelope"></i> Email</a></li>
+	<li class="col-lg-12 col-md-12 col-sm-4 col-xs-12  my-blog"><a href="mailto:ds@didiksetiawan.com" target="_self"><i class="fa fa-envelope"></i> Email</a></li>
 
 </ul>
 
@@ -193,159 +196,67 @@
         <div class="col-md-9 col-xs-12 full">
           <div class="post-content well">
 <article class="content">
-    <div class="post"><p>I will explain how to setup a new blog using octopress, deploy it on github and
-contribute from other place. Let’s check this out.</p>
+    <div class="post"><p>As a person who use internet in daily basis, I think something
+personal like a domain name is essential to have. But, there is no good
+personal domain name available for free. Fortunately, the price to “borrow” a
+domain name from the registrar is fairly affordable. So, without even thinking
+more about price to pay, I decided that what I invested in this thing will
+someday get useful for everyone, in anyway.<br />
+After I “reserved” one domain name, I need to associate it with other service.
+The two things that important to be setting up immediately are blog and email. <br />
+Blog is like my “broadcasting center”. I store my notes, my journals there.
+Everyone is welcome to visit there, and I hope it can help someone to answer
+their question someday. Email become my virtual identity. I use it to register
+to many service on the internet. Especially with my own custom domain name,
+I can make my blog and email look more personally.
+Here I explain how I build my blog step by step.</p>
 
-<h3 id="first-time-setup">First Time Setup</h3>
+<h3 id="domain-name">Domain Name</h3>
 
-<p>Prerequisite:</p>
+<p>I register my domain from a web hosting provider. I just pay for the domain
+name, not the hosting service.<br />
+About what provider I currently use, it can be found using a domain tool easily.</p>
 
-<ul>
-  <li>Install Git and Node.js</li>
-</ul>
+<h3 id="blog">Blog</h3>
 
-<p>On debian system, use apt-get.</p>
+<p>In order to build my infrastructure, I need to have a server, dedicated internet
+or static IP address to run the software up. But I don’t have any of them, so I
+just use free service from external providers. There is a lot of providers who
+can give us some space to host our web and email.<br />
+In early time I touch with internet, I did use some blogging framework to run my
+blog. I ever use Blogger, Joomla, Drupal and Wordpress. I spend a long time with 
+Wordpress. But, due to personal favor, finally I switch to Octopress.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo </span>apt-get <span class="nb">install </span>git
-<span class="nv">$ </span><span class="nb">sudo </span>apt-get <span class="nb">install </span>nodejs</code></pre></figure>
+<p>Why Octopress? Because that is simple. It has beautiful design, while easy to 
+use. I can create post directly from Vim on my Linux console. 
+It can be updated using git, so I can feel the sysadmin way to write a post. 
+It use a simplify html-like syntax, markdown. 
+I can host my blog together with my application repository in 
+<a href="https://www.github.com">Github</a>. You can check this
+<a href="/blog/2016/06/02/octopress-setup-and-deployment/">article</a> 
+for more details. 
+With this Octopress take control my way to blog,
+I can focus on contents that I want to share rather than 
+have to be confused to setup and design my blog.</p>
 
-<ul>
-  <li>Install Ruby</li>
-</ul>
+<h3 id="ssl">SSL</h3>
 
-<p>We must use version 1.9.3 or higher. To ensure we fulfill this requirement, I
-prefer to install ruby from source. Download from
-<a href="https://www.ruby-lang.org/en/downloads/">Ruby official site</a>. The installation
-process is quite common.</p>
+<p>For security purpose, I use free ssl service from 
+<a href="http://www.cloudflare.com">CloudFlare</a>. The setup process is fairly easy.
+The requirements for its service is just a domain name with top level domain.
+I just need to set my DNS configuration to point CloudFlare DNS. Additionally, 
+there is a feature so I can force my blog visitor to use https in order to see
+the ssl sign.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">tar </span>zxf ruby-2.3.1.tar.gz 
-<span class="nv">$ </span><span class="nb">cd </span>ruby-2.3.1/
-<span class="nv">$ </span>./configure
-<span class="nv">$ </span><span class="nb">sudo </span>make <span class="o">&amp;&amp;</span> make <span class="nb">install</span> </code></pre></figure>
+<h3 id="email">Email</h3>
 
-<ul>
-  <li>Install ExecJS</li>
-</ul>
+<p>Rather than using well-known free email service, I need to host my own email
+because I want to use my own domain name. Fortunately, there is email provider 
+that provide free email service using custom domain, thanks to
+<a href="http://www.zoho.com">Zoho Mail</a>.
+Even with free service, I can use my own domain name.</p>
 
-<p>To run JavaScript code from Ruby.</p>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo </span>gem <span class="nb">install </span>execjs</code></pre></figure>
-
-<ul>
-  <li>Configure bundle</li>
-</ul>
-
-<p>Another octopress dependency.</p>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo </span>gem <span class="nb">install </span>bundler</code></pre></figure>
-
-<p>After all needed requirements fulfilled, then grab the octopress source code.</p>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git clone git://github.com/imathis/octopress.git octopress
-<span class="nv">$ </span><span class="nb">cd </span>octopress</code></pre></figure>
-
-<p>One more dependency:</p>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>bundle <span class="nb">install</span></code></pre></figure>
-
-<p>Then install octopress default theme.</p>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>rake <span class="nb">install</span></code></pre></figure>
-
-<p>Setup process is finished. We can now start to blog using rake newpost[“title”], 
-customize _config.yml, add some pages, customize 404 not found page, using
-custom domain name and so on.</p>
-
-<h3 id="deploy-on-github">Deploy on Github</h3>
-
-<p>There are some way to deploy octopress, either using rsync or git. In this
-post, I will explain how to deploy octopress on Github.
-Create a new Github repository and name the repository with the format
-username.github.io, where username is your GitHub username or organization name.</p>
-
-<p>Github Pages for users and organizations uses the master branch like the public 
-directory on a web server, serving up the files at your Pages url 
-http://username.github.io. As a result, we will to work on the source for 
-our blog in the source branch and commit the generated content to the master 
-branch. Octopress has a configuration task that helps us set all this up.</p>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>rake setup_github_pages</code></pre></figure>
-
-<p>The rake task will ask for a URL of the Github repo. Copy the SSH or HTTPS URL 
-from our newly created repository
-(e.g. git@github.com:username/username.github.io.git)
-and paste it in as a response.</p>
-
-<p>This will:</p>
-
-<ul>
-  <li>Ask for and store our Github Pages repository url</li>
-  <li>Rename the remote pointing to imathis/octopress from ‘origin’ to ‘octopress’</li>
-  <li>Add our Github Pages repository as the default origin remote</li>
-  <li>Switch the active branch from master to source</li>
-  <li>Configure our blog’s url according to your repository</li>
-  <li>Setup a master branch in the _deploy directory for deployment</li>
-</ul>
-
-<p>Next run:</p>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>rake generate
-<span class="nv">$ </span>rake deploy</code></pre></figure>
-
-<p>This will generate our blog, copy the generated files into _deploy/, add them 
-to git, commit and push them up to the master branch.</p>
-
-<p>Don’t forget to commit the source of our blog.</p>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git add <span class="nb">.</span>
-<span class="nv">$ </span>git commit <span class="nt">-m</span> <span class="s1">'our message'</span>
-<span class="nv">$ </span>git push origin <span class="nb">source</span></code></pre></figure>
-
-<p>With new repositories, Github sets the default branch based on the branch we 
-push first, and it looks there for the generated site content. If we’re having 
-trouble getting Github to publish our site, go to the admin panel for our 
-repository and make sure that the master branch is the default branch.</p>
-
-<h3 id="contribute-from-other-place">Contribute from Other Place</h3>
-
-<p>Sometimes we need to develop our octopress site in other place than we currently
-in. To do that, we will use the benefit of git.<br />
-First, we need to get our site copy:</p>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git clone git@github.com:username/username.github.io.git
-<span class="nv">$ </span><span class="nb">cd </span>username.github.io</code></pre></figure>
-
-<p>Switch to source branch</p>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git checkout <span class="nb">source</span></code></pre></figure>
-
-<p>Then do all change on our source, after that run “rake generate” or “rake
-preview” to compile our source onto public directory. Everything seems to be
-okay until we need to upload to github.</p>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>rake deploy
-<span class="c">## Deploying branch to Github Pages </span>
-<span class="c">## Pulling any updates from Github Pages </span>
-<span class="nb">cd </span>_deploy
-rake aborted!
-Errno::ENOENT: No such file or directory @ dir_chdir - _deploy
-/home/didik/octopress/Rakefile:255:in <span class="sb">`</span>block <span class="k">in</span> &lt;top <span class="o">(</span>required<span class="o">)&gt;</span><span class="s1">'
-/home/didik/octopress/Rakefile:227:in `block in &lt;top (required)&gt;'</span>
-Tasks: TOP <span class="o">=&gt;</span> deploy
-<span class="o">(</span>See full trace by running task with <span class="nt">--trace</span><span class="o">)</span></code></pre></figure>
-
-<p>Oops, it’s look like we miss something. We have to make a new _deploy directory 
-and add git initialization to it.</p>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">mkdir </span>_deploy
-<span class="nv">$ </span><span class="nb">cd </span>_deploy
-<span class="nv">$ </span>git init
-<span class="nv">$ </span>git remote add origin git@github.com:username/username.github.io.git
-<span class="nv">$ </span>git pull origin master
-<span class="nv">$ </span><span class="nb">cd</span> ..</code></pre></figure>
-
-<p>That’s all. Now, we can upload using rake deploy as usual.<br />
-Until next time.</p>
+<p>That’s all about my blog. I hope it all will be useful. Thanks for reading.</p>
 </div>
     <hr />
     <div class="share-page">
@@ -358,7 +269,7 @@ Until next time.</p>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 
 <!-- Facebook -->
-<div class="fb-share-button" data-href="https://www.didiksetiawan.com/blog/2016/06/02/octopress-setup-and-deployment/" data-layout="button_count" style="position: relative; top: -8px; left: 3px;"></div>
+<div class="fb-share-button" data-href="https://www.didiksetiawan.com/blog/2016/06/02/my-blog/" data-layout="button_count" style="position: relative; top: -8px; left: 3px;"></div>
 </div>
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
@@ -379,28 +290,11 @@ Until next time.</p>
         
             
         
-    
-        
-            
-        
             
         
     
         
             
-        
-            
-        
-    
-        
-            
-        
-            
-        
-    
-
-    
-    
         
             
         
@@ -412,7 +306,11 @@ Until next time.</p>
         
             
         
+            
+        
     
+        
+            
         
             
         
@@ -427,10 +325,6 @@ Until next time.</p>
         
             
         
-    
-        
-            
-        
             
         
     
@@ -439,28 +333,11 @@ Until next time.</p>
         
             
         
-    
-        
-            
-        
-            
-        
-    
-
-    
-    
-        
-            
-        
             
         
     
         
             
-        
-            
-        
-    
         
             
         
@@ -475,7 +352,27 @@ Until next time.</p>
         
             
         
+            
+        
     
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
         
             
         
@@ -490,7 +387,19 @@ Until next time.</p>
         
             
         
+            
+        
     
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
         
             
         
@@ -505,7 +414,30 @@ Until next time.</p>
         
             
         
+            
+        
     
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
         
             
         
@@ -523,9 +455,9 @@ Until next time.</p>
                 <ul>
                 
                 <li class="relatedPost">
-                    <a href="https://www.didiksetiawan.com/blog/2016/06/02/my-blog/">My Blog</a>
+                    <a href="https://www.didiksetiawan.com/blog/2016/06/02/octopress-setup-and-deployment/">Octopress Setup and Deployment</a>
                     
-                        <small>(Categories: <a href="/category/web">web</a>, <a href="/category/blog">blog</a>, <a href="/category/email">email</a>)</small>
+                        <small>(Categories: <a href="/category/web">web</a>, <a href="/category/blog">blog</a>)</small>
                     
                 </li>
                 
@@ -534,13 +466,11 @@ Until next time.</p>
         
             
         
-    
-        
-            
-        
             
         
     
+        
+            
         
             
         
@@ -555,22 +485,19 @@ Until next time.</p>
         
             
         
+            
+        
     
         
             
         
             
         
-    
-
-    
-    
-        
-            
-        
             
         
     
+        
+            
         
             
         
@@ -585,13 +512,11 @@ Until next time.</p>
         
             
         
-    
-        
-            
-        
             
         
     
+        
+            
         
             
         
@@ -606,19 +531,11 @@ Until next time.</p>
         
             
         
-    
-        
-            
-        
             
         
     
         
             
-        
-            
-        
-    
         
             
         
@@ -633,10 +550,6 @@ Until next time.</p>
         
             
         
-    
-        
-            
-        
             
         
     
@@ -645,13 +558,11 @@ Until next time.</p>
         
             
         
-    
-        
-            
-        
             
         
     
+        
+            
         
             
         
@@ -666,16 +577,11 @@ Until next time.</p>
         
             
         
-    
-        
-            
-        
             
         
     
-
-    
-    
+        
+            
         
             
         
@@ -687,22 +593,11 @@ Until next time.</p>
         
             
         
-    
-
-    
-    
-        
-            
-        
             
         
     
         
             
-        
-            
-        
-    
         
             
         
@@ -717,16 +612,11 @@ Until next time.</p>
         
             
         
-    
-        
-            
-        
             
         
     
-
-    
-    
+        
+            
         
             
         
@@ -738,19 +628,19 @@ Until next time.</p>
         
             
         
-    
-
-    
+            
+        
     
         
             
         
             
         
+            
+        
     
-
-    
-    
+        
+            
         
             
         
@@ -765,7 +655,136 @@ Until next time.</p>
         
             
         
+            
+        
     
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
         
             
         
@@ -780,10 +799,10 @@ Until next time.</p>
 
 <div class="PageNavigation">
   
-    <a class="prev pull-left" href="https://www.didiksetiawan.com/blog/2016/06/02/my-blog/">&laquo; My Blog</a>
+    <a class="prev pull-left" href="https://www.didiksetiawan.com/blog/2016/05/03/insert-usb-module-linux-kernel/">&laquo; Insert USB Module in Linux Kernel</a>
   
   
-    <a class="next pull-right" href="https://www.didiksetiawan.com/blog/2016/06/02/vim-quick-reference/">Vim Quick Reference &raquo;</a>
+    <a class="next pull-right" href="https://www.didiksetiawan.com/blog/2016/06/02/octopress-setup-and-deployment/">Octopress Setup and Deployment &raquo;</a>
   
 </div>
 
@@ -794,8 +813,8 @@ Until next time.</p>
         /* <![CDATA[ */
 
         var disqus_shortname = "didiksetiawan";
-        var disqus_identifier = "https://www.didiksetiawan.com_Octopress Setup and Deployment";
-        var disqus_title = "Octopress Setup and Deployment";
+        var disqus_identifier = "https://www.didiksetiawan.com_My Blog";
+        var disqus_title = "My Blog";
 
         /* * * DON'T EDIT BELOW THIS LINE * * */
         (function() {
