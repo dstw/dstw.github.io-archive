@@ -3,7 +3,7 @@ layout: post
 title: "Workflow on Contributing to Open Source Project"
 date: 2017-04-08 13:43:38 +0700
 comments: true
-categories: open_source programming
+categories: open_source collaboration programming
 ---
 
 In the open source world, different project comes with different workflow, using
@@ -30,8 +30,10 @@ Startup procedures:
 
 Fork project so you can modify yourself via Gitlab interface.
 
-    git clone https://gitlab.com/dstw/wget2
-    git remote add upstream https://dstw@gitlab.com/gnuwget/wget2.git
+``` shell
+git clone https://gitlab.com/dstw/wget2
+git remote add upstream https://dstw@gitlab.com/gnuwget/wget2.git
+```
 
 Create an own branch for each 'task' you are working on and make your commits
 within it. When done, sync with upstream, rebase/merge and create your patches
@@ -43,15 +45,19 @@ changes from the 'original/upstream' master branch on Savannah.
 
 Sync your Gitlab repo with upstream:
 
-    git checkout master
-    git fetch upstream
-    git merge upstream/master
+``` shell
+git checkout master
+git fetch upstream
+git merge upstream/master
+```
 
 Sync your 'new-feature' branch before generating patches:
 
-    git checkout new-feature
-    git rebase master
-    git push -f  # pushing updated tree to your Gitlab new-feature branch)
+``` shell
+git checkout new-feature
+git rebase master
+git push -f  # pushing updated tree to your Gitlab new-feature branch)
+```
 
 Assume 'new-feature' is a private branch where you can do all the dirty things
 that you shouldn't on public/shared branches. As soon as your patch has been
@@ -93,13 +99,17 @@ After getting a review, do some improvement. After all, make a new commit. Here,
 there is option to overwrite my existing commits or create new merge commits to
 keep history.
 
-	git push origin new-feature
+``` shell
+git push origin new-feature
+```
 
 If there is a conflict, Git will ask me to resolve the problem this. Then, try
 to push and merge commits. This won’t remove any existing commits. And if I
 don’t want to keep any commits history, I usually force to push:
 
-	git push -f origin new-feature
+``` shell
+git push -f origin new-feature
+```
 
 ~~This is considered a little bit harmful. Before I do this, I will make sure
 that I know what I do. Also, forcing commits is should only do if it believed to
