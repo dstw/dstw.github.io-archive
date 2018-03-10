@@ -27,3 +27,4 @@ markdown: kramdown
 plugins:
   - jekyll-paginate
   - jekyll-category-pages
+  - jekyll-redirect-from

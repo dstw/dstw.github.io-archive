@@ -3,6 +3,7 @@ layout: post
 title: "GSoC with GNU Wget2 - Part I"
 date: 2018-03-07 03:21:00 +0700
 comments: true
+redirect_from: /blog/2018/03/06/gsoc-with-gnu-wget2-part-i/
 categories: open_source programming collaboration gsoc
 ---
 

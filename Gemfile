@@ -8,4 +8,5 @@ group :jekyll_plugins do
   gem 'kramdown'
   gem 'rouge'
   gem 'html-proofer'
+  gem 'jekyll-redirect-from'
 end
