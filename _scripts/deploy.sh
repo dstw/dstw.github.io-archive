@@ -21,6 +21,7 @@ if [[ $TRAVIS_BRANCH == 'source' ]] ; then
 
   git status
   git add -A .
+  git status
   git commit -a -m "Travis #$TRAVIS_BUILD_NUMBER"
 
   # We redirect any output to
