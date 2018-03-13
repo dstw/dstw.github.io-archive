@@ -1,7 +1,7 @@
 url: "https://www.didiksetiawan.com"
 baseurl: ""
 title: Didik Setiawan
-about: cat ~/.life_history | grep fun
+about: Let the bits speak
 description: Didik Setiawan's Blog
 author: Didik Setiawan
 logo: /static/img/avatar.png
