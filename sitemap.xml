@@ -5,8 +5,8 @@
     <description>Didik Setiawan's Blog</description>
     <link>https://www.didiksetiawan.com/</link>
     <atom:link href="https://www.didiksetiawan.com/sitemap.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 17 Mar 2018 21:18:59 +0700</pubDate>
-    <lastBuildDate>Sat, 17 Mar 2018 21:18:59 +0700</lastBuildDate>
+    <pubDate>Sat, 17 Mar 2018 21:30:40 +0700</pubDate>
+    <lastBuildDate>Sat, 17 Mar 2018 21:30:40 +0700</lastBuildDate>
     <generator>Jekyll v3.7.3</generator>
     
       <item>
@@ -1007,9 +1007,9 @@ give the best of me in contributing to this project.&lt;/p&gt;
 [0] &lt;a href=&quot;https://stackoverflow.com/questions/1005676/urls-and-plus-signs&quot;&gt;https://stackoverflow.com/questions/1005676/urls-and-plus-signs&lt;/a&gt;&lt;br /&gt;
 [1] &lt;a href=&quot;https://gitlab.com/gnuwget/wget2/merge_requests/250&quot;&gt;https://gitlab.com/gnuwget/wget2/merge_requests/250&lt;/a&gt;&lt;/p&gt;
 </description>
-        <pubDate>Fri, 09 Mar 2018 03:21:00 +0700</pubDate>
-        <link>https://www.didiksetiawan.com/blog/2018/03/09/gsoc-with-gnu-wget2-part-ii/</link>
-        <guid isPermaLink="true">https://www.didiksetiawan.com/blog/2018/03/09/gsoc-with-gnu-wget2-part-ii/</guid>
+        <pubDate>Sat, 17 Mar 2018 03:21:00 +0700</pubDate>
+        <link>https://www.didiksetiawan.com/blog/2018/03/17/gsoc-with-gnu-wget2-part-ii/</link>
+        <guid isPermaLink="true">https://www.didiksetiawan.com/blog/2018/03/17/gsoc-with-gnu-wget2-part-ii/</guid>
         
         
         <category>open_source</category>
