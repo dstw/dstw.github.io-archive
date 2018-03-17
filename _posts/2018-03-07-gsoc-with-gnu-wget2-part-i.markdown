@@ -7,8 +7,8 @@ redirect_from: /blog/2018/03/06/gsoc-with-gnu-wget2-part-i/
 categories: open_source programming collaboration gsoc
 ---
 
-This series of writing summing up of what I did in Google Summer of Code (GSoC) 2017.
-GSoC 2017 be held in three period of time. In this part I will tell you
+This series of writing summing up of what I did in Google Summer of Code (GSoC)
+2017\. GSoC 2017 be held in three period of time. In this part I will tell you
 about the first period.
 
 ### Community Approaching
@@ -129,7 +129,6 @@ Things get more interesting. Because in this period, I will starting to work on
 Wget2 main testing function. I started on `wget_test_start_server()`.
 I must change that function in order to call Libmicrohttpd as service for
 `wget_test()`. Workflow to resolve this:
-
 
 * Disable initial process for HTTP server socket.
 * Disable `_http_server_thread`, instead call new function which call
@@ -269,23 +268,7 @@ done in this week.
 * I have finished modify configure.ac to include Libmicrohttpd into Wget2.
 * I have ensured that all make check passed on several testing machine
   including: Debian/GCC, Fedora/Clang, MingW64 and OSX.
-* Started working on `wget_test_start_server()`. Workflow to resolve this:
-
-  - Remove initial process for HTTP server socket.
-  - Create `_http_server_start()` function, wrapper for Libmicrohttpd. There is
-    also function `answer_to_connection()` which use to create proper HTTP
-    response.
-  - Use select method (`MHD_USE_SELECT_INTERNALLY`) for threading model in
-    Libmicrohttpd to get better compatibility.
-  - http_server_port seized automatically using Libmicrohttpd function by
-    passing `MHD_DAEMON_INFO_BIND_PORT` or `MHD_DAEMON_INFO_LISTEN_FD` parameter
-    to `MHD_get_daemon_info()`.
-  - Using iteration to parse urls data in `answer_to_connection()`. This
-    guarantee we can pass any variadic data to Libmicrohttpd and prevent
-    segmentation fault.
-  - Fix `answer_to_connection()` function to create proper HTTP response (to deal
-    with parameters and arguments on url, to add proper HTTP headers).
-
+* Started working on `wget_test_start_server()`.
 * I must ensure that all test suite running correctly. To give better
   visualization, I've created spreadsheet about summary of test file which use
   `wget_test_start_server()`. Currently, as far as I know, it reaches 87.5% (28
@@ -316,15 +299,20 @@ Commit Message title (60 chars)
 Any other details I want to write
 ```
 
-The commit messages I have written are actually fine, but when it exceeds 60 chars in
-the first line, I should convert my message to the longer format he just
-described.  
+The commit messages I have written are actually fine, but when it exceeds 60
+chars in the first line, I should convert my message to the longer format he
+just described.  
 Another thing, he asks to not force push to my (_master_) branches. There are
 other people that pull from these branches to check in on the code. If I force
 push, it messes the repository up for all. Force pushing should only be reserved
 as a last resort. However, in this case, when I rewrite the commit messages, I
 should force push to my own current branch. That will allow me to maintain that
 branch later.  
+I realize that my commit messages are bad practice indeed. I check it through
+`git log --pretty=oneline`. I have made some changes about that.
+But, when I want to push my changes online, it rejected by git. That's why I
+usually force push. I make sure I just make a changes to my own current branch,
+not the master one.  
 The CI system states failures. He asks whether this is an expected failures. I
 said that it not intended to be failure. On my machine which use Ubuntu/GCC, I
 can run `make check`, and some test could pass. Same like on Gitlab CI that use
@@ -340,6 +328,13 @@ that first. He said we will look into the memory leaks in a while. Most probably
 the leaks happen because either I lost the pointer to some allocated memory or
 are using the libmicrohttpd API wrong and forgot to `free()` some data structure
 returned by it.  
+I analyze how the Valgrind check was failed. On my system which using
+Ubuntu/gcc, some tests are failed, while some not. Through this, I will analyze
+based some available pattern.  Before I found that Valgrind check error, my work
+with test suite stopped at how I must deal with timestamp/modified properties in
+`test-wget-1`. Another test waiting to finish: `test-metalink` (looping
+undefinitely), `test-i-https` (https implementation) and `test-auth-basic`(basic
+authentication implementation).  
 He also sees that ./configure always tries to link Libmicrohttpd. But Wget2
 should not depend on that. It should try to add the linker flags *only* when
 trying to compile the test suite. The Wget2 binary should not use that flag. I
@@ -367,10 +362,10 @@ segmentation fault error happened because I forgot to remove
 termination time. After I remove that line, the CI runner of Fedora/Clang
 passes some tests, not all test were resulted segmentation fault (14 of 32
 pass, while 4 skipped). The other fail because likely Valgrind check error.  
-Darshit asks me to make sure that my code works as I have mentioned at least one day
-before the deadline for the evaluations. On my Week 3 report I planned to get
-100% of passing all of the test suite. But, until Week 4, my job still not yet
-all done (even excluding other error generated outside `make check` on
+Darshit asks me to make sure that my code works as I have mentioned at least one
+day before the deadline for the evaluations. On my Week 3 report I planned to
+get 100% of passing all of the test suite. But, until Week 4, my job still not
+yet all done (even excluding other error generated outside `make check` on
 Debian/GCC system). I realized I have missed my (personal) target. Hence, he
 asks me where do I think I missed out which caused me to fall behind. In
 hindsight, he asks what according to me could have been done better. So, I and
@@ -400,224 +395,35 @@ blocks reported by Valgrind is:
 ==26290==    by 0x9: ???
 ```
 
-So, he guess is that this is some memory that is being allocated by Libmicrohttpd.
-The test code does indeed seem to call `MHD_stop_daemon()` which should
-ideally ensure a clean exit. He asks, where did the implementation go wrong.  
+So, he guess is that this is some memory that is being allocated by
+Libmicrohttpd.  The test code does indeed seem to call `MHD_stop_daemon()` which
+should ideally ensure a clean exit. He asks, where did the implementation go
+wrong.  
 Christian said this is a bit hard to evaluate without the debug symbols. Most
 likely it would be a false-positive from a globally allocated buffer of
 Libgcrypt's initialization sequence. He asks to download and install debug
 symbols for Libgcrypt and ideally Libmicrohttpd. It is unlikely to be
 Libmicrohttpd fault, as except for responses there are no Libmicrohttpd buffers
 my code would have to free.  
-Evgeny gives a review about my works, direct pointed to the code.
-
-``` c
-static char *_scan_directory(const char* data)
-{
-      char *path = strchr(data, '/');
-      if (path != 0) {
-              return path;
-      }
-      else
-              return NULL;
-}
-```
-
-He asks why do I use underscore as prefix for functions. Usually it is used by
-libraries to avoid name conflict. First, I think that I need to remove the
-underscore, then Tim also give comment that this is also useful in projects
-where there is more than one C file. They use it to make clear that a
-function/variable is static (not consequently everywhere, though). So, I
-still keep the underscore.
-
-``` c
-static char *_parse_hostname(const char* data)
-{
-      if (!wget_strncasecmp_ascii(data, "http://", 7)) {
-              char *path = strchr(data += 7, '/');
-              return path;
-      } else
-              return NULL;
-}
-
-static char *_replace_space_with_plus(char *data)
-{
-      if (strchr(data, ' ') != 0) {
-              char *result = data;
-              char *wk, *s;
-
-              wk = s = strdup(data);
-
-              while (*s != 0) {
-                      if (*s == ' '){
-                              *data++ = '+';
-                              ++s;
-                      } else
-                              *data++ = *s++;
-              }
-              *data = '\0';
-              free(wk);
-              return result;
-      } else
-              return data;
-}
-```
-
-He asks me about the reason for using `strdup()`/`free()`. I checked string
-twice (by `strchr()` and by my custom iterations). It just waste of CPU time.
-He gives simpler implementation:
-
-``` c
-{
-  while(0 != *data)
-  {
-    if (' ' == *data)
-      *data = '+';
-    data++;
-  }
-  return data;
-}
-```
-
-I applied the changes to my code.  
-Evgeny also give note that according to current HTTP specification '+' must NOT be
-used as replacement for '&nbsp;' in URLs. When I learn about this problem, it
-leads me to here [2]. Then if it need to be applied, I need to modify test
-file: test-base.c to not use '+', and use %2B instead.  
-Tim added that the '+' was always just for the query part. He asks to Evgeny
-what document are you exactly referring to to. Not that he is against dropping
-the '+' rule, but what consortium is not accepted as normative by everyone,
-while IETF is. He is unsure about what 'spec' to follow. So, I keep my changes
-of '+'.
-
-``` c
-static int print_out_key(void *cls, enum MHD_ValueKind kind, const char *key,
-                                              const char *value)
-{
-      if (key && url_it == 0 && url_it2 == 0) {
-              wget_buffer_strcpy(url_arg, "?");
-              _replace_space_with_plus((char *) key);
-```
-
-Evgeny said that we are not allowed to modify any content pointed by pointer to
-const. By dropping 'const' qualifiers are violating API. In other words: I was
-modifying internal structures that are not expected to be modified and the
-result is unpredictable. I fixed them then.
-
-``` c
-              wget_buffer_strcat(url_arg, key);
-              if (value) {
-                      wget_buffer_strcat(url_arg, "=");
-                      _replace_space_with_plus((char *) value);
-                      wget_buffer_strcat(url_arg, value);
-              }
-      }
-      if (key && url_it != 0 && url_it2 == 0) {
-              wget_buffer_strcat(url_arg, "&");
-              _replace_space_with_plus((char *) key);
-              wget_buffer_strcat(url_arg, key);
-              if (value) {
-                      wget_buffer_strcat(url_arg, "=");
-                      _replace_space_with_plus((char *) value);
-                      wget_buffer_strcat(url_arg, value);
-              }
-      }
-      url_it++;
-    return MHD_YES;
-}
-```
-
-He also gives me some questions:
-
-* Is `url_arg` a global variable?
-* Do I use single thread only?
-* Why not to pass pointer to `url_arg` as `cls`?
-* What about `url_it` and `url_it2`? It is hard to guess meaning from name.
-
-If I need to pass all of them, I was advised to define some structure with three
-pointers and pass pointer to structure.
-
-``` c
-static int answer_to_connection (void *cls,
-                                      struct MHD_Connection *connection,
-                                      const char *url,
-                                      const char *method,
-                                      const char *version,
-                                      const char *upload_data, size_t *upload_data_size, void **con_cls)
-{
-      struct MHD_Response *response;
-      int ret;
-
-      url_arg = wget_buffer_alloc(1024);
-      MHD_get_connection_values (connection, MHD_GET_ARGUMENT_KIND, print_out_key, NULL);
-
-      url_it2 = url_it;
-      wget_buffer_t *url_full = wget_buffer_alloc(1024);
-      wget_buffer_strcpy(url_full, url);
-      if (url_arg)
-              wget_buffer_strcat(url_full, url_arg->data);
-      if (!strcmp(url_full->data, "/"))
-              wget_buffer_strcat(url_full, "index.html");
-      url_it = url_it2 = 0;
-      unsigned int itt, found = 0;
-      for (itt = 0; itt < nurls; itt++) {
-              char *dir = _scan_directory(url_full->data + 1);
-              if (dir != 0 && !strcmp(dir, "/"))
-                      wget_buffer_strcat(url_full, "index.html");
-
-              char *host = _parse_hostname(url_full->data);
-              if (host != 0 && !strcmp(host, "/"))
-                      wget_buffer_strcat(url_full, "index.html");
-
-              wget_buffer_t *iri_url = wget_buffer_alloc(1024);
-              wget_buffer_strcpy(iri_url, urls[itt].name);
-              MHD_http_unescape(iri_url->data);
-
-              if (urls[itt].code != NULL &&
-                      !strcmp(urls[itt].code, "302 Redirect") &&
-                      !strcmp(url_full->data, iri_url->data))
-              {
-                      response = MHD_create_response_from_buffer(strlen("302 Redirect"),
-                                      (void *) "302 Redirect", MHD_RESPMEM_PERSISTENT);
-                      for (int itt2 = 0; urls[itt].headers[itt2] != NULL; itt2++) {
-                              const char *header = urls[itt].headers[itt2];
-                              if (header) {
-                                      char *header_value = strchr(header, ':');
-                                      char *header_key = wget_strmemdup(header, header_value - header);
-                                      MHD_add_response_header(response, header_key, header_value + 2);
-                                      ret = MHD_queue_response(connection, MHD_HTTP_FOUND, response);
-                                      wget_xfree(header_key);
-                                      itt = nurls;
-                                      found = 1;
-                              } else
-                                      itt = nurls;
-                      }
-              } else if (!strcmp(url_full->data, iri_url->data)) {
-                      response = MHD_create_response_from_buffer(strlen(urls[itt].body),
-                                      (void *) urls[itt].body, MHD_RESPMEM_PERSISTENT);
-```
-
-He asks me again to ensure that content of `urls[itt].body` will be valid until
-end of this connection. Otherwise you must use `MHD_RESPMEM_MUST_COPY` as last
-parameter. I followed his advice and fix my code.
-
-Two generic advises he gave to me:
-
-* Avoid using global variables.
-* Use better names for variables. It it hard to understand what mean
-  `iri_url`, `itt` and `itt2`.
+He also asks me to ensure that I have followed the Libmicrohttpd API and
+documentation correctly. I have followed Libmicrohttpd API documentation and
+tutorial for implementation carefully.  
 
 ### First Period Evaluations
 
-After finish my 4th period report, I also must complete first evaluation report
-via GSoC web app. I passed the evaluations, but with warning. Mentors give me an
-important messages about what happened and what should I improve.  
-The project is indeed behind schedule. The mentors still give me a chance by passing
-me in the hopes that I and they will be able to improve the communication and
-get the project back on track. One major suggestion is that I increase the
-frequency of my project reports from weekly to daily. Just a single line at the
-end of each day stating what I have done and what are my plans for the next
-day.
+After finish my 4th period report, and discuss with mentors about my
+difficulties I found, I also must complete first evaluation report via GSoC web
+app. For what I can just remember, it just a dashboard which asks my feedback
+about the organization I working with. The real report is actually done via
+email.  
+The other day, GSoC announce the evaluations. The result, I passed the
+evaluations, but with warning. Mentors give me an important messages about what
+happened and what should I improve. The project is indeed behind schedule. The
+mentors still give me a chance by passing me in the hopes that I and they will
+be able to improve the communication and get the project back on track. One
+major suggestion is that I increase the frequency of my project reports from
+weekly to daily. Just a single line at the end of each day stating what I have
+done and what are my plans for the next day.
 
 ### Conclusion
 
@@ -627,5 +433,4 @@ them.
 
 Reference(s):  
 [0] [https://github.com/rockdaboot/wget2/pull/155](https://github.com/rockdaboot/wget2/pull/155)  
-[1] [https://lists.gnu.org/archive/html/bug-wget/2017-03/msg00156.html](https://lists.gnu.org/archive/html/bug-wget/2017-03/msg00156.html)  
-[2] [https://stackoverflow.com/questions/1005676/urls-and-plus-signs](https://stackoverflow.com/questions/1005676/urls-and-plus-signs)
+[1] [https://lists.gnu.org/archive/html/bug-wget/2017-03/msg00156.html](https://lists.gnu.org/archive/html/bug-wget/2017-03/msg00156.html)
