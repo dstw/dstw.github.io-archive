@@ -199,8 +199,8 @@
         <div class="col-md-9 col-xs-12 full">
           <div class="post-content well">
 <article class="content">
-    <div class="post"><p>This series of writing summing up of what I did in Google Summer of Code (GSoC) 2017.
-GSoC 2017 be held in three period of time. In this part I will tell you
+    <div class="post"><p>This series of writing summing up of what I did in Google Summer of Code (GSoC)
+2017. GSoC 2017 be held in three period of time. In this part I will tell you
 about the first period.</p>
 
 <h3 id="community-approaching">Community Approaching</h3>
@@ -473,26 +473,7 @@ done in this week.</p>
   <li>I have finished modify configure.ac to include Libmicrohttpd into Wget2.</li>
   <li>I have ensured that all make check passed on several testing machine
 including: Debian/GCC, Fedora/Clang, MingW64 and OSX.</li>
-  <li>
-    <p>Started working on <code class="highlighter-rouge">wget_test_start_server()</code>. Workflow to resolve this:</p>
-
-    <ul>
-      <li>Remove initial process for HTTP server socket.</li>
-      <li>Create <code class="highlighter-rouge">_http_server_start()</code> function, wrapper for Libmicrohttpd. There is
-also function <code class="highlighter-rouge">answer_to_connection()</code> which use to create proper HTTP
-response.</li>
-      <li>Use select method (<code class="highlighter-rouge">MHD_USE_SELECT_INTERNALLY</code>) for threading model in
-Libmicrohttpd to get better compatibility.</li>
-      <li>http_server_port seized automatically using Libmicrohttpd function by
-passing <code class="highlighter-rouge">MHD_DAEMON_INFO_BIND_PORT</code> or <code class="highlighter-rouge">MHD_DAEMON_INFO_LISTEN_FD</code> parameter
-to <code class="highlighter-rouge">MHD_get_daemon_info()</code>.</li>
-      <li>Using iteration to parse urls data in <code class="highlighter-rouge">answer_to_connection()</code>. This
-guarantee we can pass any variadic data to Libmicrohttpd and prevent
-segmentation fault.</li>
-      <li>Fix <code class="highlighter-rouge">answer_to_connection()</code> function to create proper HTTP response (to deal
-with parameters and arguments on url, to add proper HTTP headers).</li>
-    </ul>
-  </li>
+  <li>Started working on <code class="highlighter-rouge">wget_test_start_server()</code>.</li>
   <li>I must ensure that all test suite running correctly. To give better
 visualization, I’ve created spreadsheet about summary of test file which use
 <code class="highlighter-rouge">wget_test_start_server()</code>. Currently, as far as I know, it reaches 87.5% (28
@@ -523,15 +504,20 @@ Commit Message title (60 chars)
 Any other details I want to write
 </code></pre></div></div>
 
-<p>The commit messages I have written are actually fine, but when it exceeds 60 chars in
-the first line, I should convert my message to the longer format he just
-described.<br />
+<p>The commit messages I have written are actually fine, but when it exceeds 60
+chars in the first line, I should convert my message to the longer format he
+just described.<br />
 Another thing, he asks to not force push to my (<em>master</em>) branches. There are
 other people that pull from these branches to check in on the code. If I force
 push, it messes the repository up for all. Force pushing should only be reserved
 as a last resort. However, in this case, when I rewrite the commit messages, I
 should force push to my own current branch. That will allow me to maintain that
 branch later.<br />
+I realize that my commit messages are bad practice indeed. I check it through
+<code class="highlighter-rouge">git log --pretty=oneline</code>. I have made some changes about that.
+But, when I want to push my changes online, it rejected by git. That’s why I
+usually force push. I make sure I just make a changes to my own current branch,
+not the master one.<br />
 The CI system states failures. He asks whether this is an expected failures. I
 said that it not intended to be failure. On my machine which use Ubuntu/GCC, I
 can run <code class="highlighter-rouge">make check</code>, and some test could pass. Same like on Gitlab CI that use
@@ -547,6 +533,13 @@ that first. He said we will look into the memory leaks in a while. Most probably
 the leaks happen because either I lost the pointer to some allocated memory or
 are using the libmicrohttpd API wrong and forgot to <code class="highlighter-rouge">free()</code> some data structure
 returned by it.<br />
+I analyze how the Valgrind check was failed. On my system which using
+Ubuntu/gcc, some tests are failed, while some not. Through this, I will analyze
+based some available pattern.  Before I found that Valgrind check error, my work
+with test suite stopped at how I must deal with timestamp/modified properties in
+<code class="highlighter-rouge">test-wget-1</code>. Another test waiting to finish: <code class="highlighter-rouge">test-metalink</code> (looping
+undefinitely), <code class="highlighter-rouge">test-i-https</code> (https implementation) and <code class="highlighter-rouge">test-auth-basic</code>(basic
+authentication implementation).<br />
 He also sees that ./configure always tries to link Libmicrohttpd. But Wget2
 should not depend on that. It should try to add the linker flags <em>only</em> when
 trying to compile the test suite. The Wget2 binary should not use that flag. I
@@ -574,10 +567,10 @@ segmentation fault error happened because I forgot to remove
 termination time. After I remove that line, the CI runner of Fedora/Clang
 passes some tests, not all test were resulted segmentation fault (14 of 32
 pass, while 4 skipped). The other fail because likely Valgrind check error.<br />
-Darshit asks me to make sure that my code works as I have mentioned at least one day
-before the deadline for the evaluations. On my Week 3 report I planned to get
-100% of passing all of the test suite. But, until Week 4, my job still not yet
-all done (even excluding other error generated outside <code class="highlighter-rouge">make check</code> on
+Darshit asks me to make sure that my code works as I have mentioned at least one
+day before the deadline for the evaluations. On my Week 3 report I planned to
+get 100% of passing all of the test suite. But, until Week 4, my job still not
+yet all done (even excluding other error generated outside <code class="highlighter-rouge">make check</code> on
 Debian/GCC system). I realized I have missed my (personal) target. Hence, he
 asks me where do I think I missed out which caused me to fall behind. In
 hindsight, he asks what according to me could have been done better. So, I and
@@ -606,222 +599,35 @@ blocks reported by Valgrind is:</p>
 ==26290==    by 0x9: ???
 </code></pre></div></div>
 
-<p>So, he guess is that this is some memory that is being allocated by Libmicrohttpd.
-The test code does indeed seem to call <code class="highlighter-rouge">MHD_stop_daemon()</code> which should
-ideally ensure a clean exit. He asks, where did the implementation go wrong.<br />
+<p>So, he guess is that this is some memory that is being allocated by
+Libmicrohttpd.  The test code does indeed seem to call <code class="highlighter-rouge">MHD_stop_daemon()</code> which
+should ideally ensure a clean exit. He asks, where did the implementation go
+wrong.<br />
 Christian said this is a bit hard to evaluate without the debug symbols. Most
 likely it would be a false-positive from a globally allocated buffer of
 Libgcrypt’s initialization sequence. He asks to download and install debug
 symbols for Libgcrypt and ideally Libmicrohttpd. It is unlikely to be
 Libmicrohttpd fault, as except for responses there are no Libmicrohttpd buffers
 my code would have to free.<br />
-Evgeny gives a review about my works, direct pointed to the code.</p>
-
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="kt">char</span> <span class="o">*</span><span class="nf">_scan_directory</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">data</span><span class="p">)</span>
-<span class="p">{</span>
-      <span class="kt">char</span> <span class="o">*</span><span class="n">path</span> <span class="o">=</span> <span class="n">strchr</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="sc">'/'</span><span class="p">);</span>
-      <span class="k">if</span> <span class="p">(</span><span class="n">path</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-              <span class="k">return</span> <span class="n">path</span><span class="p">;</span>
-      <span class="p">}</span>
-      <span class="k">else</span>
-              <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>He asks why do I use underscore as prefix for functions. Usually it is used by
-libraries to avoid name conflict. First, I think that I need to remove the
-underscore, then Tim also give comment that this is also useful in projects
-where there is more than one C file. They use it to make clear that a
-function/variable is static (not consequently everywhere, though). So, I
-still keep the underscore.</p>
-
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="kt">char</span> <span class="o">*</span><span class="nf">_parse_hostname</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">data</span><span class="p">)</span>
-<span class="p">{</span>
-      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">wget_strncasecmp_ascii</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s">"http://"</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span> <span class="p">{</span>
-              <span class="kt">char</span> <span class="o">*</span><span class="n">path</span> <span class="o">=</span> <span class="n">strchr</span><span class="p">(</span><span class="n">data</span> <span class="o">+=</span> <span class="mi">7</span><span class="p">,</span> <span class="sc">'/'</span><span class="p">);</span>
-              <span class="k">return</span> <span class="n">path</span><span class="p">;</span>
-      <span class="p">}</span> <span class="k">else</span>
-              <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="k">static</span> <span class="kt">char</span> <span class="o">*</span><span class="nf">_replace_space_with_plus</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">data</span><span class="p">)</span>
-<span class="p">{</span>
-      <span class="k">if</span> <span class="p">(</span><span class="n">strchr</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="sc">' '</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-              <span class="kt">char</span> <span class="o">*</span><span class="n">result</span> <span class="o">=</span> <span class="n">data</span><span class="p">;</span>
-              <span class="kt">char</span> <span class="o">*</span><span class="n">wk</span><span class="p">,</span> <span class="o">*</span><span class="n">s</span><span class="p">;</span>
-
-              <span class="n">wk</span> <span class="o">=</span> <span class="n">s</span> <span class="o">=</span> <span class="n">strdup</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
-
-              <span class="k">while</span> <span class="p">(</span><span class="o">*</span><span class="n">s</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-                      <span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="n">s</span> <span class="o">==</span> <span class="sc">' '</span><span class="p">){</span>
-                              <span class="o">*</span><span class="n">data</span><span class="o">++</span> <span class="o">=</span> <span class="sc">'+'</span><span class="p">;</span>
-                              <span class="o">++</span><span class="n">s</span><span class="p">;</span>
-                      <span class="p">}</span> <span class="k">else</span>
-                              <span class="o">*</span><span class="n">data</span><span class="o">++</span> <span class="o">=</span> <span class="o">*</span><span class="n">s</span><span class="o">++</span><span class="p">;</span>
-              <span class="p">}</span>
-              <span class="o">*</span><span class="n">data</span> <span class="o">=</span> <span class="sc">'\0'</span><span class="p">;</span>
-              <span class="n">free</span><span class="p">(</span><span class="n">wk</span><span class="p">);</span>
-              <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
-      <span class="p">}</span> <span class="k">else</span>
-              <span class="k">return</span> <span class="n">data</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>He asks me about the reason for using <code class="highlighter-rouge">strdup()</code>/<code class="highlighter-rouge">free()</code>. I checked string
-twice (by <code class="highlighter-rouge">strchr()</code> and by my custom iterations). It just waste of CPU time.
-He gives simpler implementation:</p>
-
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
-  <span class="k">while</span><span class="p">(</span><span class="mi">0</span> <span class="o">!=</span> <span class="o">*</span><span class="n">data</span><span class="p">)</span>
-  <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="sc">' '</span> <span class="o">==</span> <span class="o">*</span><span class="n">data</span><span class="p">)</span>
-      <span class="o">*</span><span class="n">data</span> <span class="o">=</span> <span class="sc">'+'</span><span class="p">;</span>
-    <span class="n">data</span><span class="o">++</span><span class="p">;</span>
-  <span class="p">}</span>
-  <span class="k">return</span> <span class="n">data</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>I applied the changes to my code.<br />
-Evgeny also give note that according to current HTTP specification ‘+’ must NOT be
-used as replacement for ‘ ’ in URLs. When I learn about this problem, it
-leads me to here [2]. Then if it need to be applied, I need to modify test
-file: test-base.c to not use ‘+’, and use %2B instead.<br />
-Tim added that the ‘+’ was always just for the query part. He asks to Evgeny
-what document are you exactly referring to to. Not that he is against dropping
-the ‘+’ rule, but what consortium is not accepted as normative by everyone,
-while IETF is. He is unsure about what ‘spec’ to follow. So, I keep my changes
-of ‘+’.</p>
-
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="kt">int</span> <span class="nf">print_out_key</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">cls</span><span class="p">,</span> <span class="k">enum</span> <span class="n">MHD_ValueKind</span> <span class="n">kind</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">key</span><span class="p">,</span>
-                                              <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">value</span><span class="p">)</span>
-<span class="p">{</span>
-      <span class="k">if</span> <span class="p">(</span><span class="n">key</span> <span class="o">&amp;&amp;</span> <span class="n">url_it</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">url_it2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-              <span class="n">wget_buffer_strcpy</span><span class="p">(</span><span class="n">url_arg</span><span class="p">,</span> <span class="s">"?"</span><span class="p">);</span>
-              <span class="n">_replace_space_with_plus</span><span class="p">((</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span> <span class="n">key</span><span class="p">);</span>
-</code></pre></div></div>
-
-<p>Evgeny said that we are not allowed to modify any content pointed by pointer to
-const. By dropping ‘const’ qualifiers are violating API. In other words: I was
-modifying internal structures that are not expected to be modified and the
-result is unpredictable. I fixed them then.</p>
-
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>              <span class="n">wget_buffer_strcat</span><span class="p">(</span><span class="n">url_arg</span><span class="p">,</span> <span class="n">key</span><span class="p">);</span>
-              <span class="k">if</span> <span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="p">{</span>
-                      <span class="n">wget_buffer_strcat</span><span class="p">(</span><span class="n">url_arg</span><span class="p">,</span> <span class="s">"="</span><span class="p">);</span>
-                      <span class="n">_replace_space_with_plus</span><span class="p">((</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span> <span class="n">value</span><span class="p">);</span>
-                      <span class="n">wget_buffer_strcat</span><span class="p">(</span><span class="n">url_arg</span><span class="p">,</span> <span class="n">value</span><span class="p">);</span>
-              <span class="p">}</span>
-      <span class="p">}</span>
-      <span class="k">if</span> <span class="p">(</span><span class="n">key</span> <span class="o">&amp;&amp;</span> <span class="n">url_it</span> <span class="o">!=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">url_it2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-              <span class="n">wget_buffer_strcat</span><span class="p">(</span><span class="n">url_arg</span><span class="p">,</span> <span class="s">"&amp;"</span><span class="p">);</span>
-              <span class="n">_replace_space_with_plus</span><span class="p">((</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span> <span class="n">key</span><span class="p">);</span>
-              <span class="n">wget_buffer_strcat</span><span class="p">(</span><span class="n">url_arg</span><span class="p">,</span> <span class="n">key</span><span class="p">);</span>
-              <span class="k">if</span> <span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="p">{</span>
-                      <span class="n">wget_buffer_strcat</span><span class="p">(</span><span class="n">url_arg</span><span class="p">,</span> <span class="s">"="</span><span class="p">);</span>
-                      <span class="n">_replace_space_with_plus</span><span class="p">((</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span> <span class="n">value</span><span class="p">);</span>
-                      <span class="n">wget_buffer_strcat</span><span class="p">(</span><span class="n">url_arg</span><span class="p">,</span> <span class="n">value</span><span class="p">);</span>
-              <span class="p">}</span>
-      <span class="p">}</span>
-      <span class="n">url_it</span><span class="o">++</span><span class="p">;</span>
-    <span class="k">return</span> <span class="n">MHD_YES</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>He also gives me some questions:</p>
-
-<ul>
-  <li>Is <code class="highlighter-rouge">url_arg</code> a global variable?</li>
-  <li>Do I use single thread only?</li>
-  <li>Why not to pass pointer to <code class="highlighter-rouge">url_arg</code> as <code class="highlighter-rouge">cls</code>?</li>
-  <li>What about <code class="highlighter-rouge">url_it</code> and <code class="highlighter-rouge">url_it2</code>? It is hard to guess meaning from name.</li>
-</ul>
-
-<p>If I need to pass all of them, I was advised to define some structure with three
-pointers and pass pointer to structure.</p>
-
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="kt">int</span> <span class="nf">answer_to_connection</span> <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">cls</span><span class="p">,</span>
-                                      <span class="k">struct</span> <span class="n">MHD_Connection</span> <span class="o">*</span><span class="n">connection</span><span class="p">,</span>
-                                      <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">url</span><span class="p">,</span>
-                                      <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">method</span><span class="p">,</span>
-                                      <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">version</span><span class="p">,</span>
-                                      <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">upload_data</span><span class="p">,</span> <span class="kt">size_t</span> <span class="o">*</span><span class="n">upload_data_size</span><span class="p">,</span> <span class="kt">void</span> <span class="o">**</span><span class="n">con_cls</span><span class="p">)</span>
-<span class="p">{</span>
-      <span class="k">struct</span> <span class="n">MHD_Response</span> <span class="o">*</span><span class="n">response</span><span class="p">;</span>
-      <span class="kt">int</span> <span class="n">ret</span><span class="p">;</span>
-
-      <span class="n">url_arg</span> <span class="o">=</span> <span class="n">wget_buffer_alloc</span><span class="p">(</span><span class="mi">1024</span><span class="p">);</span>
-      <span class="n">MHD_get_connection_values</span> <span class="p">(</span><span class="n">connection</span><span class="p">,</span> <span class="n">MHD_GET_ARGUMENT_KIND</span><span class="p">,</span> <span class="n">print_out_key</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
-
-      <span class="n">url_it2</span> <span class="o">=</span> <span class="n">url_it</span><span class="p">;</span>
-      <span class="n">wget_buffer_t</span> <span class="o">*</span><span class="n">url_full</span> <span class="o">=</span> <span class="n">wget_buffer_alloc</span><span class="p">(</span><span class="mi">1024</span><span class="p">);</span>
-      <span class="n">wget_buffer_strcpy</span><span class="p">(</span><span class="n">url_full</span><span class="p">,</span> <span class="n">url</span><span class="p">);</span>
-      <span class="k">if</span> <span class="p">(</span><span class="n">url_arg</span><span class="p">)</span>
-              <span class="n">wget_buffer_strcat</span><span class="p">(</span><span class="n">url_full</span><span class="p">,</span> <span class="n">url_arg</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">);</span>
-      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">strcmp</span><span class="p">(</span><span class="n">url_full</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">,</span> <span class="s">"/"</span><span class="p">))</span>
-              <span class="n">wget_buffer_strcat</span><span class="p">(</span><span class="n">url_full</span><span class="p">,</span> <span class="s">"index.html"</span><span class="p">);</span>
-      <span class="n">url_it</span> <span class="o">=</span> <span class="n">url_it2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-      <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">itt</span><span class="p">,</span> <span class="n">found</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-      <span class="k">for</span> <span class="p">(</span><span class="n">itt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">itt</span> <span class="o">&lt;</span> <span class="n">nurls</span><span class="p">;</span> <span class="n">itt</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-              <span class="kt">char</span> <span class="o">*</span><span class="n">dir</span> <span class="o">=</span> <span class="n">_scan_directory</span><span class="p">(</span><span class="n">url_full</span><span class="o">-&gt;</span><span class="n">data</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
-              <span class="k">if</span> <span class="p">(</span><span class="n">dir</span> <span class="o">!=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">strcmp</span><span class="p">(</span><span class="n">dir</span><span class="p">,</span> <span class="s">"/"</span><span class="p">))</span>
-                      <span class="n">wget_buffer_strcat</span><span class="p">(</span><span class="n">url_full</span><span class="p">,</span> <span class="s">"index.html"</span><span class="p">);</span>
-
-              <span class="kt">char</span> <span class="o">*</span><span class="n">host</span> <span class="o">=</span> <span class="n">_parse_hostname</span><span class="p">(</span><span class="n">url_full</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">);</span>
-              <span class="k">if</span> <span class="p">(</span><span class="n">host</span> <span class="o">!=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">strcmp</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="s">"/"</span><span class="p">))</span>
-                      <span class="n">wget_buffer_strcat</span><span class="p">(</span><span class="n">url_full</span><span class="p">,</span> <span class="s">"index.html"</span><span class="p">);</span>
-
-              <span class="n">wget_buffer_t</span> <span class="o">*</span><span class="n">iri_url</span> <span class="o">=</span> <span class="n">wget_buffer_alloc</span><span class="p">(</span><span class="mi">1024</span><span class="p">);</span>
-              <span class="n">wget_buffer_strcpy</span><span class="p">(</span><span class="n">iri_url</span><span class="p">,</span> <span class="n">urls</span><span class="p">[</span><span class="n">itt</span><span class="p">].</span><span class="n">name</span><span class="p">);</span>
-              <span class="n">MHD_http_unescape</span><span class="p">(</span><span class="n">iri_url</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">);</span>
-
-              <span class="k">if</span> <span class="p">(</span><span class="n">urls</span><span class="p">[</span><span class="n">itt</span><span class="p">].</span><span class="n">code</span> <span class="o">!=</span> <span class="nb">NULL</span> <span class="o">&amp;&amp;</span>
-                      <span class="o">!</span><span class="n">strcmp</span><span class="p">(</span><span class="n">urls</span><span class="p">[</span><span class="n">itt</span><span class="p">].</span><span class="n">code</span><span class="p">,</span> <span class="s">"302 Redirect"</span><span class="p">)</span> <span class="o">&amp;&amp;</span>
-                      <span class="o">!</span><span class="n">strcmp</span><span class="p">(</span><span class="n">url_full</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">,</span> <span class="n">iri_url</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">))</span>
-              <span class="p">{</span>
-                      <span class="n">response</span> <span class="o">=</span> <span class="n">MHD_create_response_from_buffer</span><span class="p">(</span><span class="n">strlen</span><span class="p">(</span><span class="s">"302 Redirect"</span><span class="p">),</span>
-                                      <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span> <span class="s">"302 Redirect"</span><span class="p">,</span> <span class="n">MHD_RESPMEM_PERSISTENT</span><span class="p">);</span>
-                      <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">itt2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">urls</span><span class="p">[</span><span class="n">itt</span><span class="p">].</span><span class="n">headers</span><span class="p">[</span><span class="n">itt2</span><span class="p">]</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">;</span> <span class="n">itt2</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-                              <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">header</span> <span class="o">=</span> <span class="n">urls</span><span class="p">[</span><span class="n">itt</span><span class="p">].</span><span class="n">headers</span><span class="p">[</span><span class="n">itt2</span><span class="p">];</span>
-                              <span class="k">if</span> <span class="p">(</span><span class="n">header</span><span class="p">)</span> <span class="p">{</span>
-                                      <span class="kt">char</span> <span class="o">*</span><span class="n">header_value</span> <span class="o">=</span> <span class="n">strchr</span><span class="p">(</span><span class="n">header</span><span class="p">,</span> <span class="sc">':'</span><span class="p">);</span>
-                                      <span class="kt">char</span> <span class="o">*</span><span class="n">header_key</span> <span class="o">=</span> <span class="n">wget_strmemdup</span><span class="p">(</span><span class="n">header</span><span class="p">,</span> <span class="n">header_value</span> <span class="o">-</span> <span class="n">header</span><span class="p">);</span>
-                                      <span class="n">MHD_add_response_header</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">header_key</span><span class="p">,</span> <span class="n">header_value</span> <span class="o">+</span> <span class="mi">2</span><span class="p">);</span>
-                                      <span class="n">ret</span> <span class="o">=</span> <span class="n">MHD_queue_response</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span> <span class="n">MHD_HTTP_FOUND</span><span class="p">,</span> <span class="n">response</span><span class="p">);</span>
-                                      <span class="n">wget_xfree</span><span class="p">(</span><span class="n">header_key</span><span class="p">);</span>
-                                      <span class="n">itt</span> <span class="o">=</span> <span class="n">nurls</span><span class="p">;</span>
-                                      <span class="n">found</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-                              <span class="p">}</span> <span class="k">else</span>
-                                      <span class="n">itt</span> <span class="o">=</span> <span class="n">nurls</span><span class="p">;</span>
-                      <span class="p">}</span>
-              <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">strcmp</span><span class="p">(</span><span class="n">url_full</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">,</span> <span class="n">iri_url</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">))</span> <span class="p">{</span>
-                      <span class="n">response</span> <span class="o">=</span> <span class="n">MHD_create_response_from_buffer</span><span class="p">(</span><span class="n">strlen</span><span class="p">(</span><span class="n">urls</span><span class="p">[</span><span class="n">itt</span><span class="p">].</span><span class="n">body</span><span class="p">),</span>
-                                      <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span> <span class="n">urls</span><span class="p">[</span><span class="n">itt</span><span class="p">].</span><span class="n">body</span><span class="p">,</span> <span class="n">MHD_RESPMEM_PERSISTENT</span><span class="p">);</span>
-</code></pre></div></div>
-
-<p>He asks me again to ensure that content of <code class="highlighter-rouge">urls[itt].body</code> will be valid until
-end of this connection. Otherwise you must use <code class="highlighter-rouge">MHD_RESPMEM_MUST_COPY</code> as last
-parameter. I followed his advice and fix my code.</p>
-
-<p>Two generic advises he gave to me:</p>
-
-<ul>
-  <li>Avoid using global variables.</li>
-  <li>Use better names for variables. It it hard to understand what mean
-<code class="highlighter-rouge">iri_url</code>, <code class="highlighter-rouge">itt</code> and <code class="highlighter-rouge">itt2</code>.</li>
-</ul>
+He also asks me to ensure that I have followed the Libmicrohttpd API and
+documentation correctly. I have followed Libmicrohttpd API documentation and
+tutorial for implementation carefully.</p>
 
 <h3 id="first-period-evaluations">First Period Evaluations</h3>
 
-<p>After finish my 4th period report, I also must complete first evaluation report
-via GSoC web app. I passed the evaluations, but with warning. Mentors give me an
-important messages about what happened and what should I improve.<br />
-The project is indeed behind schedule. The mentors still give me a chance by passing
-me in the hopes that I and they will be able to improve the communication and
-get the project back on track. One major suggestion is that I increase the
-frequency of my project reports from weekly to daily. Just a single line at the
-end of each day stating what I have done and what are my plans for the next
-day.</p>
+<p>After finish my 4th period report, and discuss with mentors about my
+difficulties I found, I also must complete first evaluation report via GSoC web
+app. For what I can just remember, it just a dashboard which asks my feedback
+about the organization I working with. The real report is actually done via
+email.<br />
+The other day, GSoC announce the evaluations. The result, I passed the
+evaluations, but with warning. Mentors give me an important messages about what
+happened and what should I improve. The project is indeed behind schedule. The
+mentors still give me a chance by passing me in the hopes that I and they will
+be able to improve the communication and get the project back on track. One
+major suggestion is that I increase the frequency of my project reports from
+weekly to daily. Just a single line at the end of each day stating what I have
+done and what are my plans for the next day.</p>
 
 <h3 id="conclusion">Conclusion</h3>
 
@@ -831,8 +637,7 @@ them.</p>
 
 <p>Reference(s):<br />
 [0] <a href="https://github.com/rockdaboot/wget2/pull/155">https://github.com/rockdaboot/wget2/pull/155</a><br />
-[1] <a href="https://lists.gnu.org/archive/html/bug-wget/2017-03/msg00156.html">https://lists.gnu.org/archive/html/bug-wget/2017-03/msg00156.html</a><br />
-[2] <a href="https://stackoverflow.com/questions/1005676/urls-and-plus-signs">https://stackoverflow.com/questions/1005676/urls-and-plus-signs</a></p>
+[1] <a href="https://lists.gnu.org/archive/html/bug-wget/2017-03/msg00156.html">https://lists.gnu.org/archive/html/bug-wget/2017-03/msg00156.html</a></p>
 </div>
     <hr />
     <div class="share-page">
@@ -863,6 +668,20 @@ them.</p>
     
         
             
+                
+                <div class="panel-body">
+                <h4>Related Posts</h4>
+                <ul>
+                
+                <li class="relatedPost">
+                    <a href="https://www.didiksetiawan.com/blog/2018/03/09/gsoc-with-gnu-wget2-part-ii/">GSoC with GNU Wget2 - Part II</a>
+                    
+                        <small>(Categories: <a href="/category/open_source">open_source</a>, <a href="/category/programming">programming</a>, <a href="/category/collaboration">collaboration</a>, <a href="/category/gsoc">gsoc</a>)</small>
+                    
+                </li>
+                
+                
+            
         
             
         
@@ -906,10 +725,49 @@ them.</p>
     
         
             
-                
-                <div class="panel-body">
-                <h4>Related Posts</h4>
-                <ul>
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
                 
                 <li class="relatedPost">
                     <a href="https://www.didiksetiawan.com/blog/2017/04/08/workflow-on-contributing-to-open-source/">Workflow on Contributing to Open Source Project</a>
@@ -1495,6 +1353,8 @@ them.</p>
   
     <a class="prev pull-left" href="https://www.didiksetiawan.com/blog/2017/04/08/workflow-on-contributing-to-open-source/">&laquo; Workflow on Contributing to Open Source Project</a>
   
+  
+    <a class="next pull-right" href="https://www.didiksetiawan.com/blog/2018/03/09/gsoc-with-gnu-wget2-part-ii/">GSoC with GNU Wget2 - Part II &raquo;</a>
   
 </div>
 

@@ -1,0 +1,1970 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="shortcut icon" href="/static/img/favicon.ico" />
+        <title>GSoC with GNU Wget2 - Part II - Didik Setiawan</title>
+        <meta name="author" content="Didik Setiawan" />
+        <meta name="description" content="GSoC with GNU Wget2 - Part II" />
+        <meta name="keywords" content="GSoC with GNU Wget2 - Part II, Didik Setiawan, open_source, programming, collaboration, gsoc" />
+
+        <meta content="0" property="fb:app_id">
+        <meta content="Didik Setiawan" property="og:site_name">
+        
+          <meta content="GSoC with GNU Wget2 - Part II" property="og:title">
+        
+        
+          <meta content="article" property="og:type">
+        
+        
+          <meta content="Didik Setiawan's Blog" property="og:description">
+        
+        
+          <meta content="https://www.didiksetiawan.com/blog/2018/03/09/gsoc-with-gnu-wget2-part-ii/" property="og:url">
+        
+        
+          <meta content="2018-03-09T03:21:00+07:00" property="article:published_time">
+          <meta content="https://www.didiksetiawan.com/about/" property="article:author">
+        
+        
+          <meta content="https://www.didiksetiawan.com/static/img/logo-high-resolution.png" property="og:image">
+        
+        
+          
+          <meta content="open_source" property="article:section">
+          
+        
+        
+          
+        
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@didik_swn">
+        <meta name="twitter:creator" content="@didik_swn">
+        
+          <meta name="twitter:title" content="GSoC with GNU Wget2 - Part II">
+        
+        
+          <meta name="twitter:url" content="https://www.didiksetiawan.com/blog/2018/03/09/gsoc-with-gnu-wget2-part-ii/">
+        
+        
+          <meta name="twitter:description" content="Didik Setiawan's Blog">
+        
+        
+
+      <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml">
+      <script type="text/javascript">window.baseurl = 'https://www.didiksetiawan.com';</script>
+      
+        <!-- Custom Fonts -->
+        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+
+        <!-- FontAwesome icons -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/74dfc6cf47.css">
+
+        <!-- Core BootStrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <!-- Material Design CSS -->
+        <link rel="stylesheet" href="/static/css/bootstrap-material-design.min.css">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/static/css/syntax.css">
+
+        <!-- Custom CSS -->        
+        <link rel="stylesheet" href="/static/css/thickbox.css">
+        <link rel="stylesheet" href="/static/css/main.css">
+        <link rel="stylesheet" href="/static/css/projects.css">
+
+        <script type="text/javascript">
+          //loadingImage is relative to project dir
+          var tb_pathToImage = "/static/img/loadingAnimation.gif";
+        </script>
+
+  </head>
+
+  <body class="home overflow-hidden">
+    <div class="header-panel shadow-z-2">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3 col-sm-4 col-xs-12">
+            <div class="row-picture">
+              <img alt="dstw-avatar" id="about" class="logo-img" src="/static/img/avatar.png" height="75px" width="75px">
+            </div>
+            <div class="row-details">
+              <h4 class="list-group-item-heading">Didik Setiawan</h4>
+              <p class="list-group-item-text">Let the bits speak</p>
+              <div class="social-icons">
+	
+        <a class="icon" target="_blank" href="https://www.twitter.com/didik_swn"><i class="fa fa-twitter"></i></a>
+    
+        <a class="icon" target="_blank" href="https://www.github.com/dstw"><i class="fa fa-github"></i></a>
+    
+        <a class="icon" target="_blank" href="https://www.gitlab.com/dstw"><i class="fa fa-gitlab"></i></a>
+    
+        <a class="icon" target="_blank" href="https://stackoverflow.com/story/dstw"><i class="fa fa-stack-overflow"></i></a>
+    
+</div>
+
+            </div>
+            <div class="navbar-header pull-right">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <i class="fa fa-2x fa-bars"></i>
+              </button>
+            </div>
+          </div>
+          <div class="col-md-9 col-sm-8 col-xs-12">
+          <div class="row">
+            <h2 class="blog-title-pro col-md-6 col-sm-12 col-xs-12 ">GSoC with GNU Wget2 - Part II</h2>
+            
+            <div class="col-md-6 col-sm-12 col-xs-12 searchcontrol" id="js-search">
+              <input class="form-control" type="text" id="js-search__input" placeholder="Search">
+              <ul class="search__results" id="js-search__results"></ul>
+            </div>
+            
+            </div>
+            <p class="info">
+              
+                <span class="time">09 Mar 2018</span>
+              
+              
+                <span class="categories">
+                  &raquo; 
+                  
+                    <a href="/category/open_source">open_source</a>
+                    , 
+                  
+                    <a href="/category/programming">programming</a>
+                    , 
+                  
+                    <a href="/category/collaboration">collaboration</a>
+                    , 
+                  
+                    <a href="/category/gsoc">gsoc</a>
+                    
+                  
+                </span>
+              
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container main outer">
+      <div class="row">
+        <div class="col-md-3 col-xs-12">
+              <nav class="menu">
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="list-separator nav navbar-nav well well-primary post">
+
+	
+	
+	
+	
+	
+	
+    
+	
+	<li class="col-lg-12 col-md-12 col-sm-4 col-xs-12 current-menu-item gsoc-with-gnu-wget2-part-ii"><a href="/" target="_self"><i class="fa fa-home"></i> Blog</a></li>
+
+	
+	
+	
+	
+	
+	
+    
+	
+	<li class="col-lg-12 col-md-12 col-sm-4 col-xs-12  gsoc-with-gnu-wget2-part-ii"><a href="/about/" target="_self"><i class="fa fa-comments"></i> About</a></li>
+
+	
+	
+	
+	
+	
+	
+    
+	
+	<li class="col-lg-12 col-md-12 col-sm-4 col-xs-12  gsoc-with-gnu-wget2-part-ii"><a href="mailto:ds@didiksetiawan.com" target="_self"><i class="fa fa-envelope"></i> Email</a></li>
+
+</ul>
+
+    </div>
+    </nav>
+
+        </div>
+        <div class="col-md-9 col-xs-12 full">
+          <div class="post-content well">
+<article class="content">
+    <div class="post"><p>This is story about my second journey in the Google Summer of Code (GSoC) 2017.
+From the previous phase, I made some basic progress. I also got many unresolved
+tasks to be done. Started on this week, I try to follow Darshit Shah advice to
+increase my report from weekly to daily. However, in reality, it was difficult
+to create daily report, there must be day that I report nothing because what I
+do was actually stuck in my problem.<br />
+What I have got so far:</p>
+
+<p>Started working on <code class="highlighter-rouge">wget_test_start_server()</code> to use Libmicrohttpd as HTTP
+server. Workflow to resolve this:</p>
+
+<ul>
+  <li>Remove initial process for HTTP server socket</li>
+  <li>Create <code class="highlighter-rouge">_http_server_start()</code> function, wrapper for Libmicrohttpd. There is
+also function <code class="highlighter-rouge">answer_to_connection()</code> which use to create proper HTTP
+response</li>
+  <li>Use select method (<code class="highlighter-rouge">MHD_USE_SELECT_INTERNALLY</code>) for threading model in
+Libmicrohttpd to get better compatibility</li>
+  <li><code class="highlighter-rouge">http_server_port</code> seized automatically using Libmicrohttpd function by
+passing <code class="highlighter-rouge">MHD_DAEMON_INFO_BIND_PORT</code> or <code class="highlighter-rouge">MHD_DAEMON_INFO_LISTEN_FD</code> parameter to
+<code class="highlighter-rouge">MHD_get_daemon_info()</code></li>
+  <li>Using iteration to parse urls data in <code class="highlighter-rouge">answer_to_connection()</code>. This
+guarantee we can pass any variadic data to Libmicrohttpd and prevent
+segmentation fault</li>
+  <li>Fix <code class="highlighter-rouge">answer_to_connection()</code> function to create proper HTTP response:
+    <ul>
+      <li>Handle arguments (query string) on URL</li>
+      <li>Handle redirection</li>
+      <li>Handle chunked transfer encoding</li>
+      <li>Handle directory creation</li>
+      <li>Handle URL with IRI object</li>
+      <li>Handle URL with IDN hostname</li>
+      <li>Handle URL with query string which contains space</li>
+      <li>Handle If-Modified-Since header</li>
+    </ul>
+  </li>
+  <li>Fix segmentation fault error when build on Fedora/Clang CI runner. This
+caused by former variable <code class="highlighter-rouge">http_server_tid</code> that forget to removed</li>
+</ul>
+
+<p>Things which would be done in the upcoming week:</p>
+
+<ul>
+  <li>There are still problem occurred when running <code class="highlighter-rouge">make check-valgrind</code> on some
+tests. This prevent me to pass the CI test</li>
+  <li>Fix all remaining unfinished test covered by Libmicrohttpd code:
+    <ul>
+      <li>test-wget1.c: add capability for HTTP 406 Range Not Satisfiable</li>
+      <li>test-auth-basic.c: add basic authentication test</li>
+      <li>test-metalink.c: looping</li>
+      <li>test-i-https.c: add HTTPS test</li>
+    </ul>
+  </li>
+  <li>Fix Libmicrohttpd depedency on Wget2, just required when need to run test
+suite</li>
+</ul>
+
+<h3 id="5th-week">5th Week</h3>
+
+<p>I started my week with ask a question into my mentors. I try to resolve the
+check-valgrind problems. What I do so far, I split tests into two groups: pass
+and fail. I pick one from the fail group, take one from example,
+test-directory-clash. From the valgrind log it shows:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>==30425== ERROR SUMMARY: 24 errors from 2 contexts (suppressed: 0 from 0)
+==30425==
+==30425== 4 errors in context 1 of 2:
+==30425== Thread 2:
+==30425== Invalid read of size 1
+==30425==    at 0x556F570: __strcmp_sse2_unaligned (strcmp-sse2-unaligned.S:24)
+==30425==    by 0x4E6D1C2: wget_strcmp (utils.c:82)
+==30425==    by 0x40CF61: try_connection (wget.c:1088)
+==30425==    by 0x40D1E6: establish_connection (wget.c:1151)
+==30425==    by 0x40EA0D: downloader_thread (wget.c:1626)
+==30425==    by 0x52BA6B9: start_thread (pthread_create.c:333)
+==30425==    by 0x55D73DC: clone (clone.S:109)
+==30425==  Address 0xa716033 is 163 bytes inside a block of size 180 free'd
+==30425==    at 0x4C2EDEB: free (in
+/usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==30425==    by 0x4E5EDD0: wget_iri_free (iri.c:178)
+==30425==    by 0x408267: host_remove_job (host.c:347)
+==30425==    by 0x40EC4E: downloader_thread (wget.c:1698)
+==30425==    by 0x52BA6B9: start_thread (pthread_create.c:333)
+==30425==    by 0x55D73DC: clone (clone.S:109)
+==30425==  Block was alloc'd at
+==30425==    at 0x4C2DB8F: malloc (in
+/usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==30425==    by 0x4E6F2C2: wget_malloc (xalloc.c:85)
+==30425==    by 0x4E5EE69: wget_iri_parse (iri.c:231)
+==30425==    by 0x4E601AC: wget_iri_parse_base (iri.c:623)
+==30425==    by 0x407FC6: host_add_robotstxt_job (host.c:288)
+==30425==    by 0x40ACE0: add_url_to_queue (wget.c:438)
+==30425==    by 0x40C273: main (wget.c:853)
+</code></pre></div></div>
+
+<p>I try to modify the test, adding option –no-robots. The result, valgrind check
+exited normally. Therefore, I make a conclusion and guest that the robots.txt
+processor on Wget2 and my Libmicrohttpd code in libtest.c trigger memory leak.
+I have no idea about this. I can just guest that this is related to libgcrypt
+error previously said by Christian Grothoff. Although I still found that
+libgcrypt error in passed test.</p>
+
+<p>Evgeny Grin gives a review about my works, he direct pointed to the code I
+attached for review purpose.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="kt">char</span> <span class="o">*</span><span class="nf">_scan_directory</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">data</span><span class="p">)</span>
+<span class="p">{</span>
+      <span class="kt">char</span> <span class="o">*</span><span class="n">path</span> <span class="o">=</span> <span class="n">strchr</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="sc">'/'</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">path</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+              <span class="k">return</span> <span class="n">path</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">else</span>
+              <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>He asks why do I use underscore as prefix for functions. Usually it is used by
+libraries to avoid name conflict. First, I think that I need to remove the
+underscore, then Tim Ruehsen also give comment that this is also useful in
+projects where there is more than one C file. They use it to make clear that a
+function/variable is static (not consequently everywhere, though). So, I leaved
+the underscore as is.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="kt">char</span> <span class="o">*</span><span class="nf">_parse_hostname</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">data</span><span class="p">)</span>
+<span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">wget_strncasecmp_ascii</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s">"http://"</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span> <span class="p">{</span>
+              <span class="kt">char</span> <span class="o">*</span><span class="n">path</span> <span class="o">=</span> <span class="n">strchr</span><span class="p">(</span><span class="n">data</span> <span class="o">+=</span> <span class="mi">7</span><span class="p">,</span> <span class="sc">'/'</span><span class="p">);</span>
+              <span class="k">return</span> <span class="n">path</span><span class="p">;</span>
+      <span class="p">}</span> <span class="k">else</span>
+              <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">static</span> <span class="kt">char</span> <span class="o">*</span><span class="nf">_replace_space_with_plus</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">data</span><span class="p">)</span>
+<span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">strchr</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="sc">' '</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+              <span class="kt">char</span> <span class="o">*</span><span class="n">result</span> <span class="o">=</span> <span class="n">data</span><span class="p">;</span>
+              <span class="kt">char</span> <span class="o">*</span><span class="n">wk</span><span class="p">,</span> <span class="o">*</span><span class="n">s</span><span class="p">;</span>
+
+              <span class="n">wk</span> <span class="o">=</span> <span class="n">s</span> <span class="o">=</span> <span class="n">strdup</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+
+              <span class="k">while</span> <span class="p">(</span><span class="o">*</span><span class="n">s</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+                      <span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="n">s</span> <span class="o">==</span> <span class="sc">' '</span><span class="p">){</span>
+                              <span class="o">*</span><span class="n">data</span><span class="o">++</span> <span class="o">=</span> <span class="sc">'+'</span><span class="p">;</span>
+                              <span class="o">++</span><span class="n">s</span><span class="p">;</span>
+                      <span class="p">}</span> <span class="k">else</span>
+                              <span class="o">*</span><span class="n">data</span><span class="o">++</span> <span class="o">=</span> <span class="o">*</span><span class="n">s</span><span class="o">++</span><span class="p">;</span>
+              <span class="p">}</span>
+              <span class="o">*</span><span class="n">data</span> <span class="o">=</span> <span class="sc">'\0'</span><span class="p">;</span>
+              <span class="n">free</span><span class="p">(</span><span class="n">wk</span><span class="p">);</span>
+              <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+      <span class="p">}</span> <span class="k">else</span>
+              <span class="k">return</span> <span class="n">data</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>He asks me about the reason for using <code class="highlighter-rouge">strdup()</code>/<code class="highlighter-rouge">free()</code>. I checked string
+twice (by <code class="highlighter-rouge">strchr()</code> and by my custom iterations). It just waste of CPU time.
+He gives simpler implementation:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
+  <span class="k">while</span><span class="p">(</span><span class="mi">0</span> <span class="o">!=</span> <span class="o">*</span><span class="n">data</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="sc">' '</span> <span class="o">==</span> <span class="o">*</span><span class="n">data</span><span class="p">)</span>
+      <span class="o">*</span><span class="n">data</span> <span class="o">=</span> <span class="sc">'+'</span><span class="p">;</span>
+    <span class="n">data</span><span class="o">++</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="n">data</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>I applied the changes to my code.<br />
+Evgeny also give note that according to current HTTP specification ‘+’ must NOT
+be used as replacement for ‘ ’ (space) in URLs. When I learn about this problem, it
+leads me to here [0]. Then if it need to be applied, I need to modify test file:
+test-base.c to not use ‘+’, and use %2B instead.<br />
+Tim added that the ‘+’ was always just for the query part. He asks to Evgeny
+what document are you exactly referring to to. Not that he is against dropping
+the ‘+’ rule, but what consortium is not accepted as normative by everyone,
+while IETF is. He is unsure about what ‘spec’ to follow. So, I keep my changes
+of how I treat the ‘ ’ (space).</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="kt">int</span> <span class="nf">print_out_key</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">cls</span><span class="p">,</span> <span class="k">enum</span> <span class="n">MHD_ValueKind</span> <span class="n">kind</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">key</span><span class="p">,</span>
+                                              <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">value</span><span class="p">)</span>
+<span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">key</span> <span class="o">&amp;&amp;</span> <span class="n">url_it</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">url_it2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+              <span class="n">wget_buffer_strcpy</span><span class="p">(</span><span class="n">url_arg</span><span class="p">,</span> <span class="s">"?"</span><span class="p">);</span>
+              <span class="n">_replace_space_with_plus</span><span class="p">((</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span> <span class="n">key</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Evgeny said that we are not allowed to modify any content pointed by pointer to
+const. By dropping ‘const’ qualifiers are violating API. In other words: I was
+modifying internal structures that are not expected to be modified and the
+result is unpredictable.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>              <span class="n">wget_buffer_strcat</span><span class="p">(</span><span class="n">url_arg</span><span class="p">,</span> <span class="n">key</span><span class="p">);</span>
+              <span class="k">if</span> <span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+                      <span class="n">wget_buffer_strcat</span><span class="p">(</span><span class="n">url_arg</span><span class="p">,</span> <span class="s">"="</span><span class="p">);</span>
+                      <span class="n">_replace_space_with_plus</span><span class="p">((</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span> <span class="n">value</span><span class="p">);</span>
+                      <span class="n">wget_buffer_strcat</span><span class="p">(</span><span class="n">url_arg</span><span class="p">,</span> <span class="n">value</span><span class="p">);</span>
+              <span class="p">}</span>
+      <span class="p">}</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">key</span> <span class="o">&amp;&amp;</span> <span class="n">url_it</span> <span class="o">!=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">url_it2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+              <span class="n">wget_buffer_strcat</span><span class="p">(</span><span class="n">url_arg</span><span class="p">,</span> <span class="s">"&amp;"</span><span class="p">);</span>
+              <span class="n">_replace_space_with_plus</span><span class="p">((</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span> <span class="n">key</span><span class="p">);</span>
+              <span class="n">wget_buffer_strcat</span><span class="p">(</span><span class="n">url_arg</span><span class="p">,</span> <span class="n">key</span><span class="p">);</span>
+              <span class="k">if</span> <span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+                      <span class="n">wget_buffer_strcat</span><span class="p">(</span><span class="n">url_arg</span><span class="p">,</span> <span class="s">"="</span><span class="p">);</span>
+                      <span class="n">_replace_space_with_plus</span><span class="p">((</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span> <span class="n">value</span><span class="p">);</span>
+                      <span class="n">wget_buffer_strcat</span><span class="p">(</span><span class="n">url_arg</span><span class="p">,</span> <span class="n">value</span><span class="p">);</span>
+              <span class="p">}</span>
+      <span class="p">}</span>
+      <span class="n">url_it</span><span class="o">++</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">MHD_YES</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>I fixed them then.<br />
+He also gives me some questions:</p>
+
+<ul>
+  <li>Is <code class="highlighter-rouge">url_arg</code> a global variable?</li>
+  <li>Do I use single thread only?</li>
+  <li>Why not to pass pointer to <code class="highlighter-rouge">url_arg</code> as <code class="highlighter-rouge">cls</code>?</li>
+  <li>What about <code class="highlighter-rouge">url_it</code> and <code class="highlighter-rouge">url_it2</code>? It is hard to guess meaning from name.</li>
+</ul>
+
+<p>If I need to pass all of them, I was advised to define some structure with three
+pointers and pass pointer to structure.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="kt">int</span> <span class="nf">answer_to_connection</span> <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">cls</span><span class="p">,</span>
+                                      <span class="k">struct</span> <span class="n">MHD_Connection</span> <span class="o">*</span><span class="n">connection</span><span class="p">,</span>
+                                      <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">url</span><span class="p">,</span>
+                                      <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">method</span><span class="p">,</span>
+                                      <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">version</span><span class="p">,</span>
+                                      <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">upload_data</span><span class="p">,</span> <span class="kt">size_t</span> <span class="o">*</span><span class="n">upload_data_size</span><span class="p">,</span> <span class="kt">void</span> <span class="o">**</span><span class="n">con_cls</span><span class="p">)</span>
+<span class="p">{</span>
+      <span class="k">struct</span> <span class="n">MHD_Response</span> <span class="o">*</span><span class="n">response</span><span class="p">;</span>
+      <span class="kt">int</span> <span class="n">ret</span><span class="p">;</span>
+
+      <span class="n">url_arg</span> <span class="o">=</span> <span class="n">wget_buffer_alloc</span><span class="p">(</span><span class="mi">1024</span><span class="p">);</span>
+      <span class="n">MHD_get_connection_values</span> <span class="p">(</span><span class="n">connection</span><span class="p">,</span> <span class="n">MHD_GET_ARGUMENT_KIND</span><span class="p">,</span> <span class="n">print_out_key</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+
+      <span class="n">url_it2</span> <span class="o">=</span> <span class="n">url_it</span><span class="p">;</span>
+      <span class="n">wget_buffer_t</span> <span class="o">*</span><span class="n">url_full</span> <span class="o">=</span> <span class="n">wget_buffer_alloc</span><span class="p">(</span><span class="mi">1024</span><span class="p">);</span>
+      <span class="n">wget_buffer_strcpy</span><span class="p">(</span><span class="n">url_full</span><span class="p">,</span> <span class="n">url</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">url_arg</span><span class="p">)</span>
+              <span class="n">wget_buffer_strcat</span><span class="p">(</span><span class="n">url_full</span><span class="p">,</span> <span class="n">url_arg</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">strcmp</span><span class="p">(</span><span class="n">url_full</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">,</span> <span class="s">"/"</span><span class="p">))</span>
+              <span class="n">wget_buffer_strcat</span><span class="p">(</span><span class="n">url_full</span><span class="p">,</span> <span class="s">"index.html"</span><span class="p">);</span>
+      <span class="n">url_it</span> <span class="o">=</span> <span class="n">url_it2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">itt</span><span class="p">,</span> <span class="n">found</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="k">for</span> <span class="p">(</span><span class="n">itt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">itt</span> <span class="o">&lt;</span> <span class="n">nurls</span><span class="p">;</span> <span class="n">itt</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+              <span class="kt">char</span> <span class="o">*</span><span class="n">dir</span> <span class="o">=</span> <span class="n">_scan_directory</span><span class="p">(</span><span class="n">url_full</span><span class="o">-&gt;</span><span class="n">data</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+              <span class="k">if</span> <span class="p">(</span><span class="n">dir</span> <span class="o">!=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">strcmp</span><span class="p">(</span><span class="n">dir</span><span class="p">,</span> <span class="s">"/"</span><span class="p">))</span>
+                      <span class="n">wget_buffer_strcat</span><span class="p">(</span><span class="n">url_full</span><span class="p">,</span> <span class="s">"index.html"</span><span class="p">);</span>
+
+              <span class="kt">char</span> <span class="o">*</span><span class="n">host</span> <span class="o">=</span> <span class="n">_parse_hostname</span><span class="p">(</span><span class="n">url_full</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">);</span>
+              <span class="k">if</span> <span class="p">(</span><span class="n">host</span> <span class="o">!=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">strcmp</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="s">"/"</span><span class="p">))</span>
+                      <span class="n">wget_buffer_strcat</span><span class="p">(</span><span class="n">url_full</span><span class="p">,</span> <span class="s">"index.html"</span><span class="p">);</span>
+
+              <span class="n">wget_buffer_t</span> <span class="o">*</span><span class="n">iri_url</span> <span class="o">=</span> <span class="n">wget_buffer_alloc</span><span class="p">(</span><span class="mi">1024</span><span class="p">);</span>
+              <span class="n">wget_buffer_strcpy</span><span class="p">(</span><span class="n">iri_url</span><span class="p">,</span> <span class="n">urls</span><span class="p">[</span><span class="n">itt</span><span class="p">].</span><span class="n">name</span><span class="p">);</span>
+              <span class="n">MHD_http_unescape</span><span class="p">(</span><span class="n">iri_url</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">);</span>
+
+              <span class="k">if</span> <span class="p">(</span><span class="n">urls</span><span class="p">[</span><span class="n">itt</span><span class="p">].</span><span class="n">code</span> <span class="o">!=</span> <span class="nb">NULL</span> <span class="o">&amp;&amp;</span>
+                      <span class="o">!</span><span class="n">strcmp</span><span class="p">(</span><span class="n">urls</span><span class="p">[</span><span class="n">itt</span><span class="p">].</span><span class="n">code</span><span class="p">,</span> <span class="s">"302 Redirect"</span><span class="p">)</span> <span class="o">&amp;&amp;</span>
+                      <span class="o">!</span><span class="n">strcmp</span><span class="p">(</span><span class="n">url_full</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">,</span> <span class="n">iri_url</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">))</span>
+              <span class="p">{</span>
+                      <span class="n">response</span> <span class="o">=</span> <span class="n">MHD_create_response_from_buffer</span><span class="p">(</span><span class="n">strlen</span><span class="p">(</span><span class="s">"302 Redirect"</span><span class="p">),</span>
+                                      <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span> <span class="s">"302 Redirect"</span><span class="p">,</span> <span class="n">MHD_RESPMEM_PERSISTENT</span><span class="p">);</span>
+                      <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">itt2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">urls</span><span class="p">[</span><span class="n">itt</span><span class="p">].</span><span class="n">headers</span><span class="p">[</span><span class="n">itt2</span><span class="p">]</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">;</span> <span class="n">itt2</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                              <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">header</span> <span class="o">=</span> <span class="n">urls</span><span class="p">[</span><span class="n">itt</span><span class="p">].</span><span class="n">headers</span><span class="p">[</span><span class="n">itt2</span><span class="p">];</span>
+                              <span class="k">if</span> <span class="p">(</span><span class="n">header</span><span class="p">)</span> <span class="p">{</span>
+                                      <span class="kt">char</span> <span class="o">*</span><span class="n">header_value</span> <span class="o">=</span> <span class="n">strchr</span><span class="p">(</span><span class="n">header</span><span class="p">,</span> <span class="sc">':'</span><span class="p">);</span>
+                                      <span class="kt">char</span> <span class="o">*</span><span class="n">header_key</span> <span class="o">=</span> <span class="n">wget_strmemdup</span><span class="p">(</span><span class="n">header</span><span class="p">,</span> <span class="n">header_value</span> <span class="o">-</span> <span class="n">header</span><span class="p">);</span>
+                                      <span class="n">MHD_add_response_header</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">header_key</span><span class="p">,</span> <span class="n">header_value</span> <span class="o">+</span> <span class="mi">2</span><span class="p">);</span>
+                                      <span class="n">ret</span> <span class="o">=</span> <span class="n">MHD_queue_response</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span> <span class="n">MHD_HTTP_FOUND</span><span class="p">,</span> <span class="n">response</span><span class="p">);</span>
+                                      <span class="n">wget_xfree</span><span class="p">(</span><span class="n">header_key</span><span class="p">);</span>
+                                      <span class="n">itt</span> <span class="o">=</span> <span class="n">nurls</span><span class="p">;</span>
+                                      <span class="n">found</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+                              <span class="p">}</span> <span class="k">else</span>
+                                      <span class="n">itt</span> <span class="o">=</span> <span class="n">nurls</span><span class="p">;</span>
+                      <span class="p">}</span>
+              <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">strcmp</span><span class="p">(</span><span class="n">url_full</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">,</span> <span class="n">iri_url</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">))</span> <span class="p">{</span>
+                      <span class="n">response</span> <span class="o">=</span> <span class="n">MHD_create_response_from_buffer</span><span class="p">(</span><span class="n">strlen</span><span class="p">(</span><span class="n">urls</span><span class="p">[</span><span class="n">itt</span><span class="p">].</span><span class="n">body</span><span class="p">),</span>
+                                      <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span> <span class="n">urls</span><span class="p">[</span><span class="n">itt</span><span class="p">].</span><span class="n">body</span><span class="p">,</span> <span class="n">MHD_RESPMEM_PERSISTENT</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>He asks me again to ensure that content of <code class="highlighter-rouge">urls[itt].body</code> will be valid until
+end of this connection. Otherwise I must use <code class="highlighter-rouge">MHD_RESPMEM_MUST_COPY</code> as last
+parameter. I followed his advice and fix my code later.</p>
+
+<p>Two generic advises that very useful he gave to me:</p>
+
+<ul>
+  <li>Avoid using global variables.</li>
+  <li>Use better names for variables. It it hard to understand what mean
+<code class="highlighter-rouge">iri_url</code>, <code class="highlighter-rouge">itt</code> and <code class="highlighter-rouge">itt2</code>.</li>
+</ul>
+
+<h3 id="6th-week">6th Week</h3>
+
+<p>I found some difficulties when deal with global variables. I throw a question
+to mentors. Based on explanation from Evgeny before, I was given a suggestion
+to avoid using global variables. Then, I modify the code to this:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// for passing URL query string</span>
+<span class="k">struct</span> <span class="n">query_string</span> <span class="p">{</span>
+ <span class="n">wget_buffer_t</span>
+     <span class="o">*</span><span class="n">params</span><span class="p">;</span>
+ <span class="kt">int</span>
+     <span class="o">*</span><span class="n">it</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">static</span> <span class="kt">int</span> <span class="nf">print_out_key</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">cls</span><span class="p">,</span> <span class="k">enum</span> <span class="n">MHD_ValueKind</span> <span class="n">kind</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">key</span><span class="p">,</span>
+                        <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">value</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">struct</span> <span class="n">query_string</span> <span class="o">*</span><span class="n">query</span> <span class="o">=</span> <span class="n">cls</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">key</span> <span class="o">&amp;&amp;</span> <span class="n">query</span><span class="o">-&gt;</span><span class="n">it</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">wget_buffer_strcpy</span><span class="p">(</span><span class="n">query</span><span class="o">-&gt;</span><span class="n">params</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">,</span> <span class="s">"?"</span><span class="p">);</span>
+        <span class="n">replace_space_with_plus</span><span class="p">(</span><span class="n">key</span><span class="p">);</span>
+        <span class="n">wget_buffer_strcat</span><span class="p">(</span><span class="n">query</span><span class="o">-&gt;</span><span class="n">params</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">,</span> <span class="n">key</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">wget_buffer_strcat</span><span class="p">(</span><span class="n">query</span><span class="o">-&gt;</span><span class="n">params</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">,</span> <span class="s">"="</span><span class="p">);</span>
+            <span class="n">replace_space_with_plus</span><span class="p">(</span><span class="n">value</span><span class="p">);</span>
+            <span class="n">wget_buffer_strcat</span><span class="p">(</span><span class="n">query</span><span class="o">-&gt;</span><span class="n">params</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">,</span> <span class="n">value</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">key</span> <span class="o">&amp;&amp;</span> <span class="n">query</span><span class="o">-&gt;</span><span class="n">it</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">wget_buffer_strcat</span><span class="p">(</span><span class="n">query</span><span class="o">-&gt;</span><span class="n">params</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">,</span> <span class="s">"&amp;"</span><span class="p">);</span>
+        <span class="n">replace_space_with_plus</span><span class="p">(</span><span class="n">key</span><span class="p">);</span>
+        <span class="n">wget_buffer_strcat</span><span class="p">(</span><span class="n">query</span><span class="o">-&gt;</span><span class="n">params</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">,</span> <span class="n">key</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">wget_buffer_strcat</span><span class="p">(</span><span class="n">query</span><span class="o">-&gt;</span><span class="n">params</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">,</span> <span class="s">"="</span><span class="p">);</span>
+            <span class="n">replace_space_with_plus</span><span class="p">(</span><span class="n">value</span><span class="p">);</span>
+            <span class="n">wget_buffer_strcat</span><span class="p">(</span><span class="n">query</span><span class="o">-&gt;</span><span class="n">params</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">,</span> <span class="n">value</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+        <span class="n">query</span><span class="o">-&gt;</span><span class="n">it</span><span class="o">++</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">MHD_YES</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">static</span> <span class="kt">int</span> <span class="nf">answer_to_connection</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">cls</span><span class="p">,</span>
+                    <span class="k">struct</span> <span class="n">MHD_Connection</span> <span class="o">*</span><span class="n">connection</span><span class="p">,</span>
+                    <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">url</span><span class="p">,</span>
+                    <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">method</span><span class="p">,</span>
+                    <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">version</span><span class="p">,</span>
+                    <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">upload_data</span><span class="p">,</span> <span class="kt">size_t</span> <span class="o">*</span><span class="n">upload_data_size</span><span class="p">,</span> <span class="kt">void</span> <span class="o">**</span><span class="n">con_cls</span><span class="p">)</span>
+<span class="p">{</span>
+        <span class="k">struct</span> <span class="n">query_string</span> <span class="o">*</span><span class="n">query</span><span class="p">;</span>
+
+    <span class="c1">// get query string</span>
+        <span class="n">query</span><span class="o">-&gt;</span><span class="n">params</span> <span class="o">=</span> <span class="n">wget_buffer_alloc</span><span class="p">(</span><span class="mi">1024</span><span class="p">);</span>
+        <span class="n">query</span><span class="o">-&gt;</span><span class="n">it</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">MHD_get_connection_values</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span> <span class="n">MHD_GET_ARGUMENT_KIND</span><span class="p">,</span> <span class="n">print_out_key</span><span class="p">,</span> <span class="n">query</span><span class="p">);</span>
+
+        <span class="p">...</span>
+
+    <span class="n">wget_buffer_t</span> <span class="o">*</span><span class="n">url_full</span> <span class="o">=</span> <span class="n">wget_buffer_alloc</span><span class="p">(</span><span class="mi">1024</span><span class="p">);</span>
+    <span class="n">wget_buffer_strcpy</span><span class="p">(</span><span class="n">url_full</span><span class="p">,</span> <span class="n">url</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">query</span><span class="o">-&gt;</span><span class="n">params</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">wget_buffer_strcat</span><span class="p">(</span><span class="n">url_full</span><span class="p">,</span> <span class="n">query</span><span class="o">-&gt;</span><span class="n">params</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">);</span>
+    <span class="n">wget_buffer_free</span><span class="p">(</span><span class="o">&amp;</span><span class="n">query</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">);</span>
+
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>I need to pass struct query into <code class="highlighter-rouge">MHD_get_connection_values</code>. But, I never get
+expected result, often ends with segmentation faults. Then, I changed variable
+initialization to this:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>struct query_string *query = {wget_buffer_alloc(1024), 0};
+</code></pre></div></div>
+
+<p>Still, the result is not what I expected.<br />
+Tim help me with his answers. I asked to switch on warnings (e.g. <code class="highlighter-rouge">touch
+.manywarnings</code> and do <code class="highlighter-rouge">./configure</code> again). Based on it, I will see something
+like:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>libtest.c: In function 'answer_to_connection':
+libtest.c:357:13: warning: 'query' is used uninitialized in this function [-
+Wuninitialized]
+  query-&gt;str = wget_buffer_alloc(1024);
+  ~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+</code></pre></div></div>
+
+<p>I should take such warnings for serious analysis and fix them, e.g. by removing
+the pointer here:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      struct query_str query;
+...
+      query.str = wget_buffer_alloc(1024);
+      query.it1 = 0;
+</code></pre></div></div>
+
+<p>I just didn’t allocate my previous <code class="highlighter-rouge">*query</code>. I should use a stack allocation as
+above. And that is what all I need. Now, I can pass the variable through the
+functions. No more global variable needed.<br />
+Actually I already enable the manywarnings option, nonetheless I can
+interpreting the messages. Now, I learned something.</p>
+
+<h3 id="7th-week">7th Week</h3>
+
+<p><strong>Questions about CI testing</strong></p>
+
+<p>Previously I said that some CI runner still fail such as Gitlab MingW64 and
+Travis OSX where other test passed.</p>
+
+<p><strong>Gitlab MingW64:</strong> I have no idea about how to install Libmicrohttpd on
+MingW64 with Debian images. Previously, I can install Libmicrohttpd on Fedora
+images, but currently Wget2 use Debian. I ask if someone can give me a hint
+about how to install packages on Debian MingW64.<br />
+Tim said he doubt there is a MinGW64 Libmicrohttpd package for Fedora (nor for
+Debian). But, I always could build my own library, e.g. via <code class="highlighter-rouge">git clone</code>
+Libmicrohttpd, cd into the directory, build with MinGW64 (and optionally <code class="highlighter-rouge">make
+install</code>). Then set the right library paths for Wget2’s <code class="highlighter-rouge">./configure</code> run as
+always.<br />
+This might be tedious since there could be some pitfalls not easy to debug.  His
+suggestion would be to leave this step out until I am ready with all the other
+stuff. But when I try, I should do it locally first and note the steps I did.<br />
+On Travis Debian test, when I just use <code class="highlighter-rouge">apt install libmicrohttpd-dev</code> in
+travis script, it installed Libmicrohttpd &lt;= 0.9.51 which causes problems. So,
+I do some workaround with install Libmicrohttpd 0.9.55 from source. Here is the
+output of git diff from gitlab-ci and travis.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+index e8d1946..8e77d8e 100644
+</span><span class="gd">--- a/.gitlab-ci.yml
+</span><span class="gi">+++ b/.gitlab-ci.yml
+</span><span class="gu">@@ -34,6 +34,8 @@ variables:
+</span> #  * ASan, UBSan, Msan
+ #  * distcheck
+ Debian GNU/Linux build:
+<span class="gi">+  before_script:
++    - apt-get update -qq &amp;&amp; apt-get install -y -qq libmicrohttpd-dev
+</span>   image: $CI_REGISTRY/$BUILD_IMAGES_PROJECT:$DEBIAN_BUILD
+   script:
+     - ./bootstrap &amp;&amp; touch .manywarnings
+<span class="gu">@@ -55,6 +57,8 @@ Debian GNU/Linux build:
+</span>       - tests/*.log
+
+ clang/Fedora:
+<span class="gi">+  before_script:
++    - dnf -y install libmicrohttpd-devel
+</span>   image: $CI_REGISTRY/$BUILD_IMAGES_PROJECT:$FEDORA_BUILD
+   script:
+     - export CC=clang
+<span class="gh">diff --git a/.travis_setup.sh b/.travis_setup.sh
+index 916dbdb..6e5041b 100755
+</span><span class="gd">--- a/.travis_setup.sh
+</span><span class="gi">+++ b/.travis_setup.sh
+</span><span class="gu">@@ -14,7 +14,13 @@ if [[ "$TRAVIS_OS_NAME" = "osx" ]]; then
+</span>      brew install xz
+      brew install lbzip2
+      brew install lzip
+<span class="gi">+     brew install libgcrypt
++     brew install libmicrohttpd
+</span>      brew link --force gettext
+ elif [[ "$TRAVIS_OS_NAME" = "linux" ]]; then
+<span class="gi">+     sudo apt-get -y install wget
++     wget http://ftp.gnu.org/gnu/libmicrohttpd/libmicrohttpd-0.9.55.tar.gz
++     tar zxf libmicrohttpd-0.9.55.tar.gz &amp;&amp; cd libmicrohttpd-0.9.55/
++     ./configure --prefix=/usr &amp;&amp; make -j$(nproc) &amp;&amp; sudo make install
+</span>      pip install --user cpp-coveralls
+ fi
+</code></pre></div></div>
+
+<p>I then ask that my snippet above is appropriate or there is any other better
+solutions, and Tim said it is fine to use it.</p>
+
+<p><strong>Travis OSX:</strong> Failure regarding test with HTTPS support. I have checked
+that even I provide all dependencies for TLS/SSL support like gnutls and
+libgcrypt, it still fail. I don’t know if it fails because how my code read
+certificates provided or other reasons.<br />
+Tim comments is the problem occurs only on the OSX VM. This looks like
+Libmicrohttpd is not starting correctly. The same versions (gnutls 3.5.14 and
+Libmicrohttpd 0.9.55) work fine here on Debian unstable. I should try to get
+more logging output.<br />
+Evgeny also give comments, more output from Libmicrohttpd could give more
+information.  What he noticed in the meantime is warning <code class="highlighter-rouge">passing const char *
+to parameter of type char * discards qualifiers</code> which means that could
+modifying read-only memory. I should try to resolve it not by casting to <code class="highlighter-rouge">char
+*</code>.<br />
+Then I have a question, how could I get more verbose messages log of
+Libmicrohttpd? I tried to use <code class="highlighter-rouge">MHD_OPTION_EXTERNAL_LOGGER</code> like in example
+provided in <code class="highlighter-rouge">msgs_i18n.c</code>.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">httpsdaemon</span> <span class="o">=</span> <span class="n">MHD_start_daemon</span><span class="p">(</span><span class="n">MHD_USE_SELECT_INTERNALLY</span> <span class="o">|</span> <span class="n">MHD_FEATURE_MESSAGES</span> <span class="o">|</span>
+                               <span class="n">MHD_USE_TLS</span> <span class="o">|</span> <span class="n">MHD_USE_ERROR_LOG</span><span class="p">,</span>
+               <span class="n">port_num</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">_answer_to_connection</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span>
+               <span class="n">MHD_OPTION_EXTERNAL_LOGGER</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">error_handler</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span>
+               <span class="n">MHD_OPTION_HTTPS_MEM_KEY</span><span class="p">,</span> <span class="n">key_pem</span><span class="p">,</span>
+</code></pre></div></div>
+
+<p>But, it doesn’t generated any useful messages. It Just tell me that the HTTPS
+server failed in the runtime.<br />
+Evgeny replied, most probably I was trying to use Libmicrohttpd build without
+HTTPS support. I should check original package. Alternatively, I could try
+<code class="highlighter-rouge">MHD_is_feature_supported(MHD_FEATURE_SSL)</code> and skip HTTPS tests if HTTPS is not
+supported by Libmicrohttpd. I can also display warning about it during
+configure.  Before implementing such check, find first Libmicrohttpd version
+where <code class="highlighter-rouge">MHD_is_feature_supported()</code> was added.<br />
+I asked about which kind of problems I have with Libmicrohttpd 0.9.51. Evgeny
+said most recent versions of Libmicrohttpd are stable, there are only a few
+“problematic” versions. I replied with show the build log:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The following NEW packages will be installed:
+  libmicrohttpd-dev libmicrohttpd10
+0 upgraded, 2 newly installed, 0 to remove and 25 not upgraded.
+Need to get 190 kB of archives.
+After this operation, 499 kB of additional disk space will be used.
+
+0% [Working]
+
+Get:1 http://us-central1.gce.archive.ubuntu.com/ubuntu trusty/universe amd64 libmicrohttpd10
++amd64 0.9.33-1 [41.0 kB]
+
+======
+
+libtest.c: In function '_http_server_start':
+libtest.c:547:3: error: unknown type name 'MHD_socket'
+   MHD_socket sock_fd;
+   ^
+</code></pre></div></div>
+
+<p>It seems the version of Libmicrohttpd installed is 0.9.33-1. For quick
+workaround I installed v0.9.55 from source and it works. He also said, indeed
+v0.9.33 is too old. But it’s not too hard to handle it:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;microhttpd.h&gt;
+</span>
+<span class="cp">#if MHD_VERSION &lt;= 0x93302
+#define MHD_socket int
+#endif
+</span>
+</code></pre></div></div>
+
+<p>Nice pointer. Maybe I can apply this solution later.</p>
+
+<p><strong>Questions about many warnings on libtest.c and Libmicrohttpd</strong></p>
+
+<p>Here some warning I get when I build <code class="highlighter-rouge">libtest.c</code> on my system. I mentioned my
+system that I use Ubuntu 16.04 64 bit with configure command <code class="highlighter-rouge">./configure
+--enable-manywarnings</code></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>libtest.c: In function ‘_load_file’:
+libtest.c:166:11: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  if (size != fread(buffer, 1, size, fp)) {
+          ^
+libtest.c:227:29: warning: passing argument 1 of ‘_replace_space_with_plus’ discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
+    _replace_space_with_plus(value);
+
+libtest.c:194:14: note: expected ‘char *’ but argument is of type ‘const char *’
+ static char *_replace_space_with_plus(char *data)
+              ^
+</code></pre></div></div>
+
+<p>Once I tried to use <code class="highlighter-rouge">char *</code> on <code class="highlighter-rouge">_replace_space_with_plus()</code> so it becomes
+<code class="highlighter-rouge">_replace_space_with_plus((char *) key)</code> but it not allowed (API violation).
+Tim suggests me to give <code class="highlighter-rouge">query-params</code> to my “replace function” and iterate through
+all chars and add these to the buffer. For example:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>_replace_space_with_plus(query-&gt;params, key);
+
+static void _replace_space_with_plus(wget_buffer_t *buf, const char *data)
+{
+        for (; *data; data++)
+                wget_buffer_memcat(buf, *data == ' ' ? "+" : data, 1);
+}
+</code></pre></div></div>
+
+<p>He said no need to do any optimization at this point.<br />
+However, Evgeny tells that using implicit conversion from <code class="highlighter-rouge">const char*</code> to
+<code class="highlighter-rouge">char*</code> is the same API violation. But there is a better solution. If I not
+allowed to modify original string (as this this is used for other proposes as
+well) and I can read original string, just make my own copy of string and
+modify it. And I should free my copy when I don’t need it anymore.<br />
+Here is another warning messages:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>libtest.c: In function ‘_print_authorization’:
+libtest.c:252:63: warning: unused parameter ‘kind’ [-Wunused-parameter]
+ static int _print_authorization(void *cls, enum MHD_ValueKind kind,
+                                                               ^
+</code></pre></div></div>
+
+<p>It used by Libmicrohttpd API but it treated as warning by the compiler.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>libtest.c:272:64: warning: unused parameter ‘con_cls’ [-Wunused-parameter]
+      const char *upload_data, size_t *upload_data_size, void **con_cls)
+</code></pre></div></div>
+
+<p>Same as above, it treated as warning by the compiler, but actually it required.<br />
+Solution from Tim, if I found error regarding <code class="highlighter-rouge">-Wunused-parameter</code> is by adding
+the attribute <code class="highlighter-rouge">G_GNUC_WGET_UNUSED</code> to the param.<br />
+Another warning messages:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>libtest.c:429:13: warning: Value MHD_HTTP_REQUESTED_RANGE_NOT_SATISFIABLE is deprecated, use MHD_HTTP_RANGE_NOT_SATISFIABLE
+      ret = MHD_queue_response(connection, MHD_HTTP_REQUESTED_RANGE_NOT_SATISFIABLE, response);
+             ^
+</code></pre></div></div>
+
+<p>It seems about Libmicrohttpd incompatibility. I will provide version checker
+(ifdef MHD version) to fix this.<br />
+Tim directs me to the solution:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#ifdef MHD_HTTP_RANGE_NOT_SATISFIABLE
+</span>  <span class="n">ret</span> <span class="o">=</span> <span class="n">MHD_queue_response</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span> <span class="n">MHD_HTTP_RANGE_NOT_SATISFIABLE</span><span class="p">,</span>
+<span class="n">response</span><span class="p">);</span>
+<span class="cp">#else
+</span>  <span class="n">ret</span> <span class="o">=</span> <span class="n">MHD_queue_response</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span>
+<span class="n">MHD_HTTP_REQUESTED_RANGE_NOT_SATISFIABLE</span><span class="p">,</span> <span class="n">response</span><span class="p">);</span>
+<span class="cp">#endif
+</span></code></pre></div></div>
+<p>Very clear explanation from him.<br />
+Some warnings regarding unmatching data type:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>libtest.c: In function ‘_answer_to_connection’:
+libtest.c:365:27: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+     for (int it2 = 0; it2 &lt; countof(urls[it1].headers); it2++) {
+                           ^
+</code></pre></div></div>
+
+<p>Tim said it just as simple as add <code class="highlighter-rouge">unsigned</code> keyword in front of data type,
+like below:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for (unsigned it2 = 0; it2 &lt; countof(urls[it1].headers); it2++) {
+</code></pre></div></div>
+
+<p>Tim said, in general, I should stick with the Wget2 coding style for
+consistency. For example, instead of <code class="highlighter-rouge">if (' ' == *data)</code> use <code class="highlighter-rouge">(*data == ' ')</code>.
+He comments about function I write: <code class="highlighter-rouge">_get_file_size()</code>. He suggests to use
+<code class="highlighter-rouge">stat()</code>. It’s just single system call. Other function, <code class="highlighter-rouge">_load_file()</code>. He
+recommends to use wget built in function, <code class="highlighter-rouge">wget_read_file()</code> as replacement.
+Actually I get those functions from Libmicrohttpd implementation example of
+HTTPS. Tim suggestions made all of this shorter and simpler.</p>
+
+<p><strong>Problem with HTTP Persistent Connection</strong></p>
+
+<p>One of my report said, I need to solve problem of <code class="highlighter-rouge">check-valgrind</code>. I figure out
+that the problem come out from connection state of the response which need to
+be “closed” after created. The solution is just to add HTTP header “Connection:
+Close” in all response without exception.<br />
+Evgeny gives me some clarifications about this. This way I am actually hiding
+the problem, not fixing. Both Libmicrohttpd and wget must work perfectly nice
+with keep-alive. Moreover, in Libmicrohttpd test suite we run many tests in
+two modes: with “keep-alive” and “close” connections to ensure testing of all
+sides. He suggest me to fix modification of read-only memory before trying to
+resolve valgrind as this modification could easily trigger valgrind errors. If
+I run any test in multi-thread mode, he suggests to check thread
+synchronisation and concurrent access to modifiable variable.<br />
+After learned that I should leave persistent connection to be exist between
+client and server, I try to make a change, just by add HTTP header “Connection:
+Close” on request that returned 404, 401 and 416 status code, just like in the
+old http server code. Even more, I actually don’t have to close connection
+after those response codes. Otherwise, I leave the connection as is
+(keep-alive). But, I still found other issues from the result.<br />
+The test case fail if they found robots.txt in server, in other words,
+robots.txt returned status 200 OK. Here the error log from running the test
+with address sanitizer enabled:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
+Connection: Keep-Alive
+Content-Length: 85
+Content-Type: text/plain
+Date: Thu, 20 Jul 2017 19:17:43 GMT
+
+21.021743.773 method 2
+21.021743.773 nbytes 85 total 85/85
+21.021743.773 keep_alive=1
+21.021743.773 Scanning robots.txt ...
+21.021743.773 host_remove_job: 0x60c00000b980
+21.021743.773 host_remove_job: qsize=1 host-&gt;qsize=1
+21.021743.774 [0] action=1 pending=0 host=0x60700000df40
+21.021743.774 qsize=1 blocked=0
+21.021743.774 pause=-1500578263774
+21.021743.774 dequeue job http://localhost:41929/index.html
+21.021743.774 main: wake up
+=================================================================
+==14544==ERROR: AddressSanitizer: heap-use-after-free on address 0x610000007de3 at pc
++0x7f16594162d5 bp 0x7f16504fec60 sp 0x7f16504fe408
+READ of size 6 at 0x610000007de3 thread T1
+    #0 0x7f16594162d4  (/usr/lib/x86_64-linux-gnu/libasan.so.2+0x472d4)
+    #1 0x7f1659070c91 in wget_strcmp /home/didik/wget2/libwget/utils.c:82
+    #2 0x41b6d4 in try_connection /home/didik/wget2/src/wget.c:1088
+    #3 0x41c081 in establish_connection /home/didik/wget2/src/wget.c:1151
+    #4 0x422f06 in downloader_thread /home/didik/wget2/src/wget.c:1643
+    #5 0x7f1657e176b9 in start_thread (/lib/x86_64-linux-gnu/libpthread.so.0+0x76b9)
+    #6 0x7f1657b4d3dc in clone (/lib/x86_64-linux-gnu/libc.so.6+0x1073dc)
+
+0x610000007de3 is located 163 bytes inside of 180-byte region [0x610000007d40,0x610000007df4)
+freed by thread T1 here:
+    #0 0x7f16594672ca in __interceptor_free (/usr/lib/x86_64-linux-gnu/libasan.so.2+0x982ca)
+    #1 0x7f165904840b in wget_iri_free /home/didik/wget2/libwget/iri.c:287
+    #2 0x40d5b0 in host_remove_job /home/didik/wget2/src/host.c:347
+    #3 0x423800 in downloader_thread /home/didik/wget2/src/wget.c:1715
+    #4 0x7f1657e176b9 in start_thread (/lib/x86_64-linux-gnu/libpthread.so.0+0x76b9)
+
+previously allocated by thread T0 here:
+    #0 0x7f1659467602 in malloc (/usr/lib/x86_64-linux-gnu/libasan.so.2+0x98602)
+    #1 0x7f16590784da in wget_malloc /home/didik/wget2/libwget/xalloc.c:85
+    #2 0x7f1659048648 in wget_iri_parse /home/didik/wget2/libwget/iri.c:350
+    #3 0x7f165904da08 in wget_iri_parse_base /home/didik/wget2/libwget/iri.c:818
+    #4 0x40c9cf in host_add_robotstxt_job /home/didik/wget2/src/host.c:288
+    #5 0x414bba in add_url_to_queue /home/didik/wget2/src/wget.c:438
+    #6 0x4192ae in main /home/didik/wget2/src/wget.c:853
+    #7 0x7f1657a6682f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2082f)
+
+Thread T1 created by T0 here:
+    #0 0x7f1659405253 in pthread_create (/usr/lib/x86_64-linux-gnu/libasan.so.2+0x36253)
+    #1 0x7f165906d933 in wget_thread_start /home/didik/wget2/libwget/thread.c:48
+    #2 0x41a3bf in main /home/didik/wget2/src/wget.c:963
+    #3 0x7f1657a6682f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2082f)
+
+SUMMARY: AddressSanitizer: heap-use-after-free ??:0 ??
+Shadow bytes around the buggy address:
+  0x0c207fff8f60: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c207fff8f70: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c207fff8f80: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c207fff8f90: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c207fff8fa0: fa fa fa fa fa fa fa fa fd fd fd fd fd fd fd fd
+=&gt;0x0c207fff8fb0: fd fd fd fd fd fd fd fd fd fd fd fd[fd]fd fd fa
+  0x0c207fff8fc0: fa fa fa fa fa fa fa fa 00 00 00 00 00 00 00 00
+  0x0c207fff8fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 04 fa
+  0x0c207fff8fe0: fa fa fa fa fa fa fa fa fd fd fd fd fd fd fd fd
+  0x0c207fff8ff0: fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd
+  0x0c207fff9000: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07
+  Heap left redzone:       fa
+  Heap right redzone:      fb
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack partial redzone:   f4
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+==14544==ABORTING
+Unexpected error code 1, expected 0 [-r -nH]
+Removed test directory '.test_14531'
+FAIL test-robots (exit status: 1)
+</code></pre></div></div>
+
+<p>What I can see is the process want to use an allocated memory that has been
+freed before. But, I still don’t know what exact variable/pointer that trigger
+the problem.<br />
+Evgeny give comments about this. It should be pretty straightforward. I should
+check what is allocated at <code class="highlighter-rouge">host_add_robotstxt_job()-&gt;wget_iri_parse</code>
+<code class="highlighter-rouge">iri.c:350</code> in main thread. Find out how it’s passed to <code class="highlighter-rouge">downloader_thread()</code>.
+Find out how it’s freed by <code class="highlighter-rouge">host_remove_job()-&gt;wget_iri_free()</code>. Find out why
+it’s still used in
+<code class="highlighter-rouge">downloader_thread()-&gt;establish_connection()-&gt;try_connection()</code> at
+<code class="highlighter-rouge">wget.c:1088</code>.<br />
+Tim give me a clue, this is definitely a bug in Wget2 itself. No matter what
+the test server is doing, this should not happen. He will try to reproduce this
+issue to investigate later.<br />
+Because I feel a little bit rush, I have create a merge request regarding this
+[1]. I thought I was doing the right thing, until I realize, I made a mistake.
+Instead of posting issue, I made a merge request, which actually I try to
+modify code I quite not understand. Hence, I get some cautions about this. But,
+because of this, now I know the right procedure how to handle problem in
+community. Mentioning an issue itself is good way to contribute to community,
+because valid issue will lead our community to find the solution early.</p>
+
+<p><strong>Questions about chunked tranfer encoding</strong></p>
+
+<p>In test case that involving chunked transfer encoding, I found that they just
+freeze without another reaction, holding up until I send interrupt signal.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
+Connection: Keep-Alive
+Content-Length: 15
+Transfer-Encoding: chunked
+Content-Type: text/plain
+Date: Thu, 20 Jul 2017 19:30:55 GMT
+
+21.023055.800 method 1 0 0:
+21.023055.800 a nbytes 15 body_len 15
+21.023055.800 chunk size is 3
+21.023055.800 write full chunk, 3 bytes
+21.023055.801 chunk size is 2
+21.023055.801 write full chunk, 2 bytes
+</code></pre></div></div>
+
+<p>I don’t know why in the old http server code, they just can close the connection
+implicitly after generate the response.<br />
+Evgeny replied I should check with debugger first step-by-step chunked download
+process.<br />
+I was looking in to the manual and examples that we should use
+<code class="highlighter-rouge">MHD_create_response_from_callback()</code> to handle chunked transfer encoding
+connection.  My question, how do we generate a data using
+<code class="highlighter-rouge">MHD_ContentReaderCallback</code>? In the examples there just an empty data
+(<code class="highlighter-rouge">chunked_example.c</code>) and infinite data (<code class="highlighter-rouge">minimal_example_comet.c</code>)? Say we
+have a string as the buffer, something like:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>static ssize_t
+data_generator (void *cls, uint64_t pos, char *buf, size_t max)
+{
+  if (max &lt; 80)
+    return 0;
+
+  strcpy(buf, "3\r\nan\r\n2\r\example\r\n");
+
+  return 80;
+}
+</code></pre></div></div>
+
+<p>I also asks, how do I arrange it properly? So the result is like expected
+chunked transfer encoding file. I have tried using that example and the
+result is infinite streaming file. I try using return value
+<code class="highlighter-rouge">MHD_CONTENT_READER_END_OF_STREAM</code> and it give me nothing, just debug
+information showing chunked transfer encoding.<br />
+Evgeny said, it was indeed not clear from example how to use chunked transfer.
+He give a hand by updated chunked_example.c in official git repository.  I’d
+tried <code class="highlighter-rouge">chunked_example.c</code> again and it was successfully run. But, when I modify
+using encoded data like:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>static const char response_data[] = "3\r\nan\r\n2\r\example\r\n";
+</code></pre></div></div>
+
+<p>The result was:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>3
+an
+2
+example
+</code></pre></div></div>
+
+<p>I was expected a result something like plain: “an example” as the output.<br />
+Evgeny explained, I don’t need to handle chunked encoding in application.
+Libmicrohttpd automatically wrap supplied data into chunks with local header and
+footer.  If I want to generate more chunks - simply provide smaller amount of
+data with each call of callback. Each part of data will be send as separate
+chunk.<br />
+I’m actually stuck in this. I asked how do we present a connection with multiple
+chunks combined into one complete data? Like what he said, I want to generate
+more chunks. I ask if the code below related:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/* Pseudo code.        *
+if (data_not_ready)
+  {
+    // Callback will be called again on next loop.
+    // Consider suspending connection until data will be ready.
+    return 0;
+  }
+* End of pseudo code. */
+</code></pre></div></div>
+
+<p>I wonder what should I do with “data_not_ready”? My goal is to simulate chunked
+transfer encoding between client and server using Wget2 and Libmicrohttpd
+respectively. Currently, in the Wget2 test suite, it uses encoded data like:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"3\r\nabc\r\n2\r\nde\r\n"
+</code></pre></div></div>
+
+<p>With Libmicrohttpd, I don’t need to provide encoded data like above. It
+automatically handled by Libmicrohttpd. So I need to change data provided in
+<code class="highlighter-rouge">test-chunked.c</code>.<br />
+Evgeny said, I don’t need to change data provided by callback.
+I need to change amount of data provided by each call of callback. For example:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="n">buf_size</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">param</span><span class="o">-&gt;</span><span class="n">response_size</span> <span class="o">-</span> <span class="n">pos</span><span class="p">))</span>
+  <span class="n">size_to_copy</span> <span class="o">=</span> <span class="n">buf_size</span><span class="p">;</span>
+<span class="k">else</span>
+  <span class="n">size_to_copy</span> <span class="o">=</span> <span class="n">param</span><span class="o">-&gt;</span><span class="n">response_size</span> <span class="o">-</span> <span class="n">pos</span><span class="p">;</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="mi">2</span> <span class="o">&lt;</span> <span class="n">size_to_copy</span><span class="p">)</span>
+  <span class="n">size_to_copy</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+
+<span class="n">memcpy</span> <span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="n">param</span><span class="o">-&gt;</span><span class="n">response_data</span> <span class="o">+</span> <span class="n">pos</span><span class="p">,</span> <span class="n">size_to_copy</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Or use more complex algorithm with variable size depending on position.
+In this case chunks may have different size.<br />
+It’s now clear. I just need to divide data into two smaller chunks.</p>
+
+<p>Another case is, there is a garbage data like <code class="highlighter-rouge">FFFFFFF4\nGarbage</code> need to
+produced. I need to simulate it with Libmicrohttpd.<br />
+Evgeny answered, depending on where I want to put this data. If I want to put it
+in reply body - just use <code class="highlighter-rouge">FFFFFFF4\nGarbage</code> as reply.<br />
+But, I still don’t get it. Where is the reply body?<br />
+He said reply body is in response data sent by Libmicrohttpd.<br />
+If I wrote it in response text, it just literally send me same text as before
+processed. Instead, I want to create response with chunk size <code class="highlighter-rouge">FFFFFFF4</code>, like I
+wrote in the provided response text (before data encoded).<br />
+He then said, if I want to have chunk size <code class="highlighter-rouge">FFFFFFF4</code>, I have to provide data
+with size <code class="highlighter-rouge">FFFFFFF4</code>. Libmicrohttpd do not generate invalid HTTP data. For any
+test with invalid reply he suggests me to use custom simple hard coded
+pseudo-server instead of Libmicrohttpd.</p>
+
+<p>Another question is how can I passed a variable through callback.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget_buffer_t *chunked_data = wget_buffer_alloc(1024);
+wget_buffer_strcpy(chunked_data, "some char");
+response = MHD_create_response_from_callback(MHD_SIZE_UNKNOWN,
+                                            1024,
+                                            &amp;_callback,
+                                            chunked_data,
+                                            NULL);
+</code></pre></div></div>
+
+<p>My goal is to pass “chunked_data” as response_data for the callback.
+Evgeny updated chunked example once more.
+From his point of view, it is pretty simple and clear.</p>
+
+<p>Another question, and maybe just it is my misunderstanding, about how the
+response text provided. It requires to use char array, while I just have char
+pointer.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>char *body = "abcde";
+static char simple_response_text[6];
+strcpy(simple_response_text, body);
+simple_response_text[sizeof(simple_response_text) - 1] = '\0';
+</code></pre></div></div>
+
+<p>Then I copy the char pointer into char array using <code class="highlighter-rouge">strcpy</code>. Though I still need
+to provide the length of the char. As a workaround, I just hard coded the char
+length. I ask if there is any better solution.<br />
+Evgeny give some explanations, char size is always one byte (it could have
+different size, but almost all real platforms use one byte). I should not
+assign pointer to static string (which is <code class="highlighter-rouge">const char *</code>) to non-const pointer.
+<code class="highlighter-rouge">strcpy() </code> copies termination null as well, no need to terminate it again.
+Libmicrohttpd response do not need null-terminated strings, as HTTP could send
+any data, not only strings. I can use array variable as pointer to first array
+member.<br />
+Hence I need to read more about C basics, including static strings, arrays,
+pointers, pointers manipulations, pointers arithmetics, strings manipulations
+and memory management.</p>
+
+<h3 id="8th-week">8th Week</h3>
+
+<p>I have work on <code class="highlighter-rouge">wget_test_start_server()</code> to use Libmicrohttpd as HTTP server.
+To resolve this, I fix <code class="highlighter-rouge">answer_to_connection()</code> function to create proper HTTP
+response to:</p>
+
+<ul>
+  <li>Handle arguments (query string) on URL</li>
+  <li>Handle redirection</li>
+  <li>Handle directory creation</li>
+  <li>Handle URL with IRI object</li>
+  <li>Handle URL with IDN hostname</li>
+  <li>Handle URL with query string which contains space</li>
+  <li>Handle If-Modified-Since header</li>
+  <li>Handle Byte Range request</li>
+  <li>Handle HTTP basic authentication</li>
+  <li>Handle HTTPS</li>
+</ul>
+
+<p>Pass CI test on some system like Debian/GCC and Fedora/Clang.
+Fix compiler warning <code class="highlighter-rouge">-Wunused-param</code> caused by Libmicrohttpd API.
+Use persistent connection (Connection: keep-alive) instead multiple.
+connection (Connection: close). This prevent hiding several problems of the
+connection between HTTP server and client.<br />
+At this point I think that the new HTTP server with Libmicrohttpd for test suite
+has already covered all existing test. Later, I can add non existing test that
+ready on Wget2 and Libmicrohttpd. Such as add HTTP digest authentication test.
+Another unresolved tasks are:</p>
+
+<ul>
+  <li>Fix connection handler using chunked tranfer encoding</li>
+  <li>Fix CI testing on Gitlab MingW64 and Travis OSX</li>
+</ul>
+
+<h3 id="second-period-evaluations">Second Period Evaluations</h3>
+
+<p>Just like previous time, we as student are required to submit evaluations. The
+evaluations itself was just like the one before, it asks us to fill feedback
+form to the organization.<br />
+The results then announced. Mentors give me chance to pass this period
+evaluations. They send me messages that my communication has definitely
+improved over time. They think this project is now again moving on the right
+track towards completion.</p>
+
+<h3 id="conclusion">Conclusion</h3>
+
+<p>In this period I faced again with many challenges that test my technical
+skills. My communication abilities are also tested a lot. I must be good in
+conveying problems to my mentor so there is no miscommunication. Mentors also
+helped me a lot in solving the problems I have encountered. They give me a trust
+to finish this project. I should be able to take advantage of this chance to
+give the best of me in contributing to this project.</p>
+
+<p>Reference(s):<br />
+[0] <a href="https://stackoverflow.com/questions/1005676/urls-and-plus-signs">https://stackoverflow.com/questions/1005676/urls-and-plus-signs</a><br />
+[1] <a href="https://gitlab.com/gnuwget/wget2/merge_requests/250">https://gitlab.com/gnuwget/wget2/merge_requests/250</a></p>
+</div>
+    <hr />
+    <div class="share-page">
+    Share this on &rarr;
+ <a href="https://twitter.com/share" class="twitter-share-button" data-via="didik_swn">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+<!-- Google + -->
+<div class="g-plus" data-action="share" data-annotation="bubble"></div>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+
+<!-- Facebook -->
+<div class="fb-share-button" data-href="https://www.didiksetiawan.com/blog/2018/03/09/gsoc-with-gnu-wget2-part-ii/" data-layout="button_count" style="position: relative; top: -8px; left: 3px;"></div>
+</div>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6&appId=0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+</article>
+<hr />
+
+
+    
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
+                
+                <div class="panel-body">
+                <h4>Related Posts</h4>
+                <ul>
+                
+                <li class="relatedPost">
+                    <a href="https://www.didiksetiawan.com/blog/2018/03/07/gsoc-with-gnu-wget2-part-i/">GSoC with GNU Wget2 - Part I</a>
+                    
+                        <small>(Categories: <a href="/category/open_source">open_source</a>, <a href="/category/programming">programming</a>, <a href="/category/collaboration">collaboration</a>, <a href="/category/gsoc">gsoc</a>)</small>
+                    
+                </li>
+                
+                
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
+                
+                <li class="relatedPost">
+                    <a href="https://www.didiksetiawan.com/blog/2017/04/08/workflow-on-contributing-to-open-source/">Workflow on Contributing to Open Source Project</a>
+                    
+                        <small>(Categories: <a href="/category/open_source">open_source</a>, <a href="/category/collaboration">collaboration</a>, <a href="/category/programming">programming</a>)</small>
+                    
+                </li>
+                
+                
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
+                
+                <li class="relatedPost">
+                    <a href="https://www.didiksetiawan.com/blog/2017/04/05/google-summer-of-code-preparation/">Google Summer of Code Preparation</a>
+                    
+                        <small>(Categories: <a href="/category/open_source">open_source</a>, <a href="/category/collaboration">collaboration</a>, <a href="/category/programming">programming</a>, <a href="/category/gsoc">gsoc</a>)</small>
+                    
+                </li>
+                
+                
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+
+    
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+
+
+    </ul>
+    </div>
+
+
+<div class="PageNavigation">
+  
+    <a class="prev pull-left" href="https://www.didiksetiawan.com/blog/2018/03/07/gsoc-with-gnu-wget2-part-i/">&laquo; GSoC with GNU Wget2 - Part I</a>
+  
+  
+</div>
+
+
+<div class="disqus-comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* <![CDATA[ */
+
+        var disqus_shortname = "didiksetiawan";
+        var disqus_identifier = "https://www.didiksetiawan.com_GSoC with GNU Wget2 - Part II";
+        var disqus_title = "GSoC with GNU Wget2 - Part II";
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    /* ]]> */
+    </script>
+</div>
+</div>
+          <div class="row">
+            <div class="col-md-12 col-xs-12 footer">
+              <footer>
+	© 2009-2018 Didik Setiawan - Powered by Jekyll.
+</footer>
+
+            </div>
+          </div>
+        </div> <!-- end /.col-md-9 -->
+      </div> <!-- end /.row -->
+    </div>
+
+    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<script src="/static/js/super-search.js"></script>
+
+<script src="/static/js/thickbox-compressed.js"></script>
+<script src="/static/js/material.min.js"></script>
+<script src="/static/js/main.js"></script>
+<script src="/static/js/projects.js"></script>
+
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-78151571-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>
