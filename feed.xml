@@ -5,9 +5,359 @@
     <description>Didik Setiawan's Blog</description>
     <link>https://www.didiksetiawan.com/</link>
     <atom:link href="https://www.didiksetiawan.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 17 Mar 2018 21:30:40 +0700</pubDate>
-    <lastBuildDate>Sat, 17 Mar 2018 21:30:40 +0700</lastBuildDate>
+    <pubDate>Tue, 20 Mar 2018 05:50:53 +0700</pubDate>
+    <lastBuildDate>Tue, 20 Mar 2018 05:50:53 +0700</lastBuildDate>
     <generator>Jekyll v3.7.3</generator>
+    
+      <item>
+        <title>GSoC with GNU Wget2 - Part III</title>
+        <description>&lt;p&gt;This is the last part of my GSoC 2017 journal trilogy. In this period, my
+patches of this project must be sent so they can be reviewed. In order to pass
+this final evaluations, I must submitted my work and try to merge it to
+upstream codebase. As my previous period, I face with some obstacles but
+mentors help me a lot to get rid of it so the project goals was achieved.&lt;/p&gt;
+
+&lt;h3 id=&quot;9th-week&quot;&gt;9th Week&lt;/h3&gt;
+
+&lt;p&gt;Some progress I made in this week:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Fix connection handler using chunked transfer encoding&lt;/li&gt;
+  &lt;li&gt;Fix CI testing on Gitlab MingW64 and Travis OSX&lt;/li&gt;
+  &lt;li&gt;Add HTTP digest authentication test&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I also started working on:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Fix CI testing on Gitlab MingW64 and Travis OSX
+    &lt;ul&gt;
+      &lt;li&gt;MingW64: Need a script for complete setup Libmicrohttpd with HTTPS support&lt;/li&gt;
+      &lt;li&gt;OSX: Need more verbose debug since it fails to run HTTPS server&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Add HTTP digest authentication test&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;10th-week&quot;&gt;10th Week&lt;/h3&gt;
+
+&lt;p&gt;What I have done in this week:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Fix CI testing on Travis OSX: I must install Libmicrohttpd from source to get
+support for HTTPS. Maybe the Libmicrohttpd package provided by Homebrew
+Package Manager not compiled with HTTPS support.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Tasks which still in progress:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Fix CI testing on Gitlab MingW64
+    &lt;ul&gt;
+      &lt;li&gt;MingW64: Need a script for complete setup Libmicrohttpd&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Add HTTP digest authentication test&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;11th-week&quot;&gt;11th Week&lt;/h3&gt;
+
+&lt;p&gt;I have some problem with Wget2 build with Libmicrohttpd on MingW64. I have add
+some commands to build Libmicrohttpd from source, and it was successfully built
+and installed. But when it used to build Wget2, I get this problem:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;make[2]: Entering directory '/builds/gnuwget/wget2/tests'
+  CC       libtest_la-libtest.lo
+&amp;lt;command-line&amp;gt;:0:9: error: expected identifier or '(' before string constant
+libtest.c: In function '_http_server_start':
+libtest.c:595:4: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+    if (getnameinfo(addr, addr_len, NULL, 0, s_port, sizeof(s_port), NI_NUMERICSERV) == 0)
+    ^~
+libtest.c:597:5: note: ...this statement, but the latter is misleadingly indented as if it is
++guarded by the 'if'
+     if (SERVER_MODE == HTTP_MODE)
+     ^~
+Makefile:2512: recipe for target 'libtest_la-libtest.lo' failed
+make[2]: *** [libtest_la-libtest.lo] Error 1
+make[2]: Leaving directory '/builds/gnuwget/wget2/tests'
+Makefile:1552: recipe for target 'all-recursive' failed
+make[1]: *** [all-recursive] Error 1
+make[1]: Leaving directory '/builds/gnuwget/wget2'
+Makefile:1461: recipe for target 'all' failed
+make: *** [all] Error 2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Based on my analysis, the error may caused by how I embed the Libmicrohttpd.
+When I look at the examples, they mostly include “platform.h” in the header.
+But, if I look at the docs:&lt;/p&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cm&quot;&gt;/**
+ * @file platform.h
+ * @brief platform-specific includes for libmicrohttpd
+ * @author Christian Grothoff
+ *
+ * This file is included by the libmicrohttpd code
+ * before &quot;microhttpd.h&quot;; it provides the required
+ * standard headers (which are platform-specific).&amp;lt;p&amp;gt;
+ *
+ * Note that this file depends on our configure.ac
+ * build process and the generated config.h file.
+ * Hence you cannot include it directly in applications
+ * that use libmicrohttpd.
+ */&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;So, I don’t use platform.h. I follow example from Libmicrohttpd homepage, which
+they just add:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#include &amp;lt;microhttpd.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;string.h&amp;gt;
+#include &amp;lt;stdio.h&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Evgeny Grin replied, he thinks they (as Libmicrohttpd maintainer) should
+document it more explicitly. &lt;code class=&quot;highlighter-rouge&quot;&gt;platform.h &lt;/code&gt; is not installed with MHD and used
+in examples only to avoid including a lot of system headers (which might be not
+available on some platforms).&lt;br /&gt;
+On other CI testing using Debian, Fedora, OSX using either GCC or Clang, Wget2
+can build successfully, but not in Mingw64. Also I tried to compile using
+Mingw64 on my local system (Ubuntu), and the result is same like on CI.&lt;br /&gt;
+Evgeny said, according to quoted error, I might have some configuration problem.
+He asks me to ensure me to properly set &lt;code class=&quot;highlighter-rouge&quot;&gt;--build=&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;--host= &lt;/code&gt; configure
+parameters. Then try to make by &lt;code class=&quot;highlighter-rouge&quot;&gt;make all V=1&lt;/code&gt; or use configure parameter
+&lt;code class=&quot;highlighter-rouge&quot;&gt;--disable-silent-rules&lt;/code&gt; to get more verbose output.&lt;br /&gt;
+This is my build configuration on &lt;code class=&quot;highlighter-rouge&quot;&gt;.gitlab-ci.yml&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;script&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;apt-get -y install gcc-mingw-w64-x86-64 binutils-mingw-w64-x86-64 mingw-w64-x86-64-dev pkg-co&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;+nfig-mingw-w64-x86-64 win-iconv-mingw-w64-dev wine wget&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;- cd ..&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;- export PREFIX=x86_64-w64-mingw32&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;- export CC=$PREFIX-gcc&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;- export CXX=$PREFIX-g++&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;- export CPP=$PREFIX-cpp&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;- export RANLIB=$PREFIX-ranlib&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;- export PATH=&quot;/usr/$PREFIX/bin:$PATH&quot;&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;- export CFLAGS=&quot;-O2 -Wall -Wno-format -lpthread&quot;&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;- export WINEPATH=&quot;/usr/$PREFIX/bin;/usr/$PREFIX/lib&quot;&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;# Install Libmicrohttpd from source&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;- wget http://ftp.gnu.org/gnu/libmicrohttpd/libmicrohttpd-0.9.55.tar.gz&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;- tar zxf libmicrohttpd-0.9.55.tar.gz &amp;amp;&amp;amp; cd libmicrohttpd-0.9.55/&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;- ./configure --build=x86_64-pc-linux-gnu --host=$PREFIX --enable-shared --enable-static --prefix=/usr/$PREFIX --disable-silent-rules&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;- make clean&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;- make -j$(nproc)&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;- make install&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;- cd - &amp;amp;&amp;amp; cd wget2&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;- ./bootstrap&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;- export CFLAGS=&quot;-O2 -Wall -Wno-format&quot;&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;- export WINEPATH=&quot;/usr/$PREFIX/bin;/usr/$PREFIX/lib;$PWD/libwget/.libs&quot;&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;- ./configure --build=x86_64-pc-linux-gnu --host=$PREFIX --enable-shared --enable-static --disable-silent-rules&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;- make clean&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;- make -j$(nproc)&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;- make check -j$(nproc) LOG_COMPILER=wine&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;And the result:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Making all in tests
+make[2]: Entering directory '/builds/gnuwget/wget2/tests'
+/bin/bash ../libtool  --tag=CC   --mode=compile x86_64-w64-mingw32-gcc -DHAVE_CONFIG_H
+-DDATADIR=\&quot;/builds/gnuwget/wget2/data\&quot; -DSRCDIR=\&quot;/builds/gnuwget/wget2/tests\&quot;
+-DEXEEXT=\&quot;.exe\&quot; -I. -I..  -I. -I../include/wget -I../lib -I../lib -fvisibility=hidden
+-DBUILDING_LIBWGET -DWGETVER_FILE=\&quot;../include/wget/wgetver.h\&quot;
+-I/usr/x86_64-w64-mingw32/include -DNDEBUG -O2 -Wall -Wno-format -Wno-attributes -fno-PIC -MT
+libtest_la-libtest.lo -MD -MP -MF .deps/libtest_la-libtest.Tpo -c -o libtest_la-libtest.lo `test
+-f 'libtest.c' || echo './'`libtest.c
+libtool: compile:  x86_64-w64-mingw32-gcc -DHAVE_CONFIG_H
+-DDATADIR=\&quot;/builds/gnuwget/wget2/data\&quot; -DSRCDIR=\&quot;/builds/gnuwget/wget2/tests\&quot;
+-DEXEEXT=\&quot;.exe\&quot; -I. -I.. -I. -I../include/wget -I../lib -I../lib -fvisibility=hidden
+-DBUILDING_LIBWGET -DWGETVER_FILE=\&quot;../include/wget/wgetver.h\&quot;
+-I/usr/x86_64-w64-mingw32/include -DNDEBUG -O2 -Wall -Wno-format -Wno-attributes -fno-PIC -MT
+libtest_la-libtest.lo -MD -MP -MF .deps/libtest_la-libtest.Tpo -c libtest.c  -DDLL_EXPORT -DPIC
+-o .libs/libtest_la-libtest.o
+&amp;lt;command-line&amp;gt;:0:9: error: expected identifier or '(' before string constant
+libtest.c: In function '_http_server_start':
+libtest.c:595:4: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+    if (getnameinfo(addr, addr_len, NULL, 0, s_port, sizeof(s_port), NI_NUMERICSERV) == 0)
+    ^~
+libtest.c:597:5: note: ...this statement, but the latter is misleadingly indented as if it is
++guarded by the 'if'
+     if (SERVER_MODE == HTTP_MODE)
+     ^~
+Makefile:2512: recipe for target 'libtest_la-libtest.lo' failed
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;I still don’t have a clue about this build error.&lt;/p&gt;
+
+&lt;p&gt;Evgeny gives some clues.  I can skip explicit specifications of CC, CXX (not
+needed for Libmicrohttpd), CPP and RANLIB as all of them should be detected by
+configure if I specify correctly &lt;code class=&quot;highlighter-rouge&quot;&gt;--build&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;--host&lt;/code&gt;.&lt;br /&gt;
+He asks why do I specify &lt;code class=&quot;highlighter-rouge&quot;&gt;-lpthread&lt;/code&gt; flag for Libmicrohttpd? Libmicrohttpd on
+w32 uses native w32 threads by default.  Also Libmicrohttpd should not require
+Wine to build. I will fix this, both &lt;code class=&quot;highlighter-rouge&quot;&gt;-lpthread&lt;/code&gt; and wine. But, I just remember
+why I add &lt;code class=&quot;highlighter-rouge&quot;&gt;-lpthread&lt;/code&gt; as CFLAGS option. When I omit that option, I got this
+error messages when I build Libmicrohttpd:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;libtool: link: x86_64-w64-mingw32-gcc -DWINDOWS -O2 -Wall -Wno-format
+-fno-strict-aliasing -o .libs/authorization_example.exe authorization_example.o
+../../src/microhttpd/.libs/libmicrohttpd.dll.a -lws2_32
+-L/usr/x86_64-w64-mingw32/lib
+libtool: link: x86_64-w64-mingw32-gcc -DWINDOWS -O2 -Wall -Wno-format
+-fno-strict-aliasing -o .libs/upgrade_example.exe upgrade_example.o
+../../src/microhttpd/.libs/libmicrohttpd.dll.a -lws2_32
+-L/usr/x86_64-w64-mingw32/lib
+upgrade_example.o:upgrade_example.c:(.text+0x74): undefined reference to
+`pthread_create'
+upgrade_example.o:upgrade_example.c:(.text+0x82): undefined reference to
+`pthread_detach'
+collect2: error: ld returned 1 exit status
+Makefile:796: recipe for target 'upgrade_example.exe' failed
+make[4]: *** [upgrade_example.exe] Error 1
+make[4]: *** Waiting for unfinished jobs....
+make[4]: Leaving directory '/builds/dstw/libmicrohttpd-0.9.55/src/examples'
+Makefile:932: recipe for target 'all-recursive' failed
+make[3]: *** [all-recursive] Error 1
+make[3]: Leaving directory '/builds/dstw/libmicrohttpd-0.9.55/src/examples'
+Makefile:414: recipe for target 'all-recursive' failed
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Evgeny helps with fixed this error by make a change to Libmicrohttpd codebase on
+git master branch. He also gives suggestions. I don’t need examples to test wget
+so I can disable them by &lt;code class=&quot;highlighter-rouge&quot;&gt;--disable-examples&lt;/code&gt; configure switch. In addition, I
+can disable build of documentation by &lt;code class=&quot;highlighter-rouge&quot;&gt;--disable-doc&lt;/code&gt; to speedup Libmicrohttpd
+building.&lt;br /&gt;
+But all of them should be not related to error. He then give me an important
+point to start resolving my error result [0]. Based from his guidance, this is
+what I get:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Making all in tests
+make[2]: Entering directory '/home/didik/wget2/tests'
+/bin/bash ../libtool  --tag=CC   --mode=compile x86_64-w64-mingw32-gcc -DHAVE_CONFIG_H
+-DDATADIR=\&quot;/home/didik/wget2/data\&quot; -DSRCDIR=\&quot;/home/didik/wget2/tests\&quot; -DEXEEXT=\&quot;.exe\&quot; -I.
+-I..  -I. -I../include/wget -I../lib -I../lib -fvisibility=hidden -DBUILDING_LIBWGET
+-DWGETVER_FILE=\&quot;../include/wget/wgetver.h\&quot;   -O2 -Wall -Wno-format --save-temps
+-Wno-attributes -fno-PIC -Wall -Wextra -Wformat=2 -fdiagnostics-color=always -Wno-format
+-I/usr/x86_64-w64-mingw32/include -I/usr/x86_64-w64-mingw32/include -DNDEBUG -O2 -Wall
+-Wno-format --save-temps -Wno-attributes -fno-PIC -MT libtest_la-libtest.lo -MD -MP -MF
+.deps/libtest_la-libtest.Tpo -c -o libtest_la-libtest.lo `test -f 'libtest.c' || echo
+'./'`libtest.c
+libtool: compile:  x86_64-w64-mingw32-gcc -DHAVE_CONFIG_H -DDATADIR=\&quot;/home/didik/wget2/data\&quot;
+-DSRCDIR=\&quot;/home/didik/wget2/tests\&quot; -DEXEEXT=\&quot;.exe\&quot; -I. -I.. -I. -I../include/wget -I../lib
+-I../lib -fvisibility=hidden -DBUILDING_LIBWGET -DWGETVER_FILE=\&quot;../include/wget/wgetver.h\&quot; -O2
+-Wall -Wno-format --save-temps -Wno-attributes -fno-PIC -Wall -Wextra -Wformat=2
+-fdiagnostics-color=always -Wno-format -I/usr/x86_64-w64-mingw32/include
+-I/usr/x86_64-w64-mingw32/include -DNDEBUG -O2 -Wall -Wno-format --save-temps -Wno-attributes
+-fno-PIC -MT libtest_la-libtest.lo -MD -MP -MF .deps/libtest_la-libtest.Tpo -c libtest.c
+-DDLL_EXPORT -DPIC -o .libs/libtest_la-libtest.o
+In file included from /usr/share/mingw-w64/include/objbase.h:66:0,
+                 from /usr/share/mingw-w64/include/ole2.h:17,
+                 from /usr/share/mingw-w64/include/wtypes.h:12,
+                 from /usr/share/mingw-w64/include/winscard.h:10,
+                 from /usr/share/mingw-w64/include/windows.h:97,
+                 from /usr/share/mingw-w64/include/winsock2.h:23,
+                 from /usr/share/mingw-w64/include/ws2tcpip.h:17,
+                 from /usr/x86_64-w64-mingw32/include/microhttpd.h:108,
+                 from libtest.c:48:
+/usr/share/mingw-w64/include/objidl.h:12275:2: error: expected identifier or '(' before string
+constant
+ } DATADIR;
+  ^
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This lead me to &lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/share/mingw-64/include/objidl.h&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;line  | contents
+------|------------------------------------
+12271 | typedef IDataObject *LPDATAOBJECT;
+12272 | typedef enum tagDATADIR {
+12273 |     DATADIR_GET = 1,
+12274 |     DATADIR_SET = 2
+12275 | } DATADIR;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Evgeny explains well to me, he thinks the real problem is: after preprocessing
+source by precompiler, compiler get:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;typedef enum tagDATADIR {
+     DATADIR_GET = 1,
+     DATADIR_SET = 2
+} &quot;/usr/some/dir&quot;;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;I need to either &lt;code class=&quot;highlighter-rouge&quot;&gt;undef DATADIR &lt;/code&gt; before including problematic header or find
+the way how not to include problematic header. Alternatively, I can replace
+macro &lt;code class=&quot;highlighter-rouge&quot;&gt;DATADIR &lt;/code&gt; by something like &lt;code class=&quot;highlighter-rouge&quot;&gt;MY_DATADIR&lt;/code&gt;, but it will require more code
+changes on Wget2 side.&lt;br /&gt;
+I use his last option. I tried to change &lt;code class=&quot;highlighter-rouge&quot;&gt;DATADIR &lt;/code&gt; macro on Wget2 using other
+&lt;code class=&quot;highlighter-rouge&quot;&gt;DATADIR&lt;/code&gt; names so they don’t clash and it solves the problem.  Actually, there
+are not so many code which need to be changed, but I will open issue first on
+Wget2 about this [1]. After confirmed this was valid issue by Tim Ruehsen, I
+made a merge request [2] and it was accepted.&lt;br /&gt;
+Another progress I made this week is adding CI testing to simulate Wget2 build
+without Libmicrohttpd installed. This is just a copy of main build process but
+without &lt;code class=&quot;highlighter-rouge&quot;&gt;make check&lt;/code&gt; part, so the Wget2 binary can be built with skipped
+testing. I do it by made a branch without Libmicrohttpd installed.&lt;/p&gt;
+
+&lt;h3 id=&quot;12th-week&quot;&gt;12th Week&lt;/h3&gt;
+
+&lt;p&gt;This week I focused my work on task adding HTTP digest authentication test. I
+found an issue regarding HTTP digest authentication not work properly. I tried
+to analyzed it first because throw this issue to public. After I sure that my
+issue reproducible and make sense, I create issue and merge request respectively
+[3][4]. The merge request was accepted.&lt;/p&gt;
+
+&lt;h3 id=&quot;13th-week&quot;&gt;13th Week&lt;/h3&gt;
+
+&lt;p&gt;At this point I made a merge request regarding my work on this project [4].
+After get reviewed by mentors and other contributors, it finally merged. To
+complete final evaluations, I must submit final report which contains summary of
+my work and patches I made. It could be link to Github Repositository, Github
+Gist, Blog Post, Google Drive, etc, which can be accessed from public. I choose
+to use Google Drive to save my report. Here is the link [5] to my work if you
+want to check.&lt;/p&gt;
+
+&lt;h3 id=&quot;final-evaluations&quot;&gt;Final Evaluations&lt;/h3&gt;
+
+&lt;p&gt;After making it until 13th week of works, it was time to get announcement. I got
+email that said I was passed on this final evaluations. As always mentors give
+me feedback.&lt;br /&gt;
+He said, I did a good job with the project this year. There are a few small
+issues still lying, but they can be easily cleaned up very quick. Over the
+period, I have definitely grown as a programmer, however I should be a little
+more active in the community.&lt;/p&gt;
+
+&lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
+
+&lt;p&gt;GSoC give me priceless experience about how to getting involved in open source
+community. I have enjoyed working with my organization over the last few months
+and I will continue to work with them and make sure my code that I have worked
+so hard on over these last few months is integrated into their code base. I
+will try to keep active in community and contributing more while GSoC passed.
+I hope my small contribution was useful for all.&lt;/p&gt;
+
+&lt;p&gt;Reference(s):&lt;br /&gt;
+[0] &lt;a href=&quot;https://sourceforge.net/p/msys2/discussion/general/thread/c1aa51f9/&quot;&gt;https://sourceforge.net/p/msys2/discussion/general/thread/c1aa51f9/&lt;/a&gt;&lt;br /&gt;
+[1] &lt;a href=&quot;https://gitlab.com/gnuwget/wget2/issues/250&quot;&gt;https://gitlab.com/gnuwget/wget2/issues/250&lt;/a&gt;&lt;br /&gt;
+[2] &lt;a href=&quot;https://gitlab.com/gnuwget/wget2/merge_requests/264&quot;&gt;https://gitlab.com/gnuwget/wget2/merge_requests/264&lt;/a&gt;&lt;br /&gt;
+[3] &lt;a href=&quot;https://gitlab.com/gnuwget/wget2/issues/237&quot;&gt;https://gitlab.com/gnuwget/wget2/issues/237&lt;/a&gt;&lt;br /&gt;
+[4] &lt;a href=&quot;https://gitlab.com/gnuwget/wget2/merge_requests/265&quot;&gt;https://gitlab.com/gnuwget/wget2/merge_requests/265&lt;/a&gt;&lt;br /&gt;
+[5] &lt;a href=&quot;https://drive.google.com/drive/folders/0B4yUFvLvAUANLU10X19qckZ6UkE?usp=sharing&quot;&gt;https://drive.google.com/drive/folders/0B4yUFvLvAUANLU10X19qckZ6UkE?usp=sharing&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Tue, 20 Mar 2018 05:21:00 +0700</pubDate>
+        <link>https://www.didiksetiawan.com/blog/2018/03/20/gsoc-with-gnu-wget2-part-iii/</link>
+        <guid isPermaLink="true">https://www.didiksetiawan.com/blog/2018/03/20/gsoc-with-gnu-wget2-part-iii/</guid>
+        
+        
+        <category>open_source</category>
+        
+        <category>programming</category>
+        
+        <category>collaboration</category>
+        
+        <category>gsoc</category>
+        
+      </item>
     
       <item>
         <title>GSoC with GNU Wget2 - Part II</title>
@@ -2331,126 +2681,6 @@ Even with free service, I can use my own domain name.&lt;/p&gt;
         <category>blog</category>
         
         <category>email</category>
-        
-      </item>
-    
-      <item>
-        <title>Insert USB Module in Linux Kernel</title>
-        <description>&lt;p&gt;After I re-compile my kernel using a vanilla one, I found that my usb flashdrive 
-can not be detected by my operating system. I check on dmesg, there are entry
-about my usb flashdrive on the log:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;didik@thinkpad:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;dmesg
-&lt;span class=&quot;nt&quot;&gt;---&lt;/span&gt; output omitted &lt;span class=&quot;nt&quot;&gt;---&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;  123.616624] usb 1-1.2: new high-speed USB device number 3 using ehci-pci
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;  123.710606] usb 1-1.2: New USB device found, &lt;span class=&quot;nv&quot;&gt;idVendor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;0951, &lt;span class=&quot;nv&quot;&gt;idProduct&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1666
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;  123.710617] usb 1-1.2: New USB device strings: &lt;span class=&quot;nv&quot;&gt;Mfr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1, &lt;span class=&quot;nv&quot;&gt;Product&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;2, &lt;span class=&quot;nv&quot;&gt;SerialNumber&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;3
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;  123.710631] usb 1-1.2: Product: DataTraveler 3.0
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;  123.710634] usb 1-1.2: Manufacturer: Kingston
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;  123.710637] usb 1-1.2: SerialNumber: 60A44C3FACDBBDB1796E36C9
-&lt;span class=&quot;nt&quot;&gt;---&lt;/span&gt; output omitted &lt;span class=&quot;nt&quot;&gt;---&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;But, after a moment I wait, there is no notification about new flashdrive
-inserted. I check using blkid, still there is no sign of the thing.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;didik@thinkpad:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;blkid
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; password &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;didik: 
-/dev/sda1: &lt;span class=&quot;nv&quot;&gt;LABEL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;SYSTEM&quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;UUID&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;70E80099E8005FA8&quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;TYPE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;ntfs&quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;PARTUUID&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;ba6ded71-01&quot;&lt;/span&gt;
-/dev/sda2: &lt;span class=&quot;nv&quot;&gt;UUID&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;92521783-0211-4b1d-8f66-b9a62c16fc89&quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;UUID_SUB&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;fdb1cb3e-1a44-4e53-864e-b29f6fdfb153&quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;TYPE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;btrfs&quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;PARTUUID&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;ba6ded71-02&quot;&lt;/span&gt;
-/dev/sda3: &lt;span class=&quot;nv&quot;&gt;UUID&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;4723c4f7-9624-4b8d-9b41-3079442641b4&quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;TYPE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;swap&quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;PARTUUID&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;ba6ded71-03&quot;&lt;/span&gt;
-/dev/sda5: &lt;span class=&quot;nv&quot;&gt;LABEL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;DATA&quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;UUID&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;01CD0094E26EBB80&quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;TYPE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;ntfs&quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;PARTUUID&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;ba6ded71-05&quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Apparently, I forget to insert usb-storage module in my kernel, after I
-recompile it. So, I try to modprobe the needed module.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;didik@thinkpad:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;modprobe usb-storage
-modprobe: FATAL: Module usb-storage not found &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;directory /lib/modules/4.6.2&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Okay, it seems that the file I need is not available from the kernel tree. So, I
-need to insert the module manually.&lt;br /&gt;
-Time to go to kernel tree.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;didik@thinkpad:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;linux-4.6.2/
-didik@thinkpad:~/linux-4.6.2&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;make menuconfig&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;From this menu, I will include the module that I need for usb-storage. Press /
-to search module name. It is called USB_STORAGE.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/usb-module0.png&quot; alt=&quot;usb-module0.png&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;After I found its location, I insert it with “M” become my choice between the
-tri-state mode.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/static/img/usb-module1.png&quot; alt=&quot;usb-module1.png&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;I exit and save this configuration.&lt;br /&gt;
-Then I make it.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;didik@thinkpad:~/linux-4.6.2&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;make &lt;span class=&quot;nt&quot;&gt;-j4&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Note that the “4” value is changeable depends on processor specs.&lt;br /&gt;
-I use “4” because my processor 
-Install old and new compiled module, as root of course.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;didik@thinkpad:~/linux-4.6.2&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;make modules_install&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;My new module finally installed. Now I can plug the usb drive on my computer.&lt;br /&gt;
-Just in case you are curious about system message of the inserted device, you 
-can use dmesg.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;didik@thinkpad:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;dmesg
-&lt;span class=&quot;nt&quot;&gt;---&lt;/span&gt; output omitted &lt;span class=&quot;nt&quot;&gt;---&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; 3231.314581] usb 1-1.2: USB disconnect, device number 3
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; 3233.198257] usb 1-1.2: new high-speed USB device number 4 using ehci-pci
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; 3233.292379] usb 1-1.2: New USB device found, &lt;span class=&quot;nv&quot;&gt;idVendor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;0951, &lt;span class=&quot;nv&quot;&gt;idProduct&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1666
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; 3233.292390] usb 1-1.2: New USB device strings: &lt;span class=&quot;nv&quot;&gt;Mfr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1, &lt;span class=&quot;nv&quot;&gt;Product&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;2, &lt;span class=&quot;nv&quot;&gt;SerialNumber&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;3
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; 3233.292395] usb 1-1.2: Product: DataTraveler 3.0
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; 3233.292399] usb 1-1.2: Manufacturer: Kingston
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; 3233.292403] usb 1-1.2: SerialNumber: 60A44C3FACDBBDB1796E36C9
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; 3233.990697] usb-storage 1-1.2:1.0: USB Mass Storage device detected
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; 3233.990994] scsi host6: usb-storage 1-1.2:1.0
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; 3233.991196] usbcore: registered new interface driver usb-storage
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; 3234.995392] scsi 6:0:0:0: Direct-Access     Kingston DataTraveler 3.0 PMAP PQ: 0 ANSI: 6
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; 3234.996242] sd 6:0:0:0: Attached scsi generic sg2 &lt;span class=&quot;nb&quot;&gt;type &lt;/span&gt;0
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; 3234.996655] sd 6:0:0:0: &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;sdb] 31293440 512-byte logical blocks: &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;16.0 GB/14.9 GiB&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; 3234.998693] sd 6:0:0:0: &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;sdb] Write Protect is off
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; 3234.998705] sd 6:0:0:0: &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;sdb] Mode Sense: 2b 80 00 08
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; 3235.000537] sd 6:0:0:0: &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;sdb] Write cache: disabled, &lt;span class=&quot;nb&quot;&gt;read &lt;/span&gt;cache: enabled, doesn&lt;span class=&quot;s1&quot;&gt;'t support DPO or FUA
-[ 3236.101997]  sdb: sdb1
-[ 3236.108153] sd 6:0:0:0: [sdb] Attached SCSI removable disk
---- output omitted ---&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;And modinfo to view module details.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;didik@thinkpad:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;modinfo usb-storage
-filename:       /lib/modules/4.6.2/kernel/drivers/usb/storage/usb-storage.ko
-license:        GPL
-description:    USB Mass Storage driver &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;Linux
-author:         Matthew Dharm &amp;lt;mdharm-usb@one-eyed-alien.net&amp;gt;
-srcversion:     D0235102D9160CC35A9A1C4
-&lt;span class=&quot;nb&quot;&gt;alias&lt;/span&gt;:          usb:v&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;p&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;d&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;dc&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;dsc&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;dp&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;ic08isc06ip50in&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;alias&lt;/span&gt;:          usb:v&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;p&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;d&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;dc&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;dsc&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;dp&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;ic08isc05ip50in&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;---&lt;/span&gt; output omitted &lt;span class=&quot;nt&quot;&gt;---&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;alias&lt;/span&gt;:          usb:v03EEp6906d0003dc&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;dsc&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;dp&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;ic&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;isc&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;ip&lt;span class=&quot;k&quot;&gt;*in*&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;alias&lt;/span&gt;:          usb:v03EBp2002d0100dc&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;dsc&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;dp&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;ic&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;isc&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;ip&lt;span class=&quot;k&quot;&gt;*in*&lt;/span&gt;
-depends:        
-intree:         Y
-vermagic:       4.6.2 SMP mod_unload modversions 
-parm:           option_zero_cd:ZeroCD mode &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Force Modem &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;default&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Allow CD-Rom &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;uint&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-parm:           swi_tru_install:TRU-Install mode &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Full Logic &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;def&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Force CD-Rom, &lt;span class=&quot;nv&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Force Modem&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;uint&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-parm:           delay_use:seconds to delay before using a new device &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;uint&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-parm:           quirks:supplemental list of device IDs and their quirks &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;string&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Until next time.&lt;/p&gt;
-</description>
-        <pubDate>Tue, 03 May 2016 21:13:21 +0700</pubDate>
-        <link>https://www.didiksetiawan.com/blog/2016/05/03/insert-usb-module-linux-kernel/</link>
-        <guid isPermaLink="true">https://www.didiksetiawan.com/blog/2016/05/03/insert-usb-module-linux-kernel/</guid>
-        
-        
-        <category>linux</category>
-        
-        <category>kernel</category>
         
       </item>
     
