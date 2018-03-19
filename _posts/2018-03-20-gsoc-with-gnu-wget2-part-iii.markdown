@@ -1,16 +1,16 @@
 ---
 layout: post
 title: "GSoC with GNU Wget2 - Part III"
-date: 2018-03-18 21:21:00 +0700
+date: 2018-03-20 05:21:00 +0700
 comments: true
 categories: open_source programming collaboration gsoc
 ---
 
 This is the last part of my GSoC 2017 journal trilogy. In this period, my
-patches was reviewed. In order to pass this final evaluations, I must submitted
-my work and try to merge it to upstream codebase.  
-As my previous period, I face with some obstacles but mentors help me a lot to
-get rid of it so the project goals was achieved.
+patches of this project must be sent so they can be reviewed. In order to pass
+this final evaluations, I must submitted my work and try to merge it to
+upstream codebase. As my previous period, I face with some obstacles but
+mentors help me a lot to get rid of it so the project goals was achieved.
 
 ### 9th Week
 
@@ -292,19 +292,44 @@ testing. I do it by made a branch without Libmicrohttpd installed.
 ### 12th Week
 
 This week I focused my work on task adding HTTP digest authentication test. I
-found an issue regarding HTTP digest authentication not work properly.
+found an issue regarding HTTP digest authentication not work properly. I tried
+to analyzed it first because throw this issue to public. After I sure that my
+issue reproducible and make sense, I create issue and merge request respectively
+[3][4]. The merge request was accepted.
 
 ### 13th Week
 
-* Report and fix problem regarding basic authentication and
-  --auth-no-challenge option
+At this point I made a merge request regarding my work on this project [4].
+After get reviewed by mentors and other contributors, it finally merged. To
+complete final evaluations, I must submit final report which contains summary of
+my work and patches I made. It could be link to Github Repositository, Github
+Gist, Blog Post, Google Drive, etc, which can be accessed from public. I choose
+to use Google Drive to save my report. Here is the link [5] to my work if you
+want to check.
 
 ### Final Evaluations
 
+After making it until 13th week of works, it was time to get announcement. I got
+email that said I was passed on this final evaluations. As always mentors give
+me feedback.  
+He said, I did a good job with the project this year. There are a few small
+issues still lying, but they can be easily cleaned up very quick. Over the
+period, I have definitely grown as a programmer, however I should be a little
+more active in the community.
+
 ### Conclusion
 
+GSoC give me priceless experience about how to getting involved in open source
+community. I have enjoyed working with my organization over the last few months
+and I will continue to work with them and make sure my code that I have worked
+so hard on over these last few months is integrated into their code base. I
+will try to keep active in community and contributing more while GSoC passed.
+I hope my small contribution was useful for all.
 
 Reference(s):  
 [0] [https://sourceforge.net/p/msys2/discussion/general/thread/c1aa51f9/](https://sourceforge.net/p/msys2/discussion/general/thread/c1aa51f9/)  
-[1] [https://gitlab.com/gnuwget/wget2/issues/250](https://gitlab.com/gnuwget/wget2/issues/250]  
-[2] [https://gitlab.com/gnuwget/wget2/merge_requests/264](https://gitlab.com/gnuwget/wget2/merge_requests/264)
+[1] [https://gitlab.com/gnuwget/wget2/issues/250](https://gitlab.com/gnuwget/wget2/issues/250)  
+[2] [https://gitlab.com/gnuwget/wget2/merge_requests/264](https://gitlab.com/gnuwget/wget2/merge_requests/264)  
+[3] [https://gitlab.com/gnuwget/wget2/issues/237](https://gitlab.com/gnuwget/wget2/issues/237)  
+[4] [https://gitlab.com/gnuwget/wget2/merge_requests/265](https://gitlab.com/gnuwget/wget2/merge_requests/265)  
+[5] [https://drive.google.com/drive/folders/0B4yUFvLvAUANLU10X19qckZ6UkE?usp=sharing](https://drive.google.com/drive/folders/0B4yUFvLvAUANLU10X19qckZ6UkE?usp=sharing)
