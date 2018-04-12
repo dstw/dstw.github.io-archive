@@ -16,8 +16,8 @@ about the first period.
 After looking for organizations to work on, I decide to choose GNU Wget2 (part
 of GNU Project). Why I choose this organization? Some reason I can say:
 
-* The codebase is small (but not the scope, for me), it give me advantage
-  that it's easy to deploy on my local machine.
+* The codebase is small (but not the scope, for me), it gives me advantage
+  that it is easy to deploy on my local machine.
 * It use C as its primary programming language. At this time, I would like to
   learn about C (Linux was influenced me) on real world application. I was
   starting to learn C but just on the theory. So, working on Wget2 could help me
@@ -39,7 +39,7 @@ it can be merged to upstream. I respect the reviewing process, it help me learn
 a lot. Also from now I learn a lot to use _GDB (GNU Debugger)_ to debug
 application.  
 At first I choose to use subject "Design and Implementation of a Framework for
-Plugins". But I rethink again because what I do in microproject is about
+Plugins". But I rethink again because what I do in micro project is about
 Testing. Finally I change my subject so I take "Design and Implementation of
 Test Suite Using Libmicrohttpd" as my project. I send my proposal to project's
 mailing list [1]. After some reviewing and revision process, I officially sent
@@ -156,13 +156,13 @@ Some issues I found in this period:
   in the port number makes the kernel choose an open one for it. Having a
   randomised port is important to ensure that multiple runs don't step on each
   other.  
-  I think still don't know how to accomplish this. Maybe, it just my understanding
-  that when I pass 0 in MHD port number, the result is still 0.  Another
-  approach, when I look into the old code, it generate port number by calling
-  `wget_tcp_get_local_port()`. But, I need to call `wget_tcp_init()` and
-  `wget_tcp_listen()` respectively in order to get proper result.  Conclusion, do
-  I need to use existing `wget_tcp_get_local_port()` to get the port, or maybe
-  there is a function in Libmicrohttpd to do that.  
+  I think still don't know how to accomplish this. Maybe, it just my
+  understanding that when I pass 0 in MHD port number, the result is still 0.
+  Another approach, when I look into the old code, it generate port number by
+  calling `wget_tcp_get_local_port()`. But, I need to call `wget_tcp_init()` and
+  `wget_tcp_listen()` respectively in order to get proper result.  Conclusion,
+  do I need to use existing `wget_tcp_get_local_port()` to get the port, or
+  maybe there is a function in Libmicrohttpd to do that.  
   Tim added that all I need is the socket descriptor. How to call
   `getsockname()` + `getnameinfo()` to retrieve the port number I see in
   `libwget/net.c`/ `wget_tcp_get_local_port()`. If Libmicrohttpd doesn't have
@@ -429,7 +429,7 @@ done and what are my plans for the next day.
 
 That was though days with my first time period of GSoC. There was many jobs left
 to be finished in the next period. Mistakes happen, but I was learn a lot from
-them.
+them. Thanks to my mentors who patiently guide me through this process.
 
 Reference(s):  
 [0] [https://github.com/rockdaboot/wget2/pull/155](https://github.com/rockdaboot/wget2/pull/155)  
