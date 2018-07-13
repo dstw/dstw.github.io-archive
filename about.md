@@ -8,14 +8,13 @@ footer: true
 ---
 
 Hi, my name is Didik Setiawan. A typical person who like to see and learn how
-computer works. I love to use free and open source software. I recommend to use
-free and open source software in daily life also.  
-My daily activities are as a student and a software engineer. A curious student
-about computer operating systems. As a software engineer, I love to giving back
-contribution to the free and open source software community. I am proud
-become part of them.  
+computer works. I love to use Free and Open Source Software. I recommend use of
+free and open source software in daily life.  
+My daily activities are as a student and a software engineer. I have interest in
+computer operating systems. As a software engineer, I love to giving back
+contribution to the Free and Open Source Software Community.  
 This blog is my notes about programming, system administration and other
-computer stuff. I make this blog to share my views and ideas to the world.
+computer stuff. I make this blog to share my views and ideas to the world.  
 
 -----
 
