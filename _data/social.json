@@ -1,7 +1,7 @@
 [
   {
     "icon": "fa-twitter",
-    "link": "https://www.twitter.com/didik_swn"
+    "link": "https://www.twitter.com/dstw_dstw"
   },
   {
     "icon": "fa-github",
@@ -14,5 +14,9 @@
   {
     "icon": "fa-stack-overflow",
     "link": "https://stackoverflow.com/story/dstw"
+  },
+  {
+    "icon": "fa-envelope",
+    "link": "mailto:ds@didiksetiawan.com"
   }
 ]

@@ -11,7 +11,7 @@
     "icon": "fa-comments"
   },
   {
-    "text": "Email",
-    "url": "mailto:ds@didiksetiawan.com",
-    "icon": "fa-envelope"
+    "text": "Books",
+    "url": "/books/",
+    "icon": "fa-book"
   }]
