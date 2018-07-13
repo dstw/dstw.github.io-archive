@@ -23,7 +23,7 @@ of GNU Project). Why I choose this organization? Some reason I can say:
   starting to learn C but just on the theory. So, working on Wget2 could help me
   to learn C with practice.
 * The GNU Project reputation is well recognized in Open Source community so
-  working on their project make me proud.
+  working on their project will give me excellent opportunity to learn.
 
 I immediately take a look on their repository. I try to clone their repository
 and build on my machine. GNU Wget2 use mailing list as their primary
