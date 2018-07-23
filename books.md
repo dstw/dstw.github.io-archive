@@ -8,17 +8,17 @@ footer: true
 ---
 
 This page contains my reading list. It is share the same contents as in my
-Goodreads page (www.goodreads.com/dstw).
+Goodreads page [www.goodreads.com/dstw](http://www.goodreads.com/dstw).
 
-Read:
+<h2>Read:</h2>
 
 * Head First C (Griffiths, David)
 
-Currently reading:
+<h2>Currently reading:</h2>
 
 * The C Programming Language (Kernighan, Brian W.)
 
-Want to read:
+<h2>Want to read:</h2>
 
 * 21st Century C: C Tips from the New School (Klemens, Ben)
 * C Primer Plus (Prata, Stephen)
@@ -37,6 +37,5 @@ Want to read:
 
 My book collections cover C Programming Language, Linux Userspace / Kernel
 Programming and Operating System.  
-By create this list, I just want to admit that I have strong interest in such
-topics and it is also make me easier to choose what books to read. Happy
-reading!
+By create this list, I can say that I have strong interest in such
+topics. It is also make me easier to choose what books to read.
