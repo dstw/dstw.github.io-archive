@@ -5,8 +5,8 @@
     <description>Didik Setiawan's Blog</description>
     <link>https://www.didiksetiawan.com/</link>
     <atom:link href="https://www.didiksetiawan.com/sitemap.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 14 Jul 2018 00:33:18 +0700</pubDate>
-    <lastBuildDate>Sat, 14 Jul 2018 00:33:18 +0700</lastBuildDate>
+    <pubDate>Thu, 26 Jul 2018 06:01:49 +0700</pubDate>
+    <lastBuildDate>Thu, 26 Jul 2018 06:01:49 +0700</lastBuildDate>
     <generator>Jekyll v3.8.3</generator>
     
       <item>
@@ -2805,33 +2805,60 @@ parm:           quirks:supplemental list of device IDs and their quirks &lt;span
       </item>
     
       <item>
-        <title>Build Custom Linux Kernel</title>
-        <description>&lt;h2 id=&quot;install-custom-linux-kernel&quot;&gt;Install Custom Linux Kernel&lt;/h2&gt;
+        <title>Build Linux Kernel from Source</title>
+        <description>&lt;p&gt;In order to doing some research in operating system, I need to build Linux
+kernel from source. Although my GNU/Linux distro provide Linux kernel package
+which ready to use, I can not use it for Linux Kernel development. It is
+recommended to be able build my own Linux kernel in order to customize my build.&lt;/p&gt;
 
-&lt;p&gt;To build this custom Linux Kernel, I use Ubuntu 14.04 64 bit operating system.
-At first, ensure all the required utilities installed correctly.&lt;/p&gt;
+&lt;h2 id=&quot;build--install&quot;&gt;Build &amp;amp; Install&lt;/h2&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;gcc make git libssl-dev libncurses5-dev&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;To build the Linux kernel from source, I need several tools: &lt;code class=&quot;highlighter-rouge&quot;&gt;make&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;gcc&lt;/code&gt;,
+&lt;code class=&quot;highlighter-rouge&quot;&gt;libssl-dev&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;git&lt;/code&gt; and (optionally) &lt;code class=&quot;highlighter-rouge&quot;&gt;ctags&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;cscope&lt;/code&gt;, and/or &lt;code class=&quot;highlighter-rouge&quot;&gt;ncurses-dev&lt;/code&gt;.
+&lt;code class=&quot;highlighter-rouge&quot;&gt;make&lt;/code&gt; &amp;amp; &lt;code class=&quot;highlighter-rouge&quot;&gt;gcc&lt;/code&gt; is essential tools to build binaries from source. &lt;code class=&quot;highlighter-rouge&quot;&gt;libssl-dev&lt;/code&gt; is
+for cryptography purpose. &lt;code class=&quot;highlighter-rouge&quot;&gt;git&lt;/code&gt; is used for control the revision of the source
+code, it is recommended if I want to submit patch regarding Linux Kernel. The
+&lt;code class=&quot;highlighter-rouge&quot;&gt;ncurses-dev&lt;/code&gt; tools are used if I &lt;code class=&quot;highlighter-rouge&quot;&gt;make menuconfig&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;make nconfig&lt;/code&gt;.  The tool
+packages may be called something else in some Linux distribution, so I may need
+to determine the package first.&lt;/p&gt;
 
-&lt;p&gt;Download source from Linux Kernel Archives, for example, I use version 4.4.&lt;br /&gt;
-&lt;a href=&quot;https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.4.tar.xz&quot;&gt;https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.4.tar.xz&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I use Ubuntu, so I can get these tools by running:&lt;/p&gt;
 
-&lt;p&gt;Extract the tarball file.&lt;/p&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;make gcc libssl-dev bc git exuberant-ctags libncurses5-dev &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;tar &lt;/span&gt;xJf linux-4.4.tar.xz
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;linux-4.4&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;If you using different Linux distro, on Red Hat based systems like Fedora,
+CentOS you can run:&lt;/p&gt;
 
-&lt;p&gt;We need to change configuration parameters to determine which settings and modules we need to build.
-Use make *config command as follow. 
-Choose one that match to your favor.
-I usually use number 2.&lt;/p&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;yum &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;gcc make git ctags ncurses-devel openssl-devel&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;And on SUSE based systems (like SLES and Leap), you can run:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;zypper &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;git gcc ncurses-devel libopenssl-devel ctags cscope&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;If you develop using git, there are different development tree of Linux Kernel
+available. Different tree serve different purpose. Some of them I often use:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;rc: The latest version out from Linus Torvald tree. It serves main purpose to
+include some new feature or fix which ready for testing. Not recommended for
+production use.&lt;/li&gt;
+  &lt;li&gt;stable: Kernel marked stable are come from the stable maintainer which
+currently done by Greg-Kroah Hartman. This version good for production use.&lt;/li&gt;
+  &lt;li&gt;staging: The staging tree is collection of new driver which not yet ready to
+be included in Linus rc tree. This one highly recommended for new and aspiring
+Linux Kernel developer who want to contribute.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I need to change configuration parameters to determine which settings and
+modules which need to build. Several options available:&lt;/p&gt;
 
 &lt;h4 id=&quot;1-use-default-kernel-configuration&quot;&gt;1. Use default kernel configuration.&lt;/h4&gt;
-&lt;p&gt;This settings comes from the kernel maintainer.&lt;/p&gt;
+&lt;p&gt;This settings comes from the kernel maintainer. Remember, a default config may
+not have the options you are currently using.&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;make defconfig &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;h4 id=&quot;2-use-our-existing-configuration&quot;&gt;2. Use our existing configuration.&lt;/h4&gt;
+&lt;h4 id=&quot;2-use-existing-configuration&quot;&gt;2. Use existing configuration.&lt;/h4&gt;
 &lt;p&gt;Just press “Enter” when asked for configuration options.&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;make localmodconfig&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
@@ -2840,17 +2867,45 @@ I usually use number 2.&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;make menuconfig&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;h4 id=&quot;4--duplicate-our-current-config&quot;&gt;4.  Duplicate our current config.&lt;/h4&gt;
+&lt;p&gt;Compiling a kernel from scratch from a distribution configuration can take
+“forever” because the distros turn on every hardware configuration possible. For
+people wanting to do kernel development fast, you want to make a minimal
+configuration. Steve Rostedt uses ktest.pl make_min_config to get a truely
+minimum config, but it will take a day or two to build. Warning: make sure you
+have all your USB devices plugged into the system, or you won’t get the drivers
+for them!&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo cp&lt;/span&gt; /boot/config-&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;uname&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; .config&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;h4 id=&quot;4--duplicate-current-config&quot;&gt;4.  Duplicate current config.&lt;/h4&gt;
+
+&lt;p&gt;When I want to see if a bug is fixed, I can duplicate the configuration on my
+running kernel. That config file is stored somewhere in /boot/. There might be
+several files that start with config, so I can use the one associated with your
+running kernel. I can find it by running &lt;code class=&quot;highlighter-rouge&quot;&gt;uname -a&lt;/code&gt; and finding the config file
+that ends with my kernel version number. I copy that file into the source
+directory as .config. Or just run this command:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo cp&lt;/span&gt; /boot/config-&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;uname&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\*&lt;/span&gt; .config&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Among these options, I tend to use latest option because it use config from
+distro developer and cause it recognizes most of my hardware.&lt;/p&gt;
 
 &lt;p&gt;Then, compile source, this process can take a while.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;make &lt;span class=&quot;nt&quot;&gt;-j4&lt;/span&gt; &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;make &lt;span class=&quot;nt&quot;&gt;-jX&lt;/span&gt; &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;The parameter “4” is based on processor specification.
-Set this at your own favor.&lt;br /&gt;
-Install modules.&lt;/p&gt;
+&lt;p&gt;Where X is a number like 2 or 4. If you have a dual core, 2 or 3 might be good.
+Quad core, 4 or 6. Do not run with really big numbers unless you want your
+machine to be slow. You can check the number with:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt; /proc/cpuinfo&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;On my machine, there are 0-3 processor available. I want to use all of these
+resources to perform the compiling process. So I can use &lt;code class=&quot;highlighter-rouge&quot;&gt;make -j4&lt;/code&gt;.&lt;br /&gt;
+This compiling process can take a lot of time. So you can make the time to do
+some other interesting tasks such as read books of Linux Kernel development,
+read LWN, lurking on LKML, etc.&lt;/p&gt;
+
+&lt;p&gt;Install modules.&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;make modules_install &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
@@ -2863,42 +2918,50 @@ Install modules.&lt;/p&gt;
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;update-grub2 &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Reboot the system.
-We can check our new installed kernel with this command.&lt;/p&gt;
+I can check my new installed kernel with this command.&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;uname&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;h2 id=&quot;uninstall-custom-linux-kernel&quot;&gt;Uninstall Custom Linux Kernel&lt;/h2&gt;
+&lt;p&gt;Enjoy the new kernel.&lt;/p&gt;
 
-&lt;p&gt;Find out the version of custom kernel.&lt;br /&gt;
-Update filesystem search index.&lt;/p&gt;
+&lt;h2 id=&quot;remove&quot;&gt;Remove&lt;/h2&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;updatedb&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;Find out the version of custom kernel. I can look at &lt;code class=&quot;highlighter-rouge&quot;&gt;/boot&lt;/code&gt; directory.&lt;/p&gt;
 
-&lt;p&gt;In this example, I want to remove kernel version 3.16.0-30-generic.&lt;/p&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt; /boot/&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ CUSTOM_KERNEL_VERSION&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;3.16.0-30-generic&quot;&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;locate &lt;span class=&quot;nv&quot;&gt;$CUSTOM_KERNEL_VERSION&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;There are several files. I can refer to the vmlinuz files to determine which
+version I need to process.&lt;/p&gt;
 
-&lt;p&gt;Ensure our system has other kernel installed beside $CUSTOM_KERNEL_VERSION.&lt;br /&gt;
-Then, delete all files &amp;amp; folders which contain $CUSTOM_KERNEL_VERSION name.&lt;/p&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;/boot/vmlinuz-4.15.0-23-generic
+/boot/vmlinuz-4.15.0-29-generic
+/boot/vmlinuz-4.18.0-rc5
+/boot/vmlinuz-4.18.0-rc6&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo rm&lt;/span&gt; /boot/vmlinuz-&lt;span class=&quot;nv&quot;&gt;$CUSTOM_KERNEL_VERSION&lt;/span&gt;
+&lt;p&gt;In this example, I want to remove kernel version 4.18.0-rc5.&lt;br /&gt;
+Ensure our system has other kernel installed beside $CUSTOM_KERNEL_VERSION. Also
+ensure that you not removing kernel which you currently running on, because it
+can lead to unexpected behaviour. When everything is okay, delete all files and
+folders which contain $CUSTOM_KERNEL_VERSION name.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ CUSTOM_KERNEL_VERSION&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;4.18.0-rc5&quot;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo rm&lt;/span&gt; /boot/vmlinuz-&lt;span class=&quot;nv&quot;&gt;$CUSTOM_KERNEL_VERSION&lt;/span&gt;
 &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo rm&lt;/span&gt; /boot/initrd.img-&lt;span class=&quot;nv&quot;&gt;$CUSTOM_KERNEL_VERSION&lt;/span&gt;
 &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo rm&lt;/span&gt; /boot/System.map-&lt;span class=&quot;nv&quot;&gt;$CUSTOM_KERNEL_VERSION&lt;/span&gt;
 &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo rm&lt;/span&gt; /boot/config-&lt;span class=&quot;nv&quot;&gt;$CUSTOM_KERNEL_VERSION&lt;/span&gt;
 &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo rm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-rf&lt;/span&gt; /lib/modules/&lt;span class=&quot;nv&quot;&gt;$CUSTOM_KERNEL_VERSION&lt;/span&gt;/
 &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo rm&lt;/span&gt; /var/lib/initramfs-tools/&lt;span class=&quot;nv&quot;&gt;$CUSTOM_KERNEL_VERSION&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;Do some cleaning.&lt;/p&gt;
+&lt;p&gt;Lastly, do some cleaning.&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;update-initramfs &lt;span class=&quot;nt&quot;&gt;-k&lt;/span&gt; all &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt;
 &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;update-grub2&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;Finish. Our custom kernel has been uninstalled from our system.&lt;/p&gt;
+&lt;p&gt;Finish. My kernel has been uninstalled.&lt;/p&gt;
 </description>
         <pubDate>Tue, 02 Feb 2016 10:35:18 +0700</pubDate>
-        <link>https://www.didiksetiawan.com/blog/2016/02/02/build-custom-linux-kernel/</link>
-        <guid isPermaLink="true">https://www.didiksetiawan.com/blog/2016/02/02/build-custom-linux-kernel/</guid>
+        <link>https://www.didiksetiawan.com/blog/2016/02/02/build-linux-kernel-from-source/</link>
+        <guid isPermaLink="true">https://www.didiksetiawan.com/blog/2016/02/02/build-linux-kernel-from-source/</guid>
         
         
         <category>linux</category>

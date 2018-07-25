@@ -7,15 +7,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="shortcut icon" href="/static/img/favicon.ico" />
-        <title>Build Custom Linux Kernel - Didik Setiawan</title>
+        <title>Build Linux Kernel from Source - Didik Setiawan</title>
         <meta name="author" content="Didik Setiawan" />
-        <meta name="description" content="Build Custom Linux Kernel" />
-        <meta name="keywords" content="Build Custom Linux Kernel, Didik Setiawan, linux, kernel" />
+        <meta name="description" content="Build Linux Kernel from Source" />
+        <meta name="keywords" content="Build Linux Kernel from Source, Didik Setiawan, linux, kernel" />
 
         <meta content="0" property="fb:app_id">
         <meta content="Didik Setiawan" property="og:site_name">
         
-          <meta content="Build Custom Linux Kernel" property="og:title">
+          <meta content="Build Linux Kernel from Source" property="og:title">
         
         
           <meta content="article" property="og:type">
@@ -24,7 +24,7 @@
           <meta content="Didik Setiawan's Blog" property="og:description">
         
         
-          <meta content="https://www.didiksetiawan.com/blog/2016/02/02/build-custom-linux-kernel/" property="og:url">
+          <meta content="https://www.didiksetiawan.com/blog/2016/02/02/build-linux-kernel-from-source/" property="og:url">
         
         
           <meta content="2016-02-02T10:35:18+07:00" property="article:published_time">
@@ -45,10 +45,10 @@
         <meta name="twitter:site" content="@didik_swn">
         <meta name="twitter:creator" content="@didik_swn">
         
-          <meta name="twitter:title" content="Build Custom Linux Kernel">
+          <meta name="twitter:title" content="Build Linux Kernel from Source">
         
         
-          <meta name="twitter:url" content="https://www.didiksetiawan.com/blog/2016/02/02/build-custom-linux-kernel/">
+          <meta name="twitter:url" content="https://www.didiksetiawan.com/blog/2016/02/02/build-linux-kernel-from-source/">
         
         
           <meta name="twitter:description" content="Didik Setiawan's Blog">
@@ -119,7 +119,7 @@
           </div>
           <div class="col-md-9 col-sm-8 col-xs-12">
           <div class="row">
-            <h2 class="blog-title-pro col-md-6 col-sm-12 col-xs-12 ">Build Custom Linux Kernel</h2>
+            <h2 class="blog-title-pro col-md-6 col-sm-12 col-xs-12 ">Build Linux Kernel from Source</h2>
             
             <div class="col-md-6 col-sm-12 col-xs-12 searchcontrol" id="js-search">
               <input class="form-control" type="text" id="js-search__input" placeholder="Search">
@@ -164,7 +164,7 @@
 	
     
 	
-	<li class="col-lg-12 col-md-12 col-sm-4 col-xs-12 current-menu-item build-custom-linux-kernel"><a href="/" target="_self"><i class="fa fa-home"></i> Blog</a></li>
+	<li class="col-lg-12 col-md-12 col-sm-4 col-xs-12 current-menu-item build-linux-kernel-from-source"><a href="/" target="_self"><i class="fa fa-home"></i> Blog</a></li>
 
 	
 	
@@ -174,7 +174,7 @@
 	
     
 	
-	<li class="col-lg-12 col-md-12 col-sm-4 col-xs-12  build-custom-linux-kernel"><a href="/about/" target="_self"><i class="fa fa-comments"></i> About</a></li>
+	<li class="col-lg-12 col-md-12 col-sm-4 col-xs-12  build-linux-kernel-from-source"><a href="/about/" target="_self"><i class="fa fa-comments"></i> About</a></li>
 
 	
 	
@@ -184,7 +184,7 @@
 	
     
 	
-	<li class="col-lg-12 col-md-12 col-sm-4 col-xs-12  build-custom-linux-kernel"><a href="/books/" target="_self"><i class="fa fa-book"></i> Books</a></li>
+	<li class="col-lg-12 col-md-12 col-sm-4 col-xs-12  build-linux-kernel-from-source"><a href="/books/" target="_self"><i class="fa fa-book"></i> Books</a></li>
 
 </ul>
 
@@ -195,32 +195,59 @@
         <div class="col-md-9 col-xs-12 full">
           <div class="post-content well">
 <article class="content">
-    <div class="post"><h2 id="install-custom-linux-kernel">Install Custom Linux Kernel</h2>
+    <div class="post"><p>In order to doing some research in operating system, I need to build Linux
+kernel from source. Although my GNU/Linux distro provide Linux kernel package
+which ready to use, I can not use it for Linux Kernel development. It is
+recommended to be able build my own Linux kernel in order to customize my build.</p>
 
-<p>To build this custom Linux Kernel, I use Ubuntu 14.04 64 bit operating system.
-At first, ensure all the required utilities installed correctly.</p>
+<h2 id="build--install">Build &amp; Install</h2>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo </span>apt-get <span class="nb">install </span>gcc make git libssl-dev libncurses5-dev</code></pre></figure>
+<p>To build the Linux kernel from source, I need several tools: <code class="highlighter-rouge">make</code>, <code class="highlighter-rouge">gcc</code>,
+<code class="highlighter-rouge">libssl-dev</code>, <code class="highlighter-rouge">git</code> and (optionally) <code class="highlighter-rouge">ctags</code>, <code class="highlighter-rouge">cscope</code>, and/or <code class="highlighter-rouge">ncurses-dev</code>.
+<code class="highlighter-rouge">make</code> &amp; <code class="highlighter-rouge">gcc</code> is essential tools to build binaries from source. <code class="highlighter-rouge">libssl-dev</code> is
+for cryptography purpose. <code class="highlighter-rouge">git</code> is used for control the revision of the source
+code, it is recommended if I want to submit patch regarding Linux Kernel. The
+<code class="highlighter-rouge">ncurses-dev</code> tools are used if I <code class="highlighter-rouge">make menuconfig</code> or <code class="highlighter-rouge">make nconfig</code>.  The tool
+packages may be called something else in some Linux distribution, so I may need
+to determine the package first.</p>
 
-<p>Download source from Linux Kernel Archives, for example, I use version 4.4.<br />
-<a href="https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.4.tar.xz">https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.4.tar.xz</a></p>
+<p>I use Ubuntu, so I can get these tools by running:</p>
 
-<p>Extract the tarball file.</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">sudo </span>apt <span class="nb">install </span>make gcc libssl-dev bc git exuberant-ctags libncurses5-dev </code></pre></figure>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">tar </span>xJf linux-4.4.tar.xz
-<span class="nv">$ </span><span class="nb">cd </span>linux-4.4</code></pre></figure>
+<p>If you using different Linux distro, on Red Hat based systems like Fedora,
+CentOS you can run:</p>
 
-<p>We need to change configuration parameters to determine which settings and modules we need to build.
-Use make *config command as follow. 
-Choose one that match to your favor.
-I usually use number 2.</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">sudo </span>yum <span class="nb">install </span>gcc make git ctags ncurses-devel openssl-devel</code></pre></figure>
+
+<p>And on SUSE based systems (like SLES and Leap), you can run:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">sudo </span>zypper <span class="k">in </span>git gcc ncurses-devel libopenssl-devel ctags cscope</code></pre></figure>
+
+<p>If you develop using git, there are different development tree of Linux Kernel
+available. Different tree serve different purpose. Some of them I often use:</p>
+
+<ul>
+  <li>rc: The latest version out from Linus Torvald tree. It serves main purpose to
+include some new feature or fix which ready for testing. Not recommended for
+production use.</li>
+  <li>stable: Kernel marked stable are come from the stable maintainer which
+currently done by Greg-Kroah Hartman. This version good for production use.</li>
+  <li>staging: The staging tree is collection of new driver which not yet ready to
+be included in Linus rc tree. This one highly recommended for new and aspiring
+Linux Kernel developer who want to contribute.</li>
+</ul>
+
+<p>I need to change configuration parameters to determine which settings and
+modules which need to build. Several options available:</p>
 
 <h4 id="1-use-default-kernel-configuration">1. Use default kernel configuration.</h4>
-<p>This settings comes from the kernel maintainer.</p>
+<p>This settings comes from the kernel maintainer. Remember, a default config may
+not have the options you are currently using.</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>make defconfig </code></pre></figure>
 
-<h4 id="2-use-our-existing-configuration">2. Use our existing configuration.</h4>
+<h4 id="2-use-existing-configuration">2. Use existing configuration.</h4>
 <p>Just press “Enter” when asked for configuration options.</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>make localmodconfig</code></pre></figure>
@@ -229,17 +256,45 @@ I usually use number 2.</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>make menuconfig</code></pre></figure>
 
-<h4 id="4--duplicate-our-current-config">4.  Duplicate our current config.</h4>
+<p>Compiling a kernel from scratch from a distribution configuration can take
+“forever” because the distros turn on every hardware configuration possible. For
+people wanting to do kernel development fast, you want to make a minimal
+configuration. Steve Rostedt uses ktest.pl make_min_config to get a truely
+minimum config, but it will take a day or two to build. Warning: make sure you
+have all your USB devices plugged into the system, or you won’t get the drivers
+for them!</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo cp</span> /boot/config-<span class="sb">`</span><span class="nb">uname</span> <span class="nt">-r</span><span class="sb">`</span><span class="k">*</span> .config</code></pre></figure>
+<h4 id="4--duplicate-current-config">4.  Duplicate current config.</h4>
+
+<p>When I want to see if a bug is fixed, I can duplicate the configuration on my
+running kernel. That config file is stored somewhere in /boot/. There might be
+several files that start with config, so I can use the one associated with your
+running kernel. I can find it by running <code class="highlighter-rouge">uname -a</code> and finding the config file
+that ends with my kernel version number. I copy that file into the source
+directory as .config. Or just run this command:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo cp</span> /boot/config-<span class="sb">`</span><span class="nb">uname</span> <span class="nt">-r</span><span class="sb">`</span><span class="se">\*</span> .config</code></pre></figure>
+
+<p>Among these options, I tend to use latest option because it use config from
+distro developer and cause it recognizes most of my hardware.</p>
 
 <p>Then, compile source, this process can take a while.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>make <span class="nt">-j4</span> </code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>make <span class="nt">-jX</span> </code></pre></figure>
 
-<p>The parameter “4” is based on processor specification.
-Set this at your own favor.<br />
-Install modules.</p>
+<p>Where X is a number like 2 or 4. If you have a dual core, 2 or 3 might be good.
+Quad core, 4 or 6. Do not run with really big numbers unless you want your
+machine to be slow. You can check the number with:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">cat</span> /proc/cpuinfo</code></pre></figure>
+
+<p>On my machine, there are 0-3 processor available. I want to use all of these
+resources to perform the compiling process. So I can use <code class="highlighter-rouge">make -j4</code>.<br />
+This compiling process can take a lot of time. So you can make the time to do
+some other interesting tasks such as read books of Linux Kernel development,
+read LWN, lurking on LKML, etc.</p>
+
+<p>Install modules.</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo </span>make modules_install </code></pre></figure>
 
@@ -252,38 +307,46 @@ Install modules.</p>
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo </span>update-grub2 </code></pre></figure>
 
 <p>Reboot the system.
-We can check our new installed kernel with this command.</p>
+I can check my new installed kernel with this command.</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">uname</span> <span class="nt">-a</span></code></pre></figure>
 
-<h2 id="uninstall-custom-linux-kernel">Uninstall Custom Linux Kernel</h2>
+<p>Enjoy the new kernel.</p>
 
-<p>Find out the version of custom kernel.<br />
-Update filesystem search index.</p>
+<h2 id="remove">Remove</h2>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo </span>updatedb</code></pre></figure>
+<p>Find out the version of custom kernel. I can look at <code class="highlighter-rouge">/boot</code> directory.</p>
 
-<p>In this example, I want to remove kernel version 3.16.0-30-generic.</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">ls</span> /boot/</code></pre></figure>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ CUSTOM_KERNEL_VERSION</span><span class="o">=</span><span class="s2">"3.16.0-30-generic"</span>
-<span class="nv">$ </span>locate <span class="nv">$CUSTOM_KERNEL_VERSION</span></code></pre></figure>
+<p>There are several files. I can refer to the vmlinuz files to determine which
+version I need to process.</p>
 
-<p>Ensure our system has other kernel installed beside $CUSTOM_KERNEL_VERSION.<br />
-Then, delete all files &amp; folders which contain $CUSTOM_KERNEL_VERSION name.</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">/boot/vmlinuz-4.15.0-23-generic
+/boot/vmlinuz-4.15.0-29-generic
+/boot/vmlinuz-4.18.0-rc5
+/boot/vmlinuz-4.18.0-rc6</code></pre></figure>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo rm</span> /boot/vmlinuz-<span class="nv">$CUSTOM_KERNEL_VERSION</span>
+<p>In this example, I want to remove kernel version 4.18.0-rc5.<br />
+Ensure our system has other kernel installed beside $CUSTOM_KERNEL_VERSION. Also
+ensure that you not removing kernel which you currently running on, because it
+can lead to unexpected behaviour. When everything is okay, delete all files and
+folders which contain $CUSTOM_KERNEL_VERSION name.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ CUSTOM_KERNEL_VERSION</span><span class="o">=</span><span class="s2">"4.18.0-rc5"</span>
+<span class="nv">$ </span><span class="nb">sudo rm</span> /boot/vmlinuz-<span class="nv">$CUSTOM_KERNEL_VERSION</span>
 <span class="nv">$ </span><span class="nb">sudo rm</span> /boot/initrd.img-<span class="nv">$CUSTOM_KERNEL_VERSION</span>
 <span class="nv">$ </span><span class="nb">sudo rm</span> /boot/System.map-<span class="nv">$CUSTOM_KERNEL_VERSION</span>
 <span class="nv">$ </span><span class="nb">sudo rm</span> /boot/config-<span class="nv">$CUSTOM_KERNEL_VERSION</span>
 <span class="nv">$ </span><span class="nb">sudo rm</span> <span class="nt">-rf</span> /lib/modules/<span class="nv">$CUSTOM_KERNEL_VERSION</span>/
 <span class="nv">$ </span><span class="nb">sudo rm</span> /var/lib/initramfs-tools/<span class="nv">$CUSTOM_KERNEL_VERSION</span></code></pre></figure>
 
-<p>Do some cleaning.</p>
+<p>Lastly, do some cleaning.</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo </span>update-initramfs <span class="nt">-k</span> all <span class="nt">-u</span>
 <span class="nv">$ </span><span class="nb">sudo </span>update-grub2</code></pre></figure>
 
-<p>Finish. Our custom kernel has been uninstalled from our system.</p>
+<p>Finish. My kernel has been uninstalled.</p>
 </div>
     <hr />
     <div class="share-page">
@@ -296,7 +359,7 @@ Then, delete all files &amp; folders which contain $CUSTOM_KERNEL_VERSION name.<
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 
 <!-- Facebook -->
-<div class="fb-share-button" data-href="https://www.didiksetiawan.com/blog/2016/02/02/build-custom-linux-kernel/" data-layout="button_count" style="position: relative; top: -8px; left: 3px;"></div>
+<div class="fb-share-button" data-href="https://www.didiksetiawan.com/blog/2016/02/02/build-linux-kernel-from-source/" data-layout="button_count" style="position: relative; top: -8px; left: 3px;"></div>
 </div>
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
@@ -836,8 +899,8 @@ Then, delete all files &amp; folders which contain $CUSTOM_KERNEL_VERSION name.<
         /* <![CDATA[ */
 
         var disqus_shortname = "didiksetiawan";
-        var disqus_identifier = "https://www.didiksetiawan.com_Build Custom Linux Kernel";
-        var disqus_title = "Build Custom Linux Kernel";
+        var disqus_identifier = "https://www.didiksetiawan.com_Build Linux Kernel from Source";
+        var disqus_title = "Build Linux Kernel from Source";
 
         /* * * DON'T EDIT BELOW THIS LINE * * */
         (function() {
