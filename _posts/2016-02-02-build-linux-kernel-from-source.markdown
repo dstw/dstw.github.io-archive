@@ -18,14 +18,14 @@ To build the Linux kernel from source, I need several tools: `make`, `gcc`,
 `make` & `gcc` is essential tools to build binaries from source. `libssl-dev` is
 for cryptography purpose. `git` is used for control the revision of the source
 code, it is recommended if I want to submit patch regarding Linux Kernel. The
-`ncurses-dev` tools are used if I `make menuconfig` or `make nconfig`.  The tool
+`ncurses-dev` tools are used if I `make menuconfig` or `make nconfig`. The tool
 packages may be called something else in some Linux distribution, so I may need
-to determine the package first. 
+to determine the package first.
 
 I use Ubuntu, so I can get these tools by running:
 
 {% highlight bash %}
-sudo apt install make gcc libssl-dev bc git exuberant-ctags libncurses5-dev 
+sudo apt install make gcc libssl-dev bc git exuberant-ctags libncurses5-dev
 {% endhighlight %}
 
 If you using different Linux distro, on Red Hat based systems like Fedora,
@@ -35,7 +35,7 @@ CentOS you can run:
 sudo yum install gcc make git ctags ncurses-devel openssl-devel
 {% endhighlight %}
 
-And on SUSE based systems (like SLES and Leap), you can run:
+And on SUSE based systems (like SLES, Leap or Tumbleweed), you can run:
 
 {% highlight bash %}
 sudo zypper in git gcc ncurses-devel libopenssl-devel ctags cscope
@@ -56,12 +56,12 @@ available. Different tree serve different purpose. Some of them I often use:
 I need to change configuration parameters to determine which settings and
 modules which need to build. Several options available:
 
-#### 1. Use default kernel configuration.  
+#### 1. Use default kernel configuration.
 This settings comes from the kernel maintainer. Remember, a default config may
 not have the options you are currently using.
 
 {% highlight bash %}
-$ make defconfig 
+$ make defconfig
 {% endhighlight %}
 
 #### 2. Use existing configuration.  
@@ -83,7 +83,7 @@ people wanting to do kernel development fast, you want to make a minimal
 configuration. Steve Rostedt uses ktest.pl make_min_config to get a truely
 minimum config, but it will take a day or two to build. Warning: make sure you
 have all your USB devices plugged into the system, or you won't get the drivers
-for them! 
+for them!
 
 #### 4.  Duplicate current config.
 
@@ -92,10 +92,10 @@ running kernel. That config file is stored somewhere in /boot/. There might be
 several files that start with config, so I can use the one associated with your
 running kernel. I can find it by running `uname -a` and finding the config file
 that ends with my kernel version number. I copy that file into the source
-directory as .config. Or just run this command: 
+directory as .config. Or just run this command:
 
 {% highlight bash %}
-$ sudo cp /boot/config-`uname -r`\* .config
+$ sudo cp /boot/config-`uname -r`* .config
 {% endhighlight %}
 
 Among these options, I tend to use latest option because it use config from
@@ -104,7 +104,7 @@ distro developer and cause it recognizes most of my hardware.
 Then, compile source, this process can take a while.
 
 {% highlight bash %}
-$ make -jX 
+$ make -jX
 {% endhighlight %}
 
 Where X is a number like 2 or 4. If you have a dual core, 2 or 3 might be good.
@@ -124,19 +124,19 @@ read LWN, lurking on LKML, etc.
 Install modules.
 
 {% highlight bash %}
-$ sudo make modules_install 
+$ sudo make modules_install
 {% endhighlight %}
 
 Bootloader setup.
 
 {% highlight bash %}
-$ sudo make install 
+$ sudo make install
 {% endhighlight %}
 
 Double check bootloader setup.
 
 {% highlight bash %}
-$ sudo update-grub2 
+$ sudo update-grub2
 {% endhighlight %}
 
 Reboot the system.
@@ -150,7 +150,10 @@ Enjoy the new kernel.
 
 ## Remove
 
-Find out the version of custom kernel. I can look at `/boot` directory.
+When there is such as installation process, then there should be the
+unintallation process too.  
+Fist I need to find out the version of custom kernel. I can look at `/boot`
+directory.
 
 {% highlight bash %}
 $ ls /boot/
@@ -167,10 +170,11 @@ version I need to process.
 {% endhighlight %}
 
 In this example, I want to remove kernel version 4.18.0-rc5.  
-Ensure our system has other kernel installed beside $CUSTOM_KERNEL_VERSION. Also
-ensure that you not removing kernel which you currently running on, because it
-can lead to unexpected behaviour. When everything is okay, delete all files and
-folders which contain $CUSTOM_KERNEL_VERSION name.
+But, before doing this, I must ensure that my system has other kernel installed
+beside $CUSTOM_KERNEL_VERSION. Also I must ensure that I not removing kernel
+which I currently running on, because it can lead to unexpected behaviour of my
+system. When everything is okay, I can delete all files and folders which
+contain $CUSTOM_KERNEL_VERSION name.
 
 {% highlight bash %}
 $ CUSTOM_KERNEL_VERSION="4.18.0-rc5"
@@ -182,11 +186,11 @@ $ sudo rm -rf /lib/modules/$CUSTOM_KERNEL_VERSION/
 $ sudo rm /var/lib/initramfs-tools/$CUSTOM_KERNEL_VERSION
 {% endhighlight %}
 
-Lastly, do some cleaning.
+Lastly, I do some cleaning.
 
 {% highlight bash %}
 $ sudo update-initramfs -k all -u
 $ sudo update-grub2
 {% endhighlight %}
 
-Finish. My kernel has been uninstalled.
+Finish. My kernel has been successfully uninstalled.
