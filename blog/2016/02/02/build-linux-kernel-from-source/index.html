@@ -207,20 +207,20 @@ recommended to be able build my own Linux kernel in order to customize my build.
 <code class="highlighter-rouge">make</code> &amp; <code class="highlighter-rouge">gcc</code> is essential tools to build binaries from source. <code class="highlighter-rouge">libssl-dev</code> is
 for cryptography purpose. <code class="highlighter-rouge">git</code> is used for control the revision of the source
 code, it is recommended if I want to submit patch regarding Linux Kernel. The
-<code class="highlighter-rouge">ncurses-dev</code> tools are used if I <code class="highlighter-rouge">make menuconfig</code> or <code class="highlighter-rouge">make nconfig</code>.  The tool
+<code class="highlighter-rouge">ncurses-dev</code> tools are used if I <code class="highlighter-rouge">make menuconfig</code> or <code class="highlighter-rouge">make nconfig</code>. The tool
 packages may be called something else in some Linux distribution, so I may need
 to determine the package first.</p>
 
 <p>I use Ubuntu, so I can get these tools by running:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">sudo </span>apt <span class="nb">install </span>make gcc libssl-dev bc git exuberant-ctags libncurses5-dev </code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">sudo </span>apt <span class="nb">install </span>make gcc libssl-dev bc git exuberant-ctags libncurses5-dev</code></pre></figure>
 
 <p>If you using different Linux distro, on Red Hat based systems like Fedora,
 CentOS you can run:</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">sudo </span>yum <span class="nb">install </span>gcc make git ctags ncurses-devel openssl-devel</code></pre></figure>
 
-<p>And on SUSE based systems (like SLES and Leap), you can run:</p>
+<p>And on SUSE based systems (like SLES, Leap or Tumbleweed), you can run:</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">sudo </span>zypper <span class="k">in </span>git gcc ncurses-devel libopenssl-devel ctags cscope</code></pre></figure>
 
@@ -245,7 +245,7 @@ modules which need to build. Several options available:</p>
 <p>This settings comes from the kernel maintainer. Remember, a default config may
 not have the options you are currently using.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>make defconfig </code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>make defconfig</code></pre></figure>
 
 <h4 id="2-use-existing-configuration">2. Use existing configuration.</h4>
 <p>Just press “Enter” when asked for configuration options.</p>
@@ -273,14 +273,14 @@ running kernel. I can find it by running <code class="highlighter-rouge">uname -
 that ends with my kernel version number. I copy that file into the source
 directory as .config. Or just run this command:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo cp</span> /boot/config-<span class="sb">`</span><span class="nb">uname</span> <span class="nt">-r</span><span class="sb">`</span><span class="se">\*</span> .config</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo cp</span> /boot/config-<span class="sb">`</span><span class="nb">uname</span> <span class="nt">-r</span><span class="sb">`</span><span class="k">*</span> .config</code></pre></figure>
 
 <p>Among these options, I tend to use latest option because it use config from
 distro developer and cause it recognizes most of my hardware.</p>
 
 <p>Then, compile source, this process can take a while.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>make <span class="nt">-jX</span> </code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>make <span class="nt">-jX</span></code></pre></figure>
 
 <p>Where X is a number like 2 or 4. If you have a dual core, 2 or 3 might be good.
 Quad core, 4 or 6. Do not run with really big numbers unless you want your
@@ -296,15 +296,15 @@ read LWN, lurking on LKML, etc.</p>
 
 <p>Install modules.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo </span>make modules_install </code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo </span>make modules_install</code></pre></figure>
 
 <p>Bootloader setup.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo </span>make <span class="nb">install</span> </code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo </span>make <span class="nb">install</span></code></pre></figure>
 
 <p>Double check bootloader setup.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo </span>update-grub2 </code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo </span>update-grub2</code></pre></figure>
 
 <p>Reboot the system.
 I can check my new installed kernel with this command.</p>
@@ -315,7 +315,10 @@ I can check my new installed kernel with this command.</p>
 
 <h2 id="remove">Remove</h2>
 
-<p>Find out the version of custom kernel. I can look at <code class="highlighter-rouge">/boot</code> directory.</p>
+<p>When there is such as installation process, then there should be the
+unintallation process too.<br />
+Fist I need to find out the version of custom kernel. I can look at <code class="highlighter-rouge">/boot</code>
+directory.</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">ls</span> /boot/</code></pre></figure>
 
@@ -328,10 +331,11 @@ version I need to process.</p>
 /boot/vmlinuz-4.18.0-rc6</code></pre></figure>
 
 <p>In this example, I want to remove kernel version 4.18.0-rc5.<br />
-Ensure our system has other kernel installed beside $CUSTOM_KERNEL_VERSION. Also
-ensure that you not removing kernel which you currently running on, because it
-can lead to unexpected behaviour. When everything is okay, delete all files and
-folders which contain $CUSTOM_KERNEL_VERSION name.</p>
+But, before doing this, I must ensure that my system has other kernel installed
+beside $CUSTOM_KERNEL_VERSION. Also I must ensure that I not removing kernel
+which I currently running on, because it can lead to unexpected behaviour of my
+system. When everything is okay, I can delete all files and folders which
+contain $CUSTOM_KERNEL_VERSION name.</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ CUSTOM_KERNEL_VERSION</span><span class="o">=</span><span class="s2">"4.18.0-rc5"</span>
 <span class="nv">$ </span><span class="nb">sudo rm</span> /boot/vmlinuz-<span class="nv">$CUSTOM_KERNEL_VERSION</span>
@@ -341,12 +345,12 @@ folders which contain $CUSTOM_KERNEL_VERSION name.</p>
 <span class="nv">$ </span><span class="nb">sudo rm</span> <span class="nt">-rf</span> /lib/modules/<span class="nv">$CUSTOM_KERNEL_VERSION</span>/
 <span class="nv">$ </span><span class="nb">sudo rm</span> /var/lib/initramfs-tools/<span class="nv">$CUSTOM_KERNEL_VERSION</span></code></pre></figure>
 
-<p>Lastly, do some cleaning.</p>
+<p>Lastly, I do some cleaning.</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo </span>update-initramfs <span class="nt">-k</span> all <span class="nt">-u</span>
 <span class="nv">$ </span><span class="nb">sudo </span>update-grub2</code></pre></figure>
 
-<p>Finish. My kernel has been uninstalled.</p>
+<p>Finish. My kernel has been successfully uninstalled.</p>
 </div>
     <hr />
     <div class="share-page">
