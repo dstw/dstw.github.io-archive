@@ -13,8 +13,9 @@ free and open source software in daily life.
 My daily activities are as a student and a software engineer. I have interest in
 computer operating systems. As a software engineer, I love to giving back
 contribution to the Free and Open Source Software Community.  
-This blog is my notes about programming, system administration and other
-computer stuff. I make this blog to share my views and ideas to the world.  
+I dedicated this blog to share my views and ideas mostly about Free and Open
+Source Software development. For older posts, I put on diffent site on
+[https://archive.didiksetiawan.com](https://archive.didiksetiawan.com)
 
 -----
 
