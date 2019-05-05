@@ -9,4 +9,4 @@ services:
       - "4000:4000"
     volumes:
       - ".:/srv/jekyll"
-    restart: on-failure
+#    restart: on-failure
