@@ -28,3 +28,6 @@ plugins:
   - jekyll-paginate
   - jekyll-category-pages
   - jekyll-redirect-from
+
+exclude:
+  - vendor
