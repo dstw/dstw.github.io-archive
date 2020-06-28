@@ -3,7 +3,7 @@ layout: post
 title: "Workflow on Contributing to Open Source Project"
 date: 2017-04-08 13:43:38 +0700
 comments: true
-categories: open_source collaboration programming
+categories: open-source collaboration programming
 ---
 
 In the open source world, different project comes with different workflow, using

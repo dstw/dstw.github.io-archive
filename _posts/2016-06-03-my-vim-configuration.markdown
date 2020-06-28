@@ -3,7 +3,7 @@ layout: post
 title: "My Vim Configuration"
 date: 2016-06-03 15:08:57 +0700
 comments: true
-categories: text_editor vim
+categories: text-editor vim
 ---
 This is my Vim configuration a.k.a .vimrc. You can download the file from
 [here](https://github.com/dstw/dotfiles/raw/master/.vimrc).

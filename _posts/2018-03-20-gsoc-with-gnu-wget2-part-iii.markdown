@@ -3,7 +3,7 @@ layout: post
 title: "GSoC with GNU Wget2 - Part III"
 date: 2018-03-20 05:21:00 +0700
 comments: true
-categories: open_source programming collaboration gsoc
+categories: open-source programming collaboration gsoc
 ---
 
 This is the last part of my GSoC 2017 journal trilogy. In this period, my

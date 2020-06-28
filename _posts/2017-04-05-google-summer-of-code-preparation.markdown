@@ -3,7 +3,7 @@ layout: post
 title: "Google Summer of Code Preparation"
 date: 2017-04-05 12:23:38 +0700
 comments: true
-categories: open_source collaboration programming gsoc
+categories: open-source collaboration programming gsoc
 ---
 
 > GSoC (Google Summer of Code), a program where university students spend their

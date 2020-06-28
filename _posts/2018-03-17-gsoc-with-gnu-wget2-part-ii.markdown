@@ -3,7 +3,7 @@ layout: post
 title: "GSoC with GNU Wget2 - Part II"
 date: 2018-03-17 03:21:00 +0700
 comments: true
-categories: open_source programming collaboration gsoc
+categories: open-source programming collaboration gsoc
 ---
 
 This is story about my second journey in the Google Summer of Code (GSoC) 2017.

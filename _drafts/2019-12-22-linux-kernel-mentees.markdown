@@ -3,7 +3,7 @@ layout: post
 title: "Linux Kernel Mentees"
 date: 2019-12-22 12:01:00 +0700
 comments: true
-categories: open_source programming collaboration linux_kernel
+categories: open-source programming collaboration linux_kernel
 ---
 
 ### Overview

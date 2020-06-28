@@ -3,7 +3,7 @@ layout: post
 title: "Vim Quick Reference"
 date: 2016-06-02 20:23:38 +0700
 comments: true
-categories: text_editor vim
+categories: text-editor vim
 ---
 For unfimiliar user, vim is a little bit confusing at first. But,
 after you try it several times and configure properly, you will found this text

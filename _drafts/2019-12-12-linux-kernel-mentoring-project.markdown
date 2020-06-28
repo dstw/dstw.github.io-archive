@@ -3,7 +3,7 @@ layout: post
 title: "Linux Kernel Mentoring Project"
 date: 2019-12-23 11:17:00 +0700
 comments: true
-categories: open_source programming collaboration linux_kernel
+categories: open-source programming collaboration linux_kernel
 ---
 
 The year of 2019 will come to its end, and not even once post I create for this
