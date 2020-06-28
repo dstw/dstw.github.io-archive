@@ -26,6 +26,7 @@ test:
   stage: test
   script:
   - bundle exec jekyll build -d test
+  - bundle exec htmlproofer ./test --disable-external
   artifacts:
     paths:
     - test
