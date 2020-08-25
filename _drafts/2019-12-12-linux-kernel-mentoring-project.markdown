@@ -3,7 +3,7 @@ layout: post
 title: "Linux Kernel Mentoring Project"
 date: 2019-12-23 11:17:00 +0700
 comments: true
-categories: open-source programming collaboration linux_kernel
+categories: open-source programming collaboration linux-kernel
 ---
 
 The year of 2019 will come to its end, and not even once post I create for this
@@ -72,7 +72,7 @@ She restructured and improved lspci and Linux PCI code by:
 
 ### Conclusion
 
-The Linux Kernel Mentorship Program is
+The Linux Kernel Mentorship Program is great starting point from someone who want to sharpen his/her skills about Linux Kernel.
 
 Reference(s):  
 [0] [https://www.didiksetiawan.com/blog/2018/03/07/gsoc-with-gnu-wget2-part-i/](https://www.didiksetiawan.com/blog/2018/03/07/gsoc-with-gnu-wget2-part-i/)  
