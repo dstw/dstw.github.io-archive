@@ -5,3 +5,5 @@ category/
 *~
 .jekyll-cache/
 public/
+.bundle/
+vendor/
