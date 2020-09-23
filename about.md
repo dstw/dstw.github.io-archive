@@ -9,16 +9,16 @@ footer: true
 
 ##### Who are you, and what do you do?
 
-My name is Didik Setiawan. I am aspiring free and open source software
-contributor. I also work as [DevOps](https://en.wikipedia.org/wiki/DevOps)
-engineer from one of IT company in my country.  
+My name is Didik Setiawan. I am a software engineer who likes to contribute to
+free and open-source software. I also work as a system administrator from an IT
+company in my country.
 
 ##### What hardware do you use?
 
 My laptop is Lenovo Thinkpad. I also got loaned a MacBook from my employer. I
 maintain some server on cloud service, so I can get rid of hardware maintenance
-of production server related to my work.
-For mobile device, I have a Xiaomi Redmi 3 to help me do my daily tasks.
+of production server related to my work. For mobile device, I have a Xiaomi
+Redmi 3 to help me do my daily tasks.
 
 ##### And what software?
 
@@ -30,12 +30,12 @@ community support.
 ##### What would be your dream setup?
 
 On the hardware side, I have a dream to switch my laptop by upgrade my Lenovo
-Thinkpad. I though that T480 series will be a good one. I also heard that Purism
-has Librem laptop which is perfect for freedom and privacy concerned user.  
-On mobile device, I would like to have whatever brand which support LineageOS.
-But, due to popularity and approachability, I thought a Xiaomi device is a good
-one. Beside that, Purism in the 2019, will plan to produce the first security
-and privacy phone, Librem 5, that I thought very nice to have.  
+Thinkpad. I thought that T series will be a good one. I also heard that Purism
+has Librem laptop which is perfect for freedom and privacy concerned users.  On
+the mobile device, I would like to have whatever brand which supports LineageOS.
+But, due to popularity and approachability, I thought a Xiaomi brand is a good
+one.  
+For home use, it is nice to have a Raspberry Pi running as a multimedia device.
 I also would like to try open source software for networking device, such as
 OpenWRT.
 
