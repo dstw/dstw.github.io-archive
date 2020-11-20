@@ -47,7 +47,7 @@ two Kernel releases. The Kernel release cycle is 7-8 weeks.
 The best resource to learn before applying a project like this by looking from
 previous successful mentees. I take a look from successful mentees from the
 early time of the project being held 2019 Summer period, Kelsey Skunberg and
-Barath Vedartham.
+Barath Vedartham.  
 The first mentee, Kelsey Skunberg chose to work on PCI Utilities and Linux PCI
 with Bjorn Helgaas as her mentor. Her project has consisted of multiple tasks
 that helped clean up code, and enhance existing PCI features. She enhanced lspci
@@ -57,12 +57,12 @@ code by finding and removing unused code (functions, API), moving functions to
 better locations, and improved logic to improve the maintainability of Linux PCI
 code paths.  From the mentorship program, she gets the opportunity to attend
 Open Source  Summit 2019 in San Diego, where She has been able to learn,
-network, and work on her public speaking.
+network, and work on her public speaking.  
 Second, Barath Verdartham took the project titled "Predictive Memory
 Reclamation" during the Linux Kernel Mentorship program. He got the opportunity
 to work on the core kernel, and I began working with his mentor Khalid Aziz
 where gave him a task regarding the identification of anonymous memory regions
-for a process.  he worked to develop a predictive memory reclamation algorithm
+for a process. He worked to develop a predictive memory reclamation algorithm
 in the Linux Kernel. The aim of the project was to reduce the amount of time the
 Linux kernel spends in reclaiming memory to satisfy processes requests for
 memory when there is memory pressure, i.e not enough to satisfy the memory
