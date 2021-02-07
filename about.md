@@ -10,7 +10,7 @@ footer: true
 ##### Who are you, and what do you do?
 
 My name is Didik Setiawan. I am a software engineer who likes to contribute to
-free and open-source software. I also work as a system administrator from an IT
+free and open-source software. I also work as a devops engineer on an IT
 company in my country.
 
 ##### What hardware do you use?
